@@ -14,7 +14,7 @@
 *.env              # Environment variables file
 *.local            # Local configuration files
 /config/*.php      # Configuration files in the config folder
-/database/*.sql    # Database dump files (if stored in project)
+
 
 # System files
 .DS_Store          # macOS system files

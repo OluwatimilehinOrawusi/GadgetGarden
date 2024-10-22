@@ -1,0 +1,44 @@
+# Apache
+*.log               # Apache logs
+*.pid               # PID files
+*.sock              # Socket files
+
+# PHP
+/vendor/           # Composer dependencies
+/node_modules/     # Node.js dependencies (if using Node)
+*.cache            # PHP cache files
+*.phar             # PHP archive files
+*.tmp              # Temporary files
+
+# Config files
+*.env              # Environment variables file
+*.local            # Local configuration files
+/config/*.php      # Configuration files in the config folder
+/database/*.sql    # Database dump files (if stored in project)
+
+# System files
+.DS_Store          # macOS system files
+Thumbs.db          # Windows system files
+.idea/             # JetBrains project files
+.vscode/           # VSCode project files
+*.sublime-project   # Sublime Text project files
+*.sublime-workspace
+
+# IDE specific files
+*.swp              # Vim swap files
+*.lock             # Lock files
+
+# Cache
+cache/             # Cache directory
+
+# Logs
+logs/              # Log directory
+*.log              # Log files
+
+# Backup files
+*~                 # Backup files
+*.bak              # Backup files
+
+# Ignore tests and coverage
+/tests/            # Test files
+/coverage/         # Code coverage reports

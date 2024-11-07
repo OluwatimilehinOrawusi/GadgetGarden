@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gadget Garden - About Us</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .navbar .logo {
+            font-weight: bold;
+            color: #1e5631;
+            font-size: 1.5em;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1em;
+        }
+
+        .navbar .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .navbar .auth-buttons a {
+            text-decoration: none;
+            color: #333;
+            padding: 5px 15px;
+            border: 1px solid #333;
+            border-radius: 3px;
+        }
+
+        .navbar .auth-buttons a.register {
+            background-color: #333;
+            color: #fff;
+        }
+
+        /* About Us Section */
+        .about-section {
+            background-color: #1e5631;
+            color: #fff;
+            padding: 100px 20px;
+            text-align: left;
+            min-height: 100vh;
+        }
+
+        .about-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+
+        .about-section .mission {
+            font-size: 1.5em;
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="logo">GADGET GARDEN</div>
+        <nav class="menu">
+            <a href="#">Products</a>
+            <a href="#">Solutions</a>
+            <a href="#">Community</a>
+            <a href="#">Resources</a>
+            <a href="#">Pricing</a>
+            <a href="#">Contact</a>
+        </nav>
+        <div class="auth-buttons">
+            <a href="#" class="sign-in">Sign in</a>
+            <a href="#" class="register">Register</a>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h1>About Us</h1>
+        <p>Gadget Garden is a company that puts the planet first.</p>
+        <div class="mission">Our Mission .......</div>
+    </section>
+
+</body>
+</html>

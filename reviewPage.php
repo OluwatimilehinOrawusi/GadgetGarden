@@ -1,3 +1,19 @@
+<?php
+//starts the session
+session_start();
+
+//connects the user to the database
+require_once('Connectdb.php');
+
+?>
+
+
+
+
+
+
+
+<!----Start of the html code--->
 <!DOCTYPE html>
 <html lang="en">
 <head>

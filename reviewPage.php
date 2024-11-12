@@ -3,7 +3,7 @@
 session_start();
 
 //connects the user to the database
-require_once('Connectdb.php');
+require_once('db_connection.php');
 
 ?>
 

@@ -1,0 +1,37 @@
+/* Nav Bar */
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    padding: 0 5% 0 5%;
+    border-bottom: 1px solid #275E4A;
+}
+
+.nav-right{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 37%;
+}
+
+/* Buttons */
+
+.white-button{
+border: 0.1rem solid #275E4A;
+
+}
+
+.green-button{
+border: 0.1rem solid #275E4A;
+background-color: #275E4A;
+color: white;
+font-size: 2rem;
+}
+
+#categories-button{
+    border: none;
+    color:#275E4A;
+
+}

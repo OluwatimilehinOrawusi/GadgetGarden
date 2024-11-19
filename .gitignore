@@ -14,7 +14,7 @@
 *.env              # Environment variables file
 *.local            # Local configuration files
 /config/*.php      # Configuration files in the config folder
-
+.vscode
 
 # System files
 .DS_Store          # macOS system files

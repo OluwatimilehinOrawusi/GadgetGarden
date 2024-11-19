@@ -1,0 +1,157 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+  header{
+    display: flex;
+    justify-content: right;
+    position: relative;
+    background-color: white;
+    font-size: 15px;
+    font-family:inter;
+    gap: 25px;
+    text-align: right;
+    padding: 10px;
+    
+    }
+
+      
+    .Menu2{
+      position: relative;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: right  ;
+      align-items: center;
+      gap : 10px;
+      font-family: inter;
+    }
+ 
+
+body {
+background-color:#275E4A;
+}
+
+.images{
+  position: relative;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 700px;
+  height: 400px;
+}
+
+.webpage{
+  position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.intro {
+display : flex;
+text-align: left;
+align-items: center;
+flex-direction: row;
+line-height: 1.2;
+font-family: inter;
+
+}
+
+nav {
+background-color: white;
+text-align: center;
+color: #275E4A;
+}
+
+
+.form{
+width: 500px;
+gap:25px;
+
+}
+
+.signup{
+  
+position:relative;
+display: flex;  
+justify-content: left;
+align-items: center;
+text-align: center;
+flex-direction: column;
+width: 50%;
+flex-basis: 50%;
+padding: 50px;
+gap: 25px;
+border-radius: 30px;
+background-color: rgb(255, 255, 255);
+}
+
+h2{
+color: white;
+font-family: inter;
+font-size: 50px;
+}
+
+h3{
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: left  ;
+  align-items: center;
+  color: #275E4A;
+  font-family: inter;
+  }
+
+ label, h6{
+font-family:inter;
+}
+
+input{
+
+border: 1.5px solid #b3b3b3;
+border-radius : 15px;
+padding: 5px;
+width: 180px;
+
+}
+
+button{
+  background-color: white;
+  color: #275E4A;
+  border: none;
+  width: 100px;
+  height: 50px;
+  font-size: 15px;
+  font-family: inter;
+  border-radius: 30px;
+  outline: 1px solid #275E4A;
+  
+   
+  
+  
+  }
+  
+  button:hover{
+  
+  background-color: #275E4A;
+  color: white;
+  width: 100px;
+  height: 50px;
+  font-size: 15px;
+  font-family: inter;
+  }
+}

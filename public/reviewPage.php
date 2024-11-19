@@ -5,10 +5,25 @@ session_start();
 //connects the user to the database
 require_once('db_connection.php');
 
-//get the product ID and store it in a variable
-$productID = isset($_GET['product_id'])
-
+//should add the navbar partial to the page
 include 'navbar.php';
+
+//get the product ID and store it in a variable
+$productID = isset($_GET['product_id']) ? (int)$_GET['product_id'] : 0;
+
+//should check if there is actually a product that exists
+if($product_id > 0){
+    //should get the reviews from the product that the user is looking at
+    $sql = "SELECT r.rating, r.review_text, r.review_date, u.username 
+    FROM Reviews AS r
+    JOIN Users AS u ON r.user_id = u.user_id
+    WHERE r.product_id = ? 
+    ORDER BY r.review_date DESC";
+
+
+}
+
+
 ?>
 
 

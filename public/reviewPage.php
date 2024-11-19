@@ -3,7 +3,7 @@
 session_start();
 
 //connects the user to the database
-require_once('db_connection.php');
+require_once('database/db_connection.php');
 
 //should add the navbar partial to the page
 include 'navbar.php';

@@ -8,7 +8,7 @@ require_once('db_connection.php');
 //get the product ID and store it in a variable
 $productID = isset($_GET['product_id'])
 
-include navbat.php;
+include 'navbar.php';
 ?>
 
 

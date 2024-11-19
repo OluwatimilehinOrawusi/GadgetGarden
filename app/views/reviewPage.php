@@ -2,11 +2,10 @@
 //starts the session
 session_start();
 
-//connects the user to the database
-require_once('db_connection.php');
 
-//should add the navbar partial to the page
-include 'app\partials\navbar.php';
+
+
+
 
 //get the product ID and store it in a variable
 $productID = isset($_GET['product_id']) ? (int)$_GET['product_id'] : 0;
@@ -23,9 +22,6 @@ if($product_id > 0){
 
 }
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 
 ?>
@@ -43,30 +39,17 @@ error_reporting(E_ALL);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review Item - Gadget Garden</title>
-    <style>
-        /* Navigation Bar */
-
-  
-     
-    </style>
+    <?php require '../partials/header.php' ?>
+    <link rel="stylesheet" href="../../public/css/navbar.css">
+    <link rel="stylesheet" href="../../public/css/styles.css">
 </head>
 <body>
     <!-- Navigation Bar -->
-    <header class="navbar">
-        <div class="logo">GADGET GARDEN</div>
-        <nav class="menu">
-            <a href="#">Products</a>
-            <a href="#">Solutions</a>
-            <a href="#">Community</a>
-            <a href="#">Resources</a>
-            <a href="#">Pricing</a>
-            <a href="#">Contact</a>
-        </nav>
-        <div class="auth-buttons">
-            <a href="#" class="sign-in">Sign in</a>
-            <a href="#" class="register">Register</a>
-        </div>
-    </header>    
+    <!---should add the navbar partial to the page--->
+    <?php require '../partials/navbar.php'; ?>
+
+    
+    
 
      <!-----Review writing field---->   
     <div class="review-content">
@@ -74,5 +57,7 @@ error_reporting(E_ALL);
       <textarea placeholder="Write a review"></textarea>
       <button class="submit-btn">Submit</button>
     </div>
+
+    <?php require '../partials/footer.php' ?>
 </body>
 </html>

@@ -3,10 +3,10 @@
 session_start();
 
 //connects the user to the database
-require_once('database/db_connection.php');
+require_once('db_connection.php');
 
 //should add the navbar partial to the page
-include 'navbar.php';
+include 'app\partials\navbar.php';
 
 //get the product ID and store it in a variable
 $productID = isset($_GET['product_id']) ? (int)$_GET['product_id'] : 0;
@@ -22,6 +22,10 @@ if($product_id > 0){
 
 
 }
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 
 ?>

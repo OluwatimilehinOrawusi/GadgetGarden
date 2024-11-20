@@ -2,7 +2,8 @@
 //starts the session
 session_start();
 
-
+//connects the webpage to the database
+require_once('../../database/db_connection.php');
 
 
 

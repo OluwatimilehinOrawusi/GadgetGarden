@@ -31,8 +31,6 @@ if($product_id > 0){
 
 
 
-
-
 <!----Start of the html code--->
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +41,7 @@ if($product_id > 0){
     <?php require '../partials/header.php' ?>
     <link rel="stylesheet" href="../../public/css/navbar.css">
     <link rel="stylesheet" href="../../public/css/styles.css">
+    <link rel="stylesheet" href="css/reviewPage.css">
 </head>
 <body>
     <!-- Navigation Bar -->

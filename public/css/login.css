@@ -1,0 +1,52 @@
+/* Body Styles - Keep global settings minimal */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Login Page Wrapper */
+#login-page {
+    display: flex;
+    height: 100vh;
+}
+
+/* Left Side Container */
+#leftside-container {
+    flex: 1;
+    text-align: left;
+    padding: 2%;
+    background-color: #004d30; /* Dark green background */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+#catchphrase {
+    font-size: 2.5rem;
+    line-height: 1.4;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+
+#loginform input[type="submit"]:hover {
+    background-color: #275E4A;
+}
+
+.forgot-password, .register-new {
+    font-size: 0.9rem;
+    color: #275E4A;
+}
+
+.forgot-password a, .register-new a {
+    color: #275E4A;
+    text-decoration: underline;
+}
+
+.forgot-password a:hover, .register-new a:hover {
+    color: #275E4A;
+}

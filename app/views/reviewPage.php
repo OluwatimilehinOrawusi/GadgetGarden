@@ -12,7 +12,7 @@ require_once('../../database/db_connection.php');
 $productID = isset($_GET['product_id']) ? (int)$_GET['product_id'] : 0;
 
 //should check if there is actually a product that exists
-if($product_id > 0){
+if($productID > 0){
     //should get the reviews from the product that the user is looking at
     $sql = "SELECT r.rating, r.review_text, r.review_date, u.username 
     FROM Reviews AS r
@@ -57,6 +57,7 @@ if($product_id > 0){
       <textarea placeholder="Write a review"></textarea>
       <button class="submit-btn">Submit</button>
     </div>
+    <div style="height: 70px;"></div>
 
     <?php require '../partials/footer.php' ?>
 </body>

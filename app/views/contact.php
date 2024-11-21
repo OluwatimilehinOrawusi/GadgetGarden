@@ -1,3 +1,20 @@
+<?php 
+    session_start();
+
+    $successMessage = "";
+
+    if (isset($_POST['submitted'])) {
+        require_once("database/db_connection.php");
+
+        
+    }
+
+    if (isset($_SESSION['success_message'])) {
+        $successMessage = $_SESSION['success_message'];
+        unset($_SESSION['success_message']); 
+    }
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +41,6 @@
                 </div>
             </div>
 
-            <!-- Right Side: Contact Form -->
             <div class="contact-right">
                 <form>
                     <div class="form-group">
@@ -48,6 +64,7 @@
                     </div>
 
                     <button type="submit" class="submit-btn">Submit</button>
+                    <input type="hidden" name="submitted" value="TRUE" />
                 </form>
             </div>
         </div>

@@ -56,6 +56,15 @@
     border-radius: 2rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    text-align: center;
+}
+
+.review-content .submit-btn span {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* Makes the text span centered */
+    text-align: center;
 }
 
 .review-content .submit-btn:hover {

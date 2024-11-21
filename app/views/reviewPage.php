@@ -41,7 +41,7 @@ if($productID > 0){
     <?php require '../partials/header.php' ?>
     <link rel="stylesheet" href="../../public/css/navbar.css">
     <link rel="stylesheet" href="../../public/css/styles.css">
-    <link rel="stylesheet" href="css/reviewPage.css">
+    <link rel="stylesheet" href="../../public/css/reviewPage.css">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -56,8 +56,9 @@ if($productID > 0){
       <h2>Review Order</h2>
       <textarea placeholder="Write a review"></textarea>
       <button class="submit-btn">Submit</button>
+      <input type = "hidden" name ="submitted" value="TRUE" />
     </div>
-    <div style="height: 70px;"></div>
+    
 
     <?php require '../partials/footer.php' ?>
 </body>

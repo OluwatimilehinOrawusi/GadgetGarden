@@ -45,9 +45,11 @@
 
 /* Submit Button Styling */
 .review-content .submit-btn {
-    display: block;
+    display: flex;
     margin: 0 auto;
     padding: 0.75rem 2rem;
+    justify-content: center;
+    align-items: center;
     font-size: 1rem;
     font-weight: bold;
     border: 1px solid #275E4A;
@@ -62,8 +64,8 @@
 
 .review-content .submit-btn span {
     position: relative;
-    display: inline-block;
-    width: 100%; /* Makes the text span centered */
+    display: block;
+    width: auto; /* Makes the text span centered */
     text-align: center;
 }
 

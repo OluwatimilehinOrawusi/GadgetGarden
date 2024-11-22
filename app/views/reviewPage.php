@@ -7,7 +7,7 @@ require_once('../../database/db_connection.php');
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
-    //$user_id = $_SESSION['user_id']; // If a user is logged in, retrieve the user_id 
+    $user_id = $_SESSION['user_id']; // If a user is logged in, retrieve the user_id 
     $product_id = $_POST['product_id'];
     $rating = intval($_POST['rating']);
     $review_text = htmlspecialchars(trim($_POST['review_text']));

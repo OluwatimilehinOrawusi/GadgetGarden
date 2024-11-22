@@ -1,31 +1,43 @@
 <?php
-//starts the session
+// Start the session
 session_start();
 
-//connects the webpage to the database
+// Connect to the database
 require_once('../../database/db_connection.php');
 
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
+    //$user_id = $_SESSION['user_id']; // If a user is logged in, retrieve the user_id 
+    $product_id = $_POST['product_id'];
+    $rating = intval($_POST['rating']);
+    $review_text = htmlspecialchars(trim($_POST['review_text']));
 
+    // Validate form inputs
+    if ($user_id && $product_id && $rating > 0 && $rating <= 5 && !empty($review_text)) {
+        try {
+            // SQL to insert the review
+            $stmt = $db->prepare("INSERT INTO Reviews (user_id, product_id, rating, review_text) VALUES (:product_id, :rating, :review_text)");
+            
+            // Bind parameters
+            $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+            $stmt->bindParam(':rating', $rating, PDO::PARAM_INT);
+            $stmt->bindParam(':review_text', $review_text, PDO::PARAM_STR);
 
-
-//get the product ID and store it in a variable
-$productID = isset($_GET['product_id']) ? (int)$_GET['product_id'] : 0;
-
-//should check if there is actually a product that exists
-if($productID > 0){
-    //should get the reviews from the product that the user is looking at
-    $sql = "SELECT r.rating, r.review_text, r.review_date, u.username 
-    FROM Reviews AS r
-    JOIN Users AS u ON r.user_id = u.user_id
-    WHERE r.product_id = ? 
-    ORDER BY r.review_date DESC";
-
-
+            // Execute the query and check for success
+            if ($stmt->execute()) {
+                echo "<script>alert('Review submitted successfully!');</script>";
+            } else {
+                echo "<script>alert('Error submitting review.');</script>";
+            }
+        } catch (PDOException $e) {
+            echo "<script>alert('Database error: " . $e->getMessage() . "');</script>";
+        }
+    } else {
+        echo "<script>alert('Please fill in all fields correctly.');</script>";
+    }
 }
-
-
-
 ?>
+
 
 
 
@@ -48,17 +60,36 @@ if($productID > 0){
     <!---should add the navbar partial to the page--->
     <?php require '../partials/navbar.php'; ?>
 
+<!------ Seperation between the form and navbar--->
+    <div style="height: 70px;"></div>
     
     
 
-     <!-----Review writing field---->   
-    <div class="review-content">
-      <h2>Review Order</h2>
-      <textarea placeholder="Write a review"></textarea>
-      <button class="submit-btn">Submit</button>
-      <input type = "hidden" name ="submitted" value="TRUE" />
+
+  <!-- Review writing field -->
+  <div class="review-content">
+        <h2>Submit Your Review</h2>
+        <form method="POST" action="">
+
+<!----product ID section to be removed in later prints---->
+            <label for="product_id">Product ID:</label>
+            <input type="number" id="product_id" name="product_id" required>
+            <br>
+            <br>
+            <label for="rating">Rating (1-5):</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required>
+
+            <br>
+            <br>
+            <label for="review_text">Review:</label>
+            <textarea id="review_text" name="review_text" placeholder="Write your review here" required></textarea>
+
+            <button type="submit" name="submit_review" class="submit-btn">Submit</button>
+        </form>
     </div>
     
+<!------ Seperation between the form and footer--->
+    <div style="height: 70px;"></div>
 
     <?php require '../partials/footer.php' ?>
 </body>

@@ -4,42 +4,66 @@ body {
     margin: 0;
     padding: 0;
 }
+#login-container {
+    width: 35%;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px black;
+    padding: 30px 40px;
+
+}
 
 /* Login Page Wrapper */
 #login-page {
     display: flex;
     height: 100vh;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #004d30;
+    padding: 0 5%;
 }
 
 /* Left Side Container */
 #leftside-container {
     flex: 1;
-    text-align: left;
-    padding: 2%;
-    background-color: #004d30; /* Dark green background */
     color: white;
+}
+
+#loginform {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
 }
 
-#catchphrase {
-    font-size: 2.5rem;
-    line-height: 1.4;
-    margin-bottom: 30px;
-    text-align: center;
+
+#loginform label {
+    color: #858585;
+    /* add feature to make label be inside the box */
+    
 }
 
+#loginform input[type="text"],
+#loginform input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+}
+
+#loginform input[type="submit"] {
+    background-color: #004d30;
+    color: white;
+    padding:20px;
+    
+}
 
 #loginform input[type="submit"]:hover {
-    background-color: #275E4A;
+    background-color: white;
 }
+
 
 .forgot-password, .register-new {
     font-size: 0.9rem;
-    color: #275E4A;
+    color: #858585;
 }
 
 .forgot-password a, .register-new a {
@@ -49,4 +73,12 @@ body {
 
 .forgot-password a:hover, .register-new a:hover {
     color: #275E4A;
+}
+
+#textboxesandlabels {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    width: 100%; 
 }

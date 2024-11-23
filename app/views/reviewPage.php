@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     <link rel="stylesheet" href="../../public/css/navbar.css">
     <link rel="stylesheet" href="../../public/css/styles.css">
     <link rel="stylesheet" href="../../public/css/reviewPage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -76,8 +77,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
             <input type="number" id="product_id" name="product_id" required>
             <br>
             <br>
+
+
             <label for="rating">Rating (1-5):</label>
-            <input type="number" id="rating" name="rating" min="1" max="5" required>
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5" required>
+                <label for="star5" title="5 stars">★★★★★</label>
+
+                <input type="radio" id="star4" name="rating" value="4" required>
+                <label for="star4" title="4 stars">★★★★</label>
+
+                <input type="radio" id="star3" name="rating" value="3" required>
+                <label for="star5" title="3 stars">★★★</label>
+
+                <input type="radio" id="star2" name="rating" value="2" required>
+                <label for="star2" title="2 stars">★★</label>
+
+                <input type="radio" id="star1" name="rating" value="1" required>
+                <label for="star1" title="1 stars">★</label>
+            </div>
 
             <br>
             <br>

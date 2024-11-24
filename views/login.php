@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type = "text" id = "username" name = "username" required>
             <br> <br>
             <label for = "password">Pasword</label>
-            <input type = "text" id = "password" name = "password" required>
+            <input type = "password" id = "password" name = "password" required>
             <br> <br>
             <p class="forgot-password">Forgot your password? Click <a href="-">here</a> to reset</p>
             <br> <br> 

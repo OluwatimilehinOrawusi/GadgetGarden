@@ -3,11 +3,11 @@ session_start();
 $pdo = require_once '../database/database.php';
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['username'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
     $sql = "SELECT * FROM users WHERE username = ?";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$email]);
+    $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($user && password_verify($password, $user['password_hash'])) {
         $_SESSION['user_id'] = $user['user_id'];

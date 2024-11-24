@@ -26,6 +26,12 @@ hr{
     border: none;
     margin: 3rem 0;
 }
+
+.general-center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
 /* Hero Section */
 #hero-section{
     height: 100vh;

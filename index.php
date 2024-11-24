@@ -25,7 +25,7 @@ session_start();
                 <a href="#categories"><button id="categories-button">Categories </button></a>
                 <button class="white-button">About Us</button>
                 <?php if (!isset($_SESSION['user_id'])){?>
-                <?php echo '<a href="./views//login.php"><button class="green-button">Login</button></a>' ?>
+                <?php echo '<a href="./views/login.php"><button class="green-button">Login</button></a>' ?>
                  <?php echo '<a href="./views/signup.php"><button class="white-button">Sign Up</button></a> '?>
                 <?php }?>
                 <?php if (isset($_SESSION['user_id'])){?>

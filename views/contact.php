@@ -1,8 +1,38 @@
-<?php 
-    session_start();
+<?php
+session_start();
 
+require_once "../database/database.php"; 
 
-    
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = htmlspecialchars(trim($_POST['name']));
+    $phone = htmlspecialchars(trim($_POST['phone']));
+    $email = htmlspecialchars(trim($_POST['email']));
+    $message = htmlspecialchars(trim($_POST['message']));
+
+    if (!empty($name) && !empty($email) && !empty($message)) {
+        try {
+            $query = "INSERT INTO contact (name, phone, email, message) VALUES (:name, :phone, :email, :message)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':phone', $phone);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':message', $message);
+
+            if ($stmt->execute()) {
+                $_SESSION['success'] = "Thank you, $name! Your message has been received.";
+            } else {
+                $_SESSION['error'] = "Something went wrong. Please try again.";
+            }
+        } catch (PDOException $e) {
+            $_SESSION['error'] = "Database error: " . $e->getMessage();
+        }
+    } else {
+        $_SESSION['error'] = "Please fill in all required fields.";
+    }
+
+    header('Location: contact.php');
+    exit();
+}
 ?>
 
 
@@ -10,15 +40,15 @@
 <html lang="en">
 <html>
 <head>
-   <?php require_once "app/partials/header.php" ?>
-    <link rel="stylesheet" href="public/css/contact.css">
-    <link rel="stylesheet" href="public/css/navbar.css">
-    <link rel="stylesheet" href="public/css/styles.css">
+   <?php require_once "../partials/header.php" ?>
+    <link rel="stylesheet" href="../public/css/contact.css">
+    <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
     
 
 </head>
 <body>
-    <?php require_once "app/partials/navbar.php" ?>
+    <?php require_once "../partials/navbar.php" ?>
     <section class="contact-section">
         <div class="contact-container">
             <div class="contact-left">
@@ -60,7 +90,7 @@
         </div>
     </section>
 
-    <?php require_once "app/partials/footer.php" ?>
+    <?php require_once "../partials/footer.php" ?>
     </body>
 
     </html>

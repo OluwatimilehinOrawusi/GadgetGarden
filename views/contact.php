@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = htmlspecialchars(trim($_POST['email']));
     $message = htmlspecialchars(trim($_POST['message']));
 
-    if (!empty($name) && !empty($email) && !empty($message)) {
+    if (!empty($name) && !empty($phone) && !empty($email) && !empty($message)) {
         try {
             $query = "INSERT INTO contact (name, phone, email, message) VALUES (:name, :phone, :email, :message)";
             $stmt = $pdo->prepare($query);

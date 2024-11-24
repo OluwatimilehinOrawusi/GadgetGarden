@@ -58,22 +58,15 @@ body {
 
 #loginform input[type="submit"]:hover {
     transform: scale(1.05);
-    background-color: lightblue;
+    background-color: white;
+    color: #004d30;
 }
 
 
 .forgot-password, .register-new {
     font-size: 0.9rem;
     color: #858585;
-}
-
-.forgot-password a, .register-new a {
-    color: #275E4A;
     text-decoration: underline;
-}
-
-.forgot-password a:hover, .register-new a:hover {
-    color: #275E4A;
 }
 
 #textboxesandlabels {

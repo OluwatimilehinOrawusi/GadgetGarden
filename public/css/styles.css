@@ -1,3 +1,7 @@
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     margin:0;
     padding:0;
@@ -6,6 +10,7 @@ body{
 }
 a{
     text-decoration: none;
+    color: inherit;
 }
 button{
     background-color: transparent;
@@ -14,7 +19,15 @@ button{
     width: 5.5rem;
     height: 2.2rem;
 }
+
+
+.general-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* General */
+
 
 .home-images{
     border-radius: 2rem;
@@ -25,12 +38,6 @@ hr{
     background-color: #275E4A;
     border: none;
     margin: 3rem 0;
-}
-
-.general-center{
-    display:flex;
-    justify-content: center;
-    align-items: center;
 }
 /* Hero Section */
 #hero-section{
@@ -91,23 +98,8 @@ hr{
     font-size: 2.2rem;
     font-weight: 400;
 }
-/* Nav Bar */
 
-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 10%;
-    padding: 0 5% 0 5%;
-    border-bottom: 1px solid #275E4A;
-}
 
-.nav-right{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 37%;
-}
 
 /* Buttons */
 
@@ -138,6 +130,20 @@ font-size: 0.65rem;
     width: 1rem;
 }
 
+#shop-now-button{
+    width: 10rem;
+    height: 3rem;
+    margin-left:auto;
+    margin-right: auto;
+    font-size: 1rem;
+}
+
+#shop-now-container{
+    display:flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 5rem;
+}
 /* Trending Section */
 #trending-top{
 display: flex;
@@ -332,3 +338,7 @@ margin-right: 5%;
     color: white;
     font-size: 0.5rem;
 }
+
+
+
+

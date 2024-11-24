@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute() ;
           
             
-        
+        $_SESSION['success'] = "Thank you for your message, We will get back to you shortly!";
     } else {
         $_SESSION['error'] = "Please fill in all required fields.";
     }

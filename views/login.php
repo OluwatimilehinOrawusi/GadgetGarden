@@ -1,39 +1,22 @@
 <?php
-
-if (isset($_POST['submitted'])) {
-   $db =  require_once("../database/database.php");
-}
-
-try {
-    $stmt = $db->prepare('SELECT password FROM users WHERE username = ?');
-    $stmt->execute([$_POST['username']]);
-
-    if ($stmt->rowCount()>0){
-        $row = $stmt->fetch();
-    
-        if (password_verify($_POST['password'], $row['password'])){
-            session_start();
-            $_SESSION["username"] = $_POST['username'];
-            $stmt_uid = $db->prepare('SELECT user_id FROM users WHERE username = ?');
-            $stmt_uid->execute([$_POST['username']]);
-            $row_uid = $stmt_uid->fetch();
-            $_SESSION["user_id"] = $row['user_id'];
-            header("Location: ../index.php");
-            exit();
-         }
-         else {
-            $error_message = "Error logging in. The password does not match.";
-    
-         }
-     } else {
-        $error_message = "Error logging in. Username was not found.";
-     }
+session_start();
+$pdo = require_once '../database/database.php';
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $sql = "SELECT * FROM users WHERE email = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($user && password_verify($password, $user['password_hash'])) {
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['username'] = $user['username'];
+        header("Location: ./index.php");
+    } else {
+        echo "Invalid email or password.";
     }
-      catch(PDOException $ex) {
-        $error_message = "Failed to connect to the database. Error: " . $ex->getMessage();
-      }
-    
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

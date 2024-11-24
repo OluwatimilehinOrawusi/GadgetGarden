@@ -3,7 +3,7 @@
 session_start();
 
 // Connect to the database
-require_once('../../database/db_connection.php');
+require_once('../database/db_connection.php');
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {

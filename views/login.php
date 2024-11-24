@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $user['username'];
         header("Location: ../index.php");
     } else {
-        echo "Invalid email or password.";
+        echo "Invalid username or password.";
     }
 }
 ?>

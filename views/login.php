@@ -2,7 +2,7 @@
 
 if (isset($_POST['submitted'])) {
    $db =  require_once("../database/database.php");
-}
+
 
 try {
     $stmt = $db->prepare('SELECT password FROM users WHERE username = ?');
@@ -33,6 +33,7 @@ try {
         $error_message = "Failed to connect to the database. Error: " . $ex->getMessage();
       }
     
+}
 
 ?>
 <!DOCTYPE html>
@@ -41,17 +42,17 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in</title>
-    <?php require_once "app/partials/header.php" ?>
-    <link rel="stylesheet" href="public/css/navbar.css">
-    <link rel="stylesheet" href="public/css/styles.css">
-    <link rel = "stylesheet" href = "public/css/login.css">
+    <?php require_once "../partials/header.php" ?>
+    <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel = "stylesheet" href = "../public/css/login.css">
 </head>
 <body>
-<?php require_once "app/partials/navbar.php"?>
+<?php require_once "../partials/navbar.php"?>
 <div id = "login-page">
     <div id = "leftside-container">
         <h1 id = "catchphrase"> Grow Your Tech Sustainably - Buy, Sell, and Renew at Gadget Garden!</h1>
-        <img src = "public/assets/ggLaptopSignIn.png" alt = "An image of a laptop with a garden within the screen">
+        <img src = "../public/assets/ggLaptopSignIn.png" alt = "An image of a laptop with a garden within the screen">
     </div>
     <div id = "login-container">
         <h1>Sign in</h1>
@@ -75,6 +76,6 @@ try {
         </form> 
     </div>
 </div>
-<?php require_once 'app/partials/footer.php'?>
+<?php require_once '../partials/footer.php'?>
 </body>
 </html>

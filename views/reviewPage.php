@@ -1,6 +1,6 @@
 <?php
-// Start the session
-session_start();
+// // Start the session
+// session_start();
 
 // Connect to the database
 require_once('../database/database.php');
@@ -51,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review Item - Gadget Garden</title>
     <?php require '../partials/header.php' ?>
-    <link rel="stylesheet" href="../../public/css/navbar.css">
-    <link rel="stylesheet" href="../../public/css/styles.css">
-    <link rel="stylesheet" href="../../public/css/reviewPage.css">
+    <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="../public/css/reviewPage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>

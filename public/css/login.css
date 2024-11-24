@@ -1,4 +1,4 @@
-/* Body Styles - Keep global settings minimal */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -57,7 +57,8 @@ body {
 }
 
 #loginform input[type="submit"]:hover {
-    background-color: white;
+    transform: scale(1.05);
+    background-color: lightblue;
 }
 
 

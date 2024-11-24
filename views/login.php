@@ -30,7 +30,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel = "stylesheet" href = "../public/css/login.css">
 </head>
 <body>
-<?php require_once "../partials/navbar.php"?>
+<nav>
+            <div class="nav-left">
+                <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+            </div>
+            <div class="nav-right">
+                <a href="../views/products.php"><button class="green-button" >Products</button></a>
+                <a href="#categories"><button class="white-button">About Us</button></a>
+                <?php if (!isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
+                 <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
+                <?php }?>
+                <?php if (isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./basket.php"><button class="green-button">Basket</button></a>' ?>
+                <?php echo '<a href="./logout.php"><button class="white-button">Logout</button></a>' ?>
+
+                <?php }?>
+
+            </div>
+</nav>
 <div id = "login-page">
     <div id = "leftside-container">
         <h1 id = "catchphrase"> Grow Your Tech Sustainably - Buy, Sell, and Renew at Gadget Garden!</h1>

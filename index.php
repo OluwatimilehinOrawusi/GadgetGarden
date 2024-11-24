@@ -1,6 +1,19 @@
 <?php
 session_start();
 
+$pdo = require_once "./database/database.php" ;
+
+$user_id = $_SESSION['user_id'] ?? null;
+
+    // Fetch the admin status of the user
+    $stmt = $pdo->prepare("SELECT admin FROM users WHERE user_id = :user_id");
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +35,7 @@ session_start();
                 <p id="logo-text">GADGET GARDEN</p>
             </div>
             <div class="nav-right">
-                <a href="#categories"><button id="categories-button">Categories </button></a>
+                <a href="#categories"><button class="green-button">Categories </button></a>
                 <button class="white-button">About Us</button>
                 <?php if (!isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./views/login.php"><button class="green-button">Login</button></a>' ?>
@@ -30,9 +43,18 @@ session_start();
                 <?php }?>
                 <?php if (isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./views/basket.php"><button class="green-button">Basket</button></a>' ?>
+                <?php if ($user) {
+        // Check if the user is not an admin
+                    if ($user['admin']) { 
+                        echo '<a href="./views/orders.php"><button class="green-button">Orders</button></a>' ;
+                    }
+                }
+            ?>
                 <?php echo '<a href="./views/logout.php"><button class="white-button">Logout</button></a>' ?>
 
                 <?php }?>
+              
+                
             
             </div>
     </nav>
@@ -60,10 +82,10 @@ session_start();
             <h2 class="subtitle">Trending</h2>
             <div id="trending-buttons">
             
-                <button class="green-button">PHONES</button>
-                <button class="white-button">LAPTOPS</button>
-                <button class="green-button">AUDIO</button>
-                <button class="white-button">GAMING</button>
+               <a href="./views/products.php?category=phones"> <button class="green-button">PHONES</button></a>
+               <a href="./views/products.php?category=laptops"> <button class="white-button">LAPTOPS</button></a>
+               <a href="./views/products.php?category=audio"> <button class="green-button">AUDIO</button></a>
+               <a href="./views/products.php?category=gaming"> <button class="white-button">GAMING</button></a>
                 
             </div>
         </div>
@@ -94,14 +116,14 @@ session_start();
         <div id="categories-top">
             <h2 style="font-size: 3rem; font-weight:400; text-align:center"class="subtitle">Explore our <span style="display: block">Categories</span></h2>
             <div id="category-button-container">
-                <button class="white-button category-buttons">LAPTOPS</button>
-                <button class="green-button category-buttons">PHONES</button>
-                <button class="white-button category-buttons">GAMING</button>
-                <button class="green-button category-buttons">WEARABLES</button>
-                <button class="green-button category-buttons">TABLETS</button>
-                <button class="white-button category-buttons">ACCESSORIES</button>
-                <button class="green-button category-buttons">COMPUTERS</button>
-                <button class="white-button category-buttons">AUDIO</button>
+            <a href="./views/products.php?category=laptops"> <button class="white-button category-buttons">LAPTOPS</button></a>
+            <a href="./views/products.php?category=phones"> <button class="green-button category-buttons">PHONES</button></a>
+            <a href="./views/products.php?category=gaming"> <button class="white-button category-buttons">GAMING</button></a>
+            <a href="./views/products.php?category=wearables"> <button class="green-button category-buttons">WEARABLES</button></a>
+            <a href="./views/products.php?category=tablets"> <button class="green-button category-buttons">TABLETS</button></a>
+            <a href="./views/products.php?category=accessories"> <button class="white-button category-buttons">ACCESSORIES</button></a>
+            <a href="./views/products.php?category=computers"> <button class="green-button category-buttons">COMPUTERS</button></a>
+            <a href="./views/products.php?category=audio"> <button class="white-button category-buttons">AUDIO</button></a>
             </div>
         </div>
         <div class="category-image">

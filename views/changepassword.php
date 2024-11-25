@@ -13,8 +13,8 @@ $user_id = $_SESSION['user_id'];
 // Check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form input
-    $new_password = $_POST['new_password'];
-    $confirm_password = $_POST['confirm_password'];
+    $new_password = $_POST['new_password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
 
     // Ensure all required fields are filled
     if (empty($new_password) || empty($confirm_password)) {
@@ -40,19 +40,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Update the password in the database
     $update_sql = "UPDATE users SET password_hash = :password_hash WHERE user_id = :user_id";
     $update_stmt = $pdo->prepare($update_sql);
-    $update_success = $update_stmt->execute([
-        ':password_hash' => $new_password_hash,
-        ':user_id' => $user_id,
-    ]);
 
-    if ($update_success) {
-        echo "Password updated successfully!";
-    } else {
-        echo "Error updating password.";
+    try {
+        $update_success = $update_stmt->execute([
+            ':password_hash' => $new_password_hash,
+            ':user_id' => $user_id,
+        ]);
+
+        if ($update_success) {
+            echo "Password updated successfully!";
+            //takes the user to the login page when the password has been successfully changed
+            header("Location:login.php");
+            exit();
+        } else {
+            echo "Error updating password.";
+        }
+        exit;
+    } catch (PDOException $e) {
+        // Handle database-related errors
+        echo "An error occurred: " . $e->getMessage();
+        exit;
     }
-    exit;
+
 }
 ?>
+
 
 
 
@@ -91,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>You can reset your password here</p><br><br>
     </header> 
     
-    <form action="change_password.php" method="POST" onsubmit="return validateForm()">
+    <form action="changePassword.php" method="POST" onsubmit="return validateForm()">
         <div class="input-group"> 
             <label for="new-password">New Password</label>
             <div class="password-wrapper">

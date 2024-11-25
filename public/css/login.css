@@ -19,7 +19,7 @@ body {
     height: 100vh;
     justify-content: space-between;
     align-items: center;
-    background-color: #004d30;
+    background-color: #275E4A;
     padding: 0 5%;
 }
 
@@ -50,7 +50,7 @@ body {
 }
 
 #loginform input[type="submit"] {
-    background-color: #004d30;
+    background-color: #275E4A;
     color: white;
     padding:20px;
     

@@ -2,7 +2,6 @@
 session_start();
 $pdo = require_once "../database/database.php"; 
 
-// Redirect if the user is not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
@@ -12,59 +11,52 @@ $user_id = $_SESSION['user_id']; // Logged-in user ID
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data
-    $current_password = $_POST['current_password'] ?? '';
-    $new_password = $_POST['new_password'] ?? '';
-    $confirm_password = $_POST['confirm_password'] ?? '';
+    $current_password = $_POST['current_password'];
+    $new_password = $_POST['new_password'];
+    $confirm_password = $_POST['confirm_password'];
 
-    // Validate input
-    if (empty($current_password) || empty($new_password) || empty($confirm_password)) {
-        echo "All fields are required.";
-        exit;
-    }
-
+    // Check if the new passwords match
     if ($new_password !== $confirm_password) {
         echo "Passwords do not match!";
         exit;
     }
 
+    // Password validation (could be improved with regex)
     if (strlen($new_password) < 8) {
         echo "Password must be at least 8 characters long.";
         exit;
     }
 
-    try {
-        // Fetch the current password hash from the database
-        $sql = "SELECT password_hash FROM users WHERE user_id = :user_id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Fetch the current password hash from the database
+    $sql = "SELECT password_hash FROM users WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($password_hash);
+    $stmt->fetch();
+    $stmt->close();
 
-        if (!$user || !password_verify($current_password, $user['password_hash'])) {
-            echo "Current password is incorrect!";
-            exit;
-        }
-
-        // Hash the new password
+    // Check if the current password is correct
+    if (password_verify($current_password, $password_hash)) {
+        // Hash the new password before updating
         $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
 
         // Update the password in the database
-        $update_sql = "UPDATE users SET password_hash = :password_hash WHERE user_id = :user_id";
-        $update_stmt = $pdo->prepare($update_sql);
-        $update_stmt->bindParam(':password_hash', $new_password_hash, PDO::PARAM_STR);
-        $update_stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-
+        $update_sql = "UPDATE users SET password_hash = ? WHERE user_id = ?";
+        $update_stmt = $conn->prepare($update_sql);
+        $update_stmt->bind_param("si", $new_password_hash, $user_id);
+        
         if ($update_stmt->execute()) {
             echo "Password updated successfully!";
         } else {
             echo "Error updating password.";
         }
-    } catch (PDOException $e) {
-        echo "An error occurred: " . $e->getMessage();
+        $update_stmt->close();
+    } else {
+        echo "Current password is incorrect!";
     }
 }
 ?>
-
 
 
 
@@ -112,34 +104,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>You can reset your password here</p><br><br>
         </header> 
         
-       <form action="change_password.php" method="POST" onsubmit="return validateForm()">
-    <div class="input-group">
-        <label for="current-password">Current Password</label>
-        <div class="password-wrapper">
-            <input type="password" id="current-password" name="current_password" required>
-            <i class="fas fa-eye toggle-password" onclick="togglePassword('current-password', this)"></i>
-        </div>
-    </div>
-
-    <div class="input-group">
-        <label for="new-password">New Password</label>
-        <div class="password-wrapper">
-            <input type="password" id="new-password" name="new_password" required>
-            <i class="fas fa-eye toggle-password" onclick="togglePassword('new-password', this)"></i>
-        </div>
-    </div>
-
-    <div class="input-group">
-        <label for="confirm-password">Confirm New Password</label>
-        <div class="password-wrapper">
-            <input type="password" id="confirm-password" name="confirm_password" required>
-            <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password', this)"></i>
-        </div>
-    </div>
-
-    <button type="submit" class="submit-btn">Update Password</button>
-</form>
-
+        <form action="change_password.php" method="POST" onsubmit="return validateForm()">
+            <div class="input-group"> 
+                <label for="new-password">New Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="new-password" name="new_password" required>
+                    <i class="fas fa-eye toggle-password" onclick="togglePassword('new-password', this)"></i>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="confirm-password">Confirm New Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="confirm-password" name="confirm_password" required>
+                    <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password', this)"></i>
+                </div>
+            </div>
             
             <!--Submit and back to login buttons-->
             <button type="submit" class="submit-btn">Update Password</button><br><br>

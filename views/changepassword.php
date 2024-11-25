@@ -1,64 +1,58 @@
-
 <?php
 session_start();
-$pdo = require_once "../database/database.php"; 
+$pdo = require_once "../database/database.php"; // Ensure this path is correct
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
 
-$user_id = $_SESSION['user_id']; // Logged-in user ID
+// Get the logged-in user ID
+$user_id = $_SESSION['user_id'];
 
+// Check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the form data
-    $current_password = $_POST['current_password'];
+    // Get form input
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
-    // Check if the new passwords match
+    // Ensure all required fields are filled
+    if (empty($new_password) || empty($confirm_password)) {
+        echo "All fields are required.";
+        exit;
+    }
+
+    // Check if new passwords match
     if ($new_password !== $confirm_password) {
         echo "Passwords do not match!";
         exit;
     }
 
-    // Password validation (could be improved with regex)
+    // Validate new password strength
     if (strlen($new_password) < 8) {
         echo "Password must be at least 8 characters long.";
         exit;
     }
 
-    // Fetch the current password hash from the database
-    $sql = "SELECT password_hash FROM users WHERE user_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $stmt->bind_result($password_hash);
-    $stmt->fetch();
-    $stmt->close();
+    // Hash the new password
+    $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
 
-    // Check if the current password is correct
-    if (password_verify($current_password, $password_hash)) {
-        // Hash the new password before updating
-        $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+    // Update the password in the database
+    $update_sql = "UPDATE users SET password_hash = :password_hash WHERE user_id = :user_id";
+    $update_stmt = $pdo->prepare($update_sql);
+    $update_success = $update_stmt->execute([
+        ':password_hash' => $new_password_hash,
+        ':user_id' => $user_id,
+    ]);
 
-        // Update the password in the database
-        $update_sql = "UPDATE users SET password_hash = ? WHERE user_id = ?";
-        $update_stmt = $conn->prepare($update_sql);
-        $update_stmt->bind_param("si", $new_password_hash, $user_id);
-        
-        if ($update_stmt->execute()) {
-            echo "Password updated successfully!";
-        } else {
-            echo "Error updating password.";
-        }
-        $update_stmt->close();
+    if ($update_success) {
+        echo "Password updated successfully!";
     } else {
-        echo "Current password is incorrect!";
+        echo "Error updating password.";
     }
+    exit;
 }
 ?>
-
 
 
 
@@ -71,70 +65,128 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../public/css/change_password.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!--I have used a Font Awesome CDN link to integrate the eye icon for the password
-    visibility in the input group-->
-
 </head>
 <body>
 <nav>
-            <div class="nav-left">
-                <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
-            </div>
-            <div class="nav-right">
-                <a href="../views/products.php"><button class="green-button" >Products</button></a>
-                <a href="#categories"><button class="white-button">About Us</button></a>
-                <?php if (!isset($_SESSION['user_id'])){?>
-                <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
-                 <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
-                <?php }?>
-                <?php if (isset($_SESSION['user_id'])){?>
-                <?php echo '<a href="./basket.php"><button class="green-button">Basket</button></a>' ?>
-                <?php echo '<a href="./logout.php"><button class="white-button">Logout</button></a>' ?>
-
-                <?php }?>
-
-            </div>
+    <div class="nav-left">
+        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+    </div>
+    <div class="nav-right">
+        <a href="../views/products.php"><button class="green-button">Products</button></a>
+        <a href="#categories"><button class="white-button">About Us</button></a>
+        <?php if (!isset($_SESSION['user_id'])) { ?>
+            <a href="./login.php"><button class="green-button">Login</button></a>
+            <a href="./signup.php"><button class="white-button">Sign Up</button></a>
+        <?php } ?>
+        <?php if (isset($_SESSION['user_id'])) { ?>
+            <a href="./basket.php"><button class="green-button">Basket</button></a>
+            <a href="./logout.php"><button class="white-button">Logout</button></a>
+        <?php } ?>
+    </div>
 </nav>
 
-    <div class="container">
-        <header>
-            <h1 id="header">Change your password</h1>
-            <p>You can reset your password here</p><br><br>
-        </header> 
+<div class="container">
+    <header>
+        <h1 id="header">Change your password</h1>
+        <p>You can reset your password here</p><br><br>
+    </header> 
+    
+    <form action="change_password.php" method="POST" onsubmit="return validateForm()">
+        <div class="input-group"> 
+            <label for="new-password">New Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="new-password" name="new_password" required>
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('new-password', this)"></i>
+            </div>
+        </div>
         
-        <form action="change_password.php" method="POST" onsubmit="return validateForm()">
-            <div class="input-group"> 
-                <label for="new-password">New Password</label>
-                <div class="password-wrapper">
-                    <input type="password" id="new-password" name="new_password" required>
-                    <i class="fas fa-eye toggle-password" onclick="togglePassword('new-password', this)"></i>
-                </div>
+        <div class="input-group">
+            <label for="confirm-password">Confirm New Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="confirm-password" name="confirm_password" required>
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password', this)"></i>
             </div>
-            
-            <div class="input-group">
-                <label for="confirm-password">Confirm New Password</label>
-                <div class="password-wrapper">
-                    <input type="password" id="confirm-password" name="confirm_password" required>
-                    <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password', this)"></i>
-                </div>
-            </div>
-            
-            <!--Submit and back to login buttons-->
-            <button type="submit" class="submit-btn">Update Password</button><br><br>
-            <button type="button" class="back-btn" onclick="goToLogin()">Back to Login</button>
-            
-            <!-- guidelines for users' new passwords-->
-            <p class="password-guidelines">
-                <strong>Password must include:</strong><br>
-                - Minimum of 8 characters<br>
-                - A mix of uppercase and lowercase letters<br>
-                - At least one number<br>
-                - At least one special character (e.g., @, #, $, %, etc.)<br>
-            </p>
-            
+        </div>
+        
+        <button type="submit" class="submit-btn">Update Password</button><br><br>
+        <button type="button" class="back-btn" onclick="goToLogin()">Back to Login</button>
+        
+        <p class="password-guidelines">
+            <strong>Password must include:</strong><br>
+            - Minimum of 8 characters<br>
+            - A mix of uppercase and lowercase letters<br>
+            - At least one number<br>
+            - At least one special character (e.g., @, #, $, %, etc.)<br>
+        </p>
+    </form>
+</div>
 
-        </form>
-    </div>
+<script>
+    function validateForm() {
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+        // Check if the passwords match
+        if (newPassword !== confirmPassword) {
+            alert("Please make sure your passwords match");
+            return false; // Prevent form submission
+        }
+
+        // Password validation rules to improve security
+        const passwordRequirements = [
+            /[a-z]/, // At least one lowercase letter
+            /[A-Z]/, // At least one uppercase letter
+            /[0-9]/, // At least one number
+            /[!@#$%^&*(),.?":{}|<>]/ // At least one special character
+        ];
+
+        let validPassword = true;
+        let message = "Your password must contain:\n";
+
+        if (!passwordRequirements[0].test(newPassword)) {
+            validPassword = false;
+            message += "- At least one lowercase letter\n";
+        }
+        if (!passwordRequirements[1].test(newPassword)) {
+            validPassword = false;
+            message += "- At least one uppercase letter\n";
+        }
+        if (!passwordRequirements[2].test(newPassword)) {
+            validPassword = false;
+            message += "- At least one number\n";
+        }
+        if (!passwordRequirements[3].test(newPassword)) {
+            validPassword = false;
+            message += "- At least one special character (e.g., @, #, $, %, etc.)\n";
+        }
+
+        if (!validPassword) {
+            alert(message);
+            return false;
+        }
+
+        return true;
+    }
+
+    function togglePassword(inputId, icon) {
+        const input = document.getElementById(inputId);
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+
+    function goToLogin() {
+        window.location.href = "login.php";
+    }
+</script>
+
 <?php require_once "../partials/footer.php" ?>
 </body>
 </html>
+

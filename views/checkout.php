@@ -1,15 +1,40 @@
+<?php     
+//start the session_session
+session_start();
+
+//connect to db
+require_once ("../database/database.php");
+
+if (!isset($_SESSION['username'])) {
+  header("Location: login.php?error=Please+log+in");
+  exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
     <?php require_once "../partials/header.php" ?>
-    
+    <link rel="stylesheet" href="../public/css/checkout.css">
     </head>
     <body>
     <nav>
             <div class="nav-left">
                 <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
             </div>
-
+            <div class="nav-right">
+            <a href="./products.php"><button class="green-button" >Products</button></a>
+                <a href="#categories"><button class="white-button">About Us</button></a>
+                <?php if (!isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./views/login.php"><button class="green-button">Login</button></a>' ?>
+                 <?php echo '<a href="./views/signup.php"><button class="white-button">Sign Up</button></a> '?>
+                <?php }?>
+                <?php if (isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
+                <?php }?>
+            </div>
+</nav>
     <div id="checkout-container">
         <div class="checkout-flex">
         <h1>Checkout</h1>
@@ -46,7 +71,9 @@
             <div class="form-group">
                 <label for="cvv">CVV:</label>
                 <input type="text" id="cvv" name="cvv" placeholder="Enter CVV" required>
-
+            </div>
+                    <input type="hidden" name='order' value="<?php echo $order?>">
+                    <input type="hidden" name='total' value="<?php echo $_POST['total']?>">
             <button type="submit">Complete Order</button>
         </form>
     </div>

@@ -112,22 +112,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>You can reset your password here</p><br><br>
         </header> 
         
-        <form action="change_password.php" method="POST" onsubmit="return validateForm()">
-            <div class="input-group"> 
-                <label for="new-password">New Password</label>
-                <div class="password-wrapper">
-                    <input type="password" id="new-password" name="new_password" required>
-                    <i class="fas fa-eye toggle-password" onclick="togglePassword('new-password', this)"></i>
-                </div>
-            </div>
-            
-            <div class="input-group">
-                <label for="confirm-password">Confirm New Password</label>
-                <div class="password-wrapper">
-                    <input type="password" id="confirm-password" name="confirm_password" required>
-                    <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password', this)"></i>
-                </div>
-            </div>
+       <form action="change_password.php" method="POST" onsubmit="return validateForm()">
+    <div class="input-group">
+        <label for="current-password">Current Password</label>
+        <div class="password-wrapper">
+            <input type="password" id="current-password" name="current_password" required>
+            <i class="fas fa-eye toggle-password" onclick="togglePassword('current-password', this)"></i>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="new-password">New Password</label>
+        <div class="password-wrapper">
+            <input type="password" id="new-password" name="new_password" required>
+            <i class="fas fa-eye toggle-password" onclick="togglePassword('new-password', this)"></i>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="confirm-password">Confirm New Password</label>
+        <div class="password-wrapper">
+            <input type="password" id="confirm-password" name="confirm_password" required>
+            <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password', this)"></i>
+        </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Update Password</button>
+</form>
+
             
             <!--Submit and back to login buttons-->
             <button type="submit" class="submit-btn">Update Password</button><br><br>

@@ -9,6 +9,9 @@
             <div class="nav-left">
                 <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
             </div>
+            <link rel="stylesheet" href="../public/css/contact.css">
+            <link rel="stylesheet" href="../public/css/navbar.css">
+            <link rel="stylesheet" href="../public/css/styles.css">
 
     <div id="checkout-container">
         <div class="checkout-flex">

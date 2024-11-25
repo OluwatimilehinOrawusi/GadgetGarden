@@ -21,42 +21,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Password validation (could be improved with regex)
+    // Password validation (length is checked here, regex can be added for further validation)
     if (strlen($new_password) < 8) {
         echo "Password must be at least 8 characters long.";
         exit;
     }
 
-    // Fetch the current password hash from the database
-    $sql = "SELECT password_hash FROM users WHERE user_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $stmt->bind_result($password_hash);
-    $stmt->fetch();
-    $stmt->close();
+    try {
+        // Fetch the current password hash from the database
+        $stmt = $pdo->prepare("SELECT password_hash FROM users WHERE user_id = :user_id");
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Check if the current password is correct
-    if (password_verify($current_password, $password_hash)) {
-        // Hash the new password before updating
-        $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
-
-        // Update the password in the database
-        $update_sql = "UPDATE users SET password_hash = ? WHERE user_id = ?";
-        $update_stmt = $conn->prepare($update_sql);
-        $update_stmt->bind_param("si", $new_password_hash, $user_id);
-        
-        if ($update_stmt->execute()) {
-            echo "Password updated successfully!";
-        } else {
-            echo "Error updating password.";
+        if (!$result) {
+            echo "User not found!";
+            exit;
         }
-        $update_stmt->close();
-    } else {
-        echo "Current password is incorrect!";
+
+        $password_hash = $result['password_hash'];
+
+        // Check if the current password is correct
+        if (password_verify($current_password, $password_hash)) {
+            // Hash the new password before updating
+            $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+
+            // Update the password in the database
+            $update_stmt = $pdo->prepare("UPDATE users SET password_hash = :new_password_hash WHERE user_id = :user_id");
+            $update_stmt->bindParam(':new_password_hash', $new_password_hash, PDO::PARAM_STR);
+            $update_stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+            if ($update_stmt->execute()) {
+                echo "Password updated successfully!";
+            } else {
+                echo "Error updating password.";
+            }
+        } else {
+            echo "Current password is incorrect!";
+        }
+    } catch (PDOException $e) {
+        echo "Database error: " . $e->getMessage();
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GADGET GARDEN </title>
-
+    <?php require_once "../partials/header.php" ?>
 </head>
 
 <body>  
@@ -38,7 +38,7 @@
         <div class="image1"> 
 
 
-            <img src = "./images/ggLaptopSignIn.png" class = "images" alt = "Laptop Promo"/>
+            <img src = "../public/assets/ggLaptopSignIn.png" class = "images" alt = "Laptop Promo"/>
 
         </div>
 

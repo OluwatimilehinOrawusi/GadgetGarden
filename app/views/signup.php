@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link href = "./styles/signup_page.css" rel = "stylesheet"/>
+    <link rel="stylesheet" href="../public/css/navbar.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GADGET GARDEN </title>
@@ -37,7 +38,7 @@
         <div class="image1"> 
 
 
-            <img src = "./images/LaptopPromo.png" class = "images" alt = "Laptop Promo"/>
+            <img src = "./images/ggLaptopSignIn.png" class = "images" alt = "Laptop Promo"/>
 
         </div>
 

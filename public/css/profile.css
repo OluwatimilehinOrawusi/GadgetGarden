@@ -1,0 +1,156 @@
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #eef9f1;
+  padding: 15px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.search-bar {
+  padding: 8px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.sell-button {
+  background-color: #008000;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sell-button:hover {
+  background-color: #275e4a;
+}
+
+.icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.main-content {
+  padding: 20px;
+  background-color: #004d30;
+  color: white;
+}
+
+.main-content h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.info-section {
+  margin-top: 20px;
+}
+
+.info-card {
+  background-color: white;
+  color: #004d26;
+  margin: 15px auto;
+
+  padding: 20px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.info-header h3 {
+  font-size: 1.2rem;
+}
+
+.edit-button {
+  background-color: #004d26;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #00311a;
+}
+
+.info-content p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.reset-link {
+  color: black;
+  text-decoration: underline;
+}
+
+.reset-link:hover {
+  color: black;
+  text-decoration: underline;
+}
+.discount {
+  width: 100vw;
+  height: 25px;
+  background-color: #78fccc;
+  color: black;
+  font-size: 15px;
+  position: static;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+
+.order-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+.order-details {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

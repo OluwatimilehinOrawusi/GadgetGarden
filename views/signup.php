@@ -72,10 +72,11 @@
 
   <button type="createaccount">Create Account</button>
 
-<h6>Already have an account? <a href = "./login_page.html">Log in</a></h6>
+<h6>Already have an account? <a href = "./login.php">Log in</a></h6>
 
                 </div>
 </div>
+
 
             </form>
             </div>

@@ -1,9 +1,11 @@
 <?php
-// // Start the session
-// session_start();
+// Start the session
+session_start();
 
 // Connect to the database
 require_once('../database/database.php');
+
+
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
@@ -13,12 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     $review_text = htmlspecialchars(trim($_POST['review_text']));
 
     // Validate form inputs
-    if ($user_id && $product_id && $rating > 0 && $rating <= 5 && !empty($review_text)) {
+    if ($product_id && $rating > 0 && $rating <= 5 && !empty($review_text)) {
         try {
             // SQL to insert the review
-            $stmt = $db->prepare("INSERT INTO Reviews (user_id, product_id, rating, review_text) VALUES (:product_id, :rating, :review_text)");
+            $stmt = $pdo->prepare("INSERT INTO Reviews (user_id, product_id, rating, review_text) VALUES (:user_id, :product_id, :rating, :review_text)");
             
             // Bind parameters
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
             $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
             $stmt->bindParam(':rating', $rating, PDO::PARAM_INT);
             $stmt->bindParam(':review_text', $review_text, PDO::PARAM_STR);
@@ -59,7 +62,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
 <body>
     <!-- Navigation Bar -->
     <!---should add the navbar partial to the page--->
-    <?php require '../partials/navbar.php'; ?>
+    <nav>
+            <div class="nav-left">
+                <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+            </div>
+            <div class="nav-right">
+                <a href="../views/contact.php"><button class="green-button" >Contact Us</button></a>
+                <a href="#categories"><button class="white-button">About Us</button></a>
+                <?php if (!isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
+                 <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
+                <?php }?>
+                <a href="../views/contact.php"><button class="green-button" >Products</button></a>
+                <?php if (isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
+                <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
+
+                <?php }?>
+
+            </div>
+</nav>
 
 <!------ Seperation between the form and navbar--->
     <div style="height: 70px;"></div>

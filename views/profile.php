@@ -3,7 +3,7 @@
 session_start();
 
 //connect to db
-require_once ("../../database/database.php");
+require_once ("../database/database.php");
 
 if (!isset($_SESSION['username'])) {
   header("Location: login.php?error=Please+log+in");
@@ -26,9 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
 } else {
     echo "Error updating order: " . $db->error;
 }
-} else {
-die("Invalid request.");
-}
+} 
+
 ?>
 
 
@@ -38,14 +37,33 @@ die("Invalid request.");
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gadget Garden</title>
-    <?php require '../../partials/header.php'; ?>
-    <link rel="stylesheet" href="../../../public/css/navbar.css" />
-    <link rel="stylesheet" href="../../../public/css/styles.css" />
-    <link rel="stylesheet" href="profile.css" />
+    <?php require '../partials/header.php'; ?>
+    <link rel="stylesheet" href="../public/css/navbar.css" />
+    <link rel="stylesheet" href="../public/css/styles.css" />
+    <link rel="stylesheet" href="../public/css/profile.css" />
 
   </head>
   <body>
-  <?php require '../../partials/navbar.php'; ?>
+  <nav>
+            <div class="nav-left">
+                <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+            </div>
+            <div class="nav-right">
+                <a href="../views/contact.php"><button class="green-button" >Contact Us</button></a>
+                <a href="#categories"><button class="white-button">About Us</button></a>
+                <?php if (!isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
+                 <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
+                <?php }?>
+                <a href="../views/contact.php"><button class="green-button" >Products</button></a>
+                <?php if (isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
+                <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
+
+                <?php }?>
+
+            </div>
+</nav>
     <header class="header">
       <div class="header-content">
         <h1>My Profile</h1>
@@ -54,7 +72,7 @@ die("Invalid request.");
     </header>
 
     <main class="main-content">
-      <h2>Hi,Neaj</h2>
+    <?php echo "<h2> Welcome ".$_SESSION['username']."! </h2>"; ?>
       <section class="info-section">
         <div class="info-card">
           <div class="info-header">
@@ -186,5 +204,5 @@ die("Invalid request.");
     </main>
   
   </body>
-  <?php require '../../partials/footer.php'; ?>
+  <?php require '../partials/footer.php'; ?>
 </html>

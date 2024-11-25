@@ -27,28 +27,6 @@
     font-weight: bold;
   }
   
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-  }
-  
-  nav ul button {
-    background-color: #ffffff;
-    border: 2px solid #275E4A;
-    color: #275E4A;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  nav ul button:hover {
-    background-color: #275E4A;
-    color: #ffffff;
-    transition: 0.3s ease-in-out;
-  }
-  
   
   .webpage {
     display: flex;

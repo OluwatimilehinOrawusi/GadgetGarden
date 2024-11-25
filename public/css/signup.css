@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #275E4A; 
+    color: #ffffff;
+    line-height: 1.6;
+  }
+  
+  
+  header {
+    background-color: #ffffff; 
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h3 {
+    color: #275E4A;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+  
+  nav ul button {
+    background-color: #ffffff;
+    border: 2px solid #275E4A;
+    color: #275E4A;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  nav ul button:hover {
+    background-color: #275E4A;
+    color: #ffffff;
+    transition: 0.3s ease-in-out;
+  }
+  
+  
+  .webpage {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 30px;
+  }
+  
+  
+  .intro {
+    max-width: 50%;
+  }
+  
+  .intro h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  .intro .image1 img {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .signup {
+    background-color: #ffffff;
+    color: #275E4A;
+    border-radius: 20px;
+    padding: 30px;
+    width: 40%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .signup h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #275E4A;
+  }
+  
+  .signup form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .signup label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #275E4A;
+  }
+  
+  .signup input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  
+  
+  .signup button {
+    background-color: #275E4A;
+    border: 2px solid #275E4A;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .signup button:hover {
+    background-color: #275E4A;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .signup h6 {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .signup h6 a {
+    color: #275E4A;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .signup h6 a:hover {
+    text-decoration: underline;
+  }

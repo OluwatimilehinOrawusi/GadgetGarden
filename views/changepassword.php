@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 $pdo = require_once "../database/database.php"; 
@@ -69,10 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
     <link rel="stylesheet" href="../public/css/change_password.css">
+    <link rel="stylesheet" href="../public/css/change_password.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!--I have used a Font Awesome CDN link to integrate the eye icon for the password
     visibility in the input group-->
+     <!-- Link to the external JavaScript file -->
+    <script src="../public/js/change_password.js" defer></script>
 
 </head>
 <body>

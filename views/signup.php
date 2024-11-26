@@ -1,4 +1,21 @@
+<?php
 
+$pdo = require_once '../database/database.php';
+$errors = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+
+    if ($password !== $confirm_password) {
+        $errors[] = "The passwords do not match, please try again";
+    }
+
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+}
 
 
 <!DOCTYPE html>

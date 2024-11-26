@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($update_success) {
             echo "Password updated successfully!";
             //takes the user to the login page when the password has been successfully changed
-            header("Location: ../index.php");
+            header("Location:login.php");
             exit();
         } else {
             echo "Error updating password.";

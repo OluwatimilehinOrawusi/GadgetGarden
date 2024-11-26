@@ -3,7 +3,7 @@ session_start();
 $pdo = require_once "../database/database.php"; // Ensure this path is correct
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location:login.php");
     exit;
 }
 

@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,28 +50,28 @@
         <div class = "signup">
             <h3>Create Account</h3>
 
-            <form id ="myForm" onsubmit="return checkEmails(this)">
+            <form method='POST' action='./signup.php' id ="myForm" >
 
                 <div class = "creating">    
                     <label>Username</label>
-                    <input required type="text" id="name" placeholder="Username">
+                    <input required type="text" id="name" name="username" placeholder="Username">
 
                     <label for="email">E-mail</label>
 
-  <input required type="text" id="email1" name="Email" placeholder="Email">
+  <input required type="text" id="email1" name="email" placeholder="email">
 
   <label for="phonenumber">Phone Number</label>
 
-  <input required ="number" id="phonenumber" name="Phone Number" placeholder="Phone Number">
+  <input required ="number" id="phonenumber" name="phone" placeholder="phone">
 
 
   <label for="password">Password</label>
 
-  <input required type = "password" id="password" name="Password" placeholder="Password">
+  <input required type = "password" id="password" name="password" placeholder="password">
 
   <label for="cpassword">Confirm Password</label>
 
-  <input required ="text" id="cpassword" name="Confirm Password" placeholder="Confirm Password">
+  <input required ="text" id="cpassword" name="confirm_password" placeholder="confirm_password">
 
   <button type="createaccount">Create Account</button>
 

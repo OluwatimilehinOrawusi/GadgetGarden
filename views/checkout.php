@@ -2,8 +2,8 @@
 <html>
     <head>
         <?php require_once "../partials/header.php"; ?>
-        <link rel="stylesheet" href="../public/css/navbar.css">
-        <link rel="stylesheet" href="../public/css/styles.css">
+         <link rel="stylesheet" href="../public/css/navbar.css">
+        <link rel="stylesheet" href="../public/css/styles.css"> 
         <link rel="stylesheet" href="../public/css/checkout.css">
     </head>
     <body>

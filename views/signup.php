@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare($sql);
         $stmt -> execute([$username, $email, $password_hash]);
 
-        header("Location ../login.php");
+        header("Location: ./login.php");
 
     } catch (PDOException) {
         echo "An error occured, please try again later";

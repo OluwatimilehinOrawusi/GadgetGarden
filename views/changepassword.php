@@ -3,7 +3,7 @@ session_start();
 $pdo = require_once "../database/database.php"; // Ensure this path is correct
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location:login.php");
     exit;
 }
 
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="nav-right">
         <a href="../views/products.php"><button class="green-button">Products</button></a>
-        <a href="#categories"><button class="white-button">About Us</button></a>
+        <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
         <?php if (!isset($_SESSION['user_id'])) { ?>
             <a href="./login.php"><button class="green-button">Login</button></a>
             <a href="./signup.php"><button class="white-button">Sign Up</button></a>

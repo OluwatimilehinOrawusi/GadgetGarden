@@ -1,41 +1,34 @@
 <?php
-// Include the database connection
-$pdo = require_once '../database/database.php';
 
+$pdo = require_once '../database/database.php';
 $errors = [];
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
-    $phone =$_POST['phone'];
+    $phone = $_POST['phone'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    // Validate form input
     if ($password !== $confirm_password) {
-        $errors[] = "passwords do not match";
+        $errors[] = "The passwords do not match, please try again";
     }
 
-    // Hash the password
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert the user into the database
     try {
-        // Prepare the SQL query
-        $sql = "INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users(username, email, password_hash) VALUES(?,?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$username, $email, $password_hash]);
-        
-        // If the query was successful, notify the user
-        Header("Location: ./login.php");
-    } catch (PDOException $e) {
-        // Handle any errors (e.g., email already exists)
-        echo $e;
-        exit();
-        Header("Location: ./index.php");
+        $stmt -> execute([$username, $email, $password_hash]);
+
+        header("Location: ./login.php");
+
+    } catch (PDOException) {
+        echo "An error occured, please try again later";
+        exit;
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="nav-right">
                 <a href="../views/products.php"><button class="green-button" >Products</button></a>
-                <a href="#categories"><button class="white-button">About Us</button></a>
+                <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
                 <?php if (!isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
                  <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
@@ -90,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class = "creating">    
                     <label>Username</label>
-                    <input required type="text" id="username" name="username"placeholder="username">
+                    <input required type="text" id="name" name="username" placeholder="Username">
 
                     <label for="email">E-mail</label>
 

@@ -3,7 +3,7 @@ session_start();
 $pdo = require_once "../database/database.php"; // Ensure this path is correct
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location:../index.php");
+    header("Location:login.php");
     exit;
 }
 
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($update_success) {
             echo "Password updated successfully!";
             //takes the user to the login page when the password has been successfully changed
-            header("Location:login.php");
+            header("Location: ../index.php");
             exit();
         } else {
             echo "Error updating password.";

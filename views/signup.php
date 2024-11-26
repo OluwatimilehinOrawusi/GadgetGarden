@@ -15,9 +15,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+    try {
+        $sql = "INSERT INTO users(username, email, password_hash) VALUES(?,?,?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt -> execute([$username, $email, $password_hash]);
+
+        header("Location ../login.php");
+
+    } catch (PDOException) {
+        echo "An error occured, please try again later";
+        exit;
+    }
 }
 
-
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

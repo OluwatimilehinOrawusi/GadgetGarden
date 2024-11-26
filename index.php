@@ -36,7 +36,7 @@ $user_id = $_SESSION['user_id'] ?? null;
             </div>
             <div class="nav-right">
             <a href="./views/contact.php"><button class="white-button" >Contact Us</button></a>
-                <a href="#categories"><button class="green-button">Categories </button></a>
+                <a href="./views/aboutpage.php"><button class="green-button">Categories </button></a>
                 <button class="white-button">About Us</button>
                 <?php if (!isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./views/login.php"><button class="green-button">Login</button></a>' ?>

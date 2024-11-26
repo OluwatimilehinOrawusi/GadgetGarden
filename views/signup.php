@@ -87,20 +87,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <label for="email">E-mail</label>
 
-  <input required type="text" id="email1" name="email" placeholder="email">
+  <input required type="text" id="email1" name="email" placeholder="Email">
 
   <label for="phonenumber">Phone Number</label>
 
-  <input required ="number" id="phonenumber" name="phone" placeholder="phone">
+  <input required ="number" id="phonenumber" name="phone" placeholder="Phone">
 
 
   <label for="password">Password</label>
 
-  <input required type = "password" id="password" name="password" placeholder="password">
+  <input required type = "password" id="password" name="password" placeholder="Password">
 
   <label for="cpassword">Confirm Password</label>
 
-  <input required ="text" id="cpassword" name="confirm_password" placeholder="confirm_password">
+  <input required ="text" id="cpassword" name="confirm_password" placeholder="Confirm Password">
 
   <button type="createaccount">Create Account</button>
 

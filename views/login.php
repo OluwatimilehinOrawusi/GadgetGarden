@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type = "submit" value = "Sign in" id = "subbutton"/>
         <input type = "hidden" name = "submitted" value = "true"/>
         <br> <br>
-        <p class = "register-new">Don't have an account? <a href ="-">Sign up</a></p>
+        <p class = "register-new">Don't have an account? <a href ="./signup.php">Sign up</a></p>
         </form> 
     </div>
 </div>

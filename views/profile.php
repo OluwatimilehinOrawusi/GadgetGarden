@@ -80,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
             <button class="edit-button">Edit</button>
           </div>
           <div class="info-content">
-            <p><strong>First Name:</strong> Neaj</p>
-            <p><strong>Last Name:</strong> Chowdhury</p>
+            <p><strong>First Name:</strong></p>
+            <p><strong>Last Name:</strong></p>
           </div>
         </div>
 
@@ -91,20 +91,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
             <button class="edit-button">Edit</button>
           </div>
           <div class="info-content">
-            <p><strong>Email Address:</strong> 220056342@aston.ac.uk</p>
-            <p><strong>Account ID:</strong> 2168364892747</p>
+            <p><strong>Email Address:</strong></p>
+            <p><strong>Account ID:</strong></p>
           </div>
         </div>
 
         <div class="info-card">
           <div class="info-header">
-            <h3>Reset Password</h3>
+            <h3>Change Password</h3>
             <button class="edit-button">Edit</button>
           </div>
           <div class="info-content">
             <p>
-              <a href="changepassword.php" class="reset-link"
-                >Reset Password</a
+              <a href="./changepassword.php" class="reset-link"
+                >Change Password</a
               >
             </p>
           </div>
@@ -163,13 +163,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
               class="order-image"
             />
             <div class="info-content">
-              <p><strong>Order ID:</strong> H84H9SI3H984</p>
+              <p><strong>Order ID:</strong></p>
               <p>
-                <strong>Dispatched to:</strong> 18 Bromsbrook Street,
-                Birmingham, B27 9PJ
+                <strong>Dispatched to:</strong>
               </p>
-              <p><strong>Order total:</strong> £45.00</p>
-              <p><strong>Payment Method:</strong> Card</p>
+              <p><strong>Order total:</strong></p>
+              <p><strong>Payment Method:</strong></p>
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ require_once('../database/database.php');
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     $user_id = $_SESSION['user_id']; // If a user is logged in, retrieve the user_id 
-    $product_id = $_POST['product_id'];
+    $product_id = $_GET['id'];
     $rating = intval($_POST['rating']);
     $review_text = htmlspecialchars(trim($_POST['review_text']));
 
@@ -95,10 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
         <form method="POST" action="">
 
 <!----product ID section to be removed in later prints---->
-            <label for="product_id">Product ID:</label>
-            <input type="number" id="product_id" name="product_id" required>
-            <br>
-            <br>
+
 
 
             <label for="rating">Rating (1-5):</label>

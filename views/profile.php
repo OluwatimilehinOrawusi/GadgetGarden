@@ -103,8 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
           </div>
           <div class="info-content">
             <p>
-              <a href="../changepassword.php" class="reset-link"
-                >Reset Password</a
+              <a href="./changepassword.php" class="reset-link"
+                >Change Password</a
               >
             </p>
           </div>

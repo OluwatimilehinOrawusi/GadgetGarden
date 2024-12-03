@@ -1,0 +1,78 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+#login-container {
+    width: 35%;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px black;
+    padding: 30px 40px;
+
+}
+
+/* Login Page Wrapper */
+#login-page {
+    display: flex;
+    height: 100vh;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #275E4A;
+    padding: 0 5%;
+}
+
+/* Left Side Container */
+#leftside-container {
+    flex: 1;
+    color: white;
+}
+
+#loginform {
+    display: flex;
+    flex-direction: column;
+}
+
+
+#loginform label {
+    color: #858585;
+    /* add feature to make label be inside the box */
+    
+}
+
+#loginform input[type="text"],
+#loginform input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+}
+
+#loginform input[type="submit"] {
+    background-color: #275E4A;
+    color: white;
+    padding:20px;
+    
+}
+
+#loginform input[type="submit"]:hover {
+    transform: scale(1.05);
+    background-color: white;
+    color: #004d30;
+}
+
+
+.forgot-password, .register-new {
+    font-size: 0.9rem;
+    color: #858585;
+    text-decoration: underline;
+}
+
+#textboxesandlabels {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    width: 100%; 
+}

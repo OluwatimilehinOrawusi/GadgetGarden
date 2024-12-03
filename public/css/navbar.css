@@ -13,12 +13,12 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 37%;
+    width: 50%;
 }
 
 /* Buttons */
 
-.white-button{
+/* .white-button{
 border: 0.1rem solid #275E4A;
 
 }
@@ -34,4 +34,18 @@ font-size: 2rem;
     border: none;
     color:#275E4A;
 
+} */
+
+.white-button, .green-button {
+    border: 0.1rem solid #275E4A;
+    background-color: #275E4A;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.white-button:hover, .green-button:hover {
+    background-color: white;
+    color: #275E4A;
+    transform: scale(1.05);
 }

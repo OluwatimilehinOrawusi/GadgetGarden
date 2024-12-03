@@ -1,0 +1,129 @@
+/* General Styling for the Review Page */
+.review-content {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    border: 1px solid #275E4A;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Title Styling */
+.review-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #275E4A;
+}
+
+/* Textarea Styling */
+.review-content textarea {
+    width: 100%;
+    max-width: 750px;
+    height: 200px;
+    padding: 1.5rem;
+    border: 1px solid #275E4A;
+    border-radius: 0.5rem;
+    resize: none;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    color: #275E4A;
+    background-color: #fff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+}
+
+.review-content textarea::placeholder {
+    color: #a3a3a3;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Submit Button Styling */
+.review-content .submit-btn {
+    display: flex;
+    margin: 0 auto;
+    padding: 0.75rem 2rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid #275E4A;
+    background-color: #275E4A;
+    color: #fff;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    text-align: center;
+}
+
+.review-content .submit-btn span {
+    position: relative;
+    display: block;
+    width: auto; /* Makes the text span centered */
+    text-align: center;
+}
+
+.review-content .submit-btn:hover {
+    background-color: #1d4939;
+    transform: scale(1.05);
+}
+
+.review-content .submit-btn:active {
+    background-color: #14372c;
+    transform: scale(0.98);
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 768px) {
+    .review-content {
+        padding: 1.5rem;
+    }
+
+    .review-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .review-content textarea {
+        height: 120px;
+    }
+
+    .review-content .submit-btn {
+        font-size: 0.9rem;
+        padding: 0.65rem 1.5rem;
+    }
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse; /* Reverses the visual order */
+    justify-content: center;
+    font-size: 2rem;
+    gap: 0.5rem;
+}
+
+.star-rating input[type="radio"] {
+    display: none; /* Hide the radio buttons */
+}
+
+.star-rating label {
+    color: #ccc; /* Default unselected star color */
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+/* Highlight stars on selection */
+.star-rating input[type="radio"]:checked ~ label {
+    color: #f5b301; /* Highlight color for selected stars */
+}
+
+/* Hover effect for stars */
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #f5b301;
+}

@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
           </div>
           <div class="info-content">
             <p>
-              <a href="reset-password.html" class="reset-link"
+              <a href="changepassword.php" class="reset-link"
                 >Reset Password</a
               >
             </p>
@@ -120,7 +120,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
             <button class="edit-button">Edit</button>
           </div>
           <div class="order-details">
-            <img src="headphones.jpg" alt="Headphones" class="order-image" />
+            <img src="../public/assets/headphones.png"  
+            alt="Headphones"  
+            class="order-image" />
             <div class="info-content">
               <p><strong>Order ID:</strong> EJH27GD73GD</p>
               <p>
@@ -133,30 +135,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
           </div>
 
           <div class="info-header">
-            <h3>Smart TV</h3>
+            <h3>Playstation</h3>
             <button class="edit-button">Edit</button>
           </div>
           <div class="order-details">
-            <img src="tv.jpg" alt="TV" class="order-image" />
+            <img src="../public/assets/playstation.png" 
+            alt="TV" class="order-image" />
             <div class="info-content">
               <p><strong>Order ID:</strong> 78D9284741XZ</p>
               <p>
                 <strong>Dispatched to:</strong> 18 Bromsbrook Street,
                 Birmingham, B27 9PJ
               </p>
-              <p><strong>Order total:</strong> £3120.00</p>
+              <p><strong>Order total:</strong> £400.00</p>
               <p><strong>Payment Method:</strong> Card</p>
             </div>
           </div>
 
           <div class="info-header">
-            <h3>Games Controller</h3>
+            <h3>Gaming Keyboard</h3>
             <button class="edit-button">Edit</button>
           </div>
           <div class="order-details">
             <img
-              src="gamingcontroller.jpg"
-              alt="Gaming Controller"
+              src="../public/assets/gaming-keyboard.png"
+              alt="Gaming keyboard"
               class="order-image"
             />
             <div class="info-content">
@@ -180,11 +183,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
           </div>
 
           <div class="info-header">
-            <h3>Ipad Air</h3>
+            <h3>Apple Watch</h3>
             <button class="edit-button">Edit</button>
           </div>
           <div class="order-details">
-            <img src="headphones.jpg" alt="Headphones" class="order-image" />
+            <img src="../public/assets/apple-watch.png" alt="watch" class="order-image" />
             <div class="info-content">
               <p><strong>Order ID:</strong> HD8EH47FH01</p>
               <p>
@@ -206,4 +209,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
   </body>
   <?php require '../partials/footer.php'; ?>
 </html>
-

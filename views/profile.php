@@ -38,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gadget Garden</title>
     <?php require '../partials/header.php'; ?>
-    <link rel="stylesheet" href="../public/css/navbar.css" />
-    <link rel="stylesheet" href="../public/css/styles.css" />
-    <link rel="stylesheet" href="../public/css/profile.css" />
+    <link rel="stylesheet" href="../public/css/profile.css">
+    <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
 
   </head>
   <body>

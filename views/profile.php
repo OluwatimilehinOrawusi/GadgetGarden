@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
 
         <div class="info-card">
           <div class="info-header">
-            <h3>Return order</h3>
+            <h3>Return Order</h3>
             <button class="edit-button">Edit</button>
           </div>
           <div class="info-content">

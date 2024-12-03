@@ -35,6 +35,7 @@ $product= $statement->fetch(PDO::FETCH_ASSOC);
       <p class="product-condition">Condition: <?php echo $product["state"]?></p>
       <p class="product-price">£<?php echo $product["price"]?></p>
       <a href="  <?php echo './add-products.php?product_id='.$product["product_id"]?>"><button class="green-button">Add to Basket</button></a>
+      <a href="./reviewPage.php"> <u>Write a review</u></a>
     </div>
   </div>
 

@@ -47,5 +47,5 @@ font-size: 2rem;
 .white-button:hover, .green-button:hover {
     background-color: white;
     color: #275E4A;
-    transform: scale(1.05);
+    transform: scale(1.15);
 }

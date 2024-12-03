@@ -112,6 +112,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
 
         <div class="info-card">
           <div class="info-header">
+            <h3>Return order</h3>
+            <button class="edit-button">Edit</button>
+          </div>
+          <div class="info-content">
+            <p>
+              <a href="./returnOrder.php" class="return-link"
+                >Return Order</a
+              >
+            </p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-header">
             <h3>My Orders<br /><br /></h3>
           </div>
 

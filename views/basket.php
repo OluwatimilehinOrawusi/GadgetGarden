@@ -34,7 +34,7 @@ $products= $statement->fetchAll(PDO::FETCH_ASSOC);
 $serialized_array = serialize($products);
 $total = 0;
 foreach($products as $product){
-    $total = $total + (int)$product['price'] * (int)$product['quantity'];
+    $total = $total + (float)$product['price'] * (int)$product['quantity'];
 }
 
 }

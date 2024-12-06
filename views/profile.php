@@ -10,11 +10,14 @@ if (!isset($_SESSION['username'])) {
   exit();
 }
 
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
   $order_id = intval($_POST['order_id']);
   $order_total = floatval($_POST['order_total']);
   $sold_total = floatval($_POST['sold_total']);
   $dispatch_address = trim($_POST['dispatch_address']);
+
 
   $stmt = $db->prepare("UPDATE profile SET order_total = ?, sold_total = ?, dispatch_address = ? WHERE order_id = ?");
   $stmt->bind_param("ddsi", $order_total, $sold_total, $dispatch_address, $order_id);
@@ -92,8 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
             <button class="edit-button">Edit</button>
           </div>
           <div class="info-content">
-          <?php echo "<h2> Email Address: ".$_SESSION['email']."! </h2>"; ?>
-          <?php echo "<h2> Account ID: ".$_SESSION['user_id']."! </h2>"; ?>
+          <p><strong>Email Address:</strong> <?php echo ($email); ?></p>
+          <p><strong>Account ID:</strong> <?php echo ($_SESSION['user_id']); ?></p>
           </div>
         </div>
 

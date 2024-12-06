@@ -49,10 +49,19 @@ session_start();
       // Execute the statement
       $statement->execute();
       $count = $count + 1;
+
+
     }
 
-    Header("Location: ./index.php");
+
+    echo "<script>
+    alert('Your order has been placed successfully! Thank you for shopping at Gadget Garden.');
+    window.location.href = '../index.php'; // Redirect to index page
+  </script>";
+  exit();
+
 }catch(PDOException $e){
+  echo("Your order wasn't successful");
     $e->getMessage();
    }
 

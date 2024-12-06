@@ -93,8 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
             <button class="edit-button">Edit</button>
           </div>
           <div class="info-content">
-            <p><strong>Email Address:</strong></p>
-            <p><strong>Account ID:</strong></p>
+          <?php echo "<h2> Email Address: ".$_SESSION['email']."! </h2>"; ?>
+          <?php echo "<h2> Account ID: ".$_SESSION['user_id']."! </h2>"; ?>
           </div>
         </div>
 

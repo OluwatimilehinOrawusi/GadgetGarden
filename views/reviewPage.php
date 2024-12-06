@@ -53,6 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review Item - Gadget Garden</title>
+
+<!-----links styles pages and header--->
     <?php require '../partials/header.php' ?>
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
@@ -61,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
 </head>
 <body>
     <!-- Navigation Bar -->
-    <!---should add the navbar partial to the page--->
     <nav>
             <div class="nav-left">
                 <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
@@ -121,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
             <label for="review_text">Review:</label>
             <textarea id="review_text" name="review_text" placeholder="Write your review here" required></textarea>
 
+            <!------submit button----->
             <button type="submit" name="submit_review" class="submit-btn">Submit</button>
         </form>
     </div>

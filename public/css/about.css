@@ -1,4 +1,4 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,26 +9,10 @@ body {
     background-color: #f4f4f9;
     color: #333;
     line-height: 1.6;
-}
+} */
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 5%;
-    border-bottom: 1px solid #275E4A;
-    background-color: #fff;
-}
-
-.nav-left #logo-text {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #1e5631;
-}
-
-.nav-right {
-    display: flex;
-    gap: 10px;
+#aboutustitle1 {
+    color: #1e5631
 }
 
 button {
@@ -49,6 +33,7 @@ button {
     color: #275E4A;
 }
 
+
 #categories-button {
     border: none;
     font-size: 1rem;
@@ -60,6 +45,11 @@ button {
 #about-us {
     background-color: #fff;
     padding: 60px 20px;
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+ 
+    box-sizing: border-box;
 }
 
 .about-container {
@@ -114,62 +104,6 @@ button {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.footer {
-    background-color: #1e5631;
-    color: #fff;
-    padding: 40px 20px;
-}
-
-.footer-content {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.footer-form input {
-    padding: 8px;
-    width: 70%;
-    border: none;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.footer-form button {
-    padding: 8px 16px;
-    border-radius: 5px;
-    border: none;
-    background-color: #275E4A;
-    color: #fff;
-    cursor: pointer;
-}
-
-.footer-links {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.footer-column {
-    flex: 1;
-    min-width: 200px;
-    text-align: center;
-}
-
-.footer-column h4 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-    color: #fff;
-}
-
-.footer-link {
-    color: #d4f1c5;
-    font-size: 0.9rem;
-    text-decoration: none;
-}
-
-.footer-link:hover {
-    color: #fff;
-}
 
 @media (max-width: 768px) {
     .about-container {
@@ -186,13 +120,4 @@ button {
         max-width: 300px;
     }
 
-    .footer-links {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .footer-column {
-        margin-bottom: 20px;
-    }
 }

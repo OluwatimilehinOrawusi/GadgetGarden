@@ -26,13 +26,13 @@ $pdo = require_once "../database/database.php";
                 <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
             </div>
             <div class="nav-right">
-                <a href="./contact.php"><button class="green-button" >Contact Us</button></a>
+                <a href="../views/contact.php"><button class="green-button" >Contact Us</button></a>
                 <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
                 <?php if (!isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
                  <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
                 <?php }?>
-                <a href="./products.php"><button class="green-button" >Products</button></a>
+                <a href="../views/contact.php"><button class="green-button" >Products</button></a>
                 <?php if (isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
                 <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
@@ -40,12 +40,14 @@ $pdo = require_once "../database/database.php";
                 <?php }?>
 
             </div>
-</nav>
+    </nav>
         <section id="about-us">
             <div class="about-container">
                 <div class="about-content green-box">
-                    <h1>About Us</h1>
+                    <div class = "highlight">
+                    <h1 id = "aboutustitle1">About Us</h1>
                     <p>Gadget Garden is a company that puts the planet first. Our mission is to inspire a sustainable future by crafting eco-friendly technology that blends seamlessly with modern life, prioritizing the planet and enhancing everyday experiences.</p>
+                    </div>
                     <div class="highlight">
                         <h3>Our Values</h3>
                         <p>We believe in sustainability, innovation, and quality. Our products are designed to minimize environmental impact without compromising on functionality.</p>

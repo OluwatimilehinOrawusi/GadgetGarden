@@ -1,5 +1,7 @@
 .review-content {
     max-width: 900px; /* Ensure the container is wide enough */
+    width: 100%;
+    box-sizing: border-box;
     margin: 3rem auto; /* Center the container itself */
     padding: 2rem;
     border: 1px solid #275E4A;

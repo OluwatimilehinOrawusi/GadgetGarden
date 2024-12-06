@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<!-----Links to style sheet and header partial--->
     <head>
         <?php require_once "../partials/header.php"; ?>
          <link rel="stylesheet" href="../public/css/navbar.css">
@@ -7,6 +8,7 @@
         <link rel="stylesheet" href="../public/css/checkout.css">
     </head>
     <body>
+        <!------Nav bar------->
     <nav>
             <div class="nav-left">
                 <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
@@ -31,8 +33,11 @@
             <div id="checkout-flex">
                 <h1>Checkout</h1>
                 <p>
+                    <!------To display the total which is stored in a variable across multiple webpages----->
                     TOTAL: £<?php echo isset($_POST['total']) ? htmlspecialchars($_POST['total']) : "0.00"; ?>
                 </p>
+
+                <!------Links to "order.php" to handle backend action of the form------>
                 <form action="./order.php" method="POST">
                     <input type="hidden" name="total" value="<?php echo isset($_POST['total']) ? htmlspecialchars($_POST['total']) : '0.00'; ?>">
                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">

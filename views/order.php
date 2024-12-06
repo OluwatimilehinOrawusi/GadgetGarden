@@ -53,7 +53,7 @@ session_start();
 
     }
 
-
+    //script to display sucsess message and take user back to index page
     echo "<script>
     alert('Your order has been placed successfully! Thank you for shopping at Gadget Garden.');
     window.location.href = '../index.php'; // Redirect to index page

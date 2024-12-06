@@ -72,6 +72,7 @@ input:focus, textarea:focus, select:focus {
 
 /* Button Styling */
 #checkout-button {
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,9 +88,8 @@ input:focus, textarea:focus, select:focus {
 }
 
 #checkout-button:hover {
-    background-color: #275E4A;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(90deg, #1abc9c, #275E4A);
+    transform: scale(1.05);
 }
 
 /* Responsive Design */
@@ -107,6 +107,6 @@ input:focus, textarea:focus, select:focus {
     }
 
     #checkout-button {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 }

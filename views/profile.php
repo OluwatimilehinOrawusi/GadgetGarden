@@ -82,8 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
             <button class="edit-button">Edit</button>
           </div>
           <div class="info-content">
-            <p><strong>First Name:</strong></p>
-            <p><strong>Last Name:</strong></p>
+            <?php echo "<b><p>Username:</b> ".$_SESSION['username']."</strong> </p>"; ?>
           </div>
         </div>
 

@@ -94,10 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
         <h2>Submit Your Review</h2>
         <form method="POST" action="">
 
-<!----product ID section to be removed in later prints---->
 
 
 
+                <!-----Star rating button code--->
             <label for="rating">Rating (1-5):</label>
             <div class="star-rating">
                 <input type="radio" id="star5" name="rating" value="5" required>
@@ -128,6 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
 <!------ Seperation between the form and footer--->
     <div style="height: 70px;"></div>
 
+    <!-----Links the footer partial to the page----->
     <?php require '../partials/footer.php' ?>
 </body>
 </html>

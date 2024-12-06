@@ -53,7 +53,6 @@ foreach($products as $product){
                 <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
             </div>
             <div class="nav-right">
-                <a href="./contact.php"><button class="green-button" >Contact Us</button></a>
                 <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
                 <?php if (!isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
@@ -61,6 +60,7 @@ foreach($products as $product){
                 <?php }?>
                 <a href="./products.php"><button class="green-button" >Products</button></a>
                 <?php if (isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./views/contact.php"><button class="green-button">Contact us</button></a>' ?>
                 <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
                 <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
 

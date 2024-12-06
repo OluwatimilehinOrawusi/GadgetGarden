@@ -91,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="./signup.php"><button class="white-button">Sign Up</button></a>
         <?php } ?>
         <?php if (isset($_SESSION['user_id'])) { ?>
+            <?php echo '<a href="./views/contact.php"><button class="green-button">Contact us</button></a>' ?>
             <a href="./basket.php"><button class="green-button">Basket</button></a>
             <a href="./logout.php"><button class="white-button">Logout</button></a>
         <?php } ?>

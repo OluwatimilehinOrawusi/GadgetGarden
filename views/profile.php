@@ -64,6 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
 
             </div>
 </nav>
+
+<div id = "wholepage">
     <header class="header">
       <div class="header-content">
         <h1>My Profile</h1>
@@ -218,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
 
       
     </main>
-  
+  </div>
   </body>
   <?php require '../partials/footer.php'; ?>
 </html>

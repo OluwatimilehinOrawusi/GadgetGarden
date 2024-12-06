@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+$pdo = require_once "../database/database.php"; 
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,7 +42,7 @@
                 </p>
                 <form action="./order.php" method="POST">
                     <input type="hidden" name="total" value="<?php echo isset($_POST['total']) ? htmlspecialchars($_POST['total']) : '0.00'; ?>">
-                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                    
 
                     <div class="form-group">
                         <label for="name">Full Name:</label>

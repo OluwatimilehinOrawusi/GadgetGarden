@@ -19,7 +19,7 @@ try{
   //email finding query
   $emailQuery = "SELECT email FROM users WHERE user_id = :uid";
   $stmt = $pdo->prepare($emailQuery);
-  $stmt->blindParam(':uid', $uid, PDO::PARAM_INT);
+  $stmt->bindParam(':uid', $uid, PDO::PARAM_INT);
   $stmt->execute();
 
   //should fetch the email from the database and store in the variable

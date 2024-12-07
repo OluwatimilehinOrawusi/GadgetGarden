@@ -23,7 +23,9 @@ try{
   $stmt->execute();
 
   //should fetch the email from the database and store in the variable
-  $email = $stmt->fetch(PDO::FETCH_ASSOC);
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  //converts the array to a string
+  $email =$row['email'];
 
 
 

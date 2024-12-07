@@ -10,7 +10,27 @@ if (!isset($_SESSION['username'])) {
   exit();
 }
 
+//variables
+$uid = $_SESSION['user_id'];//stores the user ID of user logged in
+$email = '';//initialises the email variable
 
+//try block to query database and store email address in variable
+try{
+  //email finding query
+  $emailQuery = "SELECT email FROM users WHERE user_id = :uid";
+  $stmt = $pdo->prepare($emailQuery);
+  $stmt->blindParam(':uid', $uid, PDO::PARAM_INT);
+  $stmt->execute();
+
+  //should fetch the email from the database and store in the variable
+  $email = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+
+} catch(Exception $e){
+    $email = "An error occurred: ".$e->getMessage();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
   $order_id = intval($_POST['order_id']);

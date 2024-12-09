@@ -55,9 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php }?>
                 <a href="../views/products.php"><button class="green-button" >Products</button></a>
                 <?php if (isset($_SESSION['user_id'])){?>
-                <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
-                <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
-                <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
+                <?php echo '<a href="./basket.php"><button class="green-button">Basket</button></a>' ?>
+                <?php echo '<a href="./logout.php"><button class="white-button">Logout</button></a>' ?>
 
                 <?php }?>
 

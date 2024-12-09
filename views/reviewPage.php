@@ -53,6 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review Item - Gadget Garden</title>
+
+<!-----links styles pages and header--->
     <?php require '../partials/header.php' ?>
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
@@ -61,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
 </head>
 <body>
     <!-- Navigation Bar -->
-    <!---should add the navbar partial to the page--->
     <nav>
             <div class="nav-left">
                 <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
@@ -72,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
                 <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
                  <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
                 <?php }?>
-                <a href="../views/contact.php"><button class="green-button" >Products</button></a>
+                <a href="../views/products.php"><button class="green-button" >Products</button></a>
                 <?php if (isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./views/contact.php"><button class="green-button">Contact us</button></a>' ?>
                 <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
@@ -94,10 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
         <h2>Submit Your Review</h2>
         <form method="POST" action="">
 
-<!----product ID section to be removed in later prints---->
 
 
 
+                <!-----Star rating button code--->
             <label for="rating">Rating (1-5):</label>
             <div class="star-rating">
                 <input type="radio" id="star5" name="rating" value="5" required>
@@ -121,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
             <label for="review_text">Review:</label>
             <textarea id="review_text" name="review_text" placeholder="Write your review here" required></textarea>
 
+            <!------submit button----->
             <button type="submit" name="submit_review" class="submit-btn">Submit</button>
         </form>
     </div>
@@ -128,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
 <!------ Seperation between the form and footer--->
     <div style="height: 70px;"></div>
 
+    <!-----Links the footer partial to the page----->
     <?php require '../partials/footer.php' ?>
 </body>
 </html>

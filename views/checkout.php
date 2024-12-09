@@ -86,6 +86,7 @@ $pdo = require_once "../database/database.php";
             </div>
         </div>
 
+        <!-----Links the footer partial to the page----->
         <?php require_once "../partials/footer.php"; ?>
     </body>
 </html>

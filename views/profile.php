@@ -10,11 +10,14 @@ if (!isset($_SESSION['username'])) {
   exit();
 }
 
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
   $order_id = intval($_POST['order_id']);
   $order_total = floatval($_POST['order_total']);
   $sold_total = floatval($_POST['sold_total']);
   $dispatch_address = trim($_POST['dispatch_address']);
+
 
   $stmt = $db->prepare("UPDATE profile SET order_total = ?, sold_total = ?, dispatch_address = ? WHERE order_id = ?");
   $stmt->bind_param("ddsi", $order_total, $sold_total, $dispatch_address, $order_id);
@@ -37,6 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gadget Garden</title>
+
+    <!-----links styles pages and header--->
     <?php require '../partials/header.php'; ?>
     <link rel="stylesheet" href="../public/css/profile.css">
     <link rel="stylesheet" href="../public/css/navbar.css">
@@ -44,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
 
   </head>
   <body>
+
+  <!-- Navigation Bar -->
   <nav>
             <div class="nav-left">
                 <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
@@ -74,16 +81,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
     </header>
 
     <main class="main-content">
-    <?php echo "<h2> Welcome ".$_SESSION['username']."! </h2>"; ?>
+    <?php 
+    //Big welcome message which addresses the user
+    echo "<h2> Welcome ".$_SESSION['username']."! </h2>"; ?>
       <section class="info-section">
         <div class="info-card">
           <div class="info-header">
             <h3>Personal Info</h3>
             <button class="edit-button">Edit</button>
           </div>
+
+          <!-----Users information---->
           <div class="info-content">
-            <p><strong>First Name:</strong></p>
-            <p><strong>Last Name:</strong></p>
+            <?php 
+            //to be updated to have first name and last name when database is changed
+            echo "<b><p>Username:</b> ".$_SESSION['username']."</strong> </p>"; ?>
           </div>
         </div>
 
@@ -93,8 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
             <button class="edit-button">Edit</button>
           </div>
           <div class="info-content">
-            <p><strong>Email Address:</strong></p>
-            <p><strong>Account ID:</strong></p>
+                <!-----Additional user information---->
+          <p><strong>Email Address:</strong> <?php ?></p>
+          <p><strong>Account ID:</strong> <?php echo ($_SESSION['user_id']); ?></p>
           </div>
         </div>
 

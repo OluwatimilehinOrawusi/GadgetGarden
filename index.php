@@ -35,7 +35,6 @@ $user_id = $_SESSION['user_id'] ?? null;
                 <p id="logo-text">GADGET GARDEN</p>
             </div>
             <div class="nav-right">
-            <a href="./views/contact.php"><button class="white-button" >Contact Us</button></a>
                 <a href="#categories"><button class="green-button">Categories </button></a>
                 <a href="./views/aboutpage.php"> <button class="white-button">About Us</button></a>
                 <?php if (!isset($_SESSION['user_id'])){?>
@@ -44,6 +43,8 @@ $user_id = $_SESSION['user_id'] ?? null;
                 <?php }?>
                 <?php if (isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./views/basket.php"><button class="green-button">Basket</button></a>' ?>
+                <?php echo '<a href="./views/contact.php"><button class="green-button">Contact us</button></a>' ?>
+                <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
                 <?php if ($user) {
         // Check if the user is not an admin
                     if ($user['admin']) { 

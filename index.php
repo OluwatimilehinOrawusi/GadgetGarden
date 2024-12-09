@@ -44,7 +44,7 @@ $user_id = $_SESSION['user_id'] ?? null;
                 <?php if (isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./views/basket.php"><button class="green-button">Basket</button></a>' ?>
                 <?php echo '<a href="./views/contact.php"><button class="green-button">Contact us</button></a>' ?>
-                <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
+                <?php echo '<a href = "./views/profile.php"><button class ="white-button">Profile</button></a>' ?>
                 <?php if ($user) {
         // Check if the user is not an admin
                     if ($user['admin']) { 

@@ -2,51 +2,53 @@
 // Start the session
 session_start();
 
-// Connect to the database
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>alert('You must log in to submit a review.');</script>";
+    header('Location: ./login.php');
+    exit;
+}
+
+// Validate product ID from URL
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    echo "<script>alert('Invalid product ID.');</script>";
+    header('Location: ../index.php'); // Redirect to homepage
+    exit;
+}
+
 require_once('../database/database.php');
-
-
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
-    $user_id = $_SESSION['user_id']; // If a user is logged in, retrieve the user_id 
-    $product_id = $_GET['id'];
-    $rating = intval($_POST['rating']);
+    $user_id = $_SESSION['user_id'];
+    $product_id = intval($_GET['id']);
+    $rating = filter_var($_POST['rating'], FILTER_VALIDATE_INT);
     $review_text = htmlspecialchars(trim($_POST['review_text']));
 
     // Validate form inputs
-    if ($product_id && $rating > 0 && $rating <= 5 && !empty($review_text)) {
+    if ($product_id && $rating && $rating >= 1 && $rating <= 5 && !empty($review_text)) {
         try {
-            // SQL to insert the review
-            $stmt = $pdo->prepare("INSERT INTO Reviews (user_id, product_id, rating, review_text) VALUES (:user_id, :product_id, :rating, :review_text)");
-            
-            // Bind parameters
+            // Insert review into database
+            $stmt = $pdo->prepare("INSERT INTO reviews (user_id, product_id, rating, review_text) VALUES (:user_id, :product_id, :rating, :review_text)");
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
             $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
             $stmt->bindParam(':rating', $rating, PDO::PARAM_INT);
             $stmt->bindParam(':review_text', $review_text, PDO::PARAM_STR);
 
-            // Execute the query and check for success
             if ($stmt->execute()) {
                 echo "<script>alert('Review submitted successfully!');</script>";
             } else {
                 echo "<script>alert('Error submitting review.');</script>";
             }
         } catch (PDOException $e) {
-            echo "<script>alert('Database error: " . $e->getMessage() . "');</script>";
+            error_log("Database error: " . $e->getMessage()); // Log error
+            echo "<script>alert('A database error occurred. Please try again later.');</script>";
         }
     } else {
         echo "<script>alert('Please fill in all fields correctly.');</script>";
     }
 }
 ?>
-
-
-
-
-
-
-<!----Start of the html code--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review Item - Gadget Garden</title>
 
-<!-----links styles pages and header--->
+    <!-- Links to styles and header -->
     <?php require '../partials/header.php' ?>
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
@@ -68,38 +70,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
                 <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
             </div>
             <div class="nav-right">
-                <a href="./contact.php"><button class="green-button" >Contact Us</button></a>
-                <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
+                <a href="../views/aboutpage.php"><button class="white-button">About Us</button></a>
                 <?php if (!isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
                  <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
                 <?php }?>
-                <a href="./products.php"><button class="green-button" >Products</button></a>
                 <?php if (isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
+                <?php echo '<a href="./contact.php"><button class="white-button">Contact us</button></a>' ?>
                 <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
                 <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
 
-                <?php }?>
+                <?php } ?>
+        </div>
+    </nav>
 
-            </div>
-</nav>
-
-<!------ Seperation between the form and navbar--->
+    <!-- Separation between navbar and content -->
     <div style="height: 70px;"></div>
-    
-    
 
-
-  <!-- Review writing field -->
-  <div class="review-content">
+    <!-- Review Form -->
+    <div class="review-content">
         <h2>Submit Your Review</h2>
         <form method="POST" action="">
-
-
-
-
-                <!-----Star rating button code--->
             <label for="rating">Rating (1-5):</label>
             <div class="star-rating">
                 <input type="radio" id="star5" name="rating" value="5" required>
@@ -117,21 +109,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
                 <input type="radio" id="star1" name="rating" value="1" required>
                 <label for="star1" title="1 stars">★</label>
             </div>
-
-            <br>
-            <br>
+            <br><br>
             <label for="review_text">Review:</label>
             <textarea id="review_text" name="review_text" placeholder="Write your review here" required></textarea>
-
-            <!------submit button----->
             <button type="submit" name="submit_review" class="submit-btn">Submit</button>
         </form>
     </div>
-    
-<!------ Seperation between the form and footer--->
+
+    <!-- Separation between form and footer -->
     <div style="height: 70px;"></div>
 
-    <!-----Links the footer partial to the page----->
+    <!-- Footer -->
     <?php require '../partials/footer.php' ?>
 </body>
 </html>

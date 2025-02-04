@@ -3,10 +3,6 @@
         <div class="footer-content">
             <h3>GADGET GARDEN</h3>
             <p>Your go-to store for everything tech.</p>
-            <form class="footer-form">
-                <input type="text" placeholder="Type your questions">
-                <button style="border: 1px solid white;" class="green-button" type="submit">Submit</button>
-            </form>
         </div>
         <div class="footer-links">
             <div class="footer-column">

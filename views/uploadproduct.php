@@ -1,3 +1,18 @@
+<?php
+session_start();
+require_once "../database/database.php";
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +24,9 @@
     <h1>Upload your own product here</h1>
 
     <form method="post" action="" id = "newproductform">
-    <p>Product Name: <input type="text" id="title" name="title" required /></p>
-    <p>Price: <input type="date" id="start_date" name="start_date" required /></p>
-    <p>Quantity (Stock) : <input type="date" id="quantity_product" name="quantity_product" required /></p>
+    <p>Product Name: <input type="text" id="productname" name="productname" required /></p>
+    <p>Price: <input type="number" id="pricestock" name="start_date" required /></p>
+    <p>Quantity (Stock) : <input type="number" id="quantity_product" name="quantity_product" required /></p>
     <p>State: 
         <select id="state" name="state" required>
             <option value="development">Like New</option>

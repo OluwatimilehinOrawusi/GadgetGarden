@@ -24,8 +24,8 @@ if (!isset($_SESSION['user_id'])) {
     <h1>Upload your own product here</h1>
 
     <form method="post" action="" id = "newproductform">
-    <p>Product Name: <input type="text" id="productname" name="productname" required /></p>
-    <p>Price: <input type="number" id="pricestock" name="start_date" required /></p>
+    <p>Product Name: <input type="text" id="product_name" name="product_name" required /></p>
+    <p>Price: <input type="number" id="price_stock" name="price_stock" required /></p>
     <p>Quantity (Stock) : <input type="number" id="quantity_product" name="quantity_product" required /></p>
     <p>State: 
         <select id="state" name="state" required>

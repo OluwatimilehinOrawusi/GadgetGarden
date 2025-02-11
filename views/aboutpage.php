@@ -34,7 +34,7 @@ $pdo = require_once "../database/database.php";
                 <?php if (isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
                 <?php echo '<a href="./contact.php"><button class="white-button">Contact us</button></a>' ?>
-                <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
+                <?php echo '<a href = "./admin.php"><button class ="white-button">Profile</button></a>' ?>
                 <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
 
                 <?php }?>

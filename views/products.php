@@ -6,20 +6,22 @@ $category = isset($_GET['category']) ? trim($_GET['category']) : null;
 
 if (!empty($category)) {
     // Fetch category ID safely
-    $stmt = $pdo->prepare("SELECT category_id FROM categories WHERE name = ?");
-    $stmt->execute([$category]);
+    $stmt = $pdo->prepare("SELECT category_id FROM categories WHERE name = :category");
+    $stmt->bindParam(":category", $category, PDO::PARAM_STR);
+    $stmt->execute();
     $categoryData = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($categoryData) {
         $category_id = $categoryData['category_id'];
-        $stmt = $pdo->prepare("SELECT * FROM products WHERE category_id = ?");
-        $stmt->execute([$category_id]);
+        $stmt = $pdo->prepare("SELECT * FROM products WHERE category_id = :category_id");
+        $stmt->bindParam(":category_id", $category_id, PDO::PARAM_INT);
+        $stmt->execute();
     } else {
-        echo "Category not found: " . htmlspecialchars($category);
+        $products = []; // No products found for the category
     }
 } elseif (!empty($keyword)) {
     $stmt = $pdo->prepare("SELECT * FROM products WHERE name LIKE :keyword");
-    $stmt->bindValue(":keyword", "%$keyword%");
+    $stmt->bindValue(":keyword", "%$keyword%", PDO::PARAM_STR);
     $stmt->execute();
 } else {
     $stmt = $pdo->prepare("SELECT * FROM products");
@@ -30,7 +32,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <?php require_once "../partials/header.php"; ?>
     <link rel="stylesheet" href="../public/css/products.css">
@@ -41,24 +43,29 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <section id="header">
         <div id="search-bar-container">
             <h1 id="heading">Explore our products</h1>
-            <form id="search-form">
-                <input id="search-input" type="text" name="search">
+            <form id="search-form" method="GET" action="products.php">
+                <input id="search-input" type="text" name="search" placeholder="Search for products...">
+                <button type="submit">Search</button>
             </form>
         </div>
     </section>
 
     <section id="products">
-        <?php foreach ($products as $product) { ?>
-            <div class="card">
-                <div id="product-image-container">
-                    <img class="product-images" src="<?php echo '../' . htmlspecialchars($product['image']); ?>">
+        <?php if (empty($products)) : ?>
+            <p>No products found.</p>
+        <?php else : ?>
+            <?php foreach ($products as $product) { ?>
+                <div class="card">
+                    <div id="product-image-container">
+                        <img class="product-images" src="<?php echo htmlspecialchars($product['image']); ?>" alt="Product Image">
+                    </div>
+                    <a href="./product.php?id=<?php echo htmlspecialchars($product['product_id']); ?>">
+                        <p><?php echo htmlspecialchars($product["name"]); ?></p>
+                        <p>£<?php echo htmlspecialchars($product["price"]); ?></p>
+                    </a>
                 </div>
-                <a href="<?php echo "./product.php?id=" . htmlspecialchars($product['product_id']); ?>">
-                    <p><?php echo htmlspecialchars($product["name"]); ?></p>
-                    <p>£<?php echo htmlspecialchars($product["price"]); ?></p>
-                </a>
-            </div>
-        <?php } ?>
+            <?php } ?>
+        <?php endif; ?>
     </section>
 
     <?php require_once "../partials/footer.php"; ?>

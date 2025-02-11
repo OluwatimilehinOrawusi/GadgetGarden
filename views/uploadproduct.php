@@ -18,7 +18,7 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Uploa</title>
+    <title>Product Upload</title>
 </head>
 <body>
     <h1>Upload your own product here</h1>
@@ -29,15 +29,15 @@ if (!isset($_SESSION['user_id'])) {
     <p>Quantity (Stock) : <input type="number" id="quantity_product" name="quantity_product" required /></p>
     <p>State: 
         <select id="state" name="state" required>
-            <option value="development">Like New</option>
-            <option value="testing">Very Good</option>
-            <option value="deployment">Good</option>
-            <option value="complete">Poor</option>
+            <option value="likeNew">Like New</option>
+            <option value="veryGood">Very Good</option>
+            <option value="good">Good</option>
+            <option value="poor">Poor</option>
         </select>
     </p>
     <p>Description: <textarea rows="3" cols="40" id="description" name="description" required></textarea></p>
     
-    <input type="submit" name="submitbutton" id="submitbutton" value="Create New Project" /><br>
+    <input type="submit" name="submitbutton" id="submitbutton" value="Upload product" /><br>
     <input type="hidden" name="submitted" value="true" />
 
 

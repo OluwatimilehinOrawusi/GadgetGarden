@@ -83,17 +83,17 @@ if (!isset($_SESSION['user_id'])) {
 
             <div class="form-group">
                 <label for="card_number">Card Number:</label>
-                <input type="text" id="card_number" name="card_number" placeholder="Enter 16-digit card number" maxlength="16" pattern="\d{16}" required>
+                <input type="text" id="card_number" name="card_number" placeholder="Enter 16-digit card number" maxlength="16" pattern="\d{16}" required oninput="this.value = this.value.replace(/\D/g, '')">
             </div>
 
             <div class="form-group">
                 <label for="expiry_date">Expiry Date:</label>
-                <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required>
+                <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required oninput="formatExpiryDate(this)">
             </div>
 
             <div class="form-group">
                 <label for="cvv">CVV:</label>
-                <input type="text" id="cvv" name="cvv" placeholder="Enter 3-digit CVV" maxlength="3" pattern="\d{3}" required>
+                <input type="text" id="cvv" name="cvv" placeholder="Enter 3-digit CVV" maxlength="3" pattern="\d{3}" required oninput="this.value = this.value.replace(/\D/g, '')">
             </div>
 
             <button id="checkout-button" type="submit">Complete Order</button>
@@ -102,12 +102,13 @@ if (!isset($_SESSION['user_id'])) {
 </div>
 
 <script>
-document.getElementById("expiry_date").addEventListener("input", function(event) {
-    let value = event.target.value;
-    if (value.length === 2 && !value.includes("/")) {
-        event.target.value = value + "/";
+function formatExpiryDate(input) {
+    let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+    if (value.length >= 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
     }
-});
+    input.value = value;
+}
 
 function validatePayment() {
     let cardNumber = document.getElementById("card_number").value;

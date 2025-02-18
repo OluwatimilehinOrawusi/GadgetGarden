@@ -70,7 +70,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <div class="info-card">
                 <div class="info-header">
                     <h3>Personal Info</h3>
-                    <button class="edit-button">Edit</button>
                 </div>
                 <div class="info-content">
                     <p><b>Username:</b> <?php echo $username; ?></p>
@@ -80,7 +79,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <div class="info-card">
                 <div class="info-header">
                     <h3>Email Address</h3>
-                    <button class="edit-button">Edit</button>
                 </div>
                 <div class="info-content">
                     <p><b>Email:</b> <?php echo $email; ?></p>
@@ -91,7 +89,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <div class="info-card">
                 <div class="info-header">
                     <h3>Change Password</h3>
-                    <button class="edit-button">Edit</button>
                 </div>
                 <div class="info-content">
                     <a href="./changepassword.php" class="reset-link">Change Password</a>
@@ -101,7 +98,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <div class="info-card">
                 <div class="info-header">
                     <h3>Return Order</h3>
-                    <button class="edit-button">Edit</button>
                 </div>
                 <div class="info-content">
                     <a href="./returnOrder.php" class="return-link">Return Order</a>

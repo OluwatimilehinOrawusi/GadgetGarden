@@ -22,6 +22,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./public/css/navbar.css">
     <link rel="stylesheet" href="./public/css/styles.css">
+    <link rel="stylesheet" href="../public/css/chatbot.css">
 </head>
 <body>
 
@@ -135,6 +136,61 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
 </section>
 
+    
+// section dedicated to the chat bot
+ <div class="chat-icon" onclick="toggleChat()">💬</div>
+    
+    <div class="chat-container" id="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <div class="chat-options">
+            <p class="bot-message message"><strong>Bot:</strong> Select one of the following options:</p>
+            <button onclick="sendMessage('delivery times')">Delivery Times</button>
+            <button onclick="sendMessage('returns')">Returns</button>
+            <button onclick="sendMessage('contact us')">Contact Us</button>
+        </div>
+        <input type="text" id="user-input" class="chat-input" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
+    </div>
+
+    <script>
+        function toggleChat() {
+            let chatContainer = document.getElementById("chat-container");
+            chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
+        }
+        
+        function sendMessage(userInput) {
+            let chatBox = document.getElementById("chat-box");
+            
+            let userMessage = document.createElement("div");
+            userMessage.className = "message user-message";
+            userMessage.innerHTML = "<strong>You:</strong> " + userInput;
+            chatBox.appendChild(userMessage);
+            
+            let responses = {
+                "delivery times": "Our standard delivery time is 3-5 business days.",
+                "returns": "You can return any product within 30 days of purchase.",
+                "contact us": "Please log in to access our contact page: <a href='login.php'>Login</a>"
+            };
+            
+            let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";
+            
+            let botMessage = document.createElement("div");
+            botMessage.className = "message bot-message";
+            botMessage.innerHTML = "<strong>Bot:</strong> " + response;
+            chatBox.appendChild(botMessage);
+            
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                let userInput = document.getElementById("user-input").value;
+                document.getElementById("user-input").value = "";
+                sendMessage(userInput);
+            }
+        }
+    </script>
+
+    
 <?php require_once "./partials/footer.php"; ?>
 
 </body>

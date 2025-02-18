@@ -22,7 +22,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./public/css/navbar.css">
     <link rel="stylesheet" href="./public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/chatbot.css">
+    <link rel="stylesheet" href="./public/css/chatbot.css">
 </head>
 <body>
 
@@ -137,7 +137,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 </section>
 
     
-// section dedicated to the chat bot
+
  <div class="chat-icon" onclick="toggleChat()">💬</div>
     
     <div class="chat-container" id="chat-container">

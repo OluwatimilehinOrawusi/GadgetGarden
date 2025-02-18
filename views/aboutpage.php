@@ -16,6 +16,7 @@ $pdo = require_once "../database/database.php";
     <link rel="stylesheet" href="../public/css/about.css">
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
+     <link rel="stylesheet" href="../public/css/chatbot.css">
 </head>
 <body>
     <nav>

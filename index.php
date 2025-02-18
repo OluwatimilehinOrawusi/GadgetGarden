@@ -168,7 +168,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             let responses = {
                 "delivery times": "Our standard delivery time is 3-5 business days.",
                 "returns": "You can return any product within 30 days of purchase.",
-                "contact us": "Please log in to access our contact page: <a href='login.php'>Login</a>"
+                "contact us": "Please log in to access our contact page: <a href='./login.php'>Login</a>"
             };
             
             let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";

@@ -152,7 +152,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
 
 
-// section dedicated to the chat bot
+
  <div class="chat-icon" onclick="toggleChat()">💬</div>
     
     <div class="chat-container" id="chat-container">

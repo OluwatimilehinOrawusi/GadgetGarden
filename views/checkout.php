@@ -9,6 +9,13 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php?error=Please+log+in+to+checkout");
     exit();
 }
+
+// Fetch user details from session
+$email = isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '';
+$full_name = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : '';
+
+// Ensure total price is retrieved securely
+$total_price = isset($_POST['total']) ? floatval($_POST['total']) : 0.00;
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +31,7 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
 
+<!-- 🟢 Navigation Bar -->
 <nav>
     <div class="nav-left">
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
@@ -42,24 +50,23 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 </nav>
 
+<!-- 🛒 Checkout Section -->
 <div id="checkout-container">
     <div id="checkout-flex">
         <h1>Checkout</h1>
-        <p>
-            TOTAL: £<?php echo isset($_POST['total']) ? htmlspecialchars($_POST['total']) : "0.00"; ?>
-        </p>
+        <p><strong>TOTAL: £<?php echo number_format($total_price, 2); ?></strong></p>
 
         <form action="./order.php" method="POST" onsubmit="return validatePayment()">
-            <input type="hidden" name="total" value="<?php echo isset($_POST['total']) ? htmlspecialchars($_POST['total']) : '0.00'; ?>">
+            <input type="hidden" name="total" value="<?php echo number_format($total_price, 2); ?>">
 
             <div class="form-group">
                 <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" value="<?php echo $full_name; ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" value="<?php echo $email; ?>" required>
             </div>
 
             <div class="form-group">
@@ -103,7 +110,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <script>
 function formatExpiryDate(input) {
-    let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+    let value = input.value.replace(/\D/g, '');
     if (value.length >= 2) {
         value = value.substring(0, 2) + '/' + value.substring(2, 4);
     }

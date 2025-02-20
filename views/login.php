@@ -8,25 +8,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Retrieve user data
+    
     $sql = "SELECT user_id, username, password_hash, admin FROM users WHERE username = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password_hash'])) {
-        // ✅ Store user info in session
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $user['username'];
-        $_SESSION['user_role'] = $user['admin'] ? 'admin' : 'user'; // ✅ Store admin/user role
+        $_SESSION['user_role'] = $user['admin'] ? 'admin' : 'user'; 
 
-        // ✅ Redirect admin to admin dashboard
         if ($user['admin']) {
             header("Location: ../views/admin_dashboard.php");
             exit();
         }
 
-        // ✅ Redirect normal users to home page
         header("Location: ../index.php");
         exit();
     } else {
@@ -76,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>Sign in</h1>
         <br> <br>
         
-        <!-- Show error messages -->
         <?php if (!empty($errors)) : ?>
             <div class="error-message">
                 <?php foreach ($errors as $error) {

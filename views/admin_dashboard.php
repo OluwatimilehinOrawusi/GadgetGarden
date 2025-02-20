@@ -3,7 +3,7 @@ session_start();
 require_once "../database/database.php";
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 
@@ -22,7 +22,6 @@ if (!isset($_SESSION['user_role'])) {
 }
 
 if (!in_array($_SESSION['user_role'], ['admin', 'manager'])) {
-    header("Location: ../index.php");
     exit();
 }
 

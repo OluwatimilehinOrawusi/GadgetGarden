@@ -11,17 +11,18 @@ session_start();
         <?php if (!isset($_SESSION['user_id'])) { ?>
             <a href="./login.php"><button class="green-button">Login</button></a>
             <a href="./signup.php"><button class="white-button">Sign Up</button></a>
-        <?php } ?>
-        <a href="../views/products.php"><button class="green-button">Products</button></a>
-        <?php if (isset($_SESSION['user_id'])) { ?>
+        <?php } else { ?>
+            <a href="../views/products.php"><button class="green-button">Products</button></a>
             <a href="./basket.php"><button class="white-button">Basket</button></a>
-            <a href="./profile.php"><button class="white-button">Profile</button></a>
             
-           
-            <a href="./admin.php"><button class="white-button">Admin</button></a>
+            <!-- Fix: Use 'user_role' instead of 'role' and check for 'manager' -->
+            <?php if (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 'admin' || $_SESSION['user_role'] == 'manager')) { ?>
+                <a href="../views/admin_dashboard.php"><button class="white-button">Admin Dashboard</button></a>
+            <?php } else { ?>
+                <a href="./profile.php"><button class="white-button">Profile</button></a>
+            <?php } ?>
             
             <a href="./logout.php"><button class="green-button">Logout</button></a>
         <?php } ?>
     </div>
 </nav>
-            

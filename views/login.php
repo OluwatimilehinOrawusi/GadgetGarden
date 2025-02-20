@@ -5,11 +5,10 @@ $pdo = require_once '../database/database.php';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
+    $username = trim($_POST['username']);
     $password = $_POST['password'];
 
-    
-    $sql = "SELECT user_id, username, password_hash, admin FROM users WHERE username = ?";
+    $sql = "SELECT user_id, username, password_hash, role FROM users WHERE username = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -17,14 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && password_verify($password, $user['password_hash'])) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $user['username'];
-        $_SESSION['user_role'] = $user['admin'] ? 'admin' : 'user'; 
+        $_SESSION['user_role'] = $user['role'];
 
-        if ($user['admin']) {
+        if ($user['role'] === 'admin' || $user['role'] === 'manager') {
             header("Location: ../views/admin_dashboard.php");
-            exit();
+        } else {
+            header("Location: ../index.php");
         }
-
-        header("Location: ../index.php");
         exit();
     } else {
         $errors[] = "Invalid username or password.";
@@ -38,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in</title>
-    <?php require_once "../partials/header.php" ?>
+    <?php require_once "../partials/header.php"; ?>
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
     <link rel="stylesheet" href="../public/css/login.css">
@@ -101,6 +99,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
-<?php require_once '../partials/footer.php' ?>
+<?php require_once '../partials/footer.php'; ?>
 </body>
 </html>

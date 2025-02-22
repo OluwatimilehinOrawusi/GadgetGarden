@@ -3,7 +3,9 @@
 session_start();
 require_once "../database/database.php";
 
+// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
+    echo "<script>alert('You must log in to upload a product to Gadget Gardern.');</script>";
     header("Location: login.php");
     exit();
 }

@@ -1,0 +1,54 @@
+
+a{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+
+.clickable-div {
+    display: block;  /* Make the anchor behave like a block */
+    text-decoration: none; /* Remove default link styling */
+  }
+  
+#grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr fr;
+    height: 50rem;
+    width: 90vw;
+    gap:4rem;
+    margin: 1rem 0rem;
+  
+    
+
+}
+
+#main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+
+   
+}
+
+.dashboard-cards{
+    background-color:  #275E4A;
+    border-radius: 1rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#analytic-card{
+    grid-column: span 2;
+}
+
+#dashboard-links{
+    grid-row: span 2;
+}

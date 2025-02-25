@@ -16,8 +16,8 @@ $orderQuery = $pdo->prepare("
     SELECT o.order_id, o.order_date, o.total_price, op.product_id, op.quantity, 
            p.name AS product_name, p.price AS product_price, p.image 
     FROM orders o 
-    JOIN order_products op ON o.order_id = op.order_id 
-    JOIN products p ON op.product_id = p.product_id 
+    LEFT JOIN order_products op ON o.order_id = op.order_id 
+    LEFT JOIN products p ON op.product_id = p.product_id 
     WHERE o.user_id = :user_id
     ORDER BY o.order_id DESC
 ");
@@ -71,7 +71,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <div class="info-card">
                 <div class="info-header">
                     <h3>Personal Info</h3>
-                    <button class="edit-button">Edit</button>
                 </div>
                 <div class="info-content">
                     <p><b>Username:</b> <?php echo $username; ?></p>
@@ -81,7 +80,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <div class="info-card">
                 <div class="info-header">
                     <h3>Email Address</h3>
-                    <button class="edit-button">Edit</button>
                 </div>
                 <div class="info-content">
                     <p><b>Email:</b> <?php echo $email; ?></p>
@@ -92,7 +90,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <div class="info-card">
                 <div class="info-header">
                     <h3>Change Password</h3>
-                    <button class="edit-button">Edit</button>
                 </div>
                 <div class="info-content">
                     <a href="./changepassword.php" class="reset-link">Change Password</a>
@@ -102,7 +99,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <div class="info-card">
                 <div class="info-header">
                     <h3>Return Order</h3>
-                    <button class="edit-button">Edit</button>
                 </div>
                 <div class="info-content">
                     <a href="./returnOrder.php" class="return-link">Return Order</a>
@@ -135,15 +131,20 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                                 <p><b>Payment Method:</b> Card</p>
                             <?php
                         }
-                        ?>
-                        <div class="order-details">
-                            <img src="<?php echo "../public/assets/" . htmlspecialchars(basename($order['image'])); ?>" alt="Product Image" class="order-image">
-                            <div class="info-content">
-                                <p><b>Product:</b> <?php echo htmlspecialchars($order["product_name"]); ?></p>
-                                <p><b>Price:</b> £<?php echo htmlspecialchars($order["product_price"]); ?></p>
-                                <p><b>Quantity:</b> <?php echo htmlspecialchars($order["quantity"]); ?></p>
+
+                        if (!empty($order['product_name'])) { 
+                            $productImage = !empty($order['image']) ? "../public/assets/" . htmlspecialchars(basename($order['image'])) : "../public/assets/placeholder.png";
+                            ?>
+                            <div class="order-details">
+                                <img src="<?php echo $productImage; ?>" alt="Product Image" class="order-image">
+                                <div class="info-content">
+                                    <p><b>Product:</b> <?php echo htmlspecialchars($order["product_name"]); ?></p>
+                                    <p><b>Price:</b> £<?php echo htmlspecialchars($order["product_price"]); ?></p>
+                                    <p><b>Quantity:</b> <?php echo htmlspecialchars($order["quantity"]); ?></p>
+                                </div>
                             </div>
-                        </div>
+                        <?php } ?>
+
                         <?php 
                         $previousOrderId = $order["order_id"];
                     }

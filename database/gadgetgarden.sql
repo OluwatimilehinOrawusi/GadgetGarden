@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2024 at 10:01 PM
+-- Generation Time: Feb 18, 2025 at 03:59 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,13 +41,10 @@ CREATE TABLE `basket` (
 --
 
 INSERT INTO `basket` (`basket_id`, `user_id`, `product_id`, `quantity`, `added_at`, `updated_at`) VALUES
-(1, 1, 7, 8, '2024-11-21 05:30:20', '2024-11-22 14:25:58'),
-(2, 1, 11, 1, '2024-11-21 23:17:18', '2024-11-21 23:17:18'),
-(3, 1, 36, 1, '2024-11-22 13:44:54', '2024-11-22 13:44:54'),
-(4, 1, 4, 1, '2024-11-22 13:56:32', '2024-11-22 13:56:32'),
-(5, 1, 10, 1, '2024-11-22 15:31:03', '2024-11-22 15:31:03'),
 (6, 1, 23, 1, '2024-11-22 21:04:31', '2024-11-22 21:04:31'),
-(7, 1, 16, 2, '2024-11-22 22:52:45', '2024-11-22 22:53:19');
+(8, 7, 21, 1, '2025-02-18 11:41:30', '2025-02-18 11:41:30'),
+(9, 8, 12, 1, '2025-02-18 14:26:50', '2025-02-18 14:26:50'),
+(10, 9, 21, 1, '2025-02-18 14:53:05', '2025-02-18 14:53:05');
 
 -- --------------------------------------------------------
 
@@ -109,7 +106,13 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `total_price`) VALUES
 (5, 1, '2024-11-22 21:00:12', 14988.00),
 (6, 1, '2024-11-22 21:04:57', 15587.00),
-(7, 1, '2024-11-22 22:53:44', 16185.00);
+(7, 1, '2024-11-22 22:53:44', 16185.00),
+(8, 7, '2025-02-18 11:41:49', 899.99),
+(9, 7, '2025-02-18 12:10:09', 899.99),
+(10, 1, '2025-02-18 14:36:09', 599.99),
+(11, 1, '2025-02-18 14:36:48', 599.99),
+(12, 8, '2025-02-18 14:50:47', 899.99),
+(13, 9, '2025-02-18 14:53:51', 899.99);
 
 -- --------------------------------------------------------
 
@@ -223,17 +226,21 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `admin` tinyint(1) DEFAULT 0
+  `admin` tinyint(1) DEFAULT 0,
+  `phone` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `created_at`, `admin`) VALUES
-(1, 'timi', 'timi1@gmail.com', '$2y$10$qBbiZx43Ww0CueE9DWvjX.j4A9fStOZhaS7/YbWYLEyO5c4gVKPme', '2024-11-21 04:08:19', 1),
-(2, 'user123', 'user@gmail.com', '$2y$10$iedZ9BN4Hko1/sNEKDcIsO2Xday31KBv622QCgS4IRCaKduPnAQIe', '2024-11-22 22:44:32', 0),
-(6, 'usernew', 'fdaj@gmail.com', '$2y$10$GQmyTDvDKH10wTQaD2jla./tfUwUPhKsmhvu9VZhSa/sn2L64/pNu', '2024-11-22 22:48:39', 0);
+INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `created_at`, `admin`, `phone`) VALUES
+(1, 'timi', 'timi1@gmail.com', '$2y$10$qBbiZx43Ww0CueE9DWvjX.j4A9fStOZhaS7/YbWYLEyO5c4gVKPme', '2024-11-21 04:08:19', 1, NULL),
+(2, 'user123', 'user@gmail.com', '$2y$10$iedZ9BN4Hko1/sNEKDcIsO2Xday31KBv622QCgS4IRCaKduPnAQIe', '2024-11-22 22:44:32', 0, NULL),
+(6, 'usernew', 'fdaj@gmail.com', '$2y$10$GQmyTDvDKH10wTQaD2jla./tfUwUPhKsmhvu9VZhSa/sn2L64/pNu', '2024-11-22 22:48:39', 0, NULL),
+(7, 'hammad', 'trdesyugyug@tutft', '$2y$10$2OOJAe1Y6NE/jXDtiHmqDeJlToW.2vF3yj5vhpGU0f4lRmMua5qY.', '2025-02-18 11:41:13', 0, 'estersrdrdt'),
+(8, 'timi123', 'IUHuhuadjjewije@ewiuhiyeh', '$2y$10$v/oA7RYtsT26hHpoM6zYw.RgIEQ1Wc4I3CzM50P19ieB2dCvoXI6y', '2025-02-18 14:26:31', 0, 'wqwqewqewq'),
+(9, '123', 'fhdrdrd@saydsad', '$2y$10$VbTaX5/hCNp8WAYhE228dObT6sqxxebj8yEzR.a5m72hv3sBpJv5K', '2025-02-18 14:52:53', 0, 'weweqe');
 
 --
 -- Indexes for dumped tables
@@ -296,7 +303,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `basket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `basket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -308,7 +315,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `order_products`
@@ -326,7 +333,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -364,6 +371,17 @@ ALTER TABLE `order_products`
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
 COMMIT;
+
+CREATE TABLE reviews (
+    review_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    review_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
+);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

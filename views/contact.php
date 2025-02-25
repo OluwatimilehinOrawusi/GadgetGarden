@@ -1,8 +1,9 @@
 <?php
-session_start();
+session_start(); // Start a new session in order to store contact data
 
-$pdo = require_once "../database/database.php"; 
+$pdo = require_once "../database/database.php"; // Conntect to the database
 
+// If server is connected successfully, Then store all the data into the correct tables
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
     $name =  $_POST['name'];
@@ -23,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute() ;
           
             
-        $_SESSION['success'] = "Thank you for your message, We will get back to you shortly!";
+        $_SESSION['success'] = "Thank you for your message, We will get back to you shortly!"; // Success message once field filled
     } else {
-        $_SESSION['error'] = "Please fill in all required fields.";
+        $_SESSION['error'] = "Please fill in all required fields."; // If fields are left empty
     }
 
     header('Location: contact.php');
@@ -37,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <html>
+    <!---Message container for success/error message--> 
 <div class="message-container">
     <?php if (isset($_SESSION['success'])): ?>
         <div class="alert alert-success">
@@ -60,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <nav>
+    <!---nav bar-->
             <div class="nav-left">
                 <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
             </div>
@@ -70,15 +73,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
                  <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
                 <?php }?>
-                <a href="./products.php"><button class="green-button" >Products</button></a>
+                <a href="../views/products.php"><button class="green-button" >Products</button></a>
                 <?php if (isset($_SESSION['user_id'])){?>
                 <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
+                <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
                 <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
 
                 <?php }?>
 
             </div>
 </nav>
+
+ <!---HTML for the contact page, includes the input forms, and submit button -->
     <section class="contact-section">
         
         <div class="contact-container">

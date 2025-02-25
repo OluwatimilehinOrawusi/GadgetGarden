@@ -1,17 +1,14 @@
 /* Reset styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-body {
+
+#wholepage {
   font-family: "Inter", sans-serif;
   background-color: #f4f4f4;
   color: #333;
   margin: 0;
   padding: 0;
-}
+  box-sizing: border-box;
+} 
 
 .header {
   background-color: #eef9f1;
@@ -26,12 +23,6 @@ body {
   text-align: center;
 }
 
-.nav {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  margin-top: 10px;
-}
 
 .search-bar {
   padding: 8px;

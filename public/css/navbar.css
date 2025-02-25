@@ -13,7 +13,7 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 50%;
+    width: 60%;
 }
 
 /* Buttons */
@@ -47,5 +47,5 @@ font-size: 2rem;
 .white-button:hover, .green-button:hover {
     background-color: white;
     color: #275E4A;
-    transform: scale(1.05);
+    transform: scale(1.15);
 }

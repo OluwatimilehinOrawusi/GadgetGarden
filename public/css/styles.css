@@ -66,7 +66,7 @@ hr{
 }
 #hero-main-img{
     grid-row: span 2;
-    background: url("../assets/hero.png");
+    background: url("../assets/hero.jpg");
     background-size: cover; /* Scales the image to cover the entire div */
     background-position: left; /* Centers the image */
     background-repeat: no-repeat; /* Prevents tiling if the image is smaller than the div */
@@ -74,14 +74,14 @@ hr{
     background-color: #275E4A;
 }
 #home-top-right{
-    background: url("../assets/top-right.png");
+    background: url("../assets/top-right.jpg");
     background-size: cover; /* Scales the image to cover the entire div */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents tiling if the image is smaller than the div */
 }
 
 #home-bottom-right{
-    background: url("../assets/bottom-right.png");
+    background: url("../assets/bottom-right.jpg");
     background-size: cover; /* Scales the image to cover the entire div */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents tiling if the image is smaller than the div */
@@ -175,14 +175,14 @@ margin-right: 5%;
 
 }
 #trending-items div:nth-child(1){
-    background: url("../assets/trending1.png");
+    background: url("../assets/trending1.jpg");
     background-size: cover; /* Makes the image fill the div */
     background-repeat: no-repeat; /* Prevents tiling */
     background-position: center; /* Centers the image */
 }
 
 #trending-items div:nth-child(2){
-    background: url("../assets/trending2.png");
+    background: url("../assets/trending2.jpg");
     background-size: cover; /* Makes the image fill the div */
     background-repeat: no-repeat; /* Prevents tiling */
     background-position: center; /* Centers the image */
@@ -190,7 +190,7 @@ margin-right: 5%;
 #trending-items div:nth-child(4){
     grid-row: 1 / 2;
     grid-column: 4 / 6;
-    background: url("../assets/trending3.png");
+    background: url("../assets/trending3.jpg");
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -198,7 +198,7 @@ margin-right: 5%;
 }
 
 #trending-items div:nth-child(5){
-    background: url("../assets/trending4.png");
+    background: url("../assets/trending4.jpg");
     background-size:cover;
     background-repeat:no-repeat;
     background-position:center;
@@ -208,14 +208,14 @@ margin-right: 5%;
 }
 
 #trending-items div:nth-child(7){
-    background: url("../assets/trending5.png");
+    background: url("../assets/trending5.jpg");
     background-size:cover;
     background-repeat:no-repeat;
     background-position:center;
   
 }
 #trending-items div:nth-child(8){
-    background: url("../assets/trending6.png");
+    background: url("../assets/trending6.jpg");
     background-size:cover;
     background-repeat:no-repeat;
     background-position:center;
@@ -249,7 +249,7 @@ margin-right: 5%;
     height: 60vh;
     margin: 0 5%;
     border: 1px solid black;
-    background: url("../assets/banner.png");
+    background: url("../assets/banner.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -285,21 +285,21 @@ margin-right: 5%;
 }
 
 .why-us-secure{
-    background: url("../assets/why-us1.png");
+    background: url("../assets/why-us1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .why-us-cheap{
-    background: url("../assets/why-us2.png");
+    background: url("../assets/why-us2.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .why-us-eco{
-    background: url("../assets/why-us3.png");
+    background: url("../assets/why-us3.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

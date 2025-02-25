@@ -199,7 +199,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         window.location.href = "login.php";
     }
 </script>
-
 <?php require_once "../partials/footer.php" ?>
 </body>
 </html>

@@ -40,6 +40,7 @@ $orders = $ordersStmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Orders - Gadget Garden</title>
     <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
     <link rel="stylesheet" href="../public/css/admin.css">
     <style>
         body {
@@ -93,20 +94,47 @@ $orders = $ordersStmt->fetchAll(PDO::FETCH_ASSOC);
         tr:hover {
             background: #d8f3dc;
         }
+        .search-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #1E5631;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            background: #145A32;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #117A3D;
+        }
+
     </style>
 </head>
 <body>
 
-<!-- Navbar -->
 <nav>
     <div class="nav-left">
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
     </div>
     <div class="nav-right">
-        <a href="admin_dashboard.php"><button class="white-button">Dashboard</button></a>
+        <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
         <a href="manage_users.php"><button class="white-button">Users</button></a>
-        <a href="admin.php"><button class="white-button">Products</button></a>
         <a href="manage_orders.php"><button class="white-button">Orders</button></a>
+        <a href="admin.php"><button class="white-button">Products</button></a>
         <a href="logout.php"><button class="green-button">Logout</button></a>
     </div>
 </nav>

@@ -40,7 +40,7 @@ $totalRevenue = $pdo->query("SELECT SUM(total_price) FROM orders")->fetchColumn(
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
     </div>
     <div class="nav-right">
-        <a href="admin_dashboard.php"><button class="white-button">Dashboard</button></a>
+        <a href="dashboard.php"><button class="white-button">Dashboard</button></a>
         <a href="manage_users.php"><button class="white-button">Users</button></a>
         <a href="admin.php"><button class="white-button">Products</button></a>
         <a href="manage_orders.php"><button class="white-button">Orders</button></a>

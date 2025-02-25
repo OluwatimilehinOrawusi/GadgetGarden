@@ -41,10 +41,10 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 <a href="./profile.php"><button class="white-button">Profile</button></a>
 
                 <?php if ($user && $user['admin']) { ?>
-                    <a href="./views/dashboard.php"><button class="white-button">Admin Dashboard</button></a>
+                    <a href="./dashboard.php"><button class="white-button">Admin Dashboard</button></a>
                 <?php } ?>
 
-                <a href="./views/logout.php"><button class="green-button">Logout</button></a>
+                <a href="./logout.php"><button class="green-button">Logout</button></a>
             <?php } ?>
         </div>
     </nav>

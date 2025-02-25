@@ -1,66 +1,51 @@
-/* Navbar Styling */
-nav {
-    background-color: #333;
+/* Nav Bar */
+
+nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
+    height: 10%;
+    padding: 0 5% 0 5%;
+    border-bottom: 1px solid #275E4A;
 }
-
 
 .nav-right{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 60%;
-  
- 
-.nav-left p {
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0;
+}
+
+/* Buttons */
+
+/* .white-button{
+border: 0.1rem solid #275E4A;
 
 }
 
-
-.nav-right a {
-    text-decoration: none;
+.green-button{
+border: 0.1rem solid #275E4A;
+background-color: #275E4A;
+color: white;
+font-size: 2rem;
 }
+
+#categories-button{
+    border: none;
+    color:#275E4A;
+
+} */
 
 .white-button, .green-button {
-    background-color: #2a6041;
+    border: 0.1rem solid #275E4A;
+    background-color: #275E4A;
     color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 20px;
-    font-size: 16px;
+    font-size: 2rem;
     cursor: pointer;
-    transition: background 0.3s ease;
 }
 
-.white-button:hover {
-    background-color: #1d4630;
-}
-
-.green-button {
-    background-color: #19692c;
-}
-
-.green-button:hover {
-    background-color: #145623;
-}
-
-/* Responsive Navbar */
-@media (max-width: 768px) {
-    .nav-right {
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 10px;
-    }
-
-    .white-button, .green-button {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
+.white-button:hover, .green-button:hover {
+    background-color: white;
+    color: #275E4A;
+    transform: scale(1.15);
 }

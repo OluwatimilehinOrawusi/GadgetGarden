@@ -66,8 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for = "password">Pasword</label>
             <input type = "password" id = "password" name = "password" required>
             <br> <br>
-            <!-- <p class="forgot-password">Forgot your password? Click <a href="-">here</a> to reset</p>
-            <br> <br> will add forgot passwod functionality in next phase since not mentioned in current brief -->
+            <p class="forgot-password">Forgot your password? Click <a href="-">here</a> to recover your account</p>
         </div>
 
         <input type = "submit" value = "Sign in" id = "subbutton"/>

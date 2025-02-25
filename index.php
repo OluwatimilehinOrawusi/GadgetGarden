@@ -46,7 +46,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <a href="./views/profile.php"><button class="white-button">Profile</button></a>
 
             <?php if ($user && $user['admin']) { ?>
-                <a href="./views/admin_dashboard.php"><button class="white-button">Admin Dashboard</button></a>
+                <a href="./views/dashboard.php"><button class="white-button">Admin Dashboard</button></a>
             <?php } ?>
 
             <a href="./views/logout.php"><button class="green-button">Logout</button></a>
@@ -82,11 +82,16 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
 
     <div id="trending-items">
-        <div class="home-images"></div>
-        <div class="home-images"></div>
-        <div class="home-image"></div>
-        <div class="home-images"></div>
-    </div>
+            <div class="home-images"></div>
+            <div class="home-images"></div>
+            <div class="home-image"></div>
+            <div class="home-images"></div>
+            <div class="home-images"></div>
+            <div class="home-images"></div>
+            <div class="home-images"></div>
+            <div class="home-images"></div>
+            
+        </div>
 
     <div id="shop-now-container">
         <a href="views/products.php"><button class="green-button" id="shop-now-button"> Find out more ↝</button></a>

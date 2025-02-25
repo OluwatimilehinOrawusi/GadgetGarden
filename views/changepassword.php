@@ -200,6 +200,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 </script>
 
+    <div>
+  <input type="checkbox" class="checkbox" id="checkbox">
+  <label for="checkbox" class="checkbox-label">
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-sun"></i>
+    <span class="ball"></span>
+  </label>
+</div>
+
+const checkbox = document.getElementById("checkbox")
+checkbox.addEventListener("change", () => {
+  document.body.classList.toggle("dark")
+})
+
+    
+
 <?php require_once "../partials/footer.php" ?>
 </body>
 </html>

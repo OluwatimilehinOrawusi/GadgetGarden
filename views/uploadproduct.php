@@ -48,7 +48,7 @@ if (!isset($_SESSION['user_id'])) {
 <div id="upload-container">
     <h1>Upload your own product here</h1>
 
-    <form action="uploadproduct.php" method="POST" enctype="multipart/form-data" id = "uploadform">
+    <form action="upload.php" method="POST" enctype="multipart/form-data" id = "uploadform">
         
         <!-------Product name------>
         <label for="product_name">Product Name</label>

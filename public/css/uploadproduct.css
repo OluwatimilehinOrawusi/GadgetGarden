@@ -1,8 +1,34 @@
-#login-container {
-    width: 35%;
+#upload-page {
+    background-color: #275E4A; /* Green background */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+
+/* White box containing the form */
+#upload-container {
+    width: 90%; 
+    max-width: 500px; 
     background-color: white;
     border-radius: 15px;
-    box-shadow: 0 8px 16px black;
-    padding: 30px 40px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    padding: 100px 40px;
+    text-align: center; 
+}
 
+#uploadproduct input[type="submit"] {
+    background-color: #275E4A;
+    color: white;
+    padding:20px;
+    
+}
+
+#uploadproduct input[type="submit"]:hover {
+    transform: scale(1.05);
+    background-color: #275E4A;
+    color: white;
 }

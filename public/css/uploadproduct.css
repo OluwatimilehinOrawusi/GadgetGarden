@@ -57,7 +57,7 @@ input, select, textarea {
 }
 
 #uploadform input[type="submit"]:hover {
-    transform: scale(1.05);
+    transform: scale(1.2);
     background-color: #275E4A;
     color: white;
 }

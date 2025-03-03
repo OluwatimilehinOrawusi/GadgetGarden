@@ -51,38 +51,44 @@ if (!isset($_SESSION['user_id'])) {
     <form action="uploadproduct.php" method="POST" enctype="multipart/form-data" id = "uploadform">
         
         <!-------Product name------>
-        <p>Product Name: <input type="text" id="product_name" name="product_name" required /></p>
+        <label for="product_name">Product Name</label>
+        <input type="text" id="product_name" name="product_name" required />
         
 
         <!-------Price------>
-        <p>Price: <input type="number" id="price_stock" name="price_stock" required /></p>
+        <label for="price_stock">Price</label>
+        <input type="number" id="price_stock" name="price_stock" required />
         
 
         <!-------Product Quantity------>
-        <p>Quantity (Stock): <input type="number" id="quantity_product" name="quantity_product" required /></p>
+        <label for="quantity_product">Product Quantity</label>
+        <input type="number" id="quantity_product" name="quantity_product" required />
         
 
-        <!-------Product state------>
-        <p>State: 
+        <!-------Product condition------>
+        <label for="state">Condition</label>
             <select id="state" name="state" required>
                 <option value="likeNew">Like New</option>
                 <option value="veryGood">Very Good</option>
                 <option value="good">Good</option>
                 <option value="poor">Poor</option>
             </select>
-        </p>
+        
 
 
         <!-------Product description------>
-        <p>Description: <textarea rows="3" cols="40" id="description" name="description" required></textarea></p>
+        <label for="description">Description</label>
+        <textarea rows="3" cols="40" id="description" name="description" required></textarea>
 
-
+        <div id = "fileupload-container">
         <!-------File upload------>
-        <p>Upload Image: <input type="file" name="image" accept="image/*" required></p>
+        <label for="image">Upload Image</label>
+        <input type="file" name="image" accept="image/*" required>
+        </div>
 
 
         <!-------Upload button------>
-        <button type="submit" name="submitbutton">Upload Product</button>
+        <input type="submit" name="submitbutton" value = "Upload Product" >
 
         <input type="hidden" name="submitted" value="true" />
     </form>

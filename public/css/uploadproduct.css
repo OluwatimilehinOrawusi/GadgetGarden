@@ -8,7 +8,22 @@
     width: 100%;
 }
 
+label {
+    display: block; 
+    font-weight: bold;
+    margin-top: 10px; 
+    margin-bottom: 7px; 
+}
 
+
+#fileupload-container {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+    margin-bottom: 20px; 
+    align-items: center;
+    
+}
 /* White box containing the form */
 #upload-container {
     width: 90%; 
@@ -20,15 +35,17 @@
     text-align: center; 
 }
 
-#uploadproduct input[type="submit"] {
-    background-color: #275E4A;
-    color: white;
+#uploadform input[type="submit"] {
+    background-color: white;
+    color: #275E4A;
     padding:20px;
+    border-radius: 20px;
     
 }
 
-#uploadproduct input[type="submit"]:hover {
+#uploadform input[type="submit"]:hover {
     transform: scale(1.05);
     background-color: #275E4A;
     color: white;
 }
+

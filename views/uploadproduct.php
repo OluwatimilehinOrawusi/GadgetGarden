@@ -46,7 +46,7 @@ if (!isset($_SESSION['user_id'])) {
 </nav>
     <div id = "upload-page">
 <div id="upload-container">
-    <h1>Upload your own product here</h1>
+    <h1 id = "titlestatement">Upload your own product here</h1>
 
     <form action="upload.php" method="POST" enctype="multipart/form-data" id = "uploadform">
         

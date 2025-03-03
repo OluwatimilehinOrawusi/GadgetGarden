@@ -8,6 +8,11 @@
     width: 100%;
 }
 
+
+#titlestatement {
+    margin-bottom: 35px;
+}
+
 label {
     display: block; 
     font-weight: bold;
@@ -31,7 +36,7 @@ label {
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
-    padding: 100px 40px;
+    padding: 40px 40px;
     text-align: center; 
 }
 

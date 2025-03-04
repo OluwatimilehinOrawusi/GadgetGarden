@@ -200,21 +200,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 </script>
 <?php require_once "../partials/footer.php" ?>
-
-
-<h2>Toggle Dark/Light Mode</h2>
-<p>Click the button to toggle between dark and light mode for this page.</p>
-
-<button onclick="myFunction()">Toggle dark mode</button>
-
-<script>
-function myFunction() {
-   var element = document.body;
-   element.classList.toggle("dark-mode");
-}
-</script>
-
-
     
 </body>
 </html>

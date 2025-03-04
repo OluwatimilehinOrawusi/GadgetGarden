@@ -1,6 +1,6 @@
 <?php 
 
-// Start session if not already started
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $pdo = require_once "../database/database.php";
 
-// Update quantity
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && isset($_POST['quantity'])) {
     $id = intval($_POST['id']);
     $quantity = intval($_POST['quantity']);
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && isset($_POST
     exit();
 }
 
-// Remove item from basket
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_id'])) {
     $remove_id = intval($_POST['remove_id']);
 
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_id'])) {
     exit();
 }
 
-// Fetch basket items
+
 $user_id = $_SESSION['user_id'];
 $statement = $pdo->prepare('
     SELECT b.basket_id, b.user_id, b.product_id, b.quantity, 
@@ -53,7 +53,7 @@ $statement->bindValue(":user_id", $user_id, PDO::PARAM_INT);
 $statement->execute();
 $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-// Calculate total price
+
 $total = 0;
 foreach ($products as $product) {
     $total += (float) $product['price'] * (int) $product['quantity'];
@@ -104,14 +104,14 @@ $serialized_array = serialize($products);
                 <p><?php echo htmlspecialchars($product['name']); ?></p>
                 <p>£<?php echo number_format($product['price'], 2); ?></p>
                 
-                <!-- Update Quantity Form -->
+                
                 <form method="POST" action="basket.php">
                     <input id="quantity" name="quantity" type="number" value="<?php echo $product['quantity']; ?>" min="1">
                     <input type="hidden" name="id" value="<?php echo $product['product_id']; ?>">
                     <button type="submit" class="white-button">Update</button>
                 </form>
 
-                <!-- Remove Item Form -->
+                
                 <form method="POST" action="basket.php">
                     <input type="hidden" name="remove_id" value="<?php echo $product['product_id']; ?>">
                     <button type="submit" class="red-button" onclick="return confirm('Are you sure you want to remove this item?')">Remove</button>

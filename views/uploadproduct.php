@@ -11,6 +11,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
+
+    //Form information entered into variables
     $product_name = $_POST['product_name'];
     $price = $_POST['price_stock'];
     $quantity = $_POST['quantity_product'];
@@ -26,7 +28,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     
     //Lock to image filetypes
+    $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
+    if (!in_array($imageFileType, $allowed_types)) {
+        echo "<script>alert('Invalid file type. Only JPG, JPEG, PNG & GIF files are allowed.');</script>";
+        exit();
+    }
+
+    // Move uploaded file
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        // Insert product into database
+        $sql = "INSERT INTO products (user_id, name, price, quantity, condition, description, image_path) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("isdisss", $user_id, $product_name, $price, $quantity, $condition, $description, $target_file);
+            
+            if ($stmt->execute()) {
+                echo "<script>alert('Product uploaded successfully!'); window.location.href = 'product_list.php';</script>";
+            } else {
+                echo "<script>alert('Error uploading product. Please try again.');</script>";
+            }
+            
+            $stmt->close();
+        }
+    } else {
+        echo "<script>alert('Error uploading image. Please try again.');</script>";
+    }
     
+    $conn->close();
 }
 ?>
 

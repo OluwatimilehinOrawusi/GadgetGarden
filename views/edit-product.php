@@ -11,3 +11,5 @@ $stmt->bindParam(':user_id', $user_id);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
+
+

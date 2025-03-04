@@ -194,39 +194,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 sendMessage(userInput);
             }
         }
-  
-     function showFeedbackForm() {
-        document.getElementById("feedback-form").style.display = "block";
-    }
-
-    function submitFeedback() {
-        let rating = document.querySelector('input[name="rating"]:checked');
-        let comment = document.getElementById("feedback-comment").value;
-        
-        if (!rating) {
-            alert("Please provide a rating before submitting your feedback.");
-            return;
-        }
-        
-        alert("Thank you for your feedback!\nRating: " + rating.value + "\nComment: " + comment);
-        
-        document.getElementById("feedback-form").style.display = "none";
-    }
-</script>
-
-<div id="feedback-form" style="display:none; margin-top: 20px;">
-    <h3>Rate your experience</h3>
-    <div>
-        <input type="radio" name="rating" value="1"> 1
-        <input type="radio" name="rating" value="2"> 2
-        <input type="radio" name="rating" value="3"> 3
-        <input type="radio" name="rating" value="4"> 4
-        <input type="radio" name="rating" value="5"> 5
-    </div>
-    <textarea id="feedback-comment" placeholder="Leave your comment here..." rows="4" style="width: 100%; margin-top: 10px;"></textarea>
-    <button onclick="submitFeedback()">Submit Feedback</button>
 </div>
-
+</script>
     
 <?php require_once "./partials/footer.php"; ?>
 

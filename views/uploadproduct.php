@@ -9,6 +9,8 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+
 ?>
 
 <!-------Upload product HTML------>
@@ -48,7 +50,7 @@ if (!isset($_SESSION['user_id'])) {
 <div id="upload-container">
     <h1 id = "titlestatement">Upload your own product here</h1>
 
-    <form action="upload.php" method="POST" enctype="multipart/form-data" id = "uploadform">
+    <form action="uploadProduct.php" method="POST" enctype="multipart/form-data" id = "uploadform">
         
         <!-------Product name------>
         <label for="product_name">Product Name</label>
@@ -80,8 +82,8 @@ if (!isset($_SESSION['user_id'])) {
         <label for="description">Description</label>
         <textarea rows="3" cols="40" id="description" name="description" required></textarea>
 
-        <div id = "fileupload-container">
         <!-------File upload------>
+        <div id = "fileupload-container">
         <label for="image">Upload Image</label>
         <input type="file" name="image" accept="image/*" required>
         </div>

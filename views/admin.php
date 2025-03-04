@@ -136,7 +136,7 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC
                     <td>£<?php echo number_format($product['price'], 2); ?></td>
                     <td><?php echo htmlspecialchars($product['stock']); ?></td>
                     <td>
-                        <a href="edit-product.php?id=<?php echo $product['product_id']; ?>">Edit</a>
+                        <a href="edit-product.php?=<?php echo $product['product_id']; ?>">Edit</a>
                         <?php if ($is_admin) : ?>
                             | <button class="update-btn">Delete</button>
                         <?php endif; ?>

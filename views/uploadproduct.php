@@ -10,7 +10,24 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
+    $product_name = $_POST['product_name'];
+    $price = $_POST['price_stock'];
+    $quantity = $_POST['quantity_product'];
+    $condition = $_POST['state'];
+    $description = $_POST['description'];
+    $user_id = $_SESSION['user_id'];
 
+
+    //File handling
+    $target_dir = //to be added"";
+    $file_name = basename($_FILES["image"]["name"]);
+    $target_file = $target_dir . time() . "_" . $file_name;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    
+    //Lock to image filetypes
+    
+}
 ?>
 
 <!-------Upload product HTML------>

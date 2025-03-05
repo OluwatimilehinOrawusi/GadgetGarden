@@ -142,5 +142,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 </div>
         </div>
     
+       <?php require_once '../partials/footer.php'; ?>
 </body>
 </html>

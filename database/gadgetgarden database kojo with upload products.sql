@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2025 at 03:59 PM
+-- Generation Time: Mar 08, 2025 at 04:35 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,10 +41,10 @@ CREATE TABLE `basket` (
 --
 
 INSERT INTO `basket` (`basket_id`, `user_id`, `product_id`, `quantity`, `added_at`, `updated_at`) VALUES
-(6, 1, 23, 1, '2024-11-22 21:04:31', '2024-11-22 21:04:31'),
 (8, 7, 21, 1, '2025-02-18 11:41:30', '2025-02-18 11:41:30'),
 (9, 8, 12, 1, '2025-02-18 14:26:50', '2025-02-18 14:26:50'),
-(10, 9, 21, 1, '2025-02-18 14:53:05', '2025-02-18 14:53:05');
+(10, 9, 21, 1, '2025-02-18 14:53:05', '2025-02-18 14:53:05'),
+(15, 10, 12, 1, '2025-02-25 04:28:00', '2025-02-25 04:28:00');
 
 -- --------------------------------------------------------
 
@@ -86,6 +86,15 @@ CREATE TABLE `contact` (
   `message` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`user_id`, `name`, `phone`, `email`, `message`) VALUES
+(1, 'iuyyiu', 'wqewqewqe', 'wqewqe@wqewqe', 'wqewqewq'),
+(1, 'wqewqe', 'wqewewqewq', 'wqewqewqe@we', 'wqewe'),
+(1, '4ew53432', 'wqw4qwe', 'hammad12398ok@gmail.com', '3432');
+
 -- --------------------------------------------------------
 
 --
@@ -96,23 +105,49 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_date` datetime DEFAULT current_timestamp(),
-  `total_price` decimal(10,2) NOT NULL
+  `total_price` decimal(10,2) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `total_price`) VALUES
-(5, 1, '2024-11-22 21:00:12', 14988.00),
-(6, 1, '2024-11-22 21:04:57', 15587.00),
-(7, 1, '2024-11-22 22:53:44', 16185.00),
-(8, 7, '2025-02-18 11:41:49', 899.99),
-(9, 7, '2025-02-18 12:10:09', 899.99),
-(10, 1, '2025-02-18 14:36:09', 599.99),
-(11, 1, '2025-02-18 14:36:48', 599.99),
-(12, 8, '2025-02-18 14:50:47', 899.99),
-(13, 9, '2025-02-18 14:53:51', 899.99);
+INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `total_price`, `product_id`, `quantity`) VALUES
+(5, 1, '2024-11-22 21:00:12', 14988.00, 0, 0),
+(6, 1, '2024-11-22 21:04:57', 15587.00, 0, 0),
+(7, 1, '2024-11-22 22:53:44', 16185.00, 0, 0),
+(8, 7, '2025-02-18 11:41:49', 899.99, 0, 0),
+(9, 7, '2025-02-18 12:10:09', 899.99, 0, 0),
+(10, 1, '2025-02-18 14:36:09', 599.99, 0, 0),
+(11, 1, '2025-02-18 14:36:48', 599.99, 0, 0),
+(12, 8, '2025-02-18 14:50:47', 899.99, 0, 0),
+(13, 9, '2025-02-18 14:53:51', 899.99, 0, 0),
+(14, 1, '2025-02-21 03:37:37', 599.99, 0, 0),
+(15, 1, '2025-02-21 03:43:02', 599.99, 0, 0),
+(16, 1, '2025-02-23 18:44:29', 859.97, 0, 0),
+(17, 1, '2025-02-23 18:48:00', 859.97, 0, 0),
+(18, 1, '2025-02-23 18:50:29', 859.97, 0, 0),
+(19, 1, '2025-02-24 02:00:40', 859.97, 0, 0),
+(20, 1, '2025-02-24 02:01:16', 859.97, 0, 0),
+(21, 1, '2025-02-24 02:01:44', 859.97, 0, 0),
+(22, 1, '2025-02-24 02:03:29', 859.97, 0, 0),
+(23, 1, '2025-02-24 02:06:14', 859.97, 0, 0),
+(24, 1, '2025-02-24 02:08:54', 859.97, 0, 0),
+(25, 1, '2025-02-24 02:34:42', 859.97, 0, 0),
+(26, 1, '2025-02-25 04:25:06', 1609.96, 23, 1),
+(27, 1, '2025-02-25 04:25:06', 1609.96, 3, 2),
+(28, 1, '2025-02-25 04:25:06', 1609.96, 13, 1),
+(29, 10, '2025-02-25 04:25:58', 899.99, 12, 1),
+(30, 10, '2025-02-25 04:27:00', 899.99, 21, 1),
+(31, 10, '2025-02-25 04:31:24', 899.99, 0, 0),
+(32, 1, '2025-02-25 04:45:49', 7.00, 0, 0),
+(33, 1, '2025-02-25 04:46:20', 599.99, 0, 0),
+(34, 1, '2025-02-25 04:46:49', 599.99, 0, 0),
+(35, 11, '2025-02-25 14:41:33', 899.99, 0, 0),
+(36, 11, '2025-02-25 14:42:33', 749.99, 0, 0),
+(37, 1, '2025-02-25 14:45:43', 99.99, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -149,7 +184,13 @@ INSERT INTO `order_products` (`order_product_id`, `order_id`, `product_id`, `qua
 (15, 7, 4, 1),
 (16, 7, 10, 1),
 (17, 7, 23, 1),
-(18, 7, 16, 2);
+(18, 7, 16, 2),
+(19, 32, 23, 12),
+(20, 33, 23, 1),
+(21, 34, 23, 1),
+(22, 35, 12, 1),
+(23, 36, 13, 1),
+(24, 37, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -173,9 +214,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `stock`, `state`, `category_id`, `image`) VALUES
-(1, 'Logitech MX Master 3 Mouse', 'Wireless mouse with ergonomic design, multi-device control.', 99.99, 8, 'Like New', 7, '/public/assets/logitech-mouse.png'),
+(1, 'Logitech MX Master 3 Mouse', 'Wireless mouse with ergonomic design, multi-device control.', 99.99, 6, 'Like New', 7, '/public/assets/logitech-mouse.png'),
 (2, 'Anker 20W USB-C Charger', 'Fast charging brick for smartphones and tablets.', 19.99, 20, 'Very Good', 7, '/public/assets/anker-charger.png'),
-(3, 'Samsung 1TB Portable SSD T7', 'Compact external SSD with fast transfer speeds.', 129.99, 10, 'Like New', 3, '/public/assets/samsung.png'),
+(3, 'Samsung 1TB Portable SSD T7', 'Compact external SSD with fast transfer speeds.', 129.99, 8, 'Like New', 3, '/public/assets/samsung.png'),
 (4, 'Corsair K95 RGB Gaming Keyboard', 'Mechanical keyboard with RGB lighting and macro keys.', 199.99, 6, 'Very Good', 7, '/public/assets/gaming-keyboard.png'),
 (5, 'Belkin 6-Port Surge Protector', 'Reliable power strip with surge protection.', 29.99, 25, 'Good', 7, '/public/assets/surge-protector.png'),
 (6, 'Dell OptiPlex 3080 Desktop', 'Compact desktop PC, Intel i5, 8GB RAM, 256GB SSD, ideal for office tasks.', 499.99, 15, 'Very Good', 8, '/public/assets/desktop.png'),
@@ -184,8 +225,8 @@ INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `stock`, `
 (9, 'HP Pavilion Gaming Desktop', 'High-performance gaming PC, Intel i7, NVIDIA GTX 1660, 16GB RAM, 512GB SSD.', 1199.99, 5, 'Very Good', 8, '/public/assets/desktop.png'),
 (10, 'Acer Aspire TC-895 Desktop', 'Mid-range PC with Intel i5, 12GB RAM, 1TB HDD + 256GB SSD combo storage.', 599.99, 8, 'Good', 8, '/public/assets/acer-computer.png'),
 (11, 'Dell XPS 13 (2021)', 'Ultra-portable 13\" laptop, Intel i7, 16GB RAM, 512GB SSD.', 1099.99, 5, 'Like New', 1, '/public/assets/dell-desktop.png'),
-(12, 'Apple MacBook Air M1', 'Lightweight laptop, M1 chip, 8GB RAM, 256GB SSD.', 899.99, 12, 'Very Good', 1, '/public/assets/macbook.png'),
-(13, 'Lenovo ThinkPad T14', 'Business laptop, Intel i5, 8GB RAM, 256GB SSD, Windows 11 Pro.', 749.99, 10, 'Good', 1, '/public/assets/lenovo-laptop.png'),
+(12, 'Apple MacBook Air M1', 'Lightweight laptop, M1 chip, 8GB RAM, 256GB SSD.', 899.99, 10, 'Very Good', 1, '/public/assets/macbook.png'),
+(13, 'Lenovo ThinkPad T14', 'Business laptop, Intel i5, 8GB RAM, 256GB SSD, Windows 11 Pro.', 749.99, 8, 'Good', 1, '/public/assets/lenovo-laptop.png'),
 (14, 'ASUS ROG Zephyrus G15', 'Gaming laptop, AMD Ryzen 9, RTX 3060, 16GB RAM, 1TB SSD.', 1599.99, 4, 'Very Good', 1, '/public/assets/asus-laptop.png'),
 (15, 'HP Spectre x360 Convertible', '2-in-1 touchscreen laptop, Intel i7, 16GB RAM, 512GB SSD.', 1249.99, 7, 'Like New', 1, '/public/assets/hp-laptop.png'),
 (16, 'Sony WH-1000XM4 Headphones', 'Noise-canceling wireless headphones, 30-hour battery life.', 299.99, 8, 'Very Good', 2, '/public/assets/sony-headphones.png'),
@@ -193,9 +234,9 @@ INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `stock`, `
 (18, 'JBL Charge 5 Bluetooth Speaker', 'Portable speaker, waterproof, 20 hours of playtime.', 179.99, 10, 'Good', 2, '/public/assets/jbl-speaker.png'),
 (19, 'Bose SoundLink Revolve II', 'Premium portable Bluetooth speaker with 360° sound.', 199.99, 6, 'Very Good', 2, '/public/assets/bose-speaker.png'),
 (20, 'Sennheiser Momentum True Wireless 3', 'Audiophile-grade wireless earbuds, ANC, and custom EQ.', 279.99, 5, 'Like New', 2, '/public/assets/speaker.png'),
-(21, 'iPhone 13 Pro', '128GB, 6.1-inch Super Retina XDR display, A15 Bionic chip.', 899.99, 7, 'Like New', 3, '/public/assets/trending1.png'),
+(21, 'iPhone 13 Pro', '128GB, 6.1-inch Super Retina XDR display, A15 Bionic chip.', 899.99, 6, 'Like New', 3, '/public/assets/trending1.png'),
 (22, 'Samsung Galaxy S22 Ultra', '256GB, 6.8-inch AMOLED, S Pen included.', 1099.99, 9, 'Very Good', 3, '/public/assets/samsung.png'),
-(23, 'Google Pixel 6', '128GB, Google Tensor chip, Android 12, dual-camera system.', 599.99, 15, 'Good', 3, '/public/assets/google-pixel.png'),
+(23, 'Google Pixel 6', '128GB, Google Tensor chip, Android 12, dual-camera system.', 599.99, -1, 'Good', 3, '/public/assets/google-pixel.png'),
 (24, 'OnePlus 10 Pro', '256GB, Snapdragon 8 Gen 1, Hasselblad-tuned cameras.', 699.99, 5, 'Very Good', 3, '/public/assets/one-plus.png'),
 (25, 'Motorola Edge+ 2022', '512GB, OLED 144Hz display, 50MP triple camera.', 799.99, 4, 'Like New', 3, '/public/assets/motorolla.png'),
 (26, 'PlayStation 5', 'Next-gen console, 825GB SSD, DualSense controller.', 499.99, 6, 'Like New', 4, '/public/assets/playstation.png'),
@@ -217,6 +258,60 @@ INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `stock`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `review_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `rating` int(11) DEFAULT NULL CHECK (`rating` between 1 and 5),
+  `review_text` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`review_id`, `user_id`, `product_id`, `rating`, `review_text`, `created_at`) VALUES
+(1, 1, 12, 2, 'gy', '2025-02-20 02:14:46'),
+(2, 1, 12, 2, 'kk', '2025-02-20 02:15:07'),
+(3, 1, 12, 3, 'wqewq', '2025-02-20 02:16:23'),
+(4, 1, 12, 3, 'wqewq', '2025-02-20 02:22:42'),
+(5, 1, 12, 3, 'wqewq', '2025-02-20 02:22:47'),
+(6, 1, 11, 4, '32432424', '2025-02-24 15:25:26'),
+(7, 1, 21, 3, 'Decent phone', '2025-03-08 02:12:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `upload_products`
+--
+
+CREATE TABLE `upload_products` (
+  `upload_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `Admin_approve` tinyint(1) NOT NULL DEFAULT 0,
+  `name` varchar(100) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `condition` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `image_path` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `upload_products`
+--
+
+INSERT INTO `upload_products` (`upload_id`, `user_id`, `product_id`, `Admin_approve`, `name`, `price`, `quantity`, `condition`, `description`, `image_path`) VALUES
+(4, 1, 41, 0, 'Warzone drillas logo', 20.00, 1, 'likeNew', 'the logo', '../Uploads/ImageTempUploads/1741404122_warzone drillaz logo v2.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -227,20 +322,23 @@ CREATE TABLE `users` (
   `password_hash` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `admin` tinyint(1) DEFAULT 0,
-  `phone` varchar(20) DEFAULT NULL
+  `phone` varchar(20) DEFAULT NULL,
+  `role` enum('admin','manager','user') NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `created_at`, `admin`, `phone`) VALUES
-(1, 'timi', 'timi1@gmail.com', '$2y$10$qBbiZx43Ww0CueE9DWvjX.j4A9fStOZhaS7/YbWYLEyO5c4gVKPme', '2024-11-21 04:08:19', 1, NULL),
-(2, 'user123', 'user@gmail.com', '$2y$10$iedZ9BN4Hko1/sNEKDcIsO2Xday31KBv622QCgS4IRCaKduPnAQIe', '2024-11-22 22:44:32', 0, NULL),
-(6, 'usernew', 'fdaj@gmail.com', '$2y$10$GQmyTDvDKH10wTQaD2jla./tfUwUPhKsmhvu9VZhSa/sn2L64/pNu', '2024-11-22 22:48:39', 0, NULL),
-(7, 'hammad', 'trdesyugyug@tutft', '$2y$10$2OOJAe1Y6NE/jXDtiHmqDeJlToW.2vF3yj5vhpGU0f4lRmMua5qY.', '2025-02-18 11:41:13', 0, 'estersrdrdt'),
-(8, 'timi123', 'IUHuhuadjjewije@ewiuhiyeh', '$2y$10$v/oA7RYtsT26hHpoM6zYw.RgIEQ1Wc4I3CzM50P19ieB2dCvoXI6y', '2025-02-18 14:26:31', 0, 'wqwqewqewq'),
-(9, '123', 'fhdrdrd@saydsad', '$2y$10$VbTaX5/hCNp8WAYhE228dObT6sqxxebj8yEzR.a5m72hv3sBpJv5K', '2025-02-18 14:52:53', 0, 'weweqe');
+INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `created_at`, `admin`, `phone`, `role`) VALUES
+(1, 'timi', 'timi1@gmail.com', '$2y$10$qBbiZx43Ww0CueE9DWvjX.j4A9fStOZhaS7/YbWYLEyO5c4gVKPme', '2024-11-21 04:08:19', 1, NULL, 'admin'),
+(2, 'user123', 'user@gmail.com', '$2y$10$iedZ9BN4Hko1/sNEKDcIsO2Xday31KBv622QCgS4IRCaKduPnAQIe', '2024-11-22 22:44:32', 0, NULL, 'manager'),
+(6, 'usernew', 'fdaj@gmail.com', '$2y$10$GQmyTDvDKH10wTQaD2jla./tfUwUPhKsmhvu9VZhSa/sn2L64/pNu', '2024-11-22 22:48:39', 0, NULL, 'user'),
+(7, 'hammad', 'trdesyugyug@tutft', '$2y$10$2OOJAe1Y6NE/jXDtiHmqDeJlToW.2vF3yj5vhpGU0f4lRmMua5qY.', '2025-02-18 11:41:13', 0, 'estersrdrdt', 'user'),
+(8, 'timi123', 'IUHuhuadjjewije@ewiuhiyeh', '$2y$10$v/oA7RYtsT26hHpoM6zYw.RgIEQ1Wc4I3CzM50P19ieB2dCvoXI6y', '2025-02-18 14:26:31', 0, 'wqwqewqewq', 'user'),
+(9, '123', 'fhdrdrd@saydsad', '$2y$10$VbTaX5/hCNp8WAYhE228dObT6sqxxebj8yEzR.a5m72hv3sBpJv5K', '2025-02-18 14:52:53', 0, 'weweqe', 'user'),
+(10, '1', '43@uhuu', '$2y$10$GgWQk.RmKi2HaGOLMJZ7XOSCFHaaL8x7PA9WYZnrVLkX9k/SR7lwW', '2025-02-20 02:41:59', 0, '3454343434343', 'manager'),
+(11, '2', '324432432@324324', '$2y$10$/QYxuEWXi7iQYZhE5Mab4ONb4gV5iEyJu4KFMfCh6nq/Nt7Dl87I6', '2025-02-25 14:40:58', 0, '234324324324', 'user');
 
 --
 -- Indexes for dumped tables
@@ -289,6 +387,20 @@ ALTER TABLE `products`
   ADD KEY `category_id` (`category_id`);
 
 --
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `upload_products`
+--
+ALTER TABLE `upload_products`
+  ADD PRIMARY KEY (`upload_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -303,7 +415,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `basket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `basket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -315,13 +427,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -330,10 +442,22 @@ ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `upload_products`
+--
+ALTER TABLE `upload_products`
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -370,18 +494,14 @@ ALTER TABLE `order_products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
-COMMIT;
 
-CREATE TABLE reviews (
-    review_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    product_id INT NOT NULL,
-    rating INT CHECK (rating BETWEEN 1 AND 5),
-    review_text TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
-);
+--
+-- Constraints for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -184,6 +184,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             chatBox.appendChild(botMessage);
             
             chatBox.scrollTop = chatBox.scrollHeight;
+            setTimeout(showFeedbackForm, 2000); // Show feedback form after a delay
         }
 
         function handleKeyPress(event) {
@@ -193,8 +194,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 sendMessage(userInput);
             }
         }
-    </script>
-
+</div>
+</script>
     
 <?php require_once "./partials/footer.php"; ?>
 

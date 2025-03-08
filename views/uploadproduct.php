@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
 
     //File handling
-    $target_dir = //to be added"";
+    $target_dir = "../Uploads/ImageTempUploads/";
     $file_name = basename($_FILES["image"]["name"]);
     $target_file = $target_dir . time() . "_" . $file_name;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

@@ -36,29 +36,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
     // Move uploaded file
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        
-        // Insert into upload_products table (Admin approval required)
-        $sql = "INSERT INTO upload_products (user_id, product_id, Admin_approve, name, price, quantity, condition, description, image_path) 
-                VALUES (?, NULL, 0, ?, ?, ?, ?, ?, ?)";
+        try {
+            // Insert into upload_products table (Admin approval required)
+            $stmt = $pdo->prepare("
+                INSERT INTO upload_products 
+                (user_id, product_id, Admin_approve, name, price, quantity, `condition`, description, image_path)  
+                VALUES (:user_id, NULL, 0, :product_name, :price, :quantity, :condition, :description, :target_file)
+            ");
 
-        if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("isdisss", $user_id, $product_name, $price, $quantity, $condition, $description, $target_file);
-            
+            // Bind parameters
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':product_name', $product_name, PDO::PARAM_STR);
+            $stmt->bindParam(':price', $price, PDO::PARAM_STR); // Using STR because decimals are stored as strings in SQL
+            $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+            $stmt->bindParam(':condition', $condition, PDO::PARAM_STR);
+            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+            $stmt->bindParam(':target_file', $target_file, PDO::PARAM_STR);
+
             if ($stmt->execute()) {
                 echo "<script>alert('Product uploaded successfully and is pending admin approval!'); window.location.href = 'product_list.php';</script>";
             } else {
                 echo "<script>alert('Error uploading product. Please try again.');</script>";
             }
-
-            $stmt->close();
+        } catch (PDOException $e) {
+            echo "<script>alert('Database error: " . addslashes($e->getMessage()) . "');</script>";
         }
     } else {
         echo "<script>alert('Error uploading image. Please try again.');</script>";
     }
-
-    $conn->close();
 }
 ?>
+
 
 
 <!-------Upload product HTML------>

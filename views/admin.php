@@ -129,21 +129,26 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($products as $product) : ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($product['name']); ?></td>
-                    <td><?php echo htmlspecialchars($product['category_name'] ?? 'Uncategorized'); ?></td>
-                    <td>£<?php echo number_format($product['price'], 2); ?></td>
-                    <td><?php echo htmlspecialchars($product['stock']); ?></td>
-                    <td>
-                    <a href="edit-product.php?product_id=<?php echo $product['product_id']; ?>">Edit</a>
-                    <?php if ($is_admin) : ?>
-                            | <button class="update-btn">Delete</button>
-                        <?php endif; ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
+    <?php foreach ($products as $product) : ?>
+        <tr>
+            <td><?php echo htmlspecialchars($product['name']); ?></td>
+            <td><?php echo htmlspecialchars($product['category_name'] ?? 'Uncategorized'); ?></td>
+            <td>£<?php echo number_format($product['price'], 2); ?></td>
+            <td><?php echo htmlspecialchars($product['stock']); ?></td>
+            <td>
+                <a href="edit-product.php?product_id=<?php echo $product['product_id']; ?>">Edit</a>
+                <?php if ($is_admin) : ?>
+                    | 
+                    <!-- Form for Delete -->
+                    <form method="POST" action="admin.php" style="display:inline;">
+                        <input type="hidden" name="delete" value="<?php echo $product['product_id']; ?>">
+                        <button type="submit" class="update-btn" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
+                    </form>
+                <?php endif; ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
     </table>
 </div>
 

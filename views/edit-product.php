@@ -118,7 +118,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php endforeach; ?>
         </select>
 
-        <button type="submit">Update Product</button>
+        <button type="submit">Update</button>
         <a href="admin.php"><button type="button">Cancel</button></a>
                 </form>
         </div>

@@ -1,7 +1,7 @@
 <?php
 // Start session
 session_start();
-require_once "../database/database.php";
+
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -9,6 +9,10 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+require_once('../database/database.php');
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 

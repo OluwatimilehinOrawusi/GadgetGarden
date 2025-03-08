@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
             $stmt->bindParam(':target_file', $target_file, PDO::PARAM_STR);
 
             if ($stmt->execute()) {
-                echo "<script>alert('Product uploaded successfully and is pending admin approval!'); window.location.href = 'index.php';</script>";
+                echo "<script>alert('Product uploaded successfully and is pending admin approval!'); window.location.href = '../index.php';</script>";
             } else {
                 echo "<script>alert('Error uploading product. Please try again.');</script>";
             }

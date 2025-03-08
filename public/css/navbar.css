@@ -1,13 +1,17 @@
 /* Nav Bar */
 
-nav{
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10%;
-    padding: 0 5% 0 5%;
+    height: 60px; /* Fixed height */
+    padding: 10px 5%;
     border-bottom: 1px solid #275E4A;
+    background-color: white !important; /* Prevents override */
+    position: relative;
+    z-index: 1000;
 }
+
 
 .nav-right{
     display: flex;
@@ -40,8 +44,9 @@ font-size: 2rem;
     border: 0.1rem solid #275E4A;
     background-color: #275E4A;
     color: white;
-    font-size: 2rem;
+    font-size: 1rem; /* Reduced from 2rem */
     cursor: pointer;
+    padding: 8px 12px; /* Adjust padding for a balanced look */
 }
 
 .white-button:hover, .green-button:hover {

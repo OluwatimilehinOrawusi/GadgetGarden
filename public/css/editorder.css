@@ -1,3 +1,19 @@
+nav, .nav-left, .nav-right {
+    all: unset;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px; /* Match other pages */
+    padding: 10px 5%;
+    border-bottom: 1px solid #275E4A;
+    background-color: white;
+}
+
+
+
 /* General Page Styles */
 body {
     font-family: 'Arial', sans-serif;
@@ -65,6 +81,8 @@ input:focus, textarea:focus, select:focus {
     background-color: #fff;
 }
 
+
+
 /* Only Apply Button Styles Inside .container */
 .container button {
     background: linear-gradient(90deg, #0d5c47, #1abc9c);
@@ -96,6 +114,7 @@ input:focus, textarea:focus, select:focus {
     transform: scale(1.05);
 }
 
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .container {
@@ -122,4 +141,6 @@ input:focus, textarea:focus, select:focus {
         opacity: 1;
         transform: translateY(0);
     }
+
+    
 }

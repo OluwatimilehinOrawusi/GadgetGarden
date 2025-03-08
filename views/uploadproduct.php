@@ -9,11 +9,13 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+//Connects to the Gadget Gardern database
 require_once('../database/database.php');
 
+//Code to run once the submit button is pressed
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
-    // Form information
+    // Form information(to be stored in variables for database)
     $product_name = $_POST['product_name'];
     $price = $_POST['price_stock'];
     $quantity = $_POST['quantity_product'];
@@ -33,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
     $new_product_id = $max_id ? $max_id + 1 : 1; // Default to 1 if no products exist
 
     // File handling
-    $target_dir = "../Uploads/ImageTempUploads/";
+    $target_dir = "../Uploads/ImageTempUploads/";//to be changed if the file structure of the website changes
     $file_name = basename($_FILES["image"]["name"]);
     $target_file = $target_dir . time() . "_" . $file_name;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -65,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
             $stmt->bindParam(':description', $description, PDO::PARAM_STR);
             $stmt->bindParam(':target_file', $target_file, PDO::PARAM_STR);
 
+            //Completion Alert
             if ($stmt->execute()) {
                 echo "<script>alert('Product uploaded successfully and is pending admin approval!'); window.location.href = '../index.php';</script>";
             } else {

@@ -5,11 +5,16 @@ $pdo = require_once "./database/database.php";
 
 $user_id = $_SESSION['user_id'] ?? null;
 
-// Fetch the admin status of the user
-$stmt = $pdo->prepare("SELECT admin FROM users WHERE user_id = :user_id");
+// Use the correct column name for role (change 'user_role' if needed)
+$stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
 $stmt->bindParam(':user_id', $user_id);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Store role in session for navbar consistency
+if ($user) {
+    $_SESSION['user_role'] = $user['role']; // Change 'role' to the correct column name
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,9 +22,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gadget Garden</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./public/css/navbar.css">
     <link rel="stylesheet" href="./public/css/styles.css">
     <link rel="stylesheet" href="./public/css/chatbot.css">
@@ -43,10 +45,12 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         <?php if (isset($_SESSION['user_id'])) { ?>
             <a href="./views/basket.php"><button class="green-button">Basket</button></a>
             <a href="./views/contact.php"><button class="green-button">Contact Us</button></a>
-            <a href="./views/profile.php"><button class="white-button">Profile</button></a>
 
-            <?php if ($user && $user['admin']) { ?>
-                <a href="./views/dashboard.php"><button class="white-button">Admin Dashboard</button></a>
+            <!-- Show "Admin Dashboard" for Admins & Managers -->
+            <?php if (isset($_SESSION['user_role']) && in_array($_SESSION['user_role'], ['admin', 'manager'])) { ?>
+                <a href="./views/admin_dashboard.php"><button class="white-button">Admin Dashboard</button></a>
+            <?php } else { ?>
+                <a href="./views/profile.php"><button class="white-button">Profile</button></a>
             <?php } ?>
 
             <a href="./views/logout.php"><button class="green-button">Logout</button></a>
@@ -80,22 +84,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <a href="./views/products.php?category=gaming"><button class="white-button">GAMING</button></a>
         </div>
     </div>
-
-    <div id="trending-items">
-            <div class="home-images"></div>
-            <div class="home-images"></div>
-            <div class="home-image"></div>
-            <div class="home-images"></div>
-            <div class="home-images"></div>
-            <div class="home-images"></div>
-            <div class="home-images"></div>
-            <div class="home-images"></div>
-            
-        </div>
-
-    <div id="shop-now-container">
-        <a href="views/products.php"><button class="green-button" id="shop-now-button"> Find out more ↝</button></a>
-    </div>
 </section>
 
 <hr>
@@ -114,9 +102,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <a href="./views/products.php?category=computers"><button class="green-button category-buttons">COMPUTERS</button></a>
             <a href="./views/products.php?category=audio"><button class="white-button category-buttons">AUDIO</button></a>
         </div>
-    </div>
-    <div class="category-image">
-        <div class="home-images" id="category-banner"></div>
     </div>
 </section>
 
@@ -141,62 +126,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
 </section>
 
-    
-
- <div class="chat-icon" onclick="toggleChat()">💬</div>
-    
-    <div class="chat-container" id="chat-container">
-        <div class="chat-box" id="chat-box"></div>
-        <div class="chat-options">
-            <p class="bot-message message"><strong>Bot:</strong> Select one of the following options:</p>
-            <button onclick="sendMessage('delivery times')">Delivery Times</button>
-            <button onclick="sendMessage('returns')">Returns</button>
-            <button onclick="sendMessage('contact us')">Contact Us</button>
-        </div>
-        <input type="text" id="user-input" class="chat-input" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
-    </div>
-
-    <script>
-        function toggleChat() {
-            let chatContainer = document.getElementById("chat-container");
-            chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
-        }
-        
-        function sendMessage(userInput) {
-            let chatBox = document.getElementById("chat-box");
-            
-            let userMessage = document.createElement("div");
-            userMessage.className = "message user-message";
-            userMessage.innerHTML = "<strong>You:</strong> " + userInput;
-            chatBox.appendChild(userMessage);
-            
-            let responses = {
-                "delivery times": "Our standard delivery time is 3-5 business days.",
-                "returns": "You can return any product within 30 days of purchase.",
-                "contact us": "Please log in to access our contact page: <a href='./login.php'>Login</a>"
-            };
-            
-            let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";
-            
-            let botMessage = document.createElement("div");
-            botMessage.className = "message bot-message";
-            botMessage.innerHTML = "<strong>Bot:</strong> " + response;
-            chatBox.appendChild(botMessage);
-            
-            chatBox.scrollTop = chatBox.scrollHeight;
-            setTimeout(showFeedbackForm, 2000); // Show feedback form after a delay
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                let userInput = document.getElementById("user-input").value;
-                document.getElementById("user-input").value = "";
-                sendMessage(userInput);
-            }
-        }
-</div>
-</script>
-    
 <?php require_once "./partials/footer.php"; ?>
 
 </body>

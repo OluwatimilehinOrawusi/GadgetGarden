@@ -63,6 +63,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <head>
         <title>Edit Product - Gadget Garden</title>
         <link rel="stylesheet" href="../public/css/styles.css">
+        <link rel="stylesheet" href="../public/css/navbar.css">
+        <link rel="stylesheet" href="../public/css/editorder.css">
+
     </head>
     <body>
     <nav>

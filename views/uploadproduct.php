@@ -2,7 +2,6 @@
 // Start session
 session_start();
 
-
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     echo "<script>alert('You must log in to upload a product to Gadget Garden.');</script>";
@@ -12,11 +11,9 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once('../database/database.php');
 
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
-    //Form information entered into variables
+    // Form information entered into variables
     $product_name = $_POST['product_name'];
     $price = $_POST['price_stock'];
     $quantity = $_POST['quantity_product'];
@@ -24,14 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
     $description = $_POST['description'];
     $user_id = $_SESSION['user_id'];
 
-
-    //File handling
+    // File handling
     $target_dir = "../Uploads/ImageTempUploads/";
     $file_name = basename($_FILES["image"]["name"]);
     $target_file = $target_dir . time() . "_" . $file_name;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    
-    //Lock to image filetypes
+
+    // Allowed file types
     $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
     if (!in_array($imageFileType, $allowed_types)) {
         echo "<script>alert('Invalid file type. Only JPG, JPEG, PNG & GIF files are allowed.');</script>";
@@ -40,27 +36,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
     // Move uploaded file
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        // Insert product into database
-        $sql = "INSERT INTO products (user_id, name, price, quantity, condition, description, image_path) VALUES (?, ?, ?, ?, ?, ?, ?)";
         
+        // Insert into upload_products table (Admin approval required)
+        $sql = "INSERT INTO upload_products (user_id, product_id, Admin_approve, name, price, quantity, condition, description, image_path) 
+                VALUES (?, NULL, 0, ?, ?, ?, ?, ?, ?)";
+
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("isdisss", $user_id, $product_name, $price, $quantity, $condition, $description, $target_file);
             
             if ($stmt->execute()) {
-                echo "<script>alert('Product uploaded successfully!'); window.location.href = 'product_list.php';</script>";
+                echo "<script>alert('Product uploaded successfully and is pending admin approval!'); window.location.href = 'product_list.php';</script>";
             } else {
                 echo "<script>alert('Error uploading product. Please try again.');</script>";
             }
-            
+
             $stmt->close();
         }
     } else {
         echo "<script>alert('Error uploading image. Please try again.');</script>";
     }
-    
+
     $conn->close();
 }
 ?>
+
 
 <!-------Upload product HTML------>
 <!DOCTYPE html>

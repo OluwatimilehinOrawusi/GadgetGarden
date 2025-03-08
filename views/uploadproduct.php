@@ -13,13 +13,24 @@ require_once('../database/database.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
-    // Form information entered into variables
+    // Form information
     $product_name = $_POST['product_name'];
     $price = $_POST['price_stock'];
     $quantity = $_POST['quantity_product'];
     $condition = $_POST['state'];
     $description = $_POST['description'];
     $user_id = $_SESSION['user_id'];
+
+    // Get the next product ID (one higher than the max from both tables)
+    $stmt = $pdo->query("
+        SELECT MAX(product_id) AS max_id FROM (
+            SELECT product_id FROM products 
+            UNION ALL 
+            SELECT product_id FROM upload_products
+        ) AS all_products
+    ");
+    $max_id = $stmt->fetch(PDO::FETCH_ASSOC)['max_id'];
+    $new_product_id = $max_id ? $max_id + 1 : 1; // Default to 1 if no products exist
 
     // File handling
     $target_dir = "../Uploads/ImageTempUploads/";
@@ -37,24 +48,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
     // Move uploaded file
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
         try {
-            // Insert into upload_products table (Admin approval required)
+            // Insert into `upload_products`
             $stmt = $pdo->prepare("
                 INSERT INTO upload_products 
                 (user_id, product_id, Admin_approve, name, price, quantity, `condition`, description, image_path)  
-                VALUES (:user_id, NULL, 0, :product_name, :price, :quantity, :condition, :description, :target_file)
+                VALUES (:user_id, :product_id, 0, :product_name, :price, :quantity, :condition, :description, :target_file)
             ");
 
             // Bind parameters
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':product_id', $new_product_id, PDO::PARAM_INT);
             $stmt->bindParam(':product_name', $product_name, PDO::PARAM_STR);
-            $stmt->bindParam(':price', $price, PDO::PARAM_STR); // Using STR because decimals are stored as strings in SQL
+            $stmt->bindParam(':price', $price, PDO::PARAM_STR);
             $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $stmt->bindParam(':condition', $condition, PDO::PARAM_STR);
             $stmt->bindParam(':description', $description, PDO::PARAM_STR);
             $stmt->bindParam(':target_file', $target_file, PDO::PARAM_STR);
 
             if ($stmt->execute()) {
-                echo "<script>alert('Product uploaded successfully and is pending admin approval!'); window.location.href = 'product_list.php';</script>";
+                echo "<script>alert('Product uploaded successfully and is pending admin approval!'); window.location.href = 'index.php';</script>";
             } else {
                 echo "<script>alert('Error uploading product. Please try again.');</script>";
             }
@@ -65,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
         echo "<script>alert('Error uploading image. Please try again.');</script>";
     }
 }
+
 ?>
 
 

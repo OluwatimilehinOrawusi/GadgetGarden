@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
     $new_product_id = $max_id ? $max_id + 1 : 1; // Default to 1 if no products exist
 
     // File handling
-    $target_dir = "../Uploads/ImageTempUploads/";//to be changed if the file structure of the website changes
+    $target_dir = "../Uploads/ProductImageUploads/";//to be changed if the file structure of the website changes
     $file_name = basename($_FILES["image"]["name"]);
     $target_file = $target_dir . time() . "_" . $file_name;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
+    $memorable_phrase = $_POST['memorable_phrase'];
 
     if ($password !== $confirm_password) {
         $errors[] = "The passwords do not match, please try again";

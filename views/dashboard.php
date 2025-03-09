@@ -42,7 +42,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                     
         <div class="dashboard-cards"><a href="./orders.php" class="clickable-div"><img src=../public\assets\Quickdelivery.png ><p>Orders</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\Checkbox.png ><a href="./reviewPage.php"><p>Product Reviews</p></a></div>
-                    <div class="dashboard-cards"><img src=../public\assets\Download.png ><a href="./reviewPage.php"><p>Review Customer Uploads</p></a></div>
+                    <div class="dashboard-cards"><img src=../public\assets\Download.png ><a href="./ReviewCustomerUploads.php"><p>Review Customer Uploads</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\Invoice.png ><a href="./legal.php"><p>Legal</p></a></div>
                     <div id="dashboard-links" class="dashboard-cards"><img src=../public\assets\Home.png ><a href="./reviewPage.php"><p>Inventory management</p></a></div>
                     <div id="analytic-card"class="dashboard-cards"><img src=../public\assets\Diagram.png ><a href="./admin_dashboard.php"><p>Analytics</p></a></div>

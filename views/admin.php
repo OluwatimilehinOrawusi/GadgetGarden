@@ -92,90 +92,7 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
     <link rel="stylesheet" href="../public/css/admin.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .search-bar {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .search-bar input {
-            width: 60%;
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #1E5631;
-            border-radius: 5px;
-        }
-
-        .search-bar button {
-            background: #145A32;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-
-        .search-bar button:hover {
-            background: #117A3D;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #1E5631;
-            color: white;
-            font-size: 16px;
-        }
-
-        .update-btn {
-            background: #145A32;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .update-btn:hover {
-            background: #117A3D;
-        }
-    </style>
+   
 </head>
 <body>
 
@@ -219,7 +136,7 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC
                     <td>£<?php echo number_format($product['price'], 2); ?></td>
                     <td><?php echo htmlspecialchars($product['stock']); ?></td>
                     <td>
-                        <a href="edit-product.php?id=<?php echo $product['product_id']; ?>">Edit</a>
+                        <a href="edit-product.php?=<?php echo $product['product_id']; ?>">Edit</a>
                         <?php if ($is_admin) : ?>
                             | <button class="update-btn">Delete</button>
                         <?php endif; ?>

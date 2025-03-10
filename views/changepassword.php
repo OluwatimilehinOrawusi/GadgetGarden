@@ -99,14 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button id="dark-mode-toggle" class="icon-button"><i class="fas fa-moon"></i> Dark Mode</button>
     </div>
 
-    <form action="changePassword.php" method="POST" onsubmit="return validateForm()">
-        <div class="input-group"> 
-            <label for="new-password">New Password</label>
-            <div class="password-wrapper">
-                <input type="password" id="new-password" name="new_password" required>
-                <i class="fas fa-eye toggle-password" onclick="togglePassword('new-password', this)"></i>
-            </div>
-        </div>
+   
         
 <div class="container">
     <header>
@@ -115,10 +108,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header> 
         
         <div class="input-group">
+             <form action="changePassword.php" method="POST" onsubmit="return validateForm()">
+            <div class="input-group"> 
+            <label for="new-password">New Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="new-password" name="new_password" required>
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('new-password', this)"></i>
+            </div>
+        </div>
             <label for="confirm-password">Confirm New Password</label>
             <div class="password-wrapper">
                 <input type="password" id="confirm-password" name="confirm_password" required>
                 <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password', this)"></i>
+                
             </div>
         </div>
         

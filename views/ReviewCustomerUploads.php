@@ -39,7 +39,7 @@ $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <h1>Review User Uploads</h1>
     <?php if (empty($uploads)) : ?>
-        <p style="text-align: center; color: #888;">No products have been uploaded</p>
+        <p>No products have been uploaded</p>
     <?php else : ?>
         <table>
             <thead>

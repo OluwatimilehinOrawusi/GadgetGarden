@@ -94,14 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php }?>
     </div>
 </nav>
-
-<div class="container">
-    <header>
-        <h1 id="header">Change your password</h1>
-        <p>You can reset your password here</p><br><br>
-    </header> 
-
-    <div class="dark-mode-container">
+    
+ <div class="dark-mode-container">
         <button id="dark-mode-toggle" class="icon-button"><i class="fas fa-moon"></i> Dark Mode</button>
     </div>
 
@@ -113,6 +107,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <i class="fas fa-eye toggle-password" onclick="togglePassword('new-password', this)"></i>
             </div>
         </div>
+        
+<div class="container">
+    <header>
+        <h1 id="header">Change your password</h1>
+        <p>You can reset your password here</p><br><br>
+    </header> 
         
         <div class="input-group">
             <label for="confirm-password">Confirm New Password</label>

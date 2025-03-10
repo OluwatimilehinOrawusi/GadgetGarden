@@ -24,12 +24,14 @@ if ($_SESSION['user_role'] !== 'admin') {
 }
 
 //Retrieve user name
+$stmt = $pdo->prepare("SELECT username FROM users WHERE user_id = ?");
 
 
-
+//retrieve upload products information
 $stmt = $pdo->prepare("SELECT * FROM upload_products WHERE Admin_approve = 0");
 $stmt->execute();
 $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$upload_user_id = 
 ?>
 
 

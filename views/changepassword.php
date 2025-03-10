@@ -198,10 +198,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     function goToLogin() {
         window.location.href = "login.php";
     }
-     document.getElementById("dark-mode-toggle").addEventListener("click", function() {
-     document.body.classList.toggle("dark-mode");
-     this.querySelector("i").classList.toggle("fa-sun");
-         });
+     <div class="dark-mode-container">
+    <button id="dark-mode-toggle" class="icon-button"><i class="fas fa-moon"></i> Dark Mode</button>
+</div>
+
+<script>
+    function validateForm() {
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+        if (newPassword !== confirmPassword) {
+            alert("Please make sure your passwords match");
+            return false;
+        }
+        return true;
+    }
+
+    function togglePassword(inputId, icon) {
+        const input = document.getElementById(inputId);
+        input.type = input.type === "password" ? "text" : "password";
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
+    }
+
+    function goToLogin() {
+        window.location.href = "login.php";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("dark-mode-toggle");
+        const body = document.body;
+        const icon = toggleButton.querySelector("i");
+
+        if (localStorage.getItem("dark-mode") === "enabled") {
+            body.classList.add("dark-mode");
+            icon.classList.add("fa-sun");
+            icon.classList.remove("fa-moon");
+        }
+
+        toggleButton.addEventListener("click", function () {
+            body.classList.toggle("dark-mode");
+            if (body.classList.contains("dark-mode")) {
+                localStorage.setItem("dark-mode", "enabled");
+                icon.classList.add("fa-sun");
+                icon.classList.remove("fa-moon");
+            } else {
+                localStorage.setItem("dark-mode", "disabled");
+                icon.classList.add("fa-moon");
+                icon.classList.remove("fa-sun");
+            }
+        });
+    });
 </script>
 <?php require_once "../partials/footer.php" ?>
     

@@ -23,15 +23,21 @@ if ($_SESSION['user_role'] !== 'admin') {
     die("Error: Permission denied. You are not an admin");
 }
 
-//Retrieve user name
-$stmt = $pdo->prepare("SELECT username FROM users WHERE user_id = ?");
+//Retrieve username
+function getUsernameById($pdo, $user_id) {
+    $stmt = $pdo->prepare("SELECT username FROM users WHERE user_id = ?");
+    $stmt->execute([$user_id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $user ? $user['username'] : null; 
+}
+
 
 
 //retrieve upload products information
 $stmt = $pdo->prepare("SELECT * FROM upload_products WHERE Admin_approve = 0");
 $stmt->execute();
 $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$upload_user_id = 
 ?>
 
 
@@ -52,6 +58,7 @@ $upload_user_id =
             <thead>
                 <tr>
                     <th>User ID</th>
+                    <th>Username</th>
                     <th>Product ID</th>
                     <th>Product Name</th>
                     <th>Price</th>
@@ -65,6 +72,7 @@ $upload_user_id =
                 <?php foreach ($uploads as $product) { ?>
                 <tr>
                     <td><?php echo htmlspecialchars($product['user_id']); ?></td>
+                    <td><?php echo htmlspecialchars(getUsernameById($pdo, $product['user_id'])); ?></td>
                     <td><?php echo htmlspecialchars($product['product_id']); ?></td>
                     <td><?php echo htmlspecialchars($product['name']); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>

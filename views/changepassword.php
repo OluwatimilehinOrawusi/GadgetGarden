@@ -96,7 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </nav>
     
  <div class="dark-mode-container">
-        <button id="dark-mode-toggle" class="icon-button"><i class="fas fa-moon"></i> Dark Mode</button>
+        <button id="dark-mode-toggle" class="icon-button">
+            <i class="fas fa-moon"></i>
+            <span>Dark Mode</span> <!-- Added this span element to hold the button text -->
+        </button>
     </div>
 
    
@@ -142,13 +145,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         const toggleButton = document.getElementById("dark-mode-toggle");
         const body = document.body;
         const icon = toggleButton.querySelector("i");
+        const buttonText = toggleButton.querySelector("span"); // Added this line to select the span element for text
 
         // Check localStorage for dark mode preference
         if (localStorage.getItem("dark-mode") === "enabled") {
             body.classList.add("dark-mode");
             icon.classList.add("fa-sun");
             icon.classList.remove("fa-moon");
-            buttonText.textContent = "Light Mode"; //change button text to light mode
+            buttonText.textContent = "Light Mode"; // Change button text to Light Mode when dark mode is active
         }
 
         toggleButton.addEventListener("click", function () {
@@ -157,12 +161,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 localStorage.setItem("dark-mode", "enabled");
                 icon.classList.add("fa-sun");
                 icon.classList.remove("fa-moon");
-                buttonText.textContent = "Light Mode"; //change the text of the button when in dark mode
+                buttonText.textContent = "Light Mode"; // Change the text to "Light Mode"
             } else {
                 localStorage.setItem("dark-mode", "disabled");
                 icon.classList.add("fa-moon");
                 icon.classList.remove("fa-sun");
-                 buttonText.textContent = "Dark Mode";  // change the button text when in light mode
+                buttonText.textContent = "Dark Mode"; // Change the text back to "Dark Mode"
             }
         });
     });

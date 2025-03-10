@@ -53,13 +53,30 @@ $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../public/css/reviewcustomeruploads.css">
 </head>
 <body>
+
+<nav>
+        <div class="nav-left">
+            <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+        </div>
+        <div class="nav-right">
+            <a href="../views/aboutpage.php"><button class="white-button">About Us</button></a>
+            <?php if (!isset($_SESSION['user_id'])) { ?>
+                <a href="./login.php"><button class="green-button">Login</button></a>
+                <a href="./signup.php"><button class="white-button">Sign Up</button></a>
+            <?php } else { ?>
+                <a href="./basket.php"><button class="white-button">Basket</button></a>
+                <a href="./contact.php"><button class="white-button">Contact Us</button></a>
+                <a href="./profile.php"><button class="white-button">Profile</button></a>
+                <a href="./logout.php"><button class="green-button">Logout</button></a>
+            <?php } ?>
+        </div>
+    </nav>
     <h1>Review User Uploads</h1>
     <?php if (empty($uploads)) : ?>
         <p>No products have been uploaded</p>
     <?php else : ?>
         <table>
             <thead>
-                <tr>
                     <th>User ID</th>
                     <th>Username</th>
                     <th>Product ID</th>
@@ -83,6 +100,12 @@ $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($product['condition']); ?></td>
                     <td><?php echo htmlspecialchars($product['description']); ?></td>
                     <td><img src="<?= htmlspecialchars($product['image_path']) ?>" width="40" height="40" alt = "image of user product upload"></td>
+                    <td> <form action = "approveproduct.php" method = "POST">
+                        <input type = "hidden" name = "product_id" value = "<?= $product['product_id'] ?>">
+                        <button type = "submit" name ="action" value = "approve">Approve</button>
+                        <button type = "submit" name = "action" value = "reject">Reject</button>
+                    </form>
+    </td>
                 </tr>
                 <?php } ?>
             </tbody>

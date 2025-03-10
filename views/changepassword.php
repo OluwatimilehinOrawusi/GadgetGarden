@@ -148,6 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             body.classList.add("dark-mode");
             icon.classList.add("fa-sun");
             icon.classList.remove("fa-moon");
+            buttonText.textContent = "Light Mode"; //change button text to light mode
         }
 
         toggleButton.addEventListener("click", function () {
@@ -156,10 +157,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 localStorage.setItem("dark-mode", "enabled");
                 icon.classList.add("fa-sun");
                 icon.classList.remove("fa-moon");
+                buttonText.textContent = "Light Mode"; //change the text of the button when in dark mode
             } else {
                 localStorage.setItem("dark-mode", "disabled");
                 icon.classList.add("fa-moon");
                 icon.classList.remove("fa-sun");
+                 buttonText.textContent = "Dark Mode";  // change the button text when in light mode
             }
         });
     });

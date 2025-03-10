@@ -137,6 +137,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
         <!-------Product Quantity------>
         <label for="quantity_product">Product Quantity</label>
         <input type="number" id="quantity_product" name="quantity_product" required />
+
+        <!-------Product Category------>
+        <label for="category">Category</label>
+        <select id = "category" name = "category" reqired>
+            <option value = "gaming">Gaming</option>
+            <option value = "phones">Phones</option>
+            <option value = "wearables">Wearables</option>
+            <option value = "laptops">Laptops</option>
+            <option value = "tablets">Tablets</option>
+            <option value = "accessories">Accessories</option>
+            <option value = "computers">Computers</option>
+            <option value = "audio">Audio</option>
+        </select>
         
 
         <!-------Product condition------>

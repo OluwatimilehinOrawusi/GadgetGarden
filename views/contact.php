@@ -5,7 +5,7 @@ $pdo = require_once "../database/database.php"; // Conntect to the database
 
 // If server is connected successfully, Then store all the data into the correct tables
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_SESSION['user_id'];
+    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : NULL;
     $name =  $_POST['name'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
@@ -38,22 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <html>
-    <!---Message container for success/error message--> 
-<div class="message-container">
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success">
-            <?= $_SESSION['success']; ?>
-        </div>
-        <?php unset($_SESSION['success']);  ?>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger">
-            <?= $_SESSION['error']; ?>
-        </div>
-        <?php unset($_SESSION['error']);  ?>
-    <?php endif; ?>
-</div>
     <link rel="stylesheet" href="../public/css/contact.css">
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
@@ -83,6 +67,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             </div>
 </nav>
+
+<!---Message container for success/error message--> 
+<div class="message-container">
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success" id="success-alert">
+            <p><?= $_SESSION['success']; ?></p>
+            <span class="close-btn" onclick="closeAlert('success-alert')">&times;</span>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger" id="error-alert">
+            <p><?= $_SESSION['error']; ?></p>
+            <span class="close-btn" onclick="closeAlert('error-alert')">&times;</span>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+</div>
 
  <!---HTML for the contact page, includes the input forms, and submit button -->
     <section class="contact-section">
@@ -129,6 +132,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </section>
 
     <?php require_once "../partials/footer.php" ?>
+
+    <script>
+function closeAlert(id) {
+    let alertBox = document.getElementById(id);
+    if (alertBox) {
+        alertBox.style.opacity = '0';
+        setTimeout(() => {
+            alertBox.style.display = 'none';
+        }, 500);
+    }
+}
+
+    setTimeout(() => {
+        closeAlert('success-alert');
+        closeAlert('error-alert');
+    }, 5000);
+    </script>
     </body>
 
     </html>

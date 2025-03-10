@@ -198,6 +198,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     function goToLogin() {
         window.location.href = "login.php";
     }
+     document.getElementById("dark-mode-toggle").addEventListener("click", function() {
+     document.body.classList.toggle("dark-mode");
+     this.querySelector("i").classList.toggle("fa-sun");
 </script>
 <?php require_once "../partials/footer.php" ?>
     

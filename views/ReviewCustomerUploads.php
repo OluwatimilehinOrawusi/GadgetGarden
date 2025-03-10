@@ -58,7 +58,7 @@ $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($uploads as $product) { ?>
                 <tr>
                     <td><?php echo htmlspecialchars($product['product_id']); ?></td>
-                    <td><?php echo htmlspecialchars($product['product_name']); ?></td>
+                    <td><?php echo htmlspecialchars($product['name']); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td>£<?php echo number_format($product['quantity']); ?></td>
                     <td><?php echo htmlspecialchars($product['condition']); ?></td>

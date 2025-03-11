@@ -50,7 +50,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                     
                     <div class="dashboard-cards"><img src=../public\assets\Account.png ><a href="./IAM.php"><p>IAM</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\Partner.png ><a href="./manage-customers.php"><p>Customer details</p></a></div>
-                    <div class="dashboard-cards"><img src=../public\assets\Megaphone.png ><a href="./forum.php"><p>Customer Forum</p></a></div>
+                    <div class="dashboard-cards"><img src=../public\assets\Megaphone.png ><a href="./admin_contact.php"><p>Customer Forum</p></a></div>
                     
                  
         </div>

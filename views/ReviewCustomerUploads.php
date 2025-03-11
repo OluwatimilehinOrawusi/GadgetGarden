@@ -38,6 +38,27 @@ function getUsernameById($pdo, $user_id) {
 $stmt = $pdo->prepare("SELECT * FROM upload_products WHERE Admin_approve = 0");
 $stmt->execute();
 $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$category_id = $pdo->prepare("SELECT category_id FROM upload_products WHERE Admin_approve = 0");
+
+if($category_id == 1){
+    $category = "laptops";
+}else if($category_id == 2){
+    $category = "audio";
+}else if($category_id == 3){
+    $category = "phones";
+}else if($category_id == 4){
+    $category = "gaming";
+}else if($category_id == 5){
+    $category = "wearables";
+}else if($category_id == 6){
+    $category = "tablets";
+}else if($category_id == 7){
+    $category = "accessories";
+}else if($category_id == 8){
+    $category = "computers";
+} else{$category = null;
+}
+
 ?>
 
 
@@ -81,6 +102,7 @@ $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Username</th>
                     <th>Product ID</th>
                     <th>Product Name</th>
+                    <th>Product Category</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Condition</th>
@@ -95,6 +117,7 @@ $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars(getUsernameById($pdo, $product['user_id'])); ?></td>
                     <td><?php echo htmlspecialchars($product['product_id']); ?></td>
                     <td><?php echo htmlspecialchars($product['name']); ?></td>
+                    <td><?php echo htmlspecialchars($category); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td>£<?php echo number_format($product['quantity']); ?></td>
                     <td><?php echo htmlspecialchars($product['condition']); ?></td>

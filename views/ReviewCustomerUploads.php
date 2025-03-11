@@ -116,8 +116,8 @@ $categories = [
                     <td><?php echo htmlspecialchars($product['product_id']); ?></td>
                     <td><?php echo htmlspecialchars($product['name']); ?></td>
                     <td><?php echo htmlspecialchars($categories[$product['category_id']] ?? "Unknown"); ?></td>
-                    <td><?php echo htmlspecialchars($product['price']); ?></td>
-                    <td>£<?php echo number_format($product['quantity']); ?></td>
+                    <td>£<?php echo htmlspecialchars($product['price']); ?></td>
+                    <td><?php echo number_format($product['quantity']); ?></td>
                     <td><?php echo htmlspecialchars($product['condition']); ?></td>
                     <td><?php echo htmlspecialchars($product['description']); ?></td>
                     <td><img src="<?= htmlspecialchars($product['image_path']) ?>" width="40" height="40" alt = "image of user product upload"></td>

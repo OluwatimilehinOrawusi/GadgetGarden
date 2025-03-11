@@ -119,8 +119,8 @@ $categories = [
                     <td><img src="<?= htmlspecialchars($product['image_path']) ?>" width="40" height="40" alt = "image of user product upload"></td>
                     <td> <form action = "approveproduct.php" method = "POST">
                         <input type = "hidden" name = "product_id" value = "<?= $product['product_id'] ?>">
-                        <button type = "submit" name ="action" value = "approve">Approve</button>
-                        <button type = "submit" name = "action" value = "reject">Reject</button>
+                        <button type = "submit" name ="action" value = "approve" id = "approve">Approve</button>
+                        <button type = "submit" name = "action" value = "reject" id = "reject">Reject</button>
                     </form>
     </td>
                 </tr>

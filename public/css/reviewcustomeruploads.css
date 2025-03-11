@@ -76,3 +76,27 @@ tr:hover {
 .search-bar button:hover {
     background: #117A3D;
 }
+
+#approve {
+    background-color: #117A3D;
+    color: white;
+    cursor: pointer;
+}
+
+#reject {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+#approve:hover {
+    background-color: white;
+    color: #275E4A;
+    transform: scale(1.05);
+}
+
+#reject:hover {
+    background-color: white;
+    color: red;
+    transform: scale(1.05);
+}

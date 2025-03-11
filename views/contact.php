@@ -38,27 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <html>
-    <!---Message container for success/error message--> 
-<div class="message-container">
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success">
-            <?= $_SESSION['success']; ?>
-        </div>
-        <?php unset($_SESSION['success']);  ?>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger">
-            <?= $_SESSION['error']; ?>
-        </div>
-        <?php unset($_SESSION['error']);  ?>
-    <?php endif; ?>
-</div>
+    <head>
     <link rel="stylesheet" href="../public/css/contact.css">
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
     
-
 </head>
 <body>
 <nav>
@@ -83,6 +67,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             </div>
 </nav>
+
+    <!---Message container for success/error message--> 
+    <div class="message-container">
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success">
+            <?= $_SESSION['success']; ?>
+        </div>
+        <?php unset($_SESSION['success']);  ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error']; ?>
+        </div>
+        <?php unset($_SESSION['error']);  ?>
+    <?php endif; ?>
+</div>
 
  <!---HTML for the contact page, includes the input forms, and submit button -->
     <section class="contact-section">

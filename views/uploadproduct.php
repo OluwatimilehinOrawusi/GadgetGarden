@@ -77,8 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
             // Insert into `upload_products`
             $stmt = $pdo->prepare("
                 INSERT INTO upload_products 
-                (user_id, product_id, Admin_approve, name, price, quantity, `condition`, description, image_path)  
-                VALUES (:user_id, :product_id, 0, :product_name, :price, :quantity, :condition, :description, :target_file)
+                (user_id, product_id, Admin_approve, name, price, quantity,category_id, `condition`, description, image_path)  
+                VALUES (:user_id, :product_id, 0, :product_name, :price, :quantity, :category_id, :condition, :description, :target_file)
             ");
 
             // Bind parameters
@@ -87,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
             $stmt->bindParam(':product_name', $product_name, PDO::PARAM_STR);
             $stmt->bindParam(':price', $price, PDO::PARAM_STR);
             $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+            $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
             $stmt->bindParam(':condition', $condition, PDO::PARAM_STR);
             $stmt->bindParam(':description', $description, PDO::PARAM_STR);
             $stmt->bindParam(':target_file', $target_file, PDO::PARAM_STR);

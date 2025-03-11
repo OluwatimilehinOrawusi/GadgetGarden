@@ -9,7 +9,7 @@ $statement->bindValue(":id", $id, PDO::PARAM_INT);
 $statement->execute();
 $product = $statement->fetch(PDO::FETCH_ASSOC);
 
-// Fetch reviews for this product
+// Fetch all reviews for this product
 $reviewStmt = $pdo->prepare("
     SELECT r.rating, r.review_text AS comment, r.created_at AS review_date, u.username 
     FROM reviews r
@@ -20,6 +20,12 @@ $reviewStmt = $pdo->prepare("
 $reviewStmt->execute([$id]);
 $reviews = $reviewStmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Calculate average rating
+$averageStmt = $pdo->prepare("SELECT AVG(rating) AS avg_rating FROM reviews WHERE product_id = ?");
+$averageStmt->execute([$id]);
+$averageResult = $averageStmt->fetch(PDO::FETCH_ASSOC);
+$averageRating = round($averageResult["avg_rating"], 1); // Round to 1 decimal place
+
 function displayStars($rating) {
     $fullStars = floor($rating);
     $halfStar = ($rating - $fullStars) >= 0.5 ? 1 : 0;
@@ -27,7 +33,7 @@ function displayStars($rating) {
     
     $starsHtml = str_repeat('<span class="full-star">★</span>', $fullStars);
     if ($halfStar) {
-        $starsHtml .= '<span class="half-star">★</span>';
+        $starsHtml .= '<span class="half-star">☆</span>';
     }
     $starsHtml .= str_repeat('<span class="empty-star">☆</span>', $emptyStars);
     
@@ -45,11 +51,9 @@ function displayStars($rating) {
     <?php require_once "../partials/navbar.php"; ?>
 
     <div class="product-container">
-        
         <div class="product-image">
             <img src="<?php echo "..".$product["image"] ?>" alt="Product Image">
         </div>
-        
         
         <div class="product-data">
             <h1 class="product-name"><?php echo htmlspecialchars($product["name"]) ?></h1>
@@ -61,7 +65,13 @@ function displayStars($rating) {
         </div>
     </div>
 
-    
+    <!-- 🟢 Average Rating Section -->
+    <div class="average-rating">
+        <h2>Average Rating</h2>
+        <p class="star-rating"><?php echo displayStars($averageRating); ?> (<?php echo $averageRating; ?> / 5)</p>
+    </div>
+
+    <!-- 🟢 Reviews Section -->
     <div class="reviews-section">
         <h2>Customer Reviews</h2>
 

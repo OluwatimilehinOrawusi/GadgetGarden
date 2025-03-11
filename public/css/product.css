@@ -140,4 +140,43 @@ body {
   .review-card {
       padding: 12px;
   }
+
+  /* Average Rating Section */
+.average-rating {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.average-rating h2 {
+  font-size: 22px;
+  color: #2a6041;
+}
+
+.star-rating {
+  font-size: 22px;
+  color: #FFD700;
+  margin: 5px 0;
+}
+
+/* Full Star */
+.full-star {
+  color: #FFD700;
+}
+
+/* Half Star */
+.half-star {
+  color: #FFD700;
+  position: relative;
+}
+
+/* Empty Star */
+.empty-star {
+  color: #ccc;
+}
+
 }

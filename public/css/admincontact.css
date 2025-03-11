@@ -35,3 +35,7 @@ tr:nth-child(even) {
     border: none;
     cursor: pointer;
 }
+
+.reply {
+    cursor: pointer; 
+}

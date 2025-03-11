@@ -180,10 +180,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
         <!-------Product condition------>
         <label for="state">Condition</label>
             <select id="state" name="state" required>
-                <option value="likeNew">Like New</option>
-                <option value="veryGood">Very Good</option>
-                <option value="good">Good</option>
-                <option value="poor">Poor</option>
+                <option value="Like New">Like New</option>
+                <option value="Very Good">Very Good</option>
+                <option value="Good">Good</option>
+                <option value="Poor">Poor</option>
             </select>
         
 

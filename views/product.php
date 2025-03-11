@@ -23,7 +23,7 @@ $product= $statement->fetch(PDO::FETCH_ASSOC);
     <div class="product-container">
     <!-- Product Image -->
     <div class="product-image">
-      <img src="<?php echo "..".$product["image"]?>" alt="Product Image">
+      <img src="<?php echo $product["image"]?>" alt="Product Image">
     </div>
     
     <!-- Product Data -->

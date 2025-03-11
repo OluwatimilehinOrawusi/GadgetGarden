@@ -69,7 +69,7 @@ if (!empty($category)) {
                 <div class="card">
                 
                     <div id="product-image-container">
-                    <img class="product-images" src="<?php echo '../'.$product['image']?>">
+                    <img class="product-images" src="<?php echo $product['image']?>">
                     </div>
                     <a href="<?php echo "./product.php?id=" .$product['product_id']?>">
                     <p><?php echo $product["name"] ?></p>

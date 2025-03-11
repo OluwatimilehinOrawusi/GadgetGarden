@@ -26,7 +26,7 @@ $new_stock = $_POST['stock'];
     // Handling file upload
     if (!empty($_FILES['image']['name'])) {
         $image = $_FILES['image']['name'];
-        $target = "uploads/" . basename($image);
+        $target = "uploads/".basename($image);
         move_uploaded_file($_FILES['image']['tmp_name'], $target);
         
         $sql = "UPDATE products SET name = ?, description = ?, stock = ?, image = ? WHERE product_id = ?";

@@ -20,7 +20,111 @@ if (!$user || !$user['admin']) {
 $totalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $totalOrders = $pdo->query("SELECT COUNT(*) FROM orders")->fetchColumn();
 $totalRevenue = $pdo->query("SELECT SUM(total_price) FROM orders")->fetchColumn();
+
+    // Calculate Average Order Value
+    $averageOrderValue = ($totalOrders > 0) ? ($totalRevenue / $totalOrders) : 0;
+
+// Fetch Best-Selling Products
+
+// Fetch Best-Selling Products with Product Names
+$productsQuery = "
+    SELECT p.name, COUNT(o.product_id) AS sold 
+    FROM orders o
+    JOIN products p ON o.product_id = p.product_id 
+    GROUP BY o.product_id 
+    ORDER BY sold DESC 
+    LIMIT 5
+";
+
+$stmt = $pdo->prepare($productsQuery);
+$stmt->execute();
+$bestSellingProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Extract product names and sales into separate arrays
+$productNames = [];
+$productSales = [];
+foreach ($bestSellingProducts as $row) {
+    $productNames[] = $row['name'];
+    $productSales[] = $row['sold'];
+}
+
+// Monthly revenue query
+$salesDataQuery = "
+    SELECT MONTH(order_date) AS month, SUM(total_price) AS total_revenue
+    FROM orders
+    GROUP BY MONTH(order_date)
+    ORDER BY MONTH(order_date)
+";
+$stmt = $pdo->prepare($salesDataQuery);
+$stmt->execute();
+$salesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$months = [];
+$revenues = [];
+foreach ($salesData as $data) {
+    $months[] = date('F', mktime(0, 0, 0, $data['month'], 10)); // Convert month number to name
+    $revenues[] = $data['total_revenue'];
+}
+
+
+// Monthly order count query
+$orderCountQuery = "
+    SELECT MONTH(order_date) AS month, COUNT(order_id) AS order_count
+    FROM orders
+    GROUP BY MONTH(order_date)
+    ORDER BY MONTH(order_date)
+";
+$stmt = $pdo->prepare($orderCountQuery);
+$stmt->execute();
+$orderCountsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$orderCounts = [];
+foreach ($orderCountsData as $data) {
+    $orderCounts[] = $data['order_count'];
+}
+
+
+// Best-selling products query
+$bestSellingProductsQuery = "
+    SELECT p.name, SUM(oi.quantity) AS total_sales
+    FROM orders oi
+    JOIN products p ON oi.product_id = p.product_id
+    GROUP BY p.name
+    ORDER BY total_sales DESC
+    LIMIT 5
+";
+$stmt = $pdo->prepare($bestSellingProductsQuery);
+$stmt->execute();
+$bestSellingProductsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$productNames = [];
+$productSales = [];
+foreach ($bestSellingProductsData as $data) {
+    $productNames[] = $data['name'];
+    $productSales[] = $data['total_sales'];
+}
+
+
+// Monthly new customers query
+$newCustomersQuery = "
+    SELECT MONTH(created_at) AS month, COUNT(user_id) AS new_customers
+    FROM users
+    GROUP BY MONTH(created_at)
+    ORDER BY MONTH(created_at)
+";
+$stmt = $pdo->prepare($newCustomersQuery);
+$stmt->execute();
+$newCustomersData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$customerMonths = [];
+$newCustomers = [];
+foreach ($newCustomersData as $data) {
+    $customerMonths[] = date('F', mktime(0, 0, 0, $data['month'], 10)); // Convert month number to name
+    $newCustomers[] = $data['new_customers'];
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +135,13 @@ $totalRevenue = $pdo->query("SELECT SUM(total_price) FROM orders")->fetchColumn(
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
     <link rel="stylesheet" href="../public/css/admin.css">
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        canvas { max-width: 100%; }
+        h2 { text-align: center; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -50,8 +161,8 @@ $totalRevenue = $pdo->query("SELECT SUM(total_price) FROM orders")->fetchColumn(
 
 <!-- Admin Dashboard -->
 <section class="admin-dashboard">
-    <h1 class="subtitle">Admin Dashboard</h1>
-    <p class="dashboard-description">Manage users, orders, and products efficiently.</p>
+    <h1 class="subtitle">Analytics Page</h1>
+    <p class="dashboard-description">Gain Insights on Gadget Garden Sales and Inventory</p>
 
     <div class="dashboard-grid">
         <div class="dashboard-card">
@@ -68,6 +179,100 @@ $totalRevenue = $pdo->query("SELECT SUM(total_price) FROM orders")->fetchColumn(
         </div>
     </div>
 </section>
+<div class="container">
+    <h2>Analytics Dashboard</h2>
+
+    <h3>Sales Revenue (Monthly)</h3>
+    <canvas id="salesChart"></canvas>
+
+    <h3>Orders Trend</h3>
+    <canvas id="ordersChart"></canvas>
+
+    <h3>Best-Selling Products</h3>
+    <canvas id="productsChart"></canvas>
+
+    <h3>Customer Growth</h3>
+    <canvas id="customersChart"></canvas>
+</div>
+
+<script>
+
+      // Sales Data
+      var months = <?php echo json_encode($months); ?>;
+    var revenues = <?php echo json_encode($revenues); ?>;
+
+    // Orders Data
+    var orderCounts = <?php echo json_encode($orderCounts); ?>;
+
+    // Best Selling Products Data
+    var productNames = <?php echo json_encode($productNames); ?>;
+    var productSales = <?php echo json_encode($productSales); ?>;
+
+    // New Customers Data
+    var customerMonths = <?php echo json_encode($customerMonths); ?>;
+    var newCustomers = <?php echo json_encode($newCustomers); ?>;
+
+
+    // Sales Chart (Monthly Revenue)
+    var ctx1 = document.getElementById('salesChart').getContext('2d');
+    var salesChart = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Revenue',
+                data: revenues,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false
+            }]
+        }
+    });
+
+    // Orders Chart (Order Counts)
+    var ctx2 = document.getElementById('ordersChart').getContext('2d');
+    var ordersChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Orders',
+                data: orderCounts,
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+
+    // Products Chart (Best Selling Products)
+    var ctx3 = document.getElementById('productsChart').getContext('2d');
+    var productsChart = new Chart(ctx3, {
+        type: 'pie',
+        data: {
+            labels: productNames,
+            datasets: [{
+                data: productSales,
+                backgroundColor: ['red', 'blue', 'green', 'orange', 'purple']
+            }]
+        }
+    });
+
+    // Customers Chart (New Customers)
+    var ctx4 = document.getElementById('customersChart').getContext('2d');
+    var customersChart = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+            labels: customerMonths,
+            datasets: [{
+                label: 'New Customers',
+                data: newCustomers,
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                borderColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+</script>
 
 </body>
 </html>

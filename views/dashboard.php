@@ -48,7 +48,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                     <div id="analytic-card"class="dashboard-cards"><img src=../public\assets\Diagram.png ><a href="./admin_dashboard.php"><p>Analytics</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\VolumeUp.png ><a href="./alerts.php"><p>Alerts</p></a></div>
                     
-                    <div class="dashboard-cards"><img src=../public\assets\Account.png ><a href="./IAM.php"><p>IAM</p></a></div>
+                    <div class="dashboard-cards"><img src=../public\assets\Account.png ><a href="./IAM.php"><p>Customer Queries</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\Partner.png ><a href="./manage_users.php"><p>Customer details</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\Megaphone.png ><a href="./forum.php"><p>Customer Forum</p></a></div>
                     

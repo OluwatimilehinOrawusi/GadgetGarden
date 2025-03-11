@@ -16,7 +16,7 @@ if (!$user || ($user['role'] !== 'admin' && $user['role'] !== 'manager')) {
     exit();
 }
 
-// Fetch all messages from the database
+// Fetch all messages from the database, including the query_id
 $stmt = $pdo->query("SELECT * FROM contact");
 $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -59,16 +59,18 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <table>
             <thead>
                 <tr>
-                   <th>Name</th>
-                   <th>Phone</th>
-                   <th>Email</th>
-                   <th>Message</th>
-                   <th>Action</th>
+                    <th>Query ID</th> <!-- Add Query ID header -->
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($messages as $message): ?>
                     <tr>
+                        <td><?php echo htmlspecialchars($message['query_id']); ?></td> <!-- Display query_id -->
                         <td><?php echo htmlspecialchars($message['name']); ?></td>
                         <td><?php echo htmlspecialchars($message['phone']); ?></td>
                         <td><?php echo htmlspecialchars($message['email']); ?></td>

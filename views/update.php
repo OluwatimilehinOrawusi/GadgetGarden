@@ -50,6 +50,20 @@ if (isset($_GET['product_id'])) {
     <link rel="stylesheet" href="../public/css/update_product.css"> <!-- ✅ New CSS File -->
 </head>
 <body>
+
+<nav>
+    <div class="nav-left">
+        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+    </div>
+    <div class="nav-right">
+        <a href="dashboard.php"><button class="white-button">Dashboard</button></a>
+        <a href="manage_users.php"><button class="white-button">Users</button></a>
+        <a href="admin.php"><button class="white-button">Products</button></a>
+        <a href="manage_orders.php"><button class="white-button">Orders</button></a>
+        <a href="logout.php"><button class="green-button">Logout</button></a>
+    </div>
+</nav>
+
     <h2>Update Product</h2>
     <form method="POST" action="update.php" enctype="multipart/form-data">
         <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">

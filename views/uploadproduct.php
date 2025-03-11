@@ -15,6 +15,7 @@ require_once('../database/database.php');
 //Code to run once the submit button is pressed
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
+  
     // Form information(to be stored in variables for database)
     $product_name = $_POST['product_name'];
     $price = $_POST['price_stock'];
@@ -22,6 +23,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
     $condition = $_POST['state'];
     $description = $_POST['description'];
     $user_id = $_SESSION['user_id'];
+    $category = $_POST['category'];
+
+    //Assign the categoryID
+    If($category == "laptops"){
+        $category_id = 1;
+    } else if($category == "audio"){
+        $category_id = 2;
+    }else if($category == "phones"){
+        $category_id = 3;        
+    }else if($category == "gaming"){
+        $category_id = 4;
+    }else if($category == "wearables"){
+        $category_id = 5;
+    }else if($category == "tablets"){
+        $category_id = 6;
+    }else if($category == "accessories"){
+        $category_id = 7;
+    }else if($category == "computers"){
+        $category_id = 8;
+    }else{
+        $category_id = null;
+    }
+
 
     // Get the next product ID (one higher than the max from both tables)
     $stmt = $pdo->query("

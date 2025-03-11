@@ -3,13 +3,7 @@ session_start();
 
 $pdo = require_once "../database/database.php";
 
-$user_id = $_SESSION['user_id'] ?? null;
-$stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = :user_id");
-$stmt->bindParam(':user_id', $user_id);
-$stmt->execute();
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {  // Remove the semicolon here
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query_id = $_POST['query_id'];
     $reply_message = $_POST['reply_message'];
 
@@ -20,15 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  // Remove the semicolon here
         $stmt->bindParam(':reply_message', $reply_message);
 
         if ($stmt->execute()) {
-            $_SESSION['success'] = "Reply sent successfully!";
+            $_SESSION['success_message'] = "Reply sent successfully!";  // Ensure success message is set here
         } else {
-            $_SESSION['error'] = "Failed to send the reply.";
+            $_SESSION['error_message'] = "Failed to send the reply.";  // You can also add an error message if needed
         }
     } else {
-        $_SESSION['error'] = "Please fill in all fields.";
+        $_SESSION['error_message'] = "Please fill in all fields.";
     }
 }
 
-header("Location: admin_contact.php");
+header("Location: admin_contact.php");  // Redirect to the admin contact page
 exit();
 ?>

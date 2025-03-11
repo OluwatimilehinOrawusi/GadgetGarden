@@ -18,7 +18,7 @@ table {
 
 th, td {
     padding: 15px;
-    border: 1px solid #ddd; 
+    border: 1px solid #ddd;
     text-align: left;
 }
 
@@ -33,24 +33,30 @@ tr:nth-child(even) {
     background: #f9f9f9;
 }
 
-.delete-btn {
-    background: #dc3545; 
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px; 
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease-in-out;
+.action-buttons {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
 }
 
-.delete-btn:hover {
-    background-color: #c82333; 
-    transform: scale(1.05);
+.reply-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+textarea {
+    width: 250px;
+    height: 80px;
+    margin-bottom: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
 }
 
 .reply {
-    background: #28a745; 
+    background: #28a745;
     color: white;
     padding: 8px 15px;
     border: none;
@@ -61,15 +67,38 @@ tr:nth-child(even) {
 }
 
 .reply:hover {
-    background-color: #218838; 
+    background-color: #218838;
     transform: scale(1.05);
 }
+
+.delete-form {
+    margin-top: 110px;
+}
+
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
 
 .message-container {
     width: 100%;
     text-align: center;
     margin-top: 20px;
 }
+
 
 .alert {
     display: inline-block;
@@ -79,9 +108,9 @@ tr:nth-child(even) {
     max-width: 500px;
     width: 80%;
     margin: 10px auto;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-    background-color: #f8d7da; 
-    color: #721c24; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8d7da;
+    color: #721c24;
 }
 
 .alert-success {
@@ -110,8 +139,6 @@ tr:nth-child(even) {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .close-btn {
     font-size: 20px;
     font-weight: bold;
@@ -120,9 +147,9 @@ tr:nth-child(even) {
     position: absolute;
     top: 10px;
     right: 10px;
-    color: #333; 
+    color: #333;
 }
 
 .close-btn:hover {
-    color: #000; 
+    color: #000;
 }

@@ -86,22 +86,23 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?php echo htmlspecialchars($message['email']); ?></td>
                         <td><?php echo htmlspecialchars($message['message']); ?></td>
                     
-                           <td>
-                            <!-- Reply Button -->
-                            <form action="reply.php" method="POST">
-                          <!-- Include the query_id as a hidden field -->
-                         <input type="hidden" name="query_id" value="<?php echo htmlspecialchars($message['query_id']); ?>">
-                        <textarea name="reply_message" placeholder="Type your reply here..." required></textarea>
-                        <button type="submit" class="reply">Reply</button>
-                 </form>
+                        <td>
+    <div class="action-buttons">
+        <!-- Reply Form -->
+        <form action="reply.php" method="POST" class="reply-form">
+            <input type="hidden" name="query_id" value="<?php echo htmlspecialchars($message['query_id']); ?>">
+            <textarea name="reply_message" placeholder="Type your reply here..."></textarea>
+            <button type="submit" class="reply">Reply</button>
+        </form>
 
-                 <form action="delete_message.php" method="POST" style="display:inline;">
-                    <input type="hidden" name="query_id" value="<?php echo htmlspecialchars($message['query_id']); ?>">
-                    <button type="submit" class="delete-btn">Delete</button>
-                 </form>
-                </td>
-
-                    </tr>
+        <!-- Delete Form -->
+        <form action="delete_message.php" method="POST" class="delete-form">
+            <input type="hidden" name="query_id" value="<?php echo htmlspecialchars($message['query_id']); ?>">
+            <button type="submit" class="delete-btn">Delete</button>
+        </form>
+    </div>
+</td>
+</tr>
                 <?php endforeach; ?>
             </tbody>
         </table>

@@ -36,102 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Manage Users - Gadget Garden</title>
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/admin.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .search-bar {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .search-bar input {
-            width: 60%;
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #1E5631;
-            border-radius: 5px;
-        }
-
-        .search-bar button {
-            background: #145A32;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-
-        .search-bar button:hover {
-            background: #117A3D;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #1E5631;
-            color: white;
-            font-size: 16px;
-        }
-
-        td {
-            font-size: 14px;
-            color: #333;
-        }
-
-      
-        select {
-            background: #f9f9f9;
-            border: 1px solid #ccc;
-        }
-
-        .update-btn {
-            background: #145A32;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .update-btn:hover {
-            background: #117A3D;
-        }
-    </style>
+    <link rel="stylesheet" href="../public/css/manage_users.css"> <!-- ✅ New CSS File -->
 </head>
 <body>
 
@@ -177,10 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <td><?php echo htmlspecialchars($user["email"]); ?></td>
                         <td><?php echo htmlspecialchars($user["role"]); ?></td>
                         <td>
-
-                                <p><?php echo $user['role'] ?> </p>
-                                <a href="update_role.php?user_id=<?php echo $user['user_id'] ?>"><button type="submit" class="update-btn">Update</button></a>
-                            
+                            <p><?php echo $user['role'] ?> </p>
+                            <a href="update_role.php?user_id=<?php echo $user['user_id'] ?>">
+                                <button type="submit" class="update-btn">Update</button>
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

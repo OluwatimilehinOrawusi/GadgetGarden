@@ -85,6 +85,7 @@ $categories = [
             <?php } ?>
         </div>
     </nav>
+    <div class="container">
     <h1>Review User Uploads</h1>
     <?php if (empty($uploads)) : ?>
         <p>No products have been uploaded</p>
@@ -123,6 +124,7 @@ $categories = [
                     <td> <form action = "approveproduct.php" method = "POST">
                         <input type = "hidden" name = "product_id" value = "<?= $product['product_id'] ?>">
                         <button type = "submit" name ="action" value = "approve" id = "approve">Approve</button>
+                        <br> <br>
                         <button type = "submit" name = "action" value = "reject" id = "reject">Reject</button>
                     </form>
     </td>

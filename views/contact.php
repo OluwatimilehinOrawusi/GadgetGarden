@@ -1,30 +1,34 @@
 <?php
 session_start(); // Start a new session in order to store contact data
 
-$pdo = require_once "../database/database.php"; // Conntect to the database
+$pdo = require_once "../database/database.php"; // Connect to the database
 
-// If server is connected successfully, Then store all the data into the correct tables
+// If server is connected successfully, then store all the data into the correct tables
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
-    $name =  $_POST['name'];
+    $name = $_POST['name'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $message = $_POST['message'];
 
     if (!empty($name) && !empty($phone) && !empty($email) && !empty($message)) {
-            
-            $query = "INSERT INTO contact (user_id, name, phone, email, message) VALUES (:user_id ,:name, :phone, :email, :message)";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->bindParam(':phone', $phone);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':message', $message);
+        // Insert data into the contact table
+        $query = "INSERT INTO contact (user_id, name, phone, email, message) VALUES (:user_id, :name, :phone, :email, :message)";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':phone', $phone);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':message', $message);
 
-            $stmt->execute() ;
-          
-            
-        $_SESSION['success'] = "Thank you for your message, We will get back to you shortly!"; // Success message once field filled
+        $stmt->execute();
+
+        // Fetch the last inserted query_id (this will give the query_id of the newly inserted row)
+        $query_id = $pdo->lastInsertId();
+
+        // Store success message along with the query_id
+        $_SESSION['success'] = "Thank you for your message! Your Query ID is: " . $query_id . ". We will get back to you shortly!";
+
     } else {
         $_SESSION['error'] = "Please fill in all required fields."; // If fields are left empty
     }
@@ -34,59 +38,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
-<html>
-    <!---Message container for success/error message--> 
-<div class="message-container">
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success">
-            <?= $_SESSION['success']; ?>
-        </div>
-        <?php unset($_SESSION['success']);  ?>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger">
-            <?= $_SESSION['error']; ?>
-        </div>
-        <?php unset($_SESSION['error']);  ?>
-    <?php endif; ?>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
     <link rel="stylesheet" href="../public/css/contact.css">
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
-    
-
 </head>
 <body>
-<nav>
-    <!---nav bar-->
-            <div class="nav-left">
-                <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+    <nav>
+        <!---nav bar-->
+        <div class="nav-left">
+            <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+        </div>
+        <div class="nav-right">
+            <a href="./contact.php"><button class="green-button">Contact Us</button></a>
+            <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
+            <?php if (!isset($_SESSION['user_id'])) { ?>
+                <a href="./login.php"><button class="green-button">Login</button></a>
+                <a href="./signup.php"><button class="white-button">Sign Up</button></a>
+            <?php } ?>
+            <a href="../views/products.php"><button class="green-button">Products</button></a>
+            <?php if (isset($_SESSION['user_id'])) { ?>
+                <a href="./basket.php"><button class="white-button">Basket</button></a>
+                <a href="./profile.php"><button class="white-button">Profile</button></a>
+                <a href="./logout.php"><button class="green-button">Logout</button></a>
+            <?php } ?>
+        </div>
+    </nav>
+
+    <!---Message container for success/error message--> 
+    <div class="message-container">
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success">
+                <?= $_SESSION['success']; ?>
             </div>
-            <div class="nav-right">
-                <a href="./contact.php"><button class="green-button" >Contact Us</button></a>
-                <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
-                <?php if (!isset($_SESSION['user_id'])){?>
-                <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
-                 <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
-                <?php }?>
-                <a href="../views/products.php"><button class="green-button" >Products</button></a>
-                <?php if (isset($_SESSION['user_id'])){?>
-                <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
-                <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
-                <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
 
-                <?php }?>
-
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger">
+                <?= $_SESSION['error']; ?>
             </div>
-</nav>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+    </div>
 
- <!---HTML for the contact page, includes the input forms, and submit button -->
+    <!---HTML for the contact page, includes the input forms, and submit button -->
     <section class="contact-section">
-        
         <div class="contact-container">
             <div class="contact-left">
                 <h2>CONTACT US</h2>
@@ -99,8 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="contact-right">
-                <form action="./contact.php
-                " method="POST">
+                <form action="./contact.php" method="POST">
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -128,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </section>
 
-    <?php require_once "../partials/footer.php" ?>
-    </body>
+    <?php require_once "../partials/footer.php"; ?>
 
-    </html>
+</body>
+</html>

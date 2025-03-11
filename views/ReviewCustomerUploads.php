@@ -40,6 +40,7 @@ $stmt->execute();
 $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $category_id = $pdo->prepare("SELECT category_id FROM upload_products WHERE Admin_approve = 0");
 
+//Category association array
 $categories = [
     1 => "Laptops",
     2 => "Audio",
@@ -109,7 +110,7 @@ $categories = [
                     <td><?php echo htmlspecialchars(getUsernameById($pdo, $product['user_id'])); ?></td>
                     <td><?php echo htmlspecialchars($product['product_id']); ?></td>
                     <td><?php echo htmlspecialchars($product['name']); ?></td>
-                    <td><?php echo htmlspecialchars($category); ?></td>
+                    <td><?php echo htmlspecialchars($categories[$product['category_id']] ?? "Unknown"); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td>£<?php echo number_format($product['quantity']); ?></td>
                     <td><?php echo htmlspecialchars($product['condition']); ?></td>

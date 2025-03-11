@@ -38,7 +38,7 @@ function getUsernameById($pdo, $user_id) {
 $stmt = $pdo->prepare("SELECT * FROM upload_products WHERE Admin_approve = 0");
 $stmt->execute();
 $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$category_id = $pdo->prepare("SELECT category_id FROM upload_products WHERE Admin_approve = 0");
+
 
 //Category association array
 $categories = [

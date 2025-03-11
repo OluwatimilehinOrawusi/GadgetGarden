@@ -9,7 +9,7 @@ $statement->bindValue(":id", $id, PDO::PARAM_INT);
 $statement->execute();
 $product = $statement->fetch(PDO::FETCH_ASSOC);
 
-// Fetch reviews for this product (Fixed column names)
+// Fetch reviews for this product
 $reviewStmt = $pdo->prepare("
     SELECT r.rating, r.review_text AS comment, r.created_at AS review_date, u.username 
     FROM reviews r
@@ -19,6 +19,20 @@ $reviewStmt = $pdo->prepare("
 ");
 $reviewStmt->execute([$id]);
 $reviews = $reviewStmt->fetchAll(PDO::FETCH_ASSOC);
+
+function displayStars($rating) {
+    $fullStars = floor($rating);
+    $halfStar = ($rating - $fullStars) >= 0.5 ? 1 : 0;
+    $emptyStars = 5 - ($fullStars + $halfStar);
+    
+    $starsHtml = str_repeat('<span class="full-star">★</span>', $fullStars);
+    if ($halfStar) {
+        $starsHtml .= '<span class="half-star">★</span>';
+    }
+    $starsHtml .= str_repeat('<span class="empty-star">☆</span>', $emptyStars);
+    
+    return $starsHtml;
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,12 +45,12 @@ $reviews = $reviewStmt->fetchAll(PDO::FETCH_ASSOC);
     <?php require_once "../partials/navbar.php"; ?>
 
     <div class="product-container">
-        <!-- Product Image -->
+        
         <div class="product-image">
             <img src="<?php echo "..".$product["image"] ?>" alt="Product Image">
         </div>
         
-        <!-- Product Data -->
+        
         <div class="product-data">
             <h1 class="product-name"><?php echo htmlspecialchars($product["name"]) ?></h1>
             <p class="product-description"><?php echo htmlspecialchars($product["description"]) ?></p>
@@ -47,7 +61,7 @@ $reviews = $reviewStmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-    <!-- 🟢 Reviews Section -->
+    
     <div class="reviews-section">
         <h2>Customer Reviews</h2>
 
@@ -56,7 +70,9 @@ $reviews = $reviewStmt->fetchAll(PDO::FETCH_ASSOC);
         <?php else : ?>
             <?php foreach ($reviews as $review) : ?>
                 <div class="review-card">
-                    <p><strong><?php echo htmlspecialchars($review["username"]); ?></strong> - Rated: <?php echo htmlspecialchars($review["rating"]); ?>/5</p>
+                    <p><strong><?php echo htmlspecialchars($review["username"]); ?></strong> - 
+                        <span class="star-rating"><?php echo displayStars($review["rating"]); ?></span>
+                    </p>
                     <p><?php echo htmlspecialchars($review["comment"]); ?></p>
                     <p class="review-date"><?php echo htmlspecialchars($review["review_date"]); ?></p>
                 </div>

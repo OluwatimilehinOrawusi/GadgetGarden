@@ -58,6 +58,99 @@ if (isset($_GET['product_id'])) {
 <html>
 <head>
     <title>Update Product</title>
+    <style>
+        /* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form Container */
+form {
+    background-color: #ffffff;
+    padding: 30px;
+    max-width: 600px;
+    margin: 50px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #275E4A; /* Green border */
+}
+
+/* Form Label and Input Styling */
+label {
+    font-weight: bold;
+    color: #333;
+    margin-top: 15px;
+    display: block;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+    outline: none;
+    border-color: #275E4A;
+}
+
+/* Textarea Specific Styles */
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+/* Button Styling */
+button[type="submit"] {
+    background-color: #275E4A; /* Green background */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: #1f4a38; /* Darker green on hover */
+}
+
+/* Image Preview Styling */
+img {
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    form {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+    </style>
 </head>
 <body>
     <h2>Update Product</h2>

@@ -13,19 +13,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_name = $_POST['name'];
     $new_description = $_POST['description'];
     $new_stock = $_POST['stock'];
+    $new_price = $_POST['price']; // New price field
+    $new_condition = $_POST['condition']; // New condition field
 
     if (!empty($_FILES['image']['name'])) {
         $image = $_FILES['image']['name'];
         $target = "uploads/".basename($image);
         move_uploaded_file($_FILES['image']['tmp_name'], $target);
-
-        $sql = "UPDATE products SET name = ?, description = ?, stock = ?, image = ? WHERE product_id = ?";
+        $sql = "UPDATE products SET name = ?, description = ?, stock = ?, price = ?, state = ?, image = ? WHERE product_id = ?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$new_name, $new_description, $new_stock, $image, $product_id]);
+        $stmt->execute([$new_name, $new_description, $new_stock, $new_price, $new_condition, $image, $product_id]);
     } else {
-        $sql = "UPDATE products SET name = ?, description = ?, stock = ? WHERE product_id = ?";
+        $sql = "UPDATE products SET name = ?, description = ?, stock = ?, price = ?, state = ? WHERE product_id = ?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$new_name, $new_description, $new_stock, $product_id]);
+        $stmt->execute([$new_name, $new_description, $new_stock, $new_price, $new_condition, $product_id]);
     }
 
     header("Location: admin.php");
@@ -58,6 +59,10 @@ if (isset($_GET['product_id'])) {
         <textarea name="description" required><?php echo $product['description']; ?></textarea><br>
         <label>Stock:</label>
         <input type="number" name="stock" value="<?php echo $product['stock']; ?>" required><br>
+        <label>Price:</label>
+        <input type="text" name="price" value="<?php echo $product['price']; ?>" required><br> <!-- New Price Field -->
+        <label>Condition:</label>
+        <input type="text" name="condition" value="<?php echo $product['state']; ?>" required><br> <!-- New Condition Field -->
         <label>Image:</label>
         <input type="file" name="image"><br>
         <img src="uploads/<?php echo $product['image']; ?>" width="100" height="100"><br>

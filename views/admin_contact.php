@@ -94,6 +94,11 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <textarea name="reply_message" placeholder="Type your reply here..." required></textarea>
                         <button type="submit" class="reply">Reply</button>
                  </form>
+
+                 <form action="delete_message.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="query_id" value="<?php echo htmlspecialchars($message['query_id']); ?>">
+                    <button type="submit" class="delete-btn">Delete</button>
+                 </form>
                 </td>
 
                     </tr>

@@ -1,48 +1,69 @@
 <?php 
 
-$pdo = require_once "../database/database.php" ;
+$pdo = require_once "../database/database.php";
 
 $id = $_GET['id'];
 
 $statement = $pdo->prepare('SELECT * FROM products WHERE product_id = :id');
-$statement->bindValue(":id", "$id");
+$statement->bindValue(":id", $id, PDO::PARAM_INT);
 $statement->execute();
-$product= $statement->fetch(PDO::FETCH_ASSOC);
+$product = $statement->fetch(PDO::FETCH_ASSOC);
 
-
+// Fetch reviews for this product (Fixed column names)
+$reviewStmt = $pdo->prepare("
+    SELECT r.rating, r.review_text AS comment, r.created_at AS review_date, u.username 
+    FROM reviews r
+    JOIN users u ON r.user_id = u.user_id
+    WHERE r.product_id = ?
+    ORDER BY r.created_at DESC
+");
+$reviewStmt->execute([$id]);
+$reviews = $reviewStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html>
-    <head>
-    <?php require_once "../partials/header.php" ?>
+<head>
+    <?php require_once "../partials/header.php"; ?>
     <link rel="stylesheet" href="../public/css/product.css">
-    </head>
-    <body>
-    <?php require_once "../partials/navbar.php" ?>
+</head>
+<body>
+    <?php require_once "../partials/navbar.php"; ?>
+
     <div class="product-container">
-    <!-- Product Image -->
-    <div class="product-image">
-      <img src="<?php echo "..".$product["image"]?>" alt="Product Image">
+        <!-- Product Image -->
+        <div class="product-image">
+            <img src="<?php echo "..".$product["image"] ?>" alt="Product Image">
+        </div>
+        
+        <!-- Product Data -->
+        <div class="product-data">
+            <h1 class="product-name"><?php echo htmlspecialchars($product["name"]) ?></h1>
+            <p class="product-description"><?php echo htmlspecialchars($product["description"]) ?></p>
+            <p class="product-condition">Condition: <?php echo htmlspecialchars($product["state"]) ?></p>
+            <p class="product-price">£<?php echo htmlspecialchars($product["price"]) ?></p>
+            <a href="add-products.php?product_id=<?php echo $product["product_id"] ?>"><button class="green-button">Add to Basket</button></a>
+            <a href="./reviewPage.php?id=<?php echo $id ?>"><u>Write a review</u></a>
+        </div>
     </div>
-    
-    <!-- Product Data -->
-    <div class="product-data">
-      <h1 class="product-name"><?php echo $product["name"]?></h1>
-      <p class="product-description">
-      <?php echo $product["description"]?>
-      </p>
-      <p class="product-condition">Condition: <?php echo $product["state"]?></p>
-      <p class="product-price">£<?php echo $product["price"]?></p>
-      <a href="  <?php echo './add-products.php?product_id='.$product["product_id"]?>"><button class="green-button">Add to Basket</button></a>
-      <a href="./reviewPage.php?id=<?php echo $id?>"> <u>Write a review</u></a>
-    </div>
-  </div>
 
-    </div>
-    <div>
+    <!-- 🟢 Reviews Section -->
+    <div class="reviews-section">
+        <h2>Customer Reviews</h2>
 
+        <?php if (empty($reviews)) : ?>
+            <p>No reviews yet. Be the first to leave a review!</p>
+        <?php else : ?>
+            <?php foreach ($reviews as $review) : ?>
+                <div class="review-card">
+                    <p><strong><?php echo htmlspecialchars($review["username"]); ?></strong> - Rated: <?php echo htmlspecialchars($review["rating"]); ?>/5</p>
+                    <p><?php echo htmlspecialchars($review["comment"]); ?></p>
+                    <p class="review-date"><?php echo htmlspecialchars($review["review_date"]); ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
-    <?php require_once "../partials/footer.php" ?>
-    </body>
+
+    <?php require_once "../partials/footer.php"; ?>
+</body>
 </html>

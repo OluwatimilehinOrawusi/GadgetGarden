@@ -40,24 +40,16 @@ $stmt->execute();
 $uploads = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $category_id = $pdo->prepare("SELECT category_id FROM upload_products WHERE Admin_approve = 0");
 
-if($category_id == 1){
-    $category = "laptops";
-}else if($category_id == 2){
-    $category = "audio";
-}else if($category_id == 3){
-    $category = "phones";
-}else if($category_id == 4){
-    $category = "gaming";
-}else if($category_id == 5){
-    $category = "wearables";
-}else if($category_id == 6){
-    $category = "tablets";
-}else if($category_id == 7){
-    $category = "accessories";
-}else if($category_id == 8){
-    $category = "computers";
-} else{$category = null;
-}
+$categories = [
+    1 => "Laptops",
+    2 => "Audio",
+    3 => "Phones",
+    4 => "Gaming",
+    5 => "Wearables",
+    6 => "Tablets",
+    7 => "Accessories",
+    8 => "Computers"
+];
 
 ?>
 

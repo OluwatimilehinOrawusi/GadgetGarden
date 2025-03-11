@@ -75,13 +75,17 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?php echo htmlspecialchars($message['phone']); ?></td>
                         <td><?php echo htmlspecialchars($message['email']); ?></td>
                         <td><?php echo htmlspecialchars($message['message']); ?></td>
-                        <td>
+                    
+                           <td>
                             <!-- Reply Button -->
-                            <form action="process_reply.php" method="POST">
-                                <textarea name="reply_message" placeholder="Type your reply here..." required></textarea>
-                                <button type="submit" class="reply">Reply</button>
-                            </form>
-                        </td>
+                            <form action="reply.php" method="POST">
+                          <!-- Include the query_id as a hidden field -->
+                         <input type="hidden" name="query_id" value="<?php echo htmlspecialchars($message['query_id']); ?>">
+                        <textarea name="reply_message" placeholder="Type your reply here..." required></textarea>
+                        <button type="submit" class="reply">Reply</button>
+                 </form>
+                </td>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>

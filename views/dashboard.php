@@ -40,16 +40,16 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <p>Administration Dashboard</p>
         <div id="grid-container">
                     
-        <div class="dashboard-cards"><a href="./orders.php" class="clickable-div"><img src=../public\assets\Quickdelivery.png ><p>Orders</p></a></div>
+        <div class="dashboard-cards"><a href="./manage_orders.php" class="clickable-div"><img src=../public\assets\Quickdelivery.png ><p>Orders</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\Checkbox.png ><a href="./reviewPage.php"><p>Product Reviews</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\Download.png ><a href="./reviewPage.php"><p>Review Customer Uploads</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\Invoice.png ><a href="./legal.php"><p>Legal</p></a></div>
-                    <div id="dashboard-links" class="dashboard-cards"><img src=../public\assets\Home.png ><a href="./reviewPage.php"><p>Inventory management</p></a></div>
+                    <div id="dashboard-links" class="dashboard-cards"><img src=../public\assets\Home.png ><a href="./admin.php"><p>Inventory management</p></a></div>
                     <div id="analytic-card"class="dashboard-cards"><img src=../public\assets\Diagram.png ><a href="./admin_dashboard.php"><p>Analytics</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\VolumeUp.png ><a href="./alerts.php"><p>Alerts</p></a></div>
                     
                     <div class="dashboard-cards"><img src=../public\assets\Account.png ><a href="./IAM.php"><p>IAM</p></a></div>
-                    <div class="dashboard-cards"><img src=../public\assets\Partner.png ><a href="./manage-customers.php"><p>Customer details</p></a></div>
+                    <div class="dashboard-cards"><img src=../public\assets\Partner.png ><a href="./manage_users.php"><p>Customer details</p></a></div>
                     <div class="dashboard-cards"><img src=../public\assets\Megaphone.png ><a href="./forum.php"><p>Customer Forum</p></a></div>
                     
                  

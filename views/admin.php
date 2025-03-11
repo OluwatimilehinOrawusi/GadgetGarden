@@ -219,9 +219,15 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC
                     <td>£<?php echo number_format($product['price'], 2); ?></td>
                     <td><?php echo htmlspecialchars($product['stock']); ?></td>
                     <td>
-                        <a href="edit-product.php?id=<?php echo $product['product_id']; ?>">Edit</a>
+                        <a href="update.php?product_id=<?php echo $product['product_id']; ?>">Edit</a>
                         <?php if ($is_admin) : ?>
-                            | <button class="update-btn">Delete</button>
+                            <!-- Delete Form -->
+<form method="POST" action="delete.php" onsubmit="return confirm('Are you sure you want to delete this product?');">
+    <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+    <button class="update-btn" style="background-color: red; color: white; border: none; padding: 10px 15px; cursor: pointer;">
+        Delete
+    </button>
+</form>
                         <?php endif; ?>
                     </td>
                 </tr>

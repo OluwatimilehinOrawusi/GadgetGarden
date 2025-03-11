@@ -177,15 +177,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <td><?php echo htmlspecialchars($user["email"]); ?></td>
                         <td><?php echo htmlspecialchars($user["role"]); ?></td>
                         <td>
-                            <form method="POST">
-                                <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
-                                <select name="role">
-                                    <option value="admin" <?php if ($user['role'] === 'admin') echo 'selected'; ?>>Admin</option>
-                                    <option value="manager" <?php if ($user['role'] === 'manager') echo 'selected'; ?>>Manager</option>
-                                    <option value="user" <?php if ($user['role'] === 'user') echo 'selected'; ?>>User</option>
-                                </select>
-                                <button type="submit" class="update-btn">Update</button>
-                            </form>
+
+                                <p><?php echo $user['role'] ?> </p>
+                                <a href="update_role.php?user_id=<?php echo $user['user_id'] ?>"><button type="submit" class="update-btn">Update</button></a>
+                            
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -89,6 +89,7 @@ $categories = [
     <?php if (empty($uploads)) : ?>
         <p>No products have been uploaded</p>
     <?php else : ?>
+        <!------Table Headers------>
         <table>
             <thead>
                     <th>User ID</th>
@@ -106,6 +107,8 @@ $categories = [
             </thead>
             <tbody>
                 <?php foreach ($uploads as $product) { ?>
+                    
+                        <!------Table Information------>    
                 <tr>
                     <td><?php echo htmlspecialchars($product['user_id']); ?></td>
                     <td><?php echo htmlspecialchars(getUsernameById($pdo, $product['user_id'])); ?></td>

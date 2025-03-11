@@ -101,6 +101,7 @@ $categories = [
                     <th>Condition</th>
                     <th>Description</th>
                     <th>Images</th>
+                    <th>Decision</th>
                 </tr>
             </thead>
             <tbody>

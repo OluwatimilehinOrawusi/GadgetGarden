@@ -9,19 +9,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['product_id'], $_POST[
         $product=$stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($product) { $stmt = $pdo->prepare("
-        INSERT INTO products(user_id,product_name,price,quantity`condition`,description,image_path,category_id)
+        INSERT INTO products(product_id,name,description,price,stock,state,category_id,image)
         VALUES (?,?,?,?,?,?,?,?)
         ");
 
         $stmt->execute([
-            $product['user_id'],
+            $product['product_id'],
             $product['name'],
+            $product['description'],
             $product['price'],
             $product['quantity'],
             $product['condition'],
-            $product['description'],
+            $product['category_id'],
             $product['image_path'],
-            $product['category_id']
+
 
         ]);
 

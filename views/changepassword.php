@@ -94,7 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php }?>
     </div>
 </nav>
-    
+  <br>
+  <br>
  <div class="dark-mode-container">
         <button id="dark-mode-toggle" class="icon-button">
             <i class="fas fa-moon"></i>

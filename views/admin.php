@@ -92,131 +92,6 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
     <link rel="stylesheet" href="../public/css/admin.css">
-   <style>
-    /* General Styles for the Page */
-/* General Styles for the Page */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-h1 {
-    text-align: center;
-    color: #333;
-}
-
-/* Styling the Search Bar */
-.search-bar {
-    margin: 20px 0;
-    display: flex;
-    justify-content: flex-start;
-}
-
-.search-bar input {
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 300px;
-    margin-right: 10px;
-}
-
-.search-bar button {
-    padding: 8px 16px;
-    background-color: #275E4A; /* Darker Green */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.search-bar button:hover {
-    background-color: #1f4a38; /* Darker shade of green */
-}
-
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 12px 15px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-th {
-    background-color: #275E4A; /* Green color */
-    color: white;
-}
-
-td {
-    background-color: #f9f9f9;
-}
-
-td a {
-    color: #275E4A; /* Green color */
-    text-decoration: none;
-    padding: 5px 10px;
-    border: 1px solid #275E4A;
-    border-radius: 4px;
-}
-
-td a:hover {
-    background-color: #275E4A; /* Green color */
-    color: white;
-}
-
-/* Button Styling for Delete and Update */
-td button {
-    padding: 8px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-td button.update-btn {
-    background-color: #4a9c85; /* Darker Green */
-    color: white;
-    border: none;
-}
-
-td button.update-btn:hover {
-    background-color: #3b7c67; /* Even Darker Green */
-}
-
-/* Responsive Table for Small Screens */
-@media screen and (max-width: 768px) {
-    table {
-        width: 100%;
-        font-size: 14px;
-    }
-
-    .search-bar input {
-        width: 100%;
-        margin-right: 0;
-    }
-
-    .search-bar button {
-        width: 100%;
-    }
-}
-
-    </style>
 </head>
 <body>
 
@@ -262,13 +137,10 @@ td button.update-btn:hover {
                     <td>
                         <a href="update.php?product_id=<?php echo $product['product_id']; ?>">Edit</a>
                         <?php if ($is_admin) : ?>
-                            <!-- Delete Form -->
-<form method="POST" action="delete.php" onsubmit="return confirm('Are you sure you want to delete this product?');">
-    <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
-    <button class="update-btn" style="background-color: red; color: white; border: none; padding: 10px 15px; cursor: pointer;">
-        Delete
-    </button>
-</form>
+                            <form method="POST" action="delete.php" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                <button class="delete-btn">Delete</button>
+                            </form>
                         <?php endif; ?>
                     </td>
                 </tr>

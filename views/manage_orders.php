@@ -2,27 +2,22 @@
 session_start();
 require_once "../database/database.php";
 
-// Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php?error=Please+log+in");
     exit();
 }
 
-// Fetch user role if not set in session
 if (!isset($_SESSION['user_role'])) {
     $stmt = $pdo->prepare("SELECT admin FROM users WHERE user_id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
     $_SESSION['user_role'] = $user['admin'] ? 'admin' : 'user';
 }
 
-// Ensure user is an admin
 if ($_SESSION['user_role'] !== 'admin') {
     die("Error: You are not an admin.");
 }
 
-// Fetch orders
 $ordersStmt = $pdo->prepare("
     SELECT o.order_id, o.order_date, o.total_price, u.username, u.email 
     FROM orders o
@@ -41,88 +36,7 @@ $orders = $ordersStmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Manage Orders - Gadget Garden</title>
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/admin.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 40px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: center;
-        }
-
-        th {
-            background: #2a6041;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-
-        tr:hover {
-            background: #d8f3dc;
-        }
-        .search-bar {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .search-bar input {
-            width: 60%;
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #1E5631;
-            border-radius: 5px;
-        }
-
-        .search-bar button {
-            background: #145A32;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-
-        .search-bar button:hover {
-            background: #117A3D;
-        }
-
-    </style>
+    <link rel="stylesheet" href="../public/css/manage_orders.css">
 </head>
 <body>
 
@@ -143,7 +57,7 @@ $orders = $ordersStmt->fetchAll(PDO::FETCH_ASSOC);
     <h1>Manage Orders</h1>
 
     <?php if (empty($orders)) : ?>
-        <p style="text-align: center; color: #888;">No orders available.</p>
+        <p class="no-orders">No orders available.</p>
     <?php else : ?>
         <table>
             <thead>

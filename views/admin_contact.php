@@ -56,6 +56,16 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="container">
         <h1>Customer Queries</h1>
+
+        <?php if (isset($_SESSION['success_message'])): ?>
+            <div class ="success-message">
+                <?php 
+                echo $_SESSION['success_message'];
+                unset($_SESSION['success_message']); 
+                ?>
+            </div>
+            <?php endif; ?>
+
         <table>
             <thead>
                 <tr>

@@ -48,12 +48,16 @@ function displayStars($rating) {
 </head>
 <body>
     <?php require_once "../partials/navbar.php"; ?>
+    
+    <!-----PRODUCT SECTION------->
     <div class="product-container">
+
+        <!-----PRODUCT IMAGE------->
         <div class="product-image">
             <img src="<?php echo "..".$product["image"] ?>" alt="Product Image">
         </div>
 
-        <!-----PRODUCT SECTION------->
+        <!-----PRODUCT DATA------->
         <div class="product-data">
             <h1 class="product-name"><?php echo htmlspecialchars($product["name"]) ?></h1>
             <p class="product-description"><?php echo htmlspecialchars($product["description"]) ?></p>

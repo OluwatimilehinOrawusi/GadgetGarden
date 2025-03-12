@@ -121,6 +121,16 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </section>
 
+        <div class="info-card">
+                <div class="info-header">
+                    <h3>Upload Product</h3>
+                </div>
+                <div class="info-content">
+                    <a href="./uploadproduct.php" class="return-link">Upload Product</a>
+                </div>
+            </div>
+        </section>
+
         <!-- My Orders Section -->
         <section class="info-section">
             <div class="info-card">

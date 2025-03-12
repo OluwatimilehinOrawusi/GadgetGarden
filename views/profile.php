@@ -7,9 +7,24 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$username = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Unknown User';
-$email = isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : 'Email not available';
-$user_id = isset($_SESSION['user_id']) ? htmlspecialchars($_SESSION['user_id']) : 'Unknown ID';
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Unknown User';
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : null;
+
+//  Fix for missing email after login
+if (!$email && $user_id) {
+    $stmt = $pdo->prepare("SELECT email FROM users WHERE user_id = :user_id");
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($user) {
+        $email = $user["email"];
+        $_SESSION["email"] = $email; //  Store email in session for next time
+    }
+}
+
+$email = $email ?? 'Email not available';
 
 // Fetch User Orders
 $orderQuery = $pdo->prepare("
@@ -65,7 +80,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <main class="main-content">
-        <h2>Welcome <?php echo $username; ?>!</h2>
+        <h2>Welcome <?php echo htmlspecialchars($username); ?>!</h2>
 
         <section class="info-section">
             <div class="info-card">
@@ -73,7 +88,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                     <h3>Personal Info</h3>
                 </div>
                 <div class="info-content">
-                    <p><b>Username:</b> <?php echo $username; ?></p>
+                    <p><b>Username:</b> <?php echo htmlspecialchars($username); ?></p>
                 </div>
             </div>
 
@@ -82,8 +97,8 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                     <h3>Email Address</h3>
                 </div>
                 <div class="info-content">
-                    <p><b>Email:</b> <?php echo $email; ?></p>
-                    <p><b>Account ID:</b> <?php echo $user_id; ?></p>
+                    <p><b>Email:</b> <?php echo htmlspecialchars($email); ?></p>
+                    <p><b>Account ID:</b> <?php echo htmlspecialchars($user_id); ?></p>
                 </div>
             </div>
 
@@ -121,7 +136,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($orders as $order) { 
                         if ($previousOrderId !== $order["order_id"]) { 
                             if ($previousOrderId !== null) {
-                                echo "</div>"; // Close previous order div
+                                echo "</div>";
                             }
                             ?>
                             <div class="order-container">
@@ -148,63 +163,9 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                         <?php 
                         $previousOrderId = $order["order_id"];
                     }
-                    echo "</div>"; // Close last order div
+                    echo "</div>";
                     ?>
                 <?php endif; ?>
-
-
-
- <div class="chat-icon" onclick="toggleChat()">💬</div>
-    
-    <div class="chat-container" id="chat-container">
-        <div class="chat-box" id="chat-box"></div>
-        <div class="chat-options">
-            <p class="bot-message message"><strong>Bot:</strong> Select one of the following options:</p>
-            <button onclick="sendMessage('delivery times')">Delivery Times</button>
-            <button onclick="sendMessage('returns')">Returns</button>
-            <button onclick="sendMessage('contact us')">Contact Us</button>
-        </div>
-        <input type="text" id="user-input" class="chat-input" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
-    </div>
-
-    <script>
-        function toggleChat() {
-            let chatContainer = document.getElementById("chat-container");
-            chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
-        }
-        
-        function sendMessage(userInput) {
-            let chatBox = document.getElementById("chat-box");
-            
-            let userMessage = document.createElement("div");
-            userMessage.className = "message user-message";
-            userMessage.innerHTML = "<strong>You:</strong> " + userInput;
-            chatBox.appendChild(userMessage);
-            
-            let responses = {
-                "delivery times": "Our standard delivery time is 3-5 business days.",
-                "returns": "You can return any product within 30 days of purchase.",
-                "contact us": "Please log in to access our contact page: <a href='login.php'>Login</a>"
-            };
-            
-            let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";
-            
-            let botMessage = document.createElement("div");
-            botMessage.className = "message bot-message";
-            botMessage.innerHTML = "<strong>Bot:</strong> " + response;
-            chatBox.appendChild(botMessage);
-            
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                let userInput = document.getElementById("user-input").value;
-                document.getElementById("user-input").value = "";
-                sendMessage(userInput);
-            }
-        }
-    </script>
             </div>
         </section>
     </main>

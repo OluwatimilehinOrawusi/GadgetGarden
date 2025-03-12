@@ -1,10 +1,17 @@
 <?php
+//Connect to Database
 $pdo = require_once "../database/database.php";
+
+//ID used for refrence
 $id = $_GET['id'];
+
+//Getting products from database
 $statement = $pdo->prepare('SELECT * FROM products WHERE product_id = :id');
 $statement->bindValue(":id", $id, PDO::PARAM_INT);
 $statement->execute();
 $product = $statement->fetch(PDO::FETCH_ASSOC);
+
+//Getting reviews for product from database
 $reviewStmt = $pdo->prepare("
     SELECT r.rating, r.review_text AS comment, r.created_at AS review_date, u.username
     FROM reviews r
@@ -14,6 +21,8 @@ $reviewStmt = $pdo->prepare("
 ");
 $reviewStmt->execute([$id]);
 $reviews = $reviewStmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 // Calculate average rating
 $averageStmt = $pdo->prepare("SELECT AVG(rating) AS avg_rating FROM reviews WHERE product_id = ?");
 $averageStmt->execute([$id]);
@@ -26,6 +35,11 @@ function displayStars($rating) {
     return str_repeat('★', $fullStars) . str_repeat('☆', $halfStar) . str_repeat('☆', $emptyStars);
 }
 ?>
+
+
+
+
+<!-----HTML------->
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +52,8 @@ function displayStars($rating) {
         <div class="product-image">
             <img src="<?php echo "..".$product["image"] ?>" alt="Product Image">
         </div>
+
+        <!-----PRODUCT SECTION------->
         <div class="product-data">
             <h1 class="product-name"><?php echo htmlspecialchars($product["name"]) ?></h1>
             <p class="product-description"><?php echo htmlspecialchars($product["description"]) ?></p>
@@ -47,6 +63,9 @@ function displayStars($rating) {
             <a href="./reviewPage.php?id=<?php echo $id ?>"><u>Write a review</u></a>
         </div>
     </div>
+
+
+    <!-----REVIEW SECTION------->
     <div class="reviews-section">
         <h2>Customer Reviews</h2>
         <?php if ($averageRating > 0) : ?>
@@ -60,6 +79,8 @@ function displayStars($rating) {
         <?php endif; ?>
         <?php if (!empty($reviews)) : ?>
             <?php foreach ($reviews as $review) : ?>
+
+              <!-----INDIVIDUAL REVIEW INFORMATION------->
                 <div class="review-card">
                     <p><strong><?php echo htmlspecialchars($review["username"]); ?></strong> -
                     <span class="star-rating"><?php echo displayStars($review["rating"]); ?></span></p>

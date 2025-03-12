@@ -120,7 +120,7 @@ $categories = [
                     <td><?php echo number_format($product['quantity']); ?></td>
                     <td><?php echo htmlspecialchars($product['condition']); ?></td>
                     <td><?php echo htmlspecialchars($product['description']); ?></td>
-                    <td><img src="<?= htmlspecialchars($product['image_path']) ?>" width="40" height="40" alt = "image of user product upload"></td>
+                    <td><img src="<?= htmlspecialchars($product['image_path']) ?>" width="200" height="200" alt = "image of user product upload"></td>
                     <td> <form action = "approveproduct.php" method = "POST">
                         <input type = "hidden" name = "product_id" value = "<?= $product['product_id'] ?>">
                         <button type = "submit" name ="action" value = "approve" id = "approve">Approve</button>

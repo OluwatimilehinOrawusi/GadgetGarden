@@ -100,7 +100,7 @@ $serialized_array = serialize($products);
     <?php foreach ($products as $product) { ?>
         <div id="card-container">
             <div class="card">
-                <img id="basket-img" src="<?php echo '../' . htmlspecialchars($product['image']); ?>">
+                <img id="basket-img" src="<?php echo htmlspecialchars($product['image']); ?>">
                 <p><?php echo htmlspecialchars($product['name']); ?></p>
                 <p>£<?php echo number_format($product['price'], 2); ?></p>
                 

@@ -156,8 +156,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
         <!-------Price------>
         <label for="price_stock">Price</label>
-        <input type="number" id="price_stock" name="price_stock" required />
-        
+        <div id = "pricecontainer">
+            <span id = "poundsign">£</span>
+            <input type="number" id="price_stock" name="price_stock" required />
+        </div>
 
         <!-------Product Quantity------>
         <label for="quantity_product">Product Quantity</label>

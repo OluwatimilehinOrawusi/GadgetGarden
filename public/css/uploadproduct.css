@@ -61,3 +61,31 @@ input, select, textarea {
     color: white;
 }
 
+#pricecontainer {
+    position:relative;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+#poundsign {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+
+       
+}
+
+#pricecontainer input{
+    padding-left: 25px;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    text-align:left;
+    font-size: 16px;
+
+}

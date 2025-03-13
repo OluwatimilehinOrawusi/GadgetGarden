@@ -164,23 +164,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
         <!-------Product Quantity------>
         <label for="quantity_product">Product Quantity</label>
-        <input type="number" id="quantity_product" name="quantity_product" min="0" required />
+        <input type="number" id="quantity_product" name="quantity_product" min="1" required />
 
-               
-        <script>
-                document.getElementById("productForm").addEventListener("submit", function(event)) {
-            let price = document.getElementById("price_stock").value;
-            let quantity = document.getElementById("quantity_stock").value;
+         
+        <!----Price and Quantity Data validation---->
+    <script>
+    document.getElementById("uploadform").addEventListener("submit", function(event) {
+        let price = parseFloat(document.getElementById("price").value);
+        let quantity = parseInt(document.getElementById("quantity_product").value);
 
-            if (price =< 0 ) {
-                alert("Price is an invalid ammount!");
-                event.preventDefault();
-            }elseif(quantity =< 0){
-                alert("There needs to be at least one item to upload");
-                event.preventDefault();
-            }
+        if (isNaN(price) || price < 0) {
+            alert("Price must be £0 or greater!");
+            event.preventDefault();
+            return;
         }
-        </script>
+
+        if (isNaN(quantity) || quantity < 1) {
+            alert("You must upload at least 1 item!");
+            event.preventDefault();
+            return;
+        }
+    });
+    </script>
+
 
         <!-------Product Category------>
         <label for="category">Category</label>

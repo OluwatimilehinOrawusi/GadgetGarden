@@ -15,13 +15,37 @@ require_once('../database/database.php');
 //Code to run once the submit button is pressed
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
+  
     // Form information(to be stored in variables for database)
     $product_name = $_POST['product_name'];
-    $price = $_POST['price_stock'];
+    $price = $_POST['price'];
     $quantity = $_POST['quantity_product'];
     $condition = $_POST['state'];
     $description = $_POST['description'];
     $user_id = $_SESSION['user_id'];
+    $category = $_POST['category'];
+
+    //Assign the categoryID
+    If($category == "laptops"){
+        $category_id = 1;
+    } else if($category == "audio"){
+        $category_id = 2;
+    }else if($category == "phones"){
+        $category_id = 3;        
+    }else if($category == "gaming"){
+        $category_id = 4;
+    }else if($category == "wearables"){
+        $category_id = 5;
+    }else if($category == "tablets"){
+        $category_id = 6;
+    }else if($category == "accessories"){
+        $category_id = 7;
+    }else if($category == "computers"){
+        $category_id = 8;
+    }else{
+        $category_id = null;
+    }
+
 
     // Get the next product ID (one higher than the max from both tables)
     $stmt = $pdo->query("
@@ -53,8 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
             // Insert into `upload_products`
             $stmt = $pdo->prepare("
                 INSERT INTO upload_products 
-                (user_id, product_id, Admin_approve, name, price, quantity, `condition`, description, image_path)  
-                VALUES (:user_id, :product_id, 0, :product_name, :price, :quantity, :condition, :description, :target_file)
+                (user_id, product_id, Admin_approve, name, price, quantity,category_id, `condition`, description, image_path)  
+                VALUES (:user_id, :product_id, 0, :product_name, :price, :quantity, :category_id, :condition, :description, :target_file)
             ");
 
             // Bind parameters
@@ -63,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
             $stmt->bindParam(':product_name', $product_name, PDO::PARAM_STR);
             $stmt->bindParam(':price', $price, PDO::PARAM_STR);
             $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+            $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
             $stmt->bindParam(':condition', $condition, PDO::PARAM_STR);
             $stmt->bindParam(':description', $description, PDO::PARAM_STR);
             $stmt->bindParam(':target_file', $target_file, PDO::PARAM_STR);
@@ -130,22 +155,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
         
 
         <!-------Price------>
-        <label for="price_stock">Price</label>
-        <input type="number" id="price_stock" name="price_stock" required />
+        <label for="price">Price</label>
+        <div id = "pricecontainer">
+            <span id = "poundsign">£</span>
+            <input type="number" id="price" name="price" min="0" required />
+        </div>
         
 
         <!-------Product Quantity------>
         <label for="quantity_product">Product Quantity</label>
-        <input type="number" id="quantity_product" name="quantity_product" required />
+        <input type="number" id="quantity_product" name="quantity_product" min="1" required />
+
+         
+        <!----Price and Quantity Data validation---->
+    <script>
+    document.getElementById("uploadform").addEventListener("submit", function(event) {
+        let price = parseFloat(document.getElementById("price").value);
+        let quantity = parseInt(document.getElementById("quantity_product").value);
+
+        if (isNaN(price) || price < 0) {
+            alert("Price must be £0 or greater!");
+            event.preventDefault();
+            return;
+        }
+
+        if (isNaN(quantity) || quantity < 1) {
+            alert("You must upload at least 1 item!");
+            event.preventDefault();
+            return;
+        }
+    });
+    </script>
+
+
+        <!-------Product Category------>
+        <label for="category">Category</label>
+        <select id = "category" name = "category" reqired>
+            <option value = "gaming">Gaming</option>
+            <option value = "phones">Phones</option>
+            <option value = "wearables">Wearables</option>
+            <option value = "laptops">Laptops</option>
+            <option value = "tablets">Tablets</option>
+            <option value = "accessories">Accessories</option>
+            <option value = "computers">Computers</option>
+            <option value = "audio">Audio</option>
+        </select>
         
 
         <!-------Product condition------>
         <label for="state">Condition</label>
             <select id="state" name="state" required>
-                <option value="likeNew">Like New</option>
-                <option value="veryGood">Very Good</option>
-                <option value="good">Good</option>
-                <option value="poor">Poor</option>
+                <option value="Like New">Like New</option>
+                <option value="Very Good">Very Good</option>
+                <option value="Good">Good</option>
+                <option value="Poor">Poor</option>
             </select>
         
 

@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
   
     // Form information(to be stored in variables for database)
     $product_name = $_POST['product_name'];
-    $price = $_POST['price_stock'];
+    $price = $_POST['price'];
     $quantity = $_POST['quantity_product'];
     $condition = $_POST['state'];
     $description = $_POST['description'];
@@ -155,11 +155,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
         
 
         <!-------Price------>
-        <label for="price_stock">Price</label>
+        <label for="price">Price</label>
         <div id = "pricecontainer">
             <span id = "poundsign">£</span>
-            <input type="number" id="price_stock" name="price_stock" required />
+            <input type="number" id="price" name="price" required />
         </div>
+        
 
         <!-------Product Quantity------>
         <label for="quantity_product">Product Quantity</label>

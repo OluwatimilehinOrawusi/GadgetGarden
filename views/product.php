@@ -54,7 +54,7 @@ function displayStars($rating) {
 
         <!-----PRODUCT IMAGE------->
         <div class="product-image">
-            <img src="<?php echo "..".$product["image"] ?>" alt="Product Image">
+            <img src="<?php echo $product["image"] ?>" alt="Product Image">
         </div>
 
         <!-----PRODUCT DATA------->

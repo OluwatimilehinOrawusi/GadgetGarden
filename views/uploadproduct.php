@@ -158,13 +158,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
         <label for="price">Price</label>
         <div id = "pricecontainer">
             <span id = "poundsign">£</span>
-            <input type="number" id="price" name="price" required />
+            <input type="number" id="price" name="price" min="0" required />
         </div>
         
 
         <!-------Product Quantity------>
         <label for="quantity_product">Product Quantity</label>
-        <input type="number" id="quantity_product" name="quantity_product" required />
+        <input type="number" id="quantity_product" name="quantity_product" min="0" required />
+
+               
+        <script>
+                document.getElementById("productForm").addEventListener("submit", function(event)) {
+            let price = document.getElementById("price_stock").value;
+            let quantity = document.getElementById("quantity_stock").value;
+
+            if (price =< 0 ) {
+                alert("Price is an invalid ammount!");
+                event.preventDefault();
+            }elseif(quantity =< 0){
+                alert("There needs to be at least one item to upload");
+                event.preventDefault();
+            }
+        }
+        </script>
 
         <!-------Product Category------>
         <label for="category">Category</label>

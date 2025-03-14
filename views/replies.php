@@ -12,13 +12,13 @@ if (!$user_id) {
     exit();
 }
 
-// Fetch the admin status of the user
+// Fetch user details
 $stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = :user_id");
-$stmt->bindParam(':user_id', $user_id);
+$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Modify the query to only fetch questions and answers for the logged-in user
+// Fetch questions and replies only for the logged-in user
 $stmt = $pdo->prepare("
     SELECT c.query_id, c.name, c.email, c.phone, c.message, c.created_at AS question_date,
            r.reply_message, r.created_at AS reply_date
@@ -27,7 +27,8 @@ $stmt = $pdo->prepare("
     WHERE c.user_id = :user_id
     ORDER BY c.created_at DESC, r.created_at ASC
 ");
-$stmt->bindParam(':user_id', $user_id);
+
+$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
 
 $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -79,31 +80,31 @@ $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </tr>
             </thead>
             <tbody>
-    <?php foreach ($questions as $question): ?>
-        <tr>
-            <td><?php echo htmlspecialchars($question['query_id']); ?></td>
-            <td><?php echo htmlspecialchars($question['name']); ?></td>
-            <td><?php echo htmlspecialchars($question['email']); ?></td>
-            <td><?php echo htmlspecialchars($question['phone']); ?></td>
-            <td><?php echo htmlspecialchars($question['message']); ?></td>
-            <td>
-                <?php if ($question['reply_message']): ?>
-                    <p><?php echo htmlspecialchars($question['reply_message']); ?></p>
-                <?php else: ?>
-                    <p>No reply yet.</p>
-                <?php endif; ?>
-            </td>
-            <td>
-                <?php if ($question['reply_date']): ?>
-                    <p><?php echo htmlspecialchars($question['reply_date']); ?></p>
-                <?php else: ?>
-                    <p>No reply yet.</p>
-                <?php endif; ?>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-</tbody>
-
+                <?php foreach ($questions as $question): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($question['query_id']); ?></td>
+                        <td><?php echo htmlspecialchars($question['name']); ?></td>
+                        <td><?php echo htmlspecialchars($question['email']); ?></td>
+                        <td><?php echo htmlspecialchars($question['phone']); ?></td>
+                        <td><?php echo htmlspecialchars($question['message']); ?></td>
+                        <td>
+                            <?php if ($question['reply_message']): ?>
+                                <p><?php echo htmlspecialchars($question['reply_message']); ?></p>
+                            <?php else: ?>
+                                <p>No reply yet.</p>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($question['reply_date']): ?>
+                                <p><?php echo htmlspecialchars($question['reply_date']); ?></p>
+                            <?php else: ?>
+                                <p>No reply yet.</p>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

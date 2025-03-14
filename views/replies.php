@@ -41,7 +41,7 @@ $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Your Questions - Gadget Garden</title>
 
     <link rel="stylesheet" href="../public/css/navbar.css">
-    <link rel="stylesheet" href="../public/styles.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
     <link rel="stylesheet" href="../public/css/replies.css">
 </head>
 <body>
@@ -75,28 +75,35 @@ $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Phone</th>
                     <th>Message</th>
                     <th>Reply</th>
+                    <th>Date Replied</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($questions as $question): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($question['query_id']); ?></td>
-                        <td><?php echo htmlspecialchars($question['name']); ?></td>
-                        <td><?php echo htmlspecialchars($question['email']); ?></td>
-                        <td><?php echo htmlspecialchars($question['phone']); ?></td>
-                        <td><?php echo htmlspecialchars($question['message']); ?></td>
-                        <td>
-                            <?php if ($question['reply_message']): ?>
-                                <p><?php echo htmlspecialchars($question['reply_message']); ?></p>
-                                <small>Replied on: <?php echo $question['reply_date']; ?></small>
-                            <?php else: ?>
-                                <p>No reply yet.</p>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+    <?php foreach ($questions as $question): ?>
+        <tr>
+            <td><?php echo htmlspecialchars($question['query_id']); ?></td>
+            <td><?php echo htmlspecialchars($question['name']); ?></td>
+            <td><?php echo htmlspecialchars($question['email']); ?></td>
+            <td><?php echo htmlspecialchars($question['phone']); ?></td>
+            <td><?php echo htmlspecialchars($question['message']); ?></td>
+            <td>
+                <?php if ($question['reply_message']): ?>
+                    <p><?php echo htmlspecialchars($question['reply_message']); ?></p>
+                <?php else: ?>
+                    <p>No reply yet.</p>
+                <?php endif; ?>
+            </td>
+            <td>
+                <?php if ($question['reply_date']): ?>
+                    <p><?php echo htmlspecialchars($question['reply_date']); ?></p>
+                <?php else: ?>
+                    <p>No reply yet.</p>
+                <?php endif; ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
+
     </div>
 </body>
 </html>

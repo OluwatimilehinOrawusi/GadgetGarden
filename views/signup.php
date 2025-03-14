@@ -18,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
     try {
-        $sql = "INSERT INTO users(username, email, password_hash) VALUES(?,?,?)";
+        $sql = "INSERT INTO users(username, email, password_hash, memorable_phrase) VALUES(?,?,?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt -> execute([$username, $email, $password_hash]);
+        $stmt -> execute([$username, $email, $password_hash, $memorable_phrase]);
 
         header("Location: ./login.php");
 

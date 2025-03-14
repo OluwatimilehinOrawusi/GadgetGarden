@@ -4,12 +4,13 @@ $pdo = require_once '../database/database.php';
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $mphrase = $_POST['mphrase'];
     $sql = "SELECT * FROM users WHERE username = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($user && password_verify($password, $user['password_hash'])) {
+
+    if ($user && $mphrase === $user['memorable_phrase']) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $user['username'];
         header("Location: ../changepassword.php");

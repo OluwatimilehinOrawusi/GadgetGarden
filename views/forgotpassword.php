@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && $mphrase === $user['memorable_phrase']) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $user['username'];
-        header("Location: ../changepassword.php");
+        header("Location: ./changepassword.php");
     } else {
         echo "Invalid username or password.";
     }
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id = "login-container">
         <h1>Recover your account</h1>
         <br> <br>
-        <form method = "post" action = "login.php" id = "loginform">
+        <form method = "post" action = "forgotpassword.php" id = "loginform">
         <div id = "textboxesandlabels">
             <label for="username">Username</label>
             <input type = "text" id = "username" name = "username" required>

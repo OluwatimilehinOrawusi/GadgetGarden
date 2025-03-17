@@ -66,13 +66,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for = "password">Pasword</label>
             <input type = "password" id = "password" name = "password" required>
             <br> <br>
-            <p class="forgot-password">Forgot your password? Click <a href="./forgotpassword.php">here</a> to recover your account</p>
+            <h6 class = "login">Forgot your password? <a href = "./forgotpassword.php">Recover Account</a></h6>
         </div>
 
         <input type = "submit" value = "Sign in" id = "subbutton"/>
         <input type = "hidden" name = "submitted" value = "true"/>
         <br> <br>
-        <p class = "register-new">Don't have an account? <a href ="./signup.php">Sign up</a></p>
+        <p class = "login">Don't have an account? <a href ="./signup.php">Sign up</a></p>
         </form> 
     </div>
 </div>

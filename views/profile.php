@@ -215,7 +215,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             "contact us": "Need help? <a href='./contact.php' style='text-decoration: underline; font-weight: bold; color: blue;'>Visit our Contact Us page</a> for more details."
         };
         
-        let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";
+        let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option below.";
         
         let botMessage = document.createElement("div");
         botMessage.className = "message bot-message";

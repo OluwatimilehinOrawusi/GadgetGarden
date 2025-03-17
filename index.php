@@ -194,8 +194,9 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 sendMessage(userInput);
             }
         }
+    </script>
 </div>
-</script>
+
     
 <?php require_once "./partials/footer.php"; ?>
 

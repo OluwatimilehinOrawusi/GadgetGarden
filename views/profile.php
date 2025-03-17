@@ -164,7 +164,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                         }
 
                         if (!empty($order['product_name'])) { 
-                            $productImage = !empty($order['image']) ? "../uploads/" . htmlspecialchars($order['image']) : "../public/assets/placeholder.png";
+                            $productImage = !empty($order['image']) ? "../uploads/".htmlspecialchars($order['image']) : "../public/assets/placeholder.png";
                             ?>
                             <div class="order-details">
                                 <img src="<?php echo $productImage; ?>" alt="Product Image" class="order-image" 

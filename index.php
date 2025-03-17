@@ -50,6 +50,15 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <?php } ?>
 
             <a href="./views/logout.php"><button class="green-button">Logout</button></a>
+
+        <!--chatbot-->
+        <div class="dark-mode-container">
+        <button id="dark-mode-toggle" class="icon-button">
+            <i class="fas fa-moon"></i>
+            <span>Dark Mode</span> <!-- Added this span element to hold the button text -->
+        </button>
+    </div>
+        
         <?php } ?>
     </div>
 </nav>

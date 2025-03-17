@@ -186,6 +186,8 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <p class="bot-message message"><strong>Bot:</strong> Select one of the following options:</p>
             <button onclick="sendMessage('delivery times')">Delivery Times</button>
             <button onclick="sendMessage('returns')">Returns</button>
+            <button onclick="sendMessage('refunds')">Refunds</button>
+            <button onclick="sendMessage('rate us')">Rate Us</button>
             <button onclick="sendMessage('contact us')">Contact Us</button>
         </div>
         <input type="text" id="user-input" class="chat-input" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
@@ -208,7 +210,9 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             let responses = {
                 "delivery times": "Our standard delivery time is 3-5 business days.",
                 "returns": "You can return any product within 30 days of purchase.",
-                "contact us": "Please log in to access our contact page: <a href='login.php'>Login</a>"
+                "refunds": "Refunds are processed within 5-7 business days after we receive the returned item."
+                "Rate Us": "How would you rate your experience with us? <div class='rating-stars'><span onclick='rate(1)'>★</span><span onclick='rate(2)'>★</span><span onclick='rate(3)'>★</span><span onclick='rate(4)'>★</span><span onclick='rate(5)'>★</span></div>"
+                "contact us": " <a href='/contact.php'>Visit our contact page</a> for more details."
             };
             
             let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";

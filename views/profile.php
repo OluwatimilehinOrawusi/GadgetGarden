@@ -186,8 +186,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
     <div class="chat-container" id="chat-container">
         <div class="chat-header">
             <h3>Chatbot</h3>
-            <button onclick="minimizeChat()">➖</button>
-            <button onclick="closeChat()">✖</button>
+       
         </div>
 
         <div class="chat-box" id="chat-box"></div>
@@ -208,18 +207,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
         function toggleChat() {
             let chatContainer = document.getElementById("chat-container");
             chatContainer.style.display = (chatContainer.style.display === "none" || chatContainer.style.display === "") ? "block" : "none";
-        }
-
-        function minimizeChat() {
-            let chatContainer = document.getElementById("chat-container");
-            chatContainer.style.height = "50px";
-            chatContainer.querySelector(".chat-box").style.display = "none";
-            chatContainer.querySelector(".chat-options").style.display = "none";
-            chatContainer.querySelector(".chat-input").style.display = "none";
-        }
-
-        function closeChat() {
-            document.getElementById("chat-container").style.display = "none";
         }
 
         function sendMessage(userInput) {

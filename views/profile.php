@@ -193,46 +193,53 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
         <input type="text" id="user-input" class="chat-input" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
     </div>
 
-    <script>
-        function toggleChat() {
-            let chatContainer = document.getElementById("chat-container");
-            chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
-        }
-        
-        function sendMessage(userInput) {
-            let chatBox = document.getElementById("chat-box");
-            
-            let userMessage = document.createElement("div");
-            userMessage.className = "message user-message";
-            userMessage.innerHTML = "<strong>You:</strong> " + userInput;
-            chatBox.appendChild(userMessage);
-            
-            let responses = {
-                "delivery times": "Our standard delivery time is 3-5 business days.",
-                "returns": "You can return any product within 30 days of purchase.",
-                "refunds": "Refunds are processed within 5-7 business days after we receive the returned item."
-                "Rate Us": "How would you rate your experience with us? <div class='rating-stars'><span onclick='rate(1)'>★</span><span onclick='rate(2)'>★</span><span onclick='rate(3)'>★</span><span onclick='rate(4)'>★</span><span onclick='rate(5)'>★</span></div>"
-                "contact us": " <a href='/contact.php'>Visit our contact page</a> for more details."
-            };
-            
-            let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";
-            
-            let botMessage = document.createElement("div");
-            botMessage.className = "message bot-message";
-            botMessage.innerHTML = "<strong>Bot:</strong> " + response;
-            chatBox.appendChild(botMessage);
-            
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
+   <script>
+    function toggleChat() {
+        let chatContainer = document.getElementById("chat-container");
+        chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
+    }
 
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                let userInput = document.getElementById("user-input").value;
+    function sendMessage(userInput) {
+        let chatBox = document.getElementById("chat-box");
+        
+        let userMessage = document.createElement("div");
+        userMessage.className = "message user-message";
+        userMessage.innerHTML = "<strong>You:</strong> " + userInput;
+        chatBox.appendChild(userMessage);
+        
+        let responses = {
+            "delivery times": "Our standard delivery time is 3-5 business days.",
+            "returns": "You can return any product within 30 days of purchase.",
+            "refunds": "Refunds are processed within 5-7 business days after we receive the returned item.",
+            "rate us": "How would you rate your experience with us? <div class='rating-stars'><span onclick='rate(1)'>★</span><span onclick='rate(2)'>★</span><span onclick='rate(3)'>★</span><span onclick='rate(4)'>★</span><span onclick='rate(5)'>★</span></div>",
+            "contact us": "<a href='/contact.php'>Visit our contact page</a> for more details."
+        };
+        
+        let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";
+        
+        let botMessage = document.createElement("div");
+        botMessage.className = "message bot-message";
+        botMessage.innerHTML = "<strong>Bot:</strong> " + response;
+        chatBox.appendChild(botMessage);
+        
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            let userInput = document.getElementById("user-input").value.trim();
+            if (userInput !== "") {
                 document.getElementById("user-input").value = "";
                 sendMessage(userInput);
             }
         }
-    </script>
+    }
+
+    function rate(stars) {
+        alert("Thank you for rating us " + stars + " stars!");
+    }
+</script>
+        
             </div>
         </section>
     </main>

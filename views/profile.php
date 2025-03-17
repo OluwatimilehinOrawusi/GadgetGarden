@@ -224,7 +224,21 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
         
         chatBox.scrollTop = chatBox.scrollHeight;
     }
+       
+// function to highlight when the user clicks on the stars
+       function rate(stars) {
+    let starElements = document.querySelectorAll('.rating-stars span');
+    starElements.forEach((star, index) => {
+        if (index < stars) {
+            star.classList.add("active");
+        } else {
+            star.classList.remove("active");
+        }
+    });
 
+    alert("Thank you for rating us " + stars + " stars!");
+}
+       
     function handleKeyPress(event) {
         if (event.key === "Enter") {
             let userInput = document.getElementById("user-input").value.trim();

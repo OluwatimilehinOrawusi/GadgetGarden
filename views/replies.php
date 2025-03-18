@@ -20,13 +20,14 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Fetch questions and replies only for the logged-in user
 $stmt = $pdo->prepare("
-    SELECT c.query_id, c.name, c.email, c.phone, c.message, c.created_at AS question_date,
+    SELECT c.id AS query_id, c.name, c.email, c.phone, c.message, c.created_at AS question_date,
            r.reply_message, r.created_at AS reply_date
     FROM contact c
-    LEFT JOIN replies r ON c.query_id = r.query_id
+    LEFT JOIN replies r ON c.id = r.query_id
     WHERE c.user_id = :user_id
     ORDER BY c.created_at DESC, r.created_at ASC
 ");
+
 
 $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->execute();

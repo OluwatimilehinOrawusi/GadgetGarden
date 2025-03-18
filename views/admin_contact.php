@@ -15,9 +15,31 @@ if (!$user || ($user['role'] !== 'admin' && $user['role'] !== 'manager')) {
     header("Location: ../index.php");
     exit();
 }
+ 
+// Handle the reply submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reply_message']) && isset($_POST['query_id'])) {
+    $reply_message = $_POST['reply_message'];
+    $query_id = $_POST['query_id'];
 
+    // Insert the reply into the `replies` table
+    $stmt = $pdo->prepare("INSERT INTO replies (query_id, reply_message, created_at) VALUES (:query_id, :reply_message, NOW())");
+    $stmt->bindParam(':query_id', $query_id, PDO::PARAM_INT);
+    $stmt->bindParam(':reply_message', $reply_message, PDO::PARAM_STR);
+    $stmt->execute();
+
+    // Update the message status in the `contact` table to 'replied'
+    $stmt = $pdo->prepare("DELETE FROM contact WHERE id = :query_id");
+    $stmt->bindParam(':query_id', $query_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Redirect with a success message
+    $_SESSION['success_message'] = "Reply sent successfully!";
+    header('Location: admin_contact.php');
+    exit();
+}
 // Fetch all messages from the database, including the query_id
-$stmt = $pdo->query("SELECT * FROM contact");
+$stmt = $pdo->prepare("SELECT * FROM contact WHERE status = 'unreplied' ORDER BY created_at DESC");
+$stmt->execute();
 $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -80,8 +102,8 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tbody>
                 <?php foreach ($messages as $message): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($message['query_id']); ?></td> <!-- Display query_id -->
-                        <td><?php echo htmlspecialchars($message['name']); ?></td>
+                    <td><?php echo htmlspecialchars($message['id']); ?></td> 
+                    <td><?php echo htmlspecialchars($message['name']); ?></td>
                         <td><?php echo htmlspecialchars($message['phone']); ?></td>
                         <td><?php echo htmlspecialchars($message['email']); ?></td>
                         <td><?php echo htmlspecialchars($message['message']); ?></td>
@@ -90,15 +112,15 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="action-buttons">
         <!-- Reply Form -->
         <form action="reply.php" method="POST" class="reply-form">
-            <input type="hidden" name="query_id" value="<?php echo htmlspecialchars($message['query_id']); ?>">
-            <textarea name="reply_message" placeholder="Type your reply here..."></textarea>
+        <input type="hidden" name="query_id" value="<?php echo htmlspecialchars($message['id']); ?>">
+        <textarea name="reply_message" placeholder="Type your reply here..."></textarea>
             <button type="submit" class="reply">Reply</button>
         </form>
 
         <!-- Delete Form -->
         <form action="delete_message.php" method="POST" class="delete-form">
-            <input type="hidden" name="query_id" value="<?php echo htmlspecialchars($message['query_id']); ?>">
-            <button type="submit" class="delete-btn">Delete</button>
+        <input type="hidden" name="query_id" value="<?php echo htmlspecialchars($message['id']); ?>">
+        <button type="submit" class="delete-btn">Delete</button>
         </form>
     </div>
 </td>

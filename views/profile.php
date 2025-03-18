@@ -7,29 +7,30 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Unknown User';
-$email = isset($_SESSION['email']) ? $_SESSION['email'] : null;
+$user_id = $_SESSION['user_id'] ?? null;
+$username = $_SESSION['username'] ?? 'Unknown User';
+$email = $_SESSION['email'] ?? null;
 
-//  Fix for missing email after login
+// Fix missing email after login
 if (!$email && $user_id) {
     $stmt = $pdo->prepare("SELECT email FROM users WHERE user_id = :user_id");
     $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
     if ($user) {
         $email = $user["email"];
-        $_SESSION["email"] = $email; //  Store email in session for next time
+        $_SESSION["email"] = $email;
     }
 }
 
 $email = $email ?? 'Email not available';
 
-// Fetch User Orders
+// Fetch User Orders 
 $orderQuery = $pdo->prepare("
-    SELECT o.order_id, o.order_date, o.total_price, op.product_id, op.quantity, 
-           p.name AS product_name, p.price AS product_price, p.image 
+    SELECT o.order_id, o.order_date, o.total_price, o.order_status, 
+           op.product_id, op.quantity, p.name AS product_name, 
+           p.price AS product_price, p.image 
     FROM orders o 
     LEFT JOIN order_products op ON o.order_id = op.order_id 
     LEFT JOIN products p ON op.product_id = p.product_id 
@@ -49,9 +50,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
     <title>Gadget Garden - Profile</title>
     <?php require '../partials/header.php'; ?>
     <link rel="stylesheet" href="../public/css/profile.css">
-    <link rel="stylesheet" href="../public/css/navbar.css">
-    <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/chatbot.css">
 </head>
 <body>
 <nav>
@@ -129,6 +127,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                     <a href="./uploadproduct.php" class="return-link">Upload Product</a>
                 </div>
             </div>
+
         </section>
 
         <!-- My Orders Section -->
@@ -148,20 +147,28 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                             if ($previousOrderId !== null) {
                                 echo "</div>";
                             }
+
+                            // Order status logic
+                            $status = ucfirst($order["order_status"] ?? 'Paid');
+                            $statusClass = strtolower(str_replace(" ", "-", $status));
                             ?>
                             <div class="order-container">
                                 <h3>Order ID: <?php echo htmlspecialchars($order["order_id"]); ?></h3>
                                 <p><b>Order Date:</b> <?php echo htmlspecialchars($order["order_date"]); ?></p>
                                 <p><b>Order Total:</b> £<?php echo htmlspecialchars($order["total_price"]); ?></p>
                                 <p><b>Payment Method:</b> Card</p>
+                                <p class="order-status <?php echo htmlspecialchars($statusClass); ?>">
+                                    <?php echo htmlspecialchars($status); ?>
+                                </p>
                             <?php
                         }
 
                         if (!empty($order['product_name'])) { 
-                            $productImage = !empty($order['image']) ? "../public/assets/" . htmlspecialchars(basename($order['image'])) : "../public/assets/placeholder.png";
+                            $productImage = !empty($order['image']) ? "../uploads/".htmlspecialchars($order['image']) : "../public/assets/placeholder.png";
                             ?>
                             <div class="order-details">
-                                <img src="<?php echo $productImage; ?>" alt="Product Image" class="order-image">
+                                <img src="<?php echo $productImage; ?>" alt="Product Image" class="order-image" 
+                                    onerror="this.src='../public/assets/placeholder.png'">
                                 <div class="info-content">
                                     <p><b>Product:</b> <?php echo htmlspecialchars($order["product_name"]); ?></p>
                                     <p><b>Price:</b> £<?php echo htmlspecialchars($order["product_price"]); ?></p>

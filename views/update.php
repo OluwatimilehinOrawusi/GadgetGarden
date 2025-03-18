@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <input type="text" name="condition" value="<?php echo $product['state']; ?>" required><br> <!-- New Condition Field -->
     <label>Image:</label>
     <input type="file" name="image"><br>
-    <img src="uploads/<?php echo $product['image']; ?>" width="100" height="100"><br>
+    <img src="<?php echo $product['image']; ?>" width="100" height="100"><br>
     <button type="submit">Update</button>
 </form>
 

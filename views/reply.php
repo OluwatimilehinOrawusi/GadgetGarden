@@ -1,28 +1,29 @@
-<?php 
+<?php
 session_start();
-
 $pdo = require_once "../database/database.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $query_id = $_POST['query_id'];
-    $reply_message = $_POST['reply_message'];
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["query_id"], $_POST["reply_message"])) {
+    $query_id = $_POST["query_id"];
+    $reply_message = trim($_POST["reply_message"]);
 
-    if (!empty($query_id) && !empty($reply_message)) {
-        // Insert the reply into the replies table
-        $stmt = $pdo->prepare("INSERT INTO replies (query_id, reply_message) VALUES (:query_id, :reply_message)");
-        $stmt->bindParam(':query_id', $query_id);
-        $stmt->bindParam(':reply_message', $reply_message);
+    if (!empty($reply_message)) {
+        // Insert the reply into the database
+        $stmt = $pdo->prepare("INSERT INTO replies (query_id, reply_message, created_at) VALUES (:query_id, :reply_message, NOW())");
+        $stmt->bindParam(":query_id", $query_id);
+        $stmt->bindParam(":reply_message", $reply_message);
 
         if ($stmt->execute()) {
-            $_SESSION['success_message'] = "Reply sent successfully!";  // Ensure success message is set here
+            // Set success message in session
+            $_SESSION["success_message"] = "Reply sent successfully!";
         } else {
-            $_SESSION['error_message'] = "Failed to send the reply.";  // You can also add an error message if needed
+            $_SESSION["error_message"] = "Failed to send reply. Please try again.";
         }
     } else {
-        $_SESSION['error_message'] = "Please fill in all fields.";
+        $_SESSION["error_message"] = "Reply cannot be empty.";
     }
 }
 
-header("Location: admin_contact.php");  // Redirect to the admin contact page
+// Redirect back to the admin page
+header("Location: admin_contact.php");
 exit();
 ?>

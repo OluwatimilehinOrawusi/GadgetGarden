@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="username">Username</label>
             <input type = "text" id = "username" name = "username" required>
             <br> <br>
-            <label for = "password">Pasword</label>
+            <label for = "password">Password</label>
             <input type = "password" id = "password" name = "password" required>
             <br> <br>
             <h6 class = "login">Forgot your password? <a href = "./forgotpassword.php">Recover Account</a></h6>

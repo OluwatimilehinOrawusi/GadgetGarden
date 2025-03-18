@@ -1,9 +1,9 @@
 
-/* body {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-} */
+}
 #login-container {
     width: 35%;
     background-color: white;
@@ -63,6 +63,12 @@
 }
 
 
+.forgot-password, .register-new {
+    font-size: 0.9rem;
+    color: #858585;
+    text-decoration: underline;
+}
+
 #textboxesandlabels {
     display: flex; 
     flex-direction: column;
@@ -70,21 +76,3 @@
     justify-content: flex-start; 
     width: 100%; 
 }
-
-.login h6 {
-    text-align: center !important;
-    margin-top: 10px !important;
-    font-size: 14px !important;
-    color: #333 !important;
-  }
-  
-  .login h6 a {
-    color: #275E4A !important;
-    text-decoration: none !important;
-    font-weight: bold !important;
-}
-
-
-  .login h6 a:hover {
-    text-decoration: underline !important;
-  }

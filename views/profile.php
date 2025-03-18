@@ -68,6 +68,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <a href="./profile.php"><button class="white-button">Profile</button></a>
             <a href="./logout.php"><button class="green-button">Logout</button></a>
         <?php } ?>
+        
     </div>
 </nav>
 

@@ -270,21 +270,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
         alert("Thank you for rating us " + stars + " stars!");
     }
     </script>
-            </div>
-
-<script>
-    document.getElementById("dark-mode-toggle").addEventListener("click", function() {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
-    });
-
-    window.onload = function() {
-        if (localStorage.getItem("darkMode") === "true") {
-            document.body.classList.add("dark-mode");
-        }
-    };
-</script>
-                
+            </div>                
         </section>
     </main>
 </div>

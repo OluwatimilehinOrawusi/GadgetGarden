@@ -16,6 +16,7 @@ body {
   height: 30rem;
   width: 30rem;
   border-radius: 8px;
+  object-fit: cover;
 }
 .product-data {
   display: flex;
@@ -38,6 +39,26 @@ body {
   font-size: 18px;
   color: #333;
 }
+/* Low Stock Warning */
+.low-stock-warning {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d6cc0b;
+  text-shadow: #3330;
+  padding: 5px 10px;
+  display: inline-block;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+/* Out of Stock Warning */
+.out-of-stock-warning {
+  font-size: 18px;
+  font-weight: bold;
+  color: #B22222;
+  margin-bottom: 5px;
+  text-shadow: #333;
+}
+/* Add to Basket Button */
 .add-to-basket {
   padding: 10px 20px;
   font-size: 1rem;
@@ -49,8 +70,20 @@ body {
   transition: background-color 0.3s;
 }
 .add-to-basket:hover {
-  background-color: #0056B3;
+  background-color: #218C5D;
 }
+/* Out of Stock Button */
+.out-of-stock-button {
+  padding: 10px 20px;
+  font-size: 0.7rem;
+  background-color: #B22222;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+/* Average Rating */
 .average-rating {
   max-width: 900px;
   margin: 20px auto;
@@ -64,6 +97,7 @@ body {
   font-size: 22px;
   color: #2A6041;
 }
+/* Star Ratings */
 .star-rating {
   font-size: 22px;
   color: #FFD700;
@@ -79,6 +113,7 @@ body {
 .empty-star {
   color: #ccc;
 }
+/* Reviews Section */
 .reviews-section {
   max-width: 900px;
   margin: 40px auto;
@@ -93,6 +128,7 @@ body {
   color: #2A6041;
   margin-bottom: 20px;
 }
+/* Review Cards */
 .review-card {
   background: white;
   padding: 15px;
@@ -113,7 +149,20 @@ body {
   font-size: 14px;
   color: #777;
 }
+/* Responsive Design */
 @media screen and (max-width: 768px) {
+  .product-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+  .product-image img {
+      height: 20rem;
+      width: 20rem;
+  }
+  .product-data {
+      padding-left: 0;
+  }
   .reviews-section {
       width: 90%;
       padding: 15px;

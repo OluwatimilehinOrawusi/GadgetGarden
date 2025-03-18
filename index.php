@@ -220,7 +220,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         alert("Thank you for rating us " + stars + " stars!");
     }
 </script>
-</div>
+
 
     
 <?php require_once "./partials/footer.php"; ?>

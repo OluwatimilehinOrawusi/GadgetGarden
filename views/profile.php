@@ -50,6 +50,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
     <title>Gadget Garden - Profile</title>
     <?php require '../partials/header.php'; ?>
     <link rel="stylesheet" href="../public/css/profile.css">
+    <link rel="stylesheet" href="../public/css/chatbot.css">
 </head>
 <body>
 <nav>

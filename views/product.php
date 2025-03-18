@@ -30,11 +30,13 @@ $reviewStmt = $pdo->prepare("
 
 $reviewStmt->execute([$id]);
 $reviews = $reviewStmt->fetchAll(PDO::FETCH_ASSOC);
+
 // Calculate average rating
 $averageStmt = $pdo->prepare("SELECT AVG(rating) AS avg_rating FROM reviews WHERE product_id = ?");
 $averageStmt->execute([$id]);
 $avgResult = $averageStmt->fetch(PDO::FETCH_ASSOC);
 $averageRating = isset($avgResult['avg_rating']) ? round($avgResult['avg_rating'], 1) : 0;
+
 // Function to generate star ratings
 function displayStars($rating) {
     $fullStars = floor($rating);
@@ -90,6 +92,8 @@ function displayStars($rating) {
             <a href="./reviewPage.php?id=<?php echo $id; ?>"><u>Write a review</u></a>
         </div>
     </div>
+
+    <!-----Review Section----->
     <div class="reviews-section">
         <h2>Customer Reviews</h2>
         <?php if ($averageRating > 0) : ?>

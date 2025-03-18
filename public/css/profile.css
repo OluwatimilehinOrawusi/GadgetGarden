@@ -241,5 +241,79 @@
   text-align: right;
 }
 
+body {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s;
+}
+
+.dark-mode .icon-button {
+    color: #ffffff;
+}
+
+nav, .info-card, .order-container {
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+.dark-mode nav, 
+.dark-mode .info-card, 
+.dark-mode .order-container {
+    background-color: #1e1e1e;
+}
+
+/* Add styles for chatbot and buttons in dark mode */
+.dark-mode .chat-container {
+    background-color: #222;
+    color: #fff;
+}
+
+.dark-mode .chat-input {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode .chat-options button {
+    background-color: #444;
+    color: #fff;
+}
+
+/* JavaScript to toggle dark mode */
+<script>
+    document.getElementById("dark-mode-toggle").addEventListener("click", function() {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    });
+
+    window.onload = function() {
+        if (localStorage.getItem("darkMode") === "true") {
+            document.body.classList.add("dark-mode");
+        }
+    };
+</script>
 
 

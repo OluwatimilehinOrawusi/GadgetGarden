@@ -1,3 +1,20 @@
+<?php
+session_start();
+$pdo = require_once "../database/database.php";
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
+$stmt = $pdo->prepare("SELECT P.product_id, p.name, p.price, p.image FROM wishlist w JOIN products p ON w.product_id = p.product_id WHERE w.user_id = :user_id");
+$stmt->execute(['user_id' => $user_id]);
+$items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +41,6 @@
                     <?php endif; ?>
     </div>
     
-    <?php require_once "../partials/footer.php"
+    <?php require_once "../partials/footer.php"?>
 </body>
 </html>

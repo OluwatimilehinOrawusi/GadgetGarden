@@ -20,6 +20,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/wishlist.css">
     <?php require_once "../partials/header.php"; ?>
     <title>Wishlist</title>
 </head>
@@ -44,12 +45,13 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             </div>
 </nav>       
+<h1>Bookmarked Items</h1>
     <div class = "wishlistcon">
-        <h1>Bookmarked Items</h1>
+        
         <?php if ($items) : ?>
             <?php foreach ($items as $item): ?>
                 <div clas = "wishlistcrd">
-                    <img src="<?php echo htmlspecialchars($item['image']); ?>" alt = "Image">
+                    <img class="wishlist-image" src="<?php echo htmlspecialchars($item['image']); ?>" alt = "Image">
                     <h3><?php echo htmlspecialchars($item['name']); ?></h3>
                     <p>£<?php echo htmlspecialchars($item['price']); ?></p>
                     <a href = "product.php?id=<?php echo $item['product_id']; ?>"><button class = "green-button">View</button></a>

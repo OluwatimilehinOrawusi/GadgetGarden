@@ -64,7 +64,9 @@ function displayStars($rating) {
             <p class="product-condition">Condition: <?php echo htmlspecialchars($product["state"]) ?></p>
             <p class="product-price">£<?php echo htmlspecialchars($product["price"]) ?></p>
             <a href="add-products.php?product_id=<?php echo $product["product_id"] ?>"><button class="green-button">Add to Basket</button></a>
+            
             <a href="./reviewPage.php?id=<?php echo $id ?>"><u>Write a review</u></a>
+
         </div>
     </div>
 

@@ -20,9 +20,30 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php require_once "../partials/header.php"; ?>
     <title>Wishlist</title>
 </head>
 <body>
+<nav>
+            <div class="nav-left">
+                <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+            </div>
+            <div class="nav-right">
+                <a href="../views/aboutpage.php"><button class="white-button">About Us</button></a>
+                <?php if (!isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
+                 <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
+                <?php }?>
+                <?php if (isset($_SESSION['user_id'])){?>
+                <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
+                <?php echo '<a href="./contact.php"><button class="white-button">Contact us</button></a>' ?>
+                <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
+                <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
+
+                <?php }?>
+
+            </div>
+</nav>       
     <div class = "wishlistcon">
         <h1>Bookmarked Items</h1>
         <?php if ($items) : ?>
@@ -31,7 +52,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <img src="<?php echo htmlspecialchars($item['image']); ?>" alt = "Image">
                     <h3><?php echo htmlspecialchars($item['name']); ?></h3>
                     <p>£<?php echo htmlspecialchars($item['price']); ?></p>
-                    <a href = "productPage.php?id=<?php echo $item['product_id']; ?>"><button class = "green-button">View</button></a>
+                    <a href = "product.php?id=<?php echo $item['product_id']; ?>"><button class = "green-button">View</button></a>
                      <!-- add remove wishlist link/page  -->
             </div>
             <?php endforeach; ?>

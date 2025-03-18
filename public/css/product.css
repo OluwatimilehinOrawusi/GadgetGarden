@@ -57,6 +57,7 @@ body {
   font-weight: bold;
   color: #B22222;
   margin-bottom: 5px;
+  text-shadow: #333;
 }
 /* Add to Basket Button */
 .add-to-basket {

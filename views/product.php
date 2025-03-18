@@ -61,20 +61,28 @@ function displayStars($rating) {
         <div class="product-image">
             <img src="<?php echo htmlspecialchars($product["image"]); ?>" alt="Product Image">
         </div>
+
+        <!-----Product information----->
         <div class="product-data">
             <h1 class="product-name"><?php echo htmlspecialchars($product["name"]); ?></h1>
             <p class="product-description"><?php echo htmlspecialchars($product["description"]); ?></p>
             <p class="product-condition">Condition: <?php echo htmlspecialchars($product["state"]); ?></p>
             <p class="product-price">£<?php echo htmlspecialchars($product["price"]); ?></p>
+            
+            <!-----Product normal stock----->
             <?php if ($stockQuantity > 3) : ?>
                 <a href="add-products.php?product_id=<?php echo $product["product_id"]; ?>">
                     <button class="green-button">Add to Basket</button>
                 </a>
+
+            <!-----Product Low stock----->    
             <?php elseif ($stockQuantity > 0) : ?>
-                <p class="low-stock-warning">:warning: Only <?php echo $stockQuantity; ?> left in stock!</p>
+                <p class="low-stock-warning">Only <?php echo $stockQuantity; ?> left in stock!</p>
                 <a href="add-products.php?product_id=<?php echo $product["product_id"]; ?>">
                     <button class="green-button">Add to Basket</button>
                 </a>
+
+            <!-----Product out of stock----->
             <?php else: ?>
                 <p class="out-of-stock-warning"> Out of Stock</p>
                 <button class="out-of-stock-button" disabled>Out of Stock</button>

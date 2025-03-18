@@ -20,7 +20,6 @@ if (!$product) {
 
 // Assign stock value safely
 $stockQuantity = isset($product['stock']) ? intval($product['stock']) : 0;
-// Fetch reviews for the product
 $reviewStmt = $pdo->prepare("
     SELECT r.rating, r.review_text AS comment, r.created_at AS review_date, u.username
     FROM reviews r

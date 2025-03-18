@@ -76,7 +76,7 @@ function displayStars($rating) {
                     <button class="green-button">Add to Basket</button>
                 </a>
             <?php else: ?>
-                <p class="out-of-stock-warning">:x: Out of Stock</p>
+                <p class="out-of-stock-warning"> Out of Stock</p>
                 <button class="out-of-stock-button" disabled>Out of Stock</button>
             <?php endif; ?>
             <a href="./reviewPage.php?id=<?php echo $id; ?>"><u>Write a review</u></a>

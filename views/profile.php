@@ -68,13 +68,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             <a href="./profile.php"><button class="white-button">Profile</button></a>
             <a href="./logout.php"><button class="green-button">Logout</button></a>
         <?php } ?>
-
-        <!--Dark mode button in the navbar-->
-         <div class="dark-mode-container">
-        <button id="dark-mode-toggle" class="icon-button">
-            <i class="fas fa-moon"></i>
-            <span>Dark Mode</span> <!-- Added this span element to hold the button text -->
-        </button>
     </div>
         
     </div>

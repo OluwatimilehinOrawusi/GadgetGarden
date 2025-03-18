@@ -43,9 +43,8 @@ body {
 .low-stock-warning {
   font-size: 18px;
   font-weight: bold;
-  color: #B22222;
-  background-color: #FFECEC;
-  border: 1px solid #FF5E5E;
+  color: #d6cc0b;
+  text-shadow: #3330;
   padding: 5px 10px;
   display: inline-block;
   border-radius: 5px;

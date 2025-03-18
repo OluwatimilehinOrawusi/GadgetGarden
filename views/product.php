@@ -6,14 +6,13 @@ $pdo = require_once "../database/database.php";
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("Invalid product ID.");
 }
-$id = intval($_GET['id']);
 
 // Fetch product details from database
+$id = intval($_GET['id']);
 $statement = $pdo->prepare('SELECT * FROM products WHERE product_id = :id');
 $statement->bindValue(":id", $id, PDO::PARAM_INT);
 $statement->execute();
 $product = $statement->fetch(PDO::FETCH_ASSOC);
-
 // Check if the product exists
 if (!$product) {
     die("Product not found.");
@@ -21,7 +20,6 @@ if (!$product) {
 
 // Assign stock value safely
 $stockQuantity = isset($product['stock']) ? intval($product['stock']) : 0;
-
 // Fetch reviews for the product
 $reviewStmt = $pdo->prepare("
     SELECT r.rating, r.review_text AS comment, r.created_at AS review_date, u.username
@@ -30,15 +28,14 @@ $reviewStmt = $pdo->prepare("
     WHERE r.product_id = ?
     ORDER BY r.created_at DESC
 ");
+
 $reviewStmt->execute([$id]);
 $reviews = $reviewStmt->fetchAll(PDO::FETCH_ASSOC);
-
 // Calculate average rating
 $averageStmt = $pdo->prepare("SELECT AVG(rating) AS avg_rating FROM reviews WHERE product_id = ?");
 $averageStmt->execute([$id]);
 $avgResult = $averageStmt->fetch(PDO::FETCH_ASSOC);
 $averageRating = isset($avgResult['avg_rating']) ? round($avgResult['avg_rating'], 1) : 0;
-
 // Function to generate star ratings
 function displayStars($rating) {
     $fullStars = floor($rating);
@@ -48,6 +45,11 @@ function displayStars($rating) {
 }
 ?>
 
+
+
+
+
+<!-----HTML------->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,33 +58,33 @@ function displayStars($rating) {
 </head>
 <body>
     <?php require_once "../partials/navbar.php"; ?>
-
     <div class="product-container">
         <div class="product-image">
             <img src="<?php echo htmlspecialchars($product["image"]); ?>" alt="Product Image">
         </div>
-
         <div class="product-data">
             <h1 class="product-name"><?php echo htmlspecialchars($product["name"]); ?></h1>
             <p class="product-description"><?php echo htmlspecialchars($product["description"]); ?></p>
             <p class="product-condition">Condition: <?php echo htmlspecialchars($product["state"]); ?></p>
             <p class="product-price">£<?php echo htmlspecialchars($product["price"]); ?></p>
-
-            <?php if ($stockQuantity > 0) : ?>
+            <?php if ($stockQuantity > 3) : ?>
+                <a href="add-products.php?product_id=<?php echo $product["product_id"]; ?>">
+                    <button class="green-button">Add to Basket</button>
+                </a>
+            <?php elseif ($stockQuantity > 0) : ?>
+                <p class="low-stock-warning">:warning: Only <?php echo $stockQuantity; ?> left in stock!</p>
                 <a href="add-products.php?product_id=<?php echo $product["product_id"]; ?>">
                     <button class="green-button">Add to Basket</button>
                 </a>
             <?php else: ?>
+                <p class="out-of-stock-warning">:x: Out of Stock</p>
                 <button class="out-of-stock-button" disabled>Out of Stock</button>
             <?php endif; ?>
-
             <a href="./reviewPage.php?id=<?php echo $id; ?>"><u>Write a review</u></a>
         </div>
     </div>
-
     <div class="reviews-section">
         <h2>Customer Reviews</h2>
-        
         <?php if ($averageRating > 0) : ?>
             <div class="average-rating">
                 <strong>Average Rating:</strong>
@@ -92,11 +94,10 @@ function displayStars($rating) {
         <?php else : ?>
             <p>No reviews yet. Be the first to leave a review!</p>
         <?php endif; ?>
-
         <?php if (!empty($reviews)) : ?>
             <?php foreach ($reviews as $review) : ?>
                 <div class="review-card">
-                    <p><strong><?php echo htmlspecialchars($review["username"]); ?></strong> - 
+                    <p><strong><?php echo htmlspecialchars($review["username"]); ?></strong> -
                     <span class="star-rating"><?php echo displayStars($review["rating"]); ?></span></p>
                     <p><?php echo htmlspecialchars($review["comment"]); ?></p>
                     <p class="review-date"><?php echo htmlspecialchars($review["review_date"]); ?></p>
@@ -104,7 +105,6 @@ function displayStars($rating) {
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
-
     <?php require_once "../partials/footer.php"; ?>
 </body>
 </html>

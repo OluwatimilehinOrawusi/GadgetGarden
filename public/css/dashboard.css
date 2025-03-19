@@ -47,6 +47,11 @@ a{
 
 #analytic-card{
     grid-column: span 2;
+    background: url("../assets/Analytics-card.jpg");
+    background-size: cover; /* Scales the image to cover the entire div */
+    background-position: left; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling if the image is smaller than the div */
+
 }
 
 #dashboard-links{

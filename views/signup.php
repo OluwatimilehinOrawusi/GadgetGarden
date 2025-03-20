@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
+    $memorable_phrase = $_POST['memorable_phrase'];
 
     if ($password !== $confirm_password) {
         $errors[] = "The passwords do not match, please try again.";
@@ -17,16 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
     try {
-        $sql = "INSERT INTO users (username, email, phone, password_hash) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO users(username, email,phone, password_hash,memorable_phrase) VALUES(?,?,?,?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$username, $email, $phone, $password_hash]);
-
-        $user_id = $pdo->lastInsertId();
-
-        $_SESSION['user_id'] = $user_id;
-        $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
-        $_SESSION['phone'] = $phone;
+        $stmt -> execute([$username, $email,$phone, $password_hash,$memorable_phrase]);
 
         header("Location: ./profile.php");
         exit;
@@ -90,8 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="password">Password</label>
                 <input required type="password" name="password" placeholder="Password">
 
-                <label for="confirm_password">Confirm Password</label>
-                <input required type="password" name="confirm_password" placeholder="Confirm Password">
+  <label for="cpassword">Confirm Password</label>
+
+  <input required ="text" id="cpassword" name="confirm_password" placeholder="Confirm Password">
 
                 <button type="submit">Create Account</button>
 

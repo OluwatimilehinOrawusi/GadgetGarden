@@ -72,31 +72,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="login-container">
         <h1>Sign in</h1>
         <br> <br>
-        
-        <?php if (!empty($errors)) : ?>
-            <div class="error-message">
-                <?php foreach ($errors as $error) {
-                    echo "<p>$error</p>";
-                } ?>
-            </div>
-        <?php endif; ?>
-
-        <form method="post" action="login.php" id="loginform">
-            <div id="textboxesandlabels">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-                <br> <br>
-
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-                <br> <br>
-            </div>
-
-            <input type="submit" value="Sign in" id="subbutton"/>
-            <input type="hidden" name="submitted" value="true"/>
+        <form method = "post" action = "login.php" id = "loginform">
+        <div id = "textboxesandlabels">
+            <label for="username">Username</label>
+            <input type = "text" id = "username" name = "username" required>
             <br> <br>
+            <label for = "password">Password</label>
+            <input type = "password" id = "password" name = "password" required>
+            <br> <br>
+            <p class = "login">Forgot your password? <a href = "./forgotpassword.php">Recover Account</a></p>
+        </div>
 
-            <p class="register-new">Don't have an account? <a href="./signup.php">Sign up</a></p>
+        <input type = "submit" value = "Sign in" id = "subbutton"/>
+        <input type = "hidden" name = "submitted" value = "true"/>
+        <br> <br>
+        <p class = "login">Don't have an account? <a href ="./signup.php">Sign up</a></p>
         </form> 
     </div>
 </div>

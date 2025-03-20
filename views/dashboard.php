@@ -66,7 +66,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
 
         <a href="./admin_dashboard.php" id="analytic-card" class="dashboard-cards clickable-div">
-            <img src="../public/assets/Analytics-card.jpg">
+            <img src="../public/assets\Diagram.png">
             <p>Analytics</p>
         </a>
 

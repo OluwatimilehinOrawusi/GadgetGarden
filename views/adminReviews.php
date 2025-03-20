@@ -124,6 +124,7 @@ foreach ($reviews as $review) {
             </table>
         <?php endif; ?>
     </div>
+    
 
     <!-- Reviews Per Product Tab -->
     <div id="perProduct" class="tab-content" style="display:none;">

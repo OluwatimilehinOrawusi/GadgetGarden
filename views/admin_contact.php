@@ -80,13 +80,22 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Customer Queries</h1>
 
         <?php if (isset($_SESSION['success_message'])): ?>
-            <div class ="success-message">
-                <?php 
-                echo $_SESSION['success_message'];
-                unset($_SESSION['success_message']); 
-                ?>
-            </div>
-            <?php endif; ?>
+    <div class="success-message">
+        <?php 
+        echo $_SESSION['success_message']; 
+        unset($_SESSION['success_message']); 
+        ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['error_message'])): ?>
+    <div class="error-message">
+        <?php 
+        echo $_SESSION['error_message']; 
+        unset($_SESSION['error_message']); 
+        ?>
+    </div>
+<?php endif; ?>
 
         <table>
             <thead>

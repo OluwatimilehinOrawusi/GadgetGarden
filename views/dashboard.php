@@ -85,7 +85,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <p>Customer Details</p>
         </a>
 
-        <a href="./forum.php" class="dashboard-cards clickable-div">
+        <a href="./replies.php" class="dashboard-cards clickable-div">
             <img src="../public/assets/Megaphone.png">
             <p>Customer Forum</p>
         </a>

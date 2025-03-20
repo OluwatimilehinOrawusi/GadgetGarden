@@ -54,6 +54,34 @@ a{
 
 }
 
+#legal-card{
+    background: url("../assets/Legal-card.jpg");
+    background-size: cover; /* Scales the image to cover the entire div */
+    background-position: left; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling if the image is smaller than the div */
+}
+
+#reviewUploads{
+    background: url("../assets/reviewCustomerUpload-card.jpg");
+    background-size: cover; /* Scales the image to cover the entire div */
+    background-position: left; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling if the image is smaller than the div */
+}
+
+#product_reviews{
+    background: url("../assets/productReviews-card.jpg");
+    background-size: cover; /* Scales the image to cover the entire div */
+    background-position: left; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling if the image is smaller than the div */ 
+}
+
+#order-card{
+    background: url("../assets/orders-card.jpg");
+    background-size: cover; /* Scales the image to cover the entire div */
+    background-position: left; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling if the image is smaller than the div */  
+}
+
 #dashboard-links{
     grid-row: span 2;
 }

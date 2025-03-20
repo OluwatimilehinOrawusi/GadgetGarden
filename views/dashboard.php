@@ -35,22 +35,29 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         <a href="./logout.php"><button class="green-button">Logout</button></a>
     </div>
 </nav>
-
     <div id="main-container">
-    <h1> Welcome <?php echo htmlspecialchars($user['username']); ?> !</h1>
+    <h1> Welcome <?php echo $user['username'] ?> !</h1>
     <p>Administration Dashboard</p>
         <div id="grid-container">
                     
-        <a href="./manage_orders.php" id="order-card" class="dashboard-cards clickable-div">
+        <a href="./manage_orders.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Quickdelivery.png">
+            <p>Orders</p>
         </a>
 
-        <a href="./reviewPage.php" id="product_reviews" class="dashboard-cards clickable-div">
+        <a href="./reviewPage.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Checkbox.png">
+            <p>Product Reviews</p>
         </a>
 
-        <a href="./ReviewCustomerUploads.php" id="reviewUploads" class="dashboard-cards clickable-div">
+        <a href="./ReviewCustomerUploads.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Download.png">
+            <p>Review Customer Uploads</p>
         </a>
 
-        <a href="./legal.php" id="legal-card"class="dashboard-cards clickable-div">
+        <a href="./legal.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Invoice.png">
+            <p>Legal</p>
         </a>
 
         <a href="./admin.php" id="dashboard-links" class="dashboard-cards clickable-div">
@@ -59,6 +66,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
 
         <a href="./admin_dashboard.php" id="analytic-card" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Analytics-card.jpg">
+            <p>Analytics</p>
         </a>
 
         <a href="./alerts.php" class="dashboard-cards clickable-div">
@@ -82,6 +91,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
         
         </div>
-    </div>
-</body>
+        </div>
+    </body>
 </html>

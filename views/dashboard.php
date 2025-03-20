@@ -45,7 +45,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <p>Orders</p>
         </a>
 
-        <a href="./reviewPage.php" class="dashboard-cards clickable-div">
+        <a href="./adminReviews.php" class="dashboard-cards clickable-div">
             <img src="../public/assets/Checkbox.png">
             <p>Product Reviews</p>
         </a>

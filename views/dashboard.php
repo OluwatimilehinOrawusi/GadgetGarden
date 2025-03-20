@@ -35,25 +35,63 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         <a href="./logout.php"><button class="green-button">Logout</button></a>
     </div>
 </nav>
+
     <div id="main-container">
-    <h1> Welcome <?php echo $user['username'] ?> !</h1>
+    <h1> Welcome <?php echo htmlspecialchars($user['username']); ?> !</h1>
     <p>Administration Dashboard</p>
         <div id="grid-container">
                     
-        <div class="dashboard-cards"><a href="./manage_orders.php" class="clickable-div"><img src=../public\assets\Quickdelivery.png ><p>Orders</p></a></div>
-                    <div class="dashboard-cards"><img src=../public\assets\Checkbox.png ><a href="./reviewPage.php"><p>Product Reviews</p></a></div>
-                    <div class="dashboard-cards"><img src=../public\assets\Download.png ><a href="./ReviewCustomerUploads.php"><p>Review Customer Uploads</p></a></div>
-                    <div class="dashboard-cards"><img src=../public\assets\Invoice.png ><a href="./legal.php"><p>Legal</p></a></div>
-                    <div id="dashboard-links" class="dashboard-cards"><img src=../public\assets\Home.png ><a href="./admin.php"><p>Inventory management</p></a></div>
-                    <div id="analytic-card"class="dashboard-cards"><img src=../public\assets\DiagAnalytics-card.jpg><a href="./admin_dashboard.php"><p>Analytics</p></a></div>
-                    <div class="dashboard-cards"><img src=../public\assets\VolumeUp.png ><a href="./alerts.php"><p>Alerts</p></a></div>
-                    
-                    <div class="dashboard-cards"><img src=../public\assets\Account.png ><a href="./admin_contact.php"><p>Customer Queries</p></a></div>
-                    <div class="dashboard-cards"><img src=../public\assets\Partner.png ><a href="./manage_users.php"><p>Customer details</p></a></div>
-                    <div class="dashboard-cards"><img src=../public\assets\Megaphone.png ><a href="./forum.php"><p>Customer Forum</p></a></div>
-                    
-                 
+        <a href="./manage_orders.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Quickdelivery.png">
+            <p>Orders</p>
+        </a>
+
+        <a href="./reviewPage.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Checkbox.png">
+            <p>Product Reviews</p>
+        </a>
+
+        <a href="./ReviewCustomerUploads.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Download.png">
+            <p>Review Customer Uploads</p>
+        </a>
+
+        <a href="./legal.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Invoice.png">
+            <p>Legal</p>
+        </a>
+
+        <a href="./admin.php" id="dashboard-links" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Home.png">
+            <p>Inventory Management</p>
+        </a>
+
+        <a href="./admin_dashboard.php" id="analytic-card" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Analytics-card.jpg">
+            <p>Analytics</p>
+        </a>
+
+        <a href="./alerts.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/VolumeUp.png">
+            <p>Alerts</p>
+        </a>
+
+        <a href="./admin_contact.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Account.png">
+            <p>Customer Queries</p>
+        </a>
+
+        <a href="./manage_users.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Partner.png">
+            <p>Customer Details</p>
+        </a>
+
+        <a href="./forum.php" class="dashboard-cards clickable-div">
+            <img src="../public/assets/Megaphone.png">
+            <p>Customer Forum</p>
+        </a>
+        
         </div>
-        </div>
-    </body>
+    </div>
+</body>
 </html>

@@ -13,7 +13,7 @@ $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user || $user['role'] !== 'admin') {
-    echo "<script>alert('Error: You are not an admin. Redirecting to home page.'); window.location.href = '../index.php';</script>";
+    echo "<script>alert('Error: You are not an admin. Redirecting to home page.'); window.location.href = './dashboard.php';</script>";
     exit();
 }
 

@@ -77,6 +77,7 @@ tr:hover {
     background-color: #117A3D;
     color: white;
     cursor: pointer;
+    margin-right: 20px;
 }
 
 
@@ -90,7 +91,7 @@ tr:hover {
 .tab-button:hover {
     background-color: white;
     color: #275E4A;
-    transform: scale(1.05);
+    transform: scale(1.10);
 }
 
 

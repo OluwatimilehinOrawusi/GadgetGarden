@@ -84,7 +84,7 @@ foreach ($reviews as $review) {
     <h1>Manage Reviews</h1>
 
     <div class="tabs">
-        <button id="allReviews-btn" class="tab-button active" onclick="openTab('allReviews')">All Reviews</button>
+        <button id="allReviews-btn" class="tab-button" onclick="openTab('allReviews')">All Reviews</button>
         <button id="perProduct-btn" class="tab-button" onclick="openTab('perProduct')">Reviews Per Product</button>
     </div>
 

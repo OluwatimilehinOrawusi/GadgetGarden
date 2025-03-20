@@ -41,7 +41,7 @@ if (isset($_GET['user_id'])) {
     <title>Update User Role</title>
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/update_role.css"> <!-- ✅ New CSS File -->
+    <link rel="stylesheet" href="../public/css/update_role.css"> 
 </head>
 <body>
 

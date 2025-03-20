@@ -51,7 +51,7 @@ foreach ($reviews as $review) {
     <title>Manage Reviews - Admin</title>
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
-    <link rel="stylesheet" href="../public/css/admin_reviews.css">
+    <link rel="stylesheet" href="../public/css/adminReviews.css">
     <script>
         function openTab(tabName) {
             let tabs = document.querySelectorAll(".tab-content");

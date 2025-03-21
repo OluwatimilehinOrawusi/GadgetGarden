@@ -30,7 +30,7 @@ body {
     60% { transform: translateY(-5px); }
 }
 
-/* Chat Container with Slide-Up Animation */
+/* Chat Container */
 .chat-container {
     width: 300px;
     position: fixed;
@@ -40,15 +40,18 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     padding: 10px;
-    display: none; /* Hidden by default */
     transform: translateY(100%);
     transition: transform 0.3s ease-in-out;
+    visibility: hidden; /* Initially hidden */
+    opacity: 0;
 }
 
 .chat-container.open {
     transform: translateY(0);
-    display: block; /* Show the chat container when open */
+    visibility: visible;
+    opacity: 1;
 }
+
 
 /* Chat Box with Message Pop-In Animation */
 .chat-box {

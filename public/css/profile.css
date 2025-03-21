@@ -244,5 +244,60 @@
 
 
 
+/* Dark Mode */
+.dark-mode #wholepage {
+  background-color: #121212;
+  color: #f4f4f4;
+}
+
+/* Header */
+.dark-mode .header {
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #444;
+}
+
+/* Main Content */
+.dark-mode .main-content {
+  background-color: #003322;
+  color: #ddd;
+}
+
+/* Info Section */
+.dark-mode .info-card {
+  background-color: #1e1e1e;
+  color: #c4f1e4;
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1);
+}
+
+/* Order Section */
+.dark-mode .order-container {
+  background-color: #1e1e1e;
+  color: #c4f1e4;
+  box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .order-container h3 {
+  color: #78fccc;
+}
+
+/* Order Status */
+.dark-mode .order-status.paid {
+  background-color: #b8860b;
+  color: white;
+}
+
+.dark-mode .order-status.dispatched {
+  background-color: #0056b3;
+}
+
+.dark-mode .order-status.delivered {
+  background-color: #1e7d34;
+}
+
+/* Discount Banner */
+.dark-mode .discount {
+  background-color: #004d26;
+  color: white;
+}
 
 

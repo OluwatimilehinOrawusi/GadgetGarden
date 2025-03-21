@@ -63,14 +63,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
         <?php if (!isset($_SESSION['user_id'])) { ?>
             <a href="./login.php"><button class="green-button">Login</button></a>
             <a href="./signup.php"><button class="white-button">Sign Up</button></a>
-
-         <!--Dark mode button in the navbar-->
-         <div class="dark-mode-container">
-        <button id="dark-mode-toggle" class="icon-button">
-            <i class="fas fa-moon"></i>
-            <span>Dark Mode</span> <!-- Added this span element to hold the button text -->
-        </button>
-    </div>
         
         <?php } else { ?>
             <a href="./basket.php"><button class="white-button">Basket</button></a>

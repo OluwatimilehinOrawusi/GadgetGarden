@@ -35,12 +35,6 @@ $pdo = require_once "../database/database.php";
                 <a href="./contact.php"><button class="white-button">Contact Us</button></a>
                 <a href="./profile.php"><button class="white-button">Profile</button></a>
                 <a href="./logout.php"><button class="green-button">Logout</button></a>
-                 <!--Dark mode button in the navbar-->
-         <div class="dark-mode-container">
-        <button id="dark-mode-toggle" class="icon-button">
-            <i class="fas fa-moon"></i>
-            <span>Dark Mode</span> <!-- Added this span element to hold the button text -->
-        </button>
     </div>
             <?php } ?>
         </div>
@@ -72,41 +66,6 @@ $pdo = require_once "../database/database.php";
             </div>
         </div>
     </section>
-
-
-  <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toggleButton = document.getElementById("dark-mode-toggle");
-            const body = document.body;
-            const icon = toggleButton.querySelector("i");
-            const buttonText = toggleButton.querySelector("span");
-
-            if (localStorage.getItem("dark-mode") === "enabled") {
-                body.classList.add("dark-mode");
-                icon.classList.add("fa-sun");
-                icon.classList.remove("fa-moon");
-                buttonText.textContent = "Light Mode";
-            }
-
-            toggleButton.addEventListener("click", function () {
-                body.classList.toggle("dark-mode");
-                if (body.classList.contains("dark-mode")) {
-                    localStorage.setItem("dark-mode", "enabled");
-                    icon.classList.add("fa-sun");
-                    icon.classList.remove("fa-moon");
-                    buttonText.textContent = "Light Mode";
-                } else {
-                    localStorage.setItem("dark-mode", "disabled");
-                    icon.classList.add("fa-moon");
-                    icon.classList.remove("fa-sun");
-                    buttonText.textContent = "Dark Mode";
-                }
-            });
-        });
-    </script>
-
-    
-
 
  <!-- Chat Icon -->
 <div class="chat-icon" onclick="toggleChat()">💬</div>

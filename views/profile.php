@@ -196,26 +196,60 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                     ?>
                 <?php endif; ?>
 
-               <!----Chat bot script------>
-                <div class="chat-icon" onclick="toggleChat()">💬</div>
+<!-- Chat Icon -->
+<div class="chat-icon" onclick="toggleChat()">💬</div>
+
+<!-- Chat Container -->
+<div class="chat-container" id="chat-container">
+    <div class="chat-header">
+        <span>Chatbot</span>
+        <button onclick="minimizeChat()">➖</button>
+        <button onclick="closeChat()">❌</button>
+        <button onclick="terminateChat()">⛔</button>
+    </div>
+    <div class="chat-box" id="chat-box"></div>
     
-    <div class="chat-container" id="chat-container">
-        <div class="chat-box" id="chat-box"></div>
-        <div class="chat-options">
-            <p class="bot-message message"><strong>Bot:</strong> Select one of the following options:</p>
-            <button onclick="sendMessage('delivery times')">Delivery Times</button>
-            <button onclick="sendMessage('returns')">Returns</button>
-            <button onclick="sendMessage('refunds')">Refunds</button>
-            <button onclick="sendMessage('rate us')">Rate Us</button>
-            <button onclick="sendMessage('contact us')">Contact Us</button>
-        </div>
-        <input type="text" id="user-input" class="chat-input" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
+    <div class="chat-options">
+        <p class="bot-message message"><strong>Bot:</strong> Select an option:</p>
+        <button onclick="sendMessage('delivery times')">Delivery Times</button>
+        <button onclick="sendMessage('returns')">Returns</button>
+        <button onclick="sendMessage('refunds')">Refunds</button>
+        <button onclick="sendMessage('rate us')">Rate Us</button>
+        <button onclick="sendMessage('contact us')">Contact Us</button>
     </div>
 
-   <script>
+    <input type="text" id="user-input" class="chat-input" placeholder="Type here..." onkeypress="handleKeyPress(event)">
+</div>
+
+<script>
     function toggleChat() {
         let chatContainer = document.getElementById("chat-container");
-        chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
+        if (!chatContainer.classList.contains("open")) {
+            chatContainer.style.display = "block";
+            setTimeout(() => chatContainer.classList.add("open"), 10);
+        } else {
+            chatContainer.classList.remove("open");
+            setTimeout(() => chatContainer.style.display = "none", 300);
+        }
+    }
+
+    function minimizeChat() {
+        let chatContainer = document.getElementById("chat-container");
+        chatContainer.classList.remove("open");
+        setTimeout(() => { chatContainer.style.display = "none"; }, 300);
+    }
+
+    function closeChat() {
+        let chatContainer = document.getElementById("chat-container");
+        chatContainer.classList.remove("open");
+        setTimeout(() => { chatContainer.style.display = "none"; }, 300);
+    }
+
+    function terminateChat() {
+        let chatContainer = document.getElementById("chat-container");
+        chatContainer.classList.remove("open");
+        setTimeout(() => { chatContainer.style.display = "none"; }, 300);
+        alert("Chat terminated. Refresh to start a new chat.");
     }
 
     function sendMessage(userInput) {
@@ -230,34 +264,39 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             "delivery times": "Our standard delivery time is 3-5 business days.",
             "returns": "You can return any product within 30 days of purchase.",
             "refunds": "Refunds are processed within 5-7 business days after we receive the returned item.",
-            "rate us": "How would you rate your experience with us? <div class='rating-stars'><span onclick='rate(1)'>★</span><span onclick='rate(2)'>★</span><span onclick='rate(3)'>★</span><span onclick='rate(4)'>★</span><span onclick='rate(5)'>★</span></div>",
-            "contact us": "Need help? <a href='./contact.php' style='text-decoration: underline; font-weight: bold; color: blue;'>Visit our Contact Us page</a> for more details."
+            "rate us": "How would you rate us? <div class='rating-stars'><span onclick='rate(1)'>★</span><span onclick='rate(2)'>★</span><span onclick='rate(3)'>★</span><span onclick='rate(4)'>★</span><span onclick='rate(5)'>★</span></div>",
+            "contact us": "Need help? <a href='./contact.php' style='text-decoration: underline; font-weight: bold; color: blue;'>Contact Us</a>."
         };
-        
-        let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";
-        
+
+        let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option.";
+
         let botMessage = document.createElement("div");
         botMessage.className = "message bot-message";
-        botMessage.innerHTML = "<strong>Bot:</strong> " + response;
+        botMessage.innerHTML = "<strong>Bot:</strong> <span class='typing-indicator'><span></span><span></span><span></span></span>";
         chatBox.appendChild(botMessage);
-        
+
+        setTimeout(() => {
+            botMessage.innerHTML = "<strong>Bot:</strong> " + response;
+        }, 1500);
+
         chatBox.scrollTop = chatBox.scrollHeight;
     }
-       
-// function to highlight when the user clicks on the stars
-       function rate(stars) {
-    let starElements = document.querySelectorAll('.rating-stars span');
-    starElements.forEach((star, index) => {
-        if (index < stars) {
-            star.classList.add("active");
-        } else {
-            star.classList.remove("active");
-        }
-    });
 
-    alert("Thank you for rating us " + stars + " stars!");
-}
-       
+    function rate(stars) {
+        let starElements = document.querySelectorAll('.rating-stars span');
+        starElements.forEach((star, index) => {
+            if (index < stars) {
+                star.classList.add("active");
+            } else {
+                star.classList.remove("active");
+            }
+        });
+
+        setTimeout(() => {
+            alert("Thank you for rating us " + stars + " stars!");
+        }, 300);
+    }
+
     function handleKeyPress(event) {
         if (event.key === "Enter") {
             let userInput = document.getElementById("user-input").value.trim();
@@ -267,11 +306,10 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             }
         }
     }
+</script>
 
-    function rate(stars) {
-        alert("Thank you for rating us " + stars + " stars!");
-    }
-    </script>
+
+                                
             </div>                
         </section>
     </main>

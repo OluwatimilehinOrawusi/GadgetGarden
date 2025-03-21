@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($update_success) {
             echo "Password updated successfully!";
-            //takes the user to the login page when the password has been successfully changed
+            // Takes the user to the login page when the password has been successfully changed
             header("Location:login.php");
             exit();
         } else {
@@ -65,9 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,45 +77,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <nav>
-            <div class="nav-left">
-                <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
-            </div>
-            <div class="nav-right">
-                <a href="../views/aboutpage.php"><button class="white-button">About Us</button></a>
-                <?php if (!isset($_SESSION['user_id'])){?>
-                <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
-                 <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
-                <?php }?>
-                <?php if (isset($_SESSION['user_id'])){?>
-                <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
-                <?php echo '<a href="./contact.php"><button class="white-button">Contact us</button></a>' ?>
-                <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
-                <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
+    <div class="nav-left">
+        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+    </div>
+    <div class="nav-right">
+        <a href="../views/aboutpage.php"><button class="white-button">About Us</button></a>
+        <?php if (!isset($_SESSION['user_id'])){?>
+        <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
+        <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
+        <?php }?>
+        <?php if (isset($_SESSION['user_id'])){?>
+        <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
+        <?php echo '<a href="./contact.php"><button class="white-button">Contact us</button></a>' ?>
+        <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
+        <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
+        <?php }?>
 
-                <?php }?>
+        <!--Dark mode button in the navbar-->
+         <div class="dark-mode-container">
+        <button id="dark-mode-toggle" class="icon-button">
+            <i class="fas fa-moon"></i>
+            <span>Dark Mode</span> <!-- Added this span element to hold the button text -->
+        </button>
+    </div>
 
-            </div>
+
+        
+    </div>
 </nav>
+  <br>
+  <br>
+
+
+   
+        
 <div class="container">
     <header>
         <h1 id="header">Change your password</h1>
         <p>You can reset your password here</p><br><br>
     </header> 
-    
-    <form action="changePassword.php" method="POST" onsubmit="return validateForm()">
-        <div class="input-group"> 
+        
+        <div class="input-group">
+             <form action="changePassword.php" method="POST" onsubmit="return validateForm()">
+            <div class="input-group"> 
             <label for="new-password">New Password</label>
             <div class="password-wrapper">
                 <input type="password" id="new-password" name="new_password" required>
                 <i class="fas fa-eye toggle-password" onclick="togglePassword('new-password', this)"></i>
             </div>
         </div>
-        
-        <div class="input-group">
             <label for="confirm-password">Confirm New Password</label>
             <div class="password-wrapper">
                 <input type="password" id="confirm-password" name="confirm_password" required>
                 <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password', this)"></i>
+                
             </div>
         </div>
         
@@ -136,10 +148,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("dark-mode-toggle");
+        const body = document.body;
+        const icon = toggleButton.querySelector("i");
+        const buttonText = toggleButton.querySelector("span"); // Added this line to select the span element for text
+
+        // Check localStorage for dark mode preference
+        if (localStorage.getItem("dark-mode") === "enabled") {
+            body.classList.add("dark-mode");
+            icon.classList.add("fa-sun");
+            icon.classList.remove("fa-moon");
+            buttonText.textContent = "Light Mode"; // Change button text to Light Mode when dark mode is active
+        }
+
+        toggleButton.addEventListener("click", function () {
+            body.classList.toggle("dark-mode");
+            if (body.classList.contains("dark-mode")) {
+                localStorage.setItem("dark-mode", "enabled");
+                icon.classList.add("fa-sun");
+                icon.classList.remove("fa-moon");
+                buttonText.textContent = "Light Mode"; // Change the text to "Light Mode"
+            } else {
+                localStorage.setItem("dark-mode", "disabled");
+                icon.classList.add("fa-moon");
+                icon.classList.remove("fa-sun");
+                buttonText.textContent = "Dark Mode"; // Change the text back to "Dark Mode"
+            }
+        });
+    });
+
     function validateForm() {
         const newPassword = document.getElementById("new-password").value;
         const confirmPassword = document.getElementById("confirm-password").value;
-
+        
         // Check if the passwords match
         if (newPassword !== confirmPassword) {
             alert("Please make sure your passwords match");
@@ -199,8 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         window.location.href = "login.php";
     }
 </script>
-
 <?php require_once "../partials/footer.php" ?>
+
 </body>
 </html>
-

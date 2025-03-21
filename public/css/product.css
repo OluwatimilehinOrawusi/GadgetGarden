@@ -1,68 +1,177 @@
-/* Reset some default styles */
 * {
-    box-sizing: border-box;
-  }
-  
-  /* Body styles */
-  body {
-    font-family: 'Inter', sans-serif;
-
-  }
-  
-  /* Main product container */
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Inter', sans-serif;
+}
+.product-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+.product-image img {
+  height: 30rem;
+  width: 30rem;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.product-data {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  padding-left: 20px;
+}
+.product-name {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+}
+.product-description {
+  font-size: 16px;
+  color: #555;
+}
+.product-condition,
+.product-price {
+  font-size: 18px;
+  color: #333;
+}
+/* Low Stock Warning */
+.low-stock-warning {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d6cc0b;
+  text-shadow: #3330;
+  padding: 5px 10px;
+  display: inline-block;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+/* Out of Stock Warning */
+.out-of-stock-warning {
+  font-size: 18px;
+  font-weight: bold;
+  color: #B22222;
+  margin-bottom: 5px;
+  text-shadow: #333;
+}
+/* Add to Basket Button */
+.add-to-basket {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #275E4A;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.add-to-basket:hover {
+  background-color: #218C5D;
+}
+/* Out of Stock Button */
+.out-of-stock-button {
+  padding: 10px 20px;
+  font-size: 0.7rem;
+  background-color: #B22222;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  cursor: not-allowed;
+  opacity: 0.7;
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  text-align: center;  
+}
+/* Average Rating */
+.average-rating {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.average-rating h2 {
+  font-size: 22px;
+  color: #2A6041;
+}
+/* Star Ratings */
+.star-rating {
+  font-size: 22px;
+  color: #FFD700;
+  margin: 5px 0;
+}
+.full-star {
+  color: #FFD700;
+}
+.half-star {
+  color: #FFD700;
+  position: relative;
+}
+.empty-star {
+  color: #ccc;
+}
+/* Reviews Section */
+.reviews-section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.reviews-section h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #2A6041;
+  margin-bottom: 20px;
+}
+/* Review Cards */
+.review-card {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  border-left: 4px solid #2A6041;
+}
+.review-card strong {
+  color: #275E4A;
+}
+.review-card p {
+  font-size: 16px;
+  color: #444;
+  margin: 5px 0;
+}
+.review-date {
+  font-size: 14px;
+  color: #777;
+}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
   .product-container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
   }
-  
-  /* Product image styles */
   .product-image img {
-    height: 30rem;
-    width: 30rem;
-    border-radius: 8px;
+      height: 20rem;
+      width: 20rem;
   }
-  
-  /* Product data styles */
   .product-data {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    flex: 1;
-    padding-left: 20px;
+      padding-left: 0;
   }
-  
-  .product-name {
-    font-size: 32px;
-    font-weight: bold;
-    color: #333;
+  .reviews-section {
+      width: 90%;
+      padding: 15px;
   }
-  
-  .product-description {
-    font-size: 16px;
-    color: #555;
+  .review-card {
+      padding: 12px;
   }
-  
-  .product-condition,
-  .product-price {
-    font-size: 18px;
-    color: #333;
-  }
-  
-  .add-to-basket {
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color:  #275E4A;;
-    color: white;
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .add-to-basket:hover {
-    background-color: #0056b3;
-  }
+}

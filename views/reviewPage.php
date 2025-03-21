@@ -36,19 +36,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
             $stmt->bindParam(':review_text', $review_text, PDO::PARAM_STR);
 
             if ($stmt->execute()) {
-                echo "<script>alert('Review submitted successfully!');</script>";
+                $_SESSION['success_message'] = "Review submitted successfully";
             } else {
-                echo "<script>alert('Error submitting review.');</script>";
+                $_SESSION['error_message'] = "Error submiting review";
             }
         } catch (PDOException $e) {
             error_log("Database error: " . $e->getMessage()); // Log error
-            echo "<script>alert('A database error occurred. Please try again later.');</script>";
+            $_SESSION['error_message'] = 'A database error occurred. Please try again later.';
         }
+
+        header("Location: product.php?id=$product_id");
+        exit;
     } else {
-        echo "<script>alert('Please fill in all fields correctly.');</script>";
+        $_SESSION['error_message'] = 'Please fill in all fields correctly.';
+        header("Location: product.php?id=$product_id");
+        exit;
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

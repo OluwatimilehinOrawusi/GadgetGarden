@@ -65,7 +65,8 @@ $pdo = require_once "../database/database.php";
     </section>
 
 
-    <div class="chat-icon" onclick="toggleChat()">💬</div>
+    <!----Chat bot script------>
+                <div class="chat-icon" onclick="toggleChat()">💬</div>
     
     <div class="chat-container" id="chat-container">
         <div class="chat-box" id="chat-box"></div>
@@ -73,49 +74,73 @@ $pdo = require_once "../database/database.php";
             <p class="bot-message message"><strong>Bot:</strong> Select one of the following options:</p>
             <button onclick="sendMessage('delivery times')">Delivery Times</button>
             <button onclick="sendMessage('returns')">Returns</button>
+            <button onclick="sendMessage('refunds')">Refunds</button>
+            <button onclick="sendMessage('rate us')">Rate Us</button>
             <button onclick="sendMessage('contact us')">Contact Us</button>
         </div>
         <input type="text" id="user-input" class="chat-input" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
     </div>
 
-    <script>
-        function toggleChat() {
-            let chatContainer = document.getElementById("chat-container");
-            chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
-        }
-        
-        function sendMessage(userInput) {
-            let chatBox = document.getElementById("chat-box");
-            
-            let userMessage = document.createElement("div");
-            userMessage.className = "message user-message";
-            userMessage.innerHTML = "<strong>You:</strong> " + userInput;
-            chatBox.appendChild(userMessage);
-            
-            let responses = {
-                "delivery times": "Our standard delivery time is 3-5 business days.",
-                "returns": "You can return any product within 30 days of purchase.",
-                "contact us": "Please log in to access our contact page: <a href='login.php'>Login</a>"
-            };
-            
-            let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";
-            
-            let botMessage = document.createElement("div");
-            botMessage.className = "message bot-message";
-            botMessage.innerHTML = "<strong>Bot:</strong> " + response;
-            chatBox.appendChild(botMessage);
-            
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
+   <script>
+    function toggleChat() {
+        let chatContainer = document.getElementById("chat-container");
+        chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
+    }
 
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                let userInput = document.getElementById("user-input").value;
+    function sendMessage(userInput) {
+        let chatBox = document.getElementById("chat-box");
+        
+        let userMessage = document.createElement("div");
+        userMessage.className = "message user-message";
+        userMessage.innerHTML = "<strong>You:</strong> " + userInput;
+        chatBox.appendChild(userMessage);
+        
+        let responses = {
+            "delivery times": "Our standard delivery time is 3-5 business days.",
+            "returns": "You can return any product within 30 days of purchase.",
+            "refunds": "Refunds are processed within 5-7 business days after we receive the returned item.",
+            "rate us": "How would you rate your experience with us? <div class='rating-stars'><span onclick='rate(1)'>★</span><span onclick='rate(2)'>★</span><span onclick='rate(3)'>★</span><span onclick='rate(4)'>★</span><span onclick='rate(5)'>★</span></div>",
+            "contact us": "Need help? <a href='./contact.php' style='text-decoration: underline; font-weight: bold; color: blue;'>Visit our Contact Us page</a> for more details."
+        };
+        
+        let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";
+        
+        let botMessage = document.createElement("div");
+        botMessage.className = "message bot-message";
+        botMessage.innerHTML = "<strong>Bot:</strong> " + response;
+        chatBox.appendChild(botMessage);
+        
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+       
+// function to highlight when the user clicks on the stars
+       function rate(stars) {
+    let starElements = document.querySelectorAll('.rating-stars span');
+    starElements.forEach((star, index) => {
+        if (index < stars) {
+            star.classList.add("active");
+        } else {
+            star.classList.remove("active");
+        }
+    });
+
+    alert("Thank you for rating us " + stars + " stars!");
+}
+       
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            let userInput = document.getElementById("user-input").value.trim();
+            if (userInput !== "") {
                 document.getElementById("user-input").value = "";
                 sendMessage(userInput);
             }
         }
-    </script>
+    }
+
+    function rate(stars) {
+        alert("Thank you for rating us " + stars + " stars!");
+    }
+</script>
     
     <?php require_once '../partials/footer.php'; ?>
 </body>

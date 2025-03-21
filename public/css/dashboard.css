@@ -47,7 +47,9 @@ a{
 
 #analytic-card{
     grid-column: span 2;
+
 }
+
 
 #dashboard-links{
     grid-row: span 2;

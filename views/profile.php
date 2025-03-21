@@ -197,17 +197,14 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
 
                <!----Chat bot script------>
-           <div class="chat-icon" onclick="toggleChat()">💬</div>
+              <div class="chat-icon" onclick="toggleChat()">💬</div>
 
 <div class="chat-container" id="chat-container">
     <div class="chat-header">
-        <div class="chat-header">
         <button onclick="minimizeChat()">➖</button>
         <button onclick="closeChat()">❌</button>
         <button onclick="terminateChat()">⛔</button>
     </div>
-       
-  
     <div class="chat-box" id="chat-box"></div>
     <div class="chat-options">
         <p class="bot-message message"><strong>Bot:</strong> Select one of the following options:</p>
@@ -287,10 +284,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             }
         });
 
-        // Delay the alert to allow stars to highlight first
-        setTimeout(() => {
-            alert("Thank you for rating us " + stars + " stars!");
-        }, 300); // 300ms delay
+        alert("Thank you for rating us " + stars + " stars!");
     }
 
     function handleKeyPress(event) {

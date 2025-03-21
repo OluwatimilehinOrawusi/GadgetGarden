@@ -214,7 +214,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             "returns": "You can return any product within 30 days of purchase.",
             "refunds": "Refunds are processed within 5-7 business days after we receive the returned item.",
             "rate us": "How would you rate us? <div class='rating-stars'><span onclick='rate(1)'>★</span><span onclick='rate(2)'>★</span><span onclick='rate(3)'>★</span><span onclick='rate(4)'>★</span><span onclick='rate(5)'>★</span></div>",
-            "contact us": "Need help? <a href='./contact.php' style='text-decoration: underline; font-weight: bold; color: blue;'>Contact Us</a>."
+            "contact us": "Need help? Send us an email at example@gmail.com or a call us on 123456789."
         };
 
         let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option.";

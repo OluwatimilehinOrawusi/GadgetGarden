@@ -246,13 +246,14 @@
 
 
 /* Dark Mode */
+/* Dark Mode */
 .dark-mode {
-  background-color: #121212; /* Dark background for body */
+  background-color: #000000; /* Black background for body */
   color: #f4f4f4; /* Light text color */
 }
 
 .dark-mode #wholepage {
-  background-color: #121212; /* Keep the whole page dark */
+  background-color: #000000; /* Keep the whole page black */
   color: #f4f4f4;
 }
 

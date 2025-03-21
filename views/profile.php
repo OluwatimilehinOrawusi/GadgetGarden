@@ -197,7 +197,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
 
                <!----Chat bot script------>
-<div class="chat-icon" onclick="toggleChat()">💬</div>
+               <div class="chat-icon" onclick="toggleChat()">💬</div>
 
 <div class="chat-container" id="chat-container"> <!-- Chat container is hidden by default -->
     <div class="chat-header">
@@ -300,6 +300,8 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 </script>
+
+                                
             </div>                
         </section>
     </main>

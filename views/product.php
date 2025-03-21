@@ -56,6 +56,7 @@ function displayStars($rating) {
 <head>
     <?php require_once "../partials/header.php"; ?>
     <link rel="stylesheet" href="../public/css/product.css">
+    <link rel="stylesheet" href="../public/css/chatbot.css">
 </head>
 <body>
     <?php require_once "../partials/navbar.php"; ?>

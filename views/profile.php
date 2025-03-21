@@ -249,6 +249,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
         }
     });
 });
+      </script>
 
  
 
@@ -372,6 +373,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <?php require '../partials/footer.php'; ?>
- </script>
+ 
 </body>
 </html>

@@ -218,11 +218,15 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <script>
-    function toggleChat() {
-        let chatContainer = document.getElementById("chat-container");
-        chatContainer.classList.toggle("open");
-        chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
+ function toggleChat() {
+    let chatContainer = document.getElementById("chat-container");
+    if (!chatContainer.classList.contains("open")) {
+        chatContainer.classList.add("open"); // Show full chat on first click
+    } else {
+        chatContainer.classList.remove("open"); // Hide chat on second click
     }
+}
+
 
     function minimizeChat() {
         let chatContainer = document.getElementById("chat-container");

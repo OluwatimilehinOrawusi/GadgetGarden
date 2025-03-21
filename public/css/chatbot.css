@@ -36,8 +36,8 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     padding: 10px;
-    display: none;
-    transform: translateY(100%);
+    display: block; /* Ensure the chat is visible by default */
+    transform: translateY(0); /* Ensure the chat is in the correct position */
     transition: transform 0.3s ease-in-out;
 }
 

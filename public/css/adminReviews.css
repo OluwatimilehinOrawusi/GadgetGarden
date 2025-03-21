@@ -80,14 +80,6 @@ tr:hover {
     margin-right: 20px;
 }
 
-
-.tab-button.active {
-    background-color: #117A3D;
-    color: #117A3D;
-    cursor: pointer;
-}
-
-
 .tab-button:hover {
     background-color: white;
     color: #275E4A;

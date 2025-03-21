@@ -128,6 +128,15 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
 
+            <div class="info-card">
+                <div class="info-header">
+                    <h3>Wishlist</h3>
+                </div>
+                <div class="info-content">
+                    <a href="./wishlist.php" class="return-link">Wishlist</a>
+                </div>
+            </div>
+
         </section>
 
         <!-- My Orders Section -->

@@ -197,25 +197,50 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
 
                <!----Chat bot script------>
-                <div class="chat-icon" onclick="toggleChat()">💬</div>
-    
-    <div class="chat-container" id="chat-container">
-        <div class="chat-box" id="chat-box"></div>
-        <div class="chat-options">
-            <p class="bot-message message"><strong>Bot:</strong> Select one of the following options:</p>
-            <button onclick="sendMessage('delivery times')">Delivery Times</button>
-            <button onclick="sendMessage('returns')">Returns</button>
-            <button onclick="sendMessage('refunds')">Refunds</button>
-            <button onclick="sendMessage('rate us')">Rate Us</button>
-            <button onclick="sendMessage('contact us')">Contact Us</button>
-        </div>
-        <input type="text" id="user-input" class="chat-input" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
-    </div>
+           <div class="chat-icon" onclick="toggleChat()">💬</div>
 
-   <script>
+<div class="chat-container" id="chat-container">
+    <div class="chat-header">
+        <button onclick="minimizeChat()">➖</button>
+        <button onclick="closeChat()">❌</button>
+        <button onclick="terminateChat()">⛔</button>
+    </div>
+    <div class="chat-box" id="chat-box"></div>
+    <div class="chat-options">
+        <p class="bot-message message"><strong>Bot:</strong> Select one of the following options:</p>
+        <button onclick="sendMessage('delivery times')">Delivery Times</button>
+        <button onclick="sendMessage('returns')">Returns</button>
+        <button onclick="sendMessage('refunds')">Refunds</button>
+        <button onclick="sendMessage('rate us')">Rate Us</button>
+        <button onclick="sendMessage('contact us')">Contact Us</button>
+    </div>
+    <input type="text" id="user-input" class="chat-input" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
+</div>
+
+<script>
     function toggleChat() {
         let chatContainer = document.getElementById("chat-container");
+        chatContainer.classList.toggle("open");
         chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
+    }
+
+    function minimizeChat() {
+        let chatContainer = document.getElementById("chat-container");
+        chatContainer.classList.remove("open");
+        setTimeout(() => { chatContainer.style.display = "none"; }, 300);
+    }
+
+    function closeChat() {
+        let chatContainer = document.getElementById("chat-container");
+        chatContainer.classList.remove("open");
+        setTimeout(() => { chatContainer.style.display = "none"; }, 300);
+    }
+
+    function terminateChat() {
+        let chatContainer = document.getElementById("chat-container");
+        chatContainer.classList.remove("open");
+        setTimeout(() => { chatContainer.style.display = "none"; }, 300);
+        alert("Chat terminated. Refresh the page to start a new chat.");
     }
 
     function sendMessage(userInput) {
@@ -236,28 +261,35 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
         
         let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option above.";
         
+        // Simulate typing animation
         let botMessage = document.createElement("div");
         botMessage.className = "message bot-message";
-        botMessage.innerHTML = "<strong>Bot:</strong> " + response;
+        botMessage.innerHTML = "<strong>Bot:</strong> <span class='typing-indicator'><span></span><span></span><span></span></span>";
         chatBox.appendChild(botMessage);
-        
+
+        setTimeout(() => {
+            botMessage.innerHTML = "<strong>Bot:</strong> " + response;
+        }, 1500); // Simulate typing delay
+
         chatBox.scrollTop = chatBox.scrollHeight;
     }
-       
-// function to highlight when the user clicks on the stars
-       function rate(stars) {
-    let starElements = document.querySelectorAll('.rating-stars span');
-    starElements.forEach((star, index) => {
-        if (index < stars) {
-            star.classList.add("active");
-        } else {
-            star.classList.remove("active");
-        }
-    });
 
-    alert("Thank you for rating us " + stars + " stars!");
-}
-       
+    function rate(stars) {
+        let starElements = document.querySelectorAll('.rating-stars span');
+        starElements.forEach((star, index) => {
+            if (index < stars) {
+                star.classList.add("active");
+            } else {
+                star.classList.remove("active");
+            }
+        });
+
+        // Delay the alert to allow stars to highlight first
+        setTimeout(() => {
+            alert("Thank you for rating us " + stars + " stars!");
+        }, 300); // 300ms delay
+    }
+
     function handleKeyPress(event) {
         if (event.key === "Enter") {
             let userInput = document.getElementById("user-input").value.trim();
@@ -267,11 +299,7 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             }
         }
     }
-
-    function rate(stars) {
-        alert("Thank you for rating us " + stars + " stars!");
-    }
-    </script>
+</script>
             </div>                
         </section>
     </main>

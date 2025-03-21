@@ -76,6 +76,7 @@ function displayStars($rating) {
                 <a href="add-products.php?product_id=<?php echo $product["product_id"]; ?>">
                     <button class="green-button">Add to Basket</button>
                 </a>
+                <a href="bookmark.php?product_id=<?php echo $product["product_id"] ?>"><button class="green-button">Bookmark Item</button></a>
 
             <!-----Product Low stock----->    
             <?php elseif ($stockQuantity > 0) : ?>
@@ -83,12 +84,15 @@ function displayStars($rating) {
                 <a href="add-products.php?product_id=<?php echo $product["product_id"]; ?>">
                     <button class="green-button">Add to Basket</button>
                 </a>
+                <a href="bookmark.php?product_id=<?php echo $product["product_id"] ?>"><button class="green-button">Bookmark Item</button></a>
 
             <!-----Product out of stock----->
             <?php else: ?>
                 <p class="out-of-stock-warning"> Out of Stock</p>
                 <button class="out-of-stock-button" disabled>Out of Stock</button>
+                <a href="bookmark.php?product_id=<?php echo $product["product_id"] ?>"><button class="green-button">Bookmark Item</button></a>
             <?php endif; ?>
+            
             <a href="./reviewPage.php?id=<?php echo $id; ?>"><u>Write a review</u></a>
         </div>
     </div>

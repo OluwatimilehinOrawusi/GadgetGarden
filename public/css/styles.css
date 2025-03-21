@@ -340,93 +340,27 @@ margin-right: 5%;
 }
 
 
+
 /* Dark Mode Styles */
 .dark-mode {
     background-color: #121212; /* Dark background */
     color: #f4f4f4; /* Light text color */
 }
 
-.dark-mode body {
-    background-color: #121212; /* Dark body background */
-    color: #f4f4f4; /* Light text color */
-}
-
-.dark-mode a {
-    color: inherit;
-}
-
-.dark-mode button {
-    background-color: transparent;
-    border-radius: 1.5rem;
-    color: #f4f4f4; /* Light text for buttons */
-    width: 5.5rem;
-    height: 2.2rem;
-}
-
-/* Hero Section */
-.dark-mode #hero-section {
-    background-color: #121212;
-}
-
-.dark-mode #hero-main-img {
-    background-color: #1e1e1e;
-}
-
-.dark-mode #title-text {
-    color: #f4f4f4;
-    text-shadow: 0.2rem 0.2rem 0.2rem black;
-}
-
-.dark-mode .subtitle {
-    color: #f4f4f4;
-}
-
-/* Buttons */
-.dark-mode .white-button {
-    border: 0.1rem solid #f4f4f4;
-    color: #f4f4f4;
-}
-
-.dark-mode .green-button {
-    background-color: #275E4A;
-    color: white;
-}
-
-.dark-mode #categories-button {
-    color: #f4f4f4;
-}
-
-/* Trending Section */
-.dark-mode #trending-items div {
-    border: 1px solid #444;
-}
-
-.dark-mode #trending-items div:nth-child(1),
-.dark-mode #trending-items div:nth-child(2),
-.dark-mode #trending-items div:nth-child(4),
-.dark-mode #trending-items div:nth-child(5),
-.dark-mode #trending-items div:nth-child(7),
-.dark-mode #trending-items div:nth-child(8) {
-    filter: brightness(0.8);
-}
-
-/* Categories Section */
-.dark-mode #category-banner {
-    filter: brightness(0.8);
+.dark-mode .footer {
+    background-color: #121212; /* Dark footer background */
+    color: #f4f4f4; /* Light text color for footer */
 }
 
 /* Footer */
-.dark-mode .footer {
-    background-color: #121212;
-    color: #f4f4f4;
-}
-
-.dark-mode .footer-link {
-    color: #f4f4f4;
-}
-
-/* Hero Section - Example of Hero Section Dark Mode Adjustment */
-.dark-mode .hero-section {
-    background-color: #121212;
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    padding: 0 5%;
+    height: 15rem;
+    background-color: #275E4A; /* Light footer background */
+    color: aliceblue;
 }
 

@@ -197,9 +197,9 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
 
                <!----Chat bot script------>
-              <div class="chat-icon" onclick="toggleChat()">💬</div>
+            <div class="chat-icon" onclick="toggleChat()">💬</div>
 
-<div class="chat-container" id="chat-container">
+<div class="chat-container open" id="chat-container"> <!-- Add 'open' class by default -->
     <div class="chat-header">
         <button onclick="minimizeChat()">➖</button>
         <button onclick="closeChat()">❌</button>
@@ -284,7 +284,10 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             }
         });
 
-        alert("Thank you for rating us " + stars + " stars!");
+        // Delay the alert to allow stars to highlight first
+        setTimeout(() => {
+            alert("Thank you for rating us " + stars + " stars!");
+        }, 300); // 300ms delay
     }
 
     function handleKeyPress(event) {

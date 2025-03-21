@@ -2,19 +2,19 @@
 session_start();
 require_once "../database/database.php";
 
+// Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: login.php?error=Please+log+in");
     exit();
 }
 
-$stmt = $pdo->prepare("SELECT admin FROM users WHERE user_id = :user_id");
-$stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-$stmt->execute();
+// Check if the user is an admin or manager
+$stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = ?");
+$stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$user || !$user['admin']) {
-    header("Location: ../index.php");
-    exit();
+if (!$user || ($user['role'] !== 'admin' && $user['role'] !== 'manager')) {
+    die("Error: You are not authorized to access this page.");
 }
 
 $totalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();

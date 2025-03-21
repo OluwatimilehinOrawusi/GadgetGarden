@@ -2,10 +2,22 @@
 session_start();
 require_once "../database/database.php";
 
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
+if (!isset($_SESSION['user_id'])) {
     header("Location: ../index.php");
     exit();
 }
+
+$stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
+$stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$user || $user['role'] !== 'admin') {
+    echo "<script>alert('Error: You are not an admin.'); window.location.href = './dashboard.php';</script>";
+    exit();
+}
+
+
 
 $searchQuery = "";
 if (isset($_GET['search'])) {

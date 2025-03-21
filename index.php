@@ -6,7 +6,7 @@ $pdo = require_once "./database/database.php";
 $user_id = $_SESSION['user_id'] ?? null;
 
 // Fetch the admin status of the user
-$stmt = $pdo->prepare("SELECT admin FROM users WHERE user_id = :user_id");
+$stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
 $stmt->bindParam(':user_id', $user_id);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -45,7 +45,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <a href="./views/contact.php"><button class="green-button">Contact Us</button></a>
             <a href="./views/profile.php"><button class="white-button">Profile</button></a>
 
-            <?php if ($user && $user['admin']) { ?>
+            <?php if ($user && ($user['role'] === 'admin' || $user['role'] === 'manager')){ ?>
                 <a href="./views/dashboard.php"><button class="white-button">Admin Dashboard</button></a>
             <?php } ?>
 

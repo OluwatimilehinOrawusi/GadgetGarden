@@ -8,19 +8,13 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+// Check if the user is an admin or manager
+$stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = ?");
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// grab user role
-if (!isset($_SESSION['user_role'])) {
-    $stmt = $pdo->prepare("SELECT admin FROM users WHERE user_id = ?");
-    $stmt->execute([$_SESSION['user_id']]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    $_SESSION['user_role'] = $user['admin'] ? 'admin' : 'user';
-}
-
-// Ensure user is an admin
-if ($_SESSION['user_role'] !== 'admin') {
-    die("Error: Permission denied. You are not an admin");
+if (!$user || ($user['role'] !== 'admin' && $user['role'] !== 'manager')) {
+    die("Error: You are not authorized to access this page.");
 }
 
 //Retrieve username

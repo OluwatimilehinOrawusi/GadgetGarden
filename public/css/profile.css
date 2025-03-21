@@ -300,4 +300,13 @@
   color: white;
 }
 
+/* Dark Mode for Dark Mode Toggle Button */
+body.dark-mode #dark-mode-toggle {
+    background-color: #ffffff;  /* Light background for button */
+    color: black;  /* Dark text */
+}
+
+body.dark-mode #dark-mode-toggle:hover {
+    background-color: #e0e0e0;  /* Light hover effect */
+}
 

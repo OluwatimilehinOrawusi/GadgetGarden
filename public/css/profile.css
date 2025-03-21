@@ -319,28 +319,43 @@
   color: white;
 }
 
+/* Dark Mode Toggle Button */
 #dark-mode-toggle {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     border: none;
-    padding: 10px 15px;
+    padding: 8px 12px;
     cursor: pointer;
+    border-radius: 50px; /* Makes it round */
+    font-size: 14px;
+    font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 8px;
-    border-radius: 5px;
+    gap: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #dark-mode-toggle i {
+    color: black;
+}
+
+/* Dark Mode Styling for the Toggle Button */
+body.dark-mode #dark-mode-toggle {
+    background-color: black;
     color: white;
 }
 
-.dark-mode #dark-mode-toggle {
-    background-color: white;
-    color: black;
+body.dark-mode #dark-mode-toggle i {
+    color: white;
 }
 
-.dark-mode #dark-mode-toggle i {
-    color: black;
+/* Make sure all other navbar buttons remain green */
+.navbar button:not(#dark-mode-toggle) {
+    background-color: #275E4A !important;  /* Keep green */
+    color: white !important;
+    border: 1px solid #275E4A !important;
 }
 
+.navbar button:not(#dark-mode-toggle):hover {
+    background-color: #1c4c38 !important;
+}

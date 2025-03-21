@@ -439,9 +439,13 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                     }
                     echo "</div>";
                     ?>
-                <?php endif; ?>
+                <?php endif; ?>                        
+            </div>                
+        </section>
+    </main>
+</div>
 
-<!-- Chat Icon -->
+            <!-- Chat Icon -->
 <div class="chat-icon" onclick="toggleChat()">💬</div>
 
 <!-- Chat Container -->
@@ -552,13 +556,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 </script>
-
-
-                                
-            </div>                
-        </section>
-    </main>
-</div>
 
 <?php require '../partials/footer.php'; ?>
 </body>

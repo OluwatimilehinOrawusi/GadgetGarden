@@ -21,7 +21,7 @@ body {
 }
 
 .chat-icon:hover {
-    animation: bounce 1.5s ease-in-out; /* Animation only on hover */
+    animation: bounce 1.0s ease-in-out; /* Animation only on hover */
 }
 
 @keyframes bounce {

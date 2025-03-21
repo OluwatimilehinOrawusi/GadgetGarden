@@ -201,10 +201,8 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="chat-container" id="chat-container">
     <div class="chat-header">
-        <button onclick="minimizeChat()">➖</button>
-        <button onclick="closeChat()">❌</button>
-        <button onclick="terminateChat()">⛔</button>
-    </div>
+       
+  
     <div class="chat-box" id="chat-box"></div>
     <div class="chat-options">
         <p class="bot-message message"><strong>Bot:</strong> Select one of the following options:</p>

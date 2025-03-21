@@ -16,7 +16,12 @@ $pdo = require_once "../database/database.php";
     <link rel="stylesheet" href="../public/css/about.css">
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
-     <link rel="stylesheet" href="../public/css/chatbot.css">
+    <link rel="stylesheet" href="../public/css/chatbot.css">
+    <link rel="stylesheet" href="../public/css/darkmode.css">
+
+     <script src="../public/js/darkmode.js"></script>
+
+
 </head>
 <body>
     <nav>
@@ -33,6 +38,7 @@ $pdo = require_once "../database/database.php";
                 <a href="./contact.php"><button class="white-button">Contact Us</button></a>
                 <a href="./profile.php"><button class="white-button">Profile</button></a>
                 <a href="./logout.php"><button class="green-button">Logout</button></a>
+                <button id="darkModeToggle">Toggle Dark Mode</button>
             <?php } ?>
         </div>
     </nav>

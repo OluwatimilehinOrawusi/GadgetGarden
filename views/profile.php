@@ -210,36 +210,47 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                                     
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggleButton = document.getElementById("dark-mode-toggle");
-        const body = document.body;
-        const icon = toggleButton.querySelector("i");
-        const buttonText = toggleButton.querySelector("span"); // Added this line to select the span element for text
+   document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("dark-mode-toggle");
+    const body = document.body;
+    const icon = toggleButton.querySelector("i");
+    const buttonText = toggleButton.querySelector("span");
+    const navbar = document.querySelector("nav");
 
-        // Check localStorage for dark mode preference
-        if (localStorage.getItem("dark-mode") === "enabled") {
-            body.classList.add("dark-mode");
+    // Check localStorage for dark mode preference
+    if (localStorage.getItem("dark-mode") === "enabled") {
+        body.classList.add("dark-mode");
+        navbar.classList.add("dark-mode"); 
+        icon.classList.add("fa-sun");
+        icon.classList.remove("fa-moon");
+        buttonText.textContent = "Light Mode";
+        toggleButton.style.backgroundColor = "white";
+        toggleButton.style.color = "black";
+    }
+
+    toggleButton.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+        navbar.classList.toggle("dark-mode");
+
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("dark-mode", "enabled");
             icon.classList.add("fa-sun");
             icon.classList.remove("fa-moon");
-            buttonText.textContent = "Light Mode"; // Change button text to Light Mode when dark mode is active
+            buttonText.textContent = "Light Mode";
+            toggleButton.style.backgroundColor = "white";
+            toggleButton.style.color = "black";
+        } else {
+            localStorage.setItem("dark-mode", "disabled");
+            icon.classList.add("fa-moon");
+            icon.classList.remove("fa-sun");
+            buttonText.textContent = "Dark Mode";
+            toggleButton.style.backgroundColor = "";
+            toggleButton.style.color = "";
         }
-
-        toggleButton.addEventListener("click", function () {
-            body.classList.toggle("dark-mode");
-            if (body.classList.contains("dark-mode")) {
-                localStorage.setItem("dark-mode", "enabled");
-                icon.classList.add("fa-sun");
-                icon.classList.remove("fa-moon");
-                buttonText.textContent = "Light Mode"; // Change the text to "Light Mode"
-            } else {
-                localStorage.setItem("dark-mode", "disabled");
-                icon.classList.add("fa-moon");
-                icon.classList.remove("fa-sun");
-                buttonText.textContent = "Dark Mode"; // Change the text back to "Dark Mode"
-            }
-        });
     });
-  </script>
+});
+
+ 
 
 <!-- Chat Icon -->
 <div class="chat-icon" onclick="toggleChat()">💬</div>
@@ -361,5 +372,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <?php require '../partials/footer.php'; ?>
+ </script>
 </body>
 </html>

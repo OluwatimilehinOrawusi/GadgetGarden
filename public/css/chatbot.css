@@ -2,13 +2,13 @@ body {
     font-family: Arial, sans-serif; 
 }
 
-/* Chat Icon */
+/* Chat Icon with Bounce Animation on Hover */
 .chat-icon {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     background: #007bff;
     color: white;
     border-radius: 50%;
@@ -17,33 +17,37 @@ body {
     justify-content: center;
     cursor: pointer;
     font-size: 24px;
-    transition: transform 0.5s ease-in-out; /* Slower hover animation */
+    transition: transform 0.3s ease-in-out;
 }
 
 .chat-icon:hover {
-    transform: scale(1.1);
+    animation: bounce 0.5s ease-in-out; /* Animation only on hover */
 }
 
-/* Chat Container */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+/* Chat Container with Slide-Up Animation */
 .chat-container {
     width: 320px;
     position: fixed;
     bottom: 80px;
     right: 20px;
-    background: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     padding: 10px;
+    display: none; /* Hidden by default */
     transform: translateY(100%);
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
+    transition: transform 0.3s ease-in-out;
 }
 
 .chat-container.open {
     transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
+    display: block; /* Show the chat container when open */
 }
 
 /* Chat Header */
@@ -51,10 +55,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
     background: #007bff;
     color: white;
     font-weight: bold;
+    padding: 10px;
     border-radius: 10px 10px 0 0;
 }
 
@@ -64,41 +68,50 @@ body {
     border: none;
     cursor: pointer;
     color: white;
-    font-size: 14px;
-    margin-left: 5px;
-    padding: 5px;
-    border-radius: 5px;
-    transition: background 0.3s ease-in-out;
+    font-size: 16px;
+    transition: color 0.3s ease-in-out;
 }
 
 .chat-header button:hover {
-    background: rgba(255, 255, 255, 0.2);
+    color: #ffd700;
 }
 
-/* Chat Box */
+/* Chat Box with Message Pop-In Animation */
 .chat-box {
-    height: 230px;
+    height: 220px;
     overflow-y: auto;
-    padding: 10px;
-    background: white;
-    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    background: #fff;
     margin-bottom: 10px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
 }
 
 /* Messages */
 .message {
     padding: 8px;
     border-radius: 10px;
-    margin: 5px 0;
+    margin: 5px;
     max-width: 80%;
+    word-wrap: break-word;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: popIn 0.3s ease-in-out forwards;
+}
+
+@keyframes popIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .user-message {
     background: #007bff;
     color: white;
     align-self: flex-end;
-    text-align: right;
     border-radius: 10px 10px 0 10px;
 }
 
@@ -109,7 +122,54 @@ body {
     border-radius: 10px 10px 10px 0;
 }
 
-/* Chat Options */
+/* Typing Indicator Animation */
+.typing-indicator {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.typing-indicator span {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: #000;
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: blink 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* Star Rating Hover Animation */
+.rating-stars {
+    display: inline-block;
+    font-size: 24px;
+    color: gray;
+    cursor: pointer;
+}
+
+.rating-stars span {
+    padding: 5px;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.rating-stars span.active {
+    color: gold;
+    transform: scale(1.2);
+}
+
+/* Button Hover Animation */
 .chat-options {
     display: flex;
     flex-wrap: wrap;
@@ -118,19 +178,21 @@ body {
 }
 
 .chat-options button {
+    flex: 1 1 45%;
+    margin: 5px;
+    padding: 10px;
     background: #007bff;
     color: white;
     border: none;
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 8px;
-    margin: 5px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    font-size: 14px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .chat-options button:hover {
     background: #0056b3;
+    transform: scale(1.05);
 }
 
 /* Chat Input */

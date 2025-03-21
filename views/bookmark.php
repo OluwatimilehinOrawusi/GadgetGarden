@@ -32,10 +32,8 @@ try {
         throw new Exception("Failed to add the product to the wishlist.");
     }
 } catch (PDOException $e) {
-    // Catch PDO exceptions (database related)
     echo "Database error: " . htmlspecialchars($e->getMessage());
 } catch (Exception $e) {
-    // Catch general exceptions (such as logic or input errors)
     echo "Error: " . htmlspecialchars($e->getMessage());
 }
 

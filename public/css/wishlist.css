@@ -1,8 +1,43 @@
+.wishlistcon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+.wishlistcrd {
+    width: 220px;
+    text-align: center;
+}
 .wishlist-image {
+    width: 100%;
     height: 150px;
-    width: 150px;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+.white-button, .green-button {
+    border: 0.1rem solid #275E4A;
+    background-color: #275E4A;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
 }
 
-.wishlistcon {
-    border-style: ridge;
+.white-button:hover, .green-button:hover {
+    background-color: white;
+    color: #275E4A;
+    transform: scale(1.15);
+}
+
+.remove-button {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    margin-left: 80px;
+}
+
+.remove-button:hover {
+    background-color: white;
+    color: red;
+    transform: scale(1.05);
 }

@@ -55,7 +55,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h3><?php echo htmlspecialchars($item['name']); ?></h3>
                     <p>£<?php echo htmlspecialchars($item['price']); ?></p>
                     <a href = "product.php?id=<?php echo $item['product_id']; ?>"><button class = "green-button">View</button></a>
-                     <!-- add remove wishlist link/page  -->
+                    <a href = "./deletebookmark.php"><button class = "remove-button">Remove</button></a>
             </div>
             <?php endforeach; ?>
                 </div>

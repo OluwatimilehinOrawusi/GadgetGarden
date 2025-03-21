@@ -250,15 +250,15 @@
   color: #f4f4f4;
 }
 
-/* Header */
+/* Header (Navbar) */
 .dark-mode .header {
-  background-color: #1e1e1e;
+  background-color: #1e1e1e !important;
   border-bottom: 1px solid #444;
 }
 
-/* Main Content */
+/* Main Content (Green Background) */
 .dark-mode .main-content {
-  background-color: #003322;
+  background-color: #00261a !important; /* Darker green for dark mode */
   color: #ddd;
 }
 
@@ -298,15 +298,5 @@
 .dark-mode .discount {
   background-color: #004d26;
   color: white;
-}
-
-/* Dark Mode for Dark Mode Toggle Button */
-body.dark-mode #dark-mode-toggle {
-    background-color: #ffffff;  /* Light background for button */
-    color: black;  /* Dark text */
-}
-
-body.dark-mode #dark-mode-toggle:hover {
-    background-color: #e0e0e0;  /* Light hover effect */
 }
 

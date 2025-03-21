@@ -36,13 +36,14 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     padding: 10px;
-    display: block; /* Ensure the chat is visible by default */
-    transform: translateY(0); /* Ensure the chat is in the correct position */
+    display: none; /* Hidden by default */
+    transform: translateY(100%);
     transition: transform 0.3s ease-in-out;
 }
 
 .chat-container.open {
     transform: translateY(0);
+    display: block; /* Show the chat container when open */
 }
 
 /* Chat Box with Message Pop-In Animation */

@@ -122,6 +122,28 @@ button {
 
 }
 
+/* Default Light Mode */
+:root {
+    --bg-color: #f4f4f9;
+    --text-color: #333;
+    --box-bg: #fff;
+    --button-bg: #1e5631;
+    --button-text: #fff;
+    --alt-button-bg: #fff;
+    --alt-button-text: #275E4A;
+}
+
+/* Dark Mode */
+.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --box-bg: #1e1e1e;
+    --button-bg: #275E4A;
+    --button-text: #fff;
+    --alt-button-bg: #333;
+    --alt-button-text: #e0e0e0;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
@@ -151,3 +173,4 @@ button {
     background-color: var(--alt-button-bg);
     color: var(--alt-button-text);
 }
+

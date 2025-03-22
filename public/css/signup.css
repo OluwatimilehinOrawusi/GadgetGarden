@@ -1,137 +1,129 @@
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  } */
-  
-  /* body {
-    font-family: 'Arial', sans-serif;
-    background-color: #275E4A; 
-    color: #ffffff;
-    line-height: 1.6;
-  } */
-  
-  
-  /* header {
-    background-color: #ffffff; 
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  header h3 {
-    color: #275E4A;
-    font-size: 24px;
-    font-weight: bold;
-  }
-   */
-  
-  .webpage {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 30px;
-    font-family: 'Arial', sans-serif;
-    background-color: #275E4A; 
-    color: #ffffff;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-  
-  
-  .intro {
-    max-width: 50%;
-  }
-  
-  .intro h2 {
-    font-size: 32px;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 20px;
-    line-height: 1.5;
-  }
-  
-  .intro .image1 img {
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-  
-  .signup {
-    background-color: #ffffff;
-    color: #275E4A;
-    border-radius: 20px;
-    padding: 30px;
-    width: 40%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  }
-  
-  .signup h3 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #275E4A;
-  }
-  
-  .signup form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .signup label {
-    font-size: 14px;
-    font-weight: bold;
-    color: #275E4A;
-  }
-  
-  .signup input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  
-  
+/* Page Layout */
+.webpage {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  background-color: #275E4A; 
+  color: #ffffff;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Intro Section */
+.intro {
+  max-width: 50%;
+}
+
+.intro h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.intro .image1 img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+/* Signup Box */
+.signup {
+  background-color: #ffffff;
+  color: #275E4A;
+  border-radius: 20px;
+  padding: 30px;
+  width: 40%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.signup h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #275E4A;
+}
+
+/* Signup Form */
+.signup form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.signup label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #275E4A;
+}
+
+.signup input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Submit Button */
 .signup button {
-border: 0.1rem solid #275E4A;
-background-color: #275E4A;
-color: white;
-font-size: 1.5rem;
-padding: 30px;
-display: flex; 
-text-align: center;
-flex-direction: column;
-align-items: center;
-justify-content: center; 
-width: 100%; 
-margin-top: 20px;
-  }
-  
-  .signup button:hover {
-    background-color: #fff;
-    transition: 0.3s ease-in-out;
-    color:#275E4A;
-  }
-  
-  .signup h6 {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .signup h6 a {
-    color: #275E4A;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .signup h6 a:hover {
-    text-decoration: underline;
-  }
+  border: none;
+  background-color: #275E4A;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  transition: 0.3s ease-in-out;
+}
+
+.signup button:hover {
+  background-color: white;
+  color: #275E4A;
+  border: 1px solid #275E4A;
+}
+
+/* Error Message Box */
+.error-box {
+  background: #ffe0e0;
+  color: red;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: left;
+  font-size: 14px;
+  border: 1px solid red;
+}
+
+.error-box ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.error-box li {
+  list-style: disc;
+}
+
+/* Login Link */
+.signup h6 {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.signup h6 a {
+  color: #275E4A;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup h6 a:hover {
+  text-decoration: underline;
+}

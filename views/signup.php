@@ -2,13 +2,6 @@
 session_start();
 require_once '../database/database.php';
 
-$user = null;
-if (isset($_SESSION['user_id'])) {
-    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
-    $stmt->execute(['user_id' => $_SESSION['user_id']]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,105 +12,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirm_password = $_POST['confirm_password'];
     $memorable_phrase = $_POST['memorable_phrase'];
 
+    // Check if passwords match
     if ($password !== $confirm_password) {
-        $errors[] = "The passwords do not match, please try again.";
+        $errors[] = "The passwords do not match. Please try again.";
     }
 
-    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+    // Strong password validation
+    if (strlen($password) < 8) {
+        $errors[] = "Password must be at least 8 characters long.";
+    }
+    if (!preg_match('/[A-Z]/', $password)) {
+        $errors[] = "Password must contain at least one uppercase letter.";
+    }
+    if (!preg_match('/[0-9]/', $password)) {
+        $errors[] = "Password must contain at least one number.";
+    }
+    if (!preg_match('/[\W]/', $password)) {
+        $errors[] = "Password must contain at least one special character (e.g., !@#$%^&*).";
+    }
 
-    try {
-        $sql = "INSERT INTO users(username, email, phone, password_hash,memorable_phrase) VALUES(?,?,?,?,?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt -> execute([$username, $email,$phone, $password_hash,$memorable_phrase]);
+    if (empty($errors)) {
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-        header("Location: ./profile.php");
-        exit;
-    } catch (PDOException $e) {
-        echo "An error occurred, please try again later: " . $e->getMessage();
-        exit;
+        try {
+            $sql = "INSERT INTO users(username, email, phone, password_hash, memorable_phrase) VALUES(?,?,?,?,?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$username, $email, $phone, $password_hash, $memorable_phrase]);
+
+            header("Location: ./profile.php");
+            exit;
+        } catch (PDOException $e) {
+            echo "An error occurred. Please try again later.";
+            exit;
+        }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="../public/css/signup.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="../public/css/signup.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GADGET GARDEN</title>
-    <?php require_once "../partials/header.php" ?>
+    <title>Gadget Garden - Signup</title>
 </head>
-
 <body>
-<nav>
-    <div class="nav-left">
-        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p>
-    </div>
-    <div class="nav-right">
-        <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
 
-        <?php if (!isset($_SESSION['user_id'])) { ?>
-            <a href="./login.php"><button class="green-button">Login</button></a>
-            <a href="./signup.php"><button class="white-button">Sign Up</button></a>
-        <?php } ?>
+<div class="signup-container">
+    <h3>Create Account</h3>
 
-        <?php if (isset($_SESSION['user_id'])) { ?>
-            <a href="./basket.php"><button class="green-button">Basket</button></a>
-            <a href="./contact.php"><button class="green-button">Contact Us</button></a>
-            <a href="./profile.php"><button class="white-button">Profile</button></a>
-            <a href="./products.php"><button class="green-button">Products</button></a>
+    <form method="POST" action="./signup.php">
+        <label>Username</label>
+        <input type="text" name="username" required>
 
-            <?php if ($user && ($user['role'] === 'admin' || $user['role'] === 'manager')){ ?>
-                <a href="./dashboard.php"><button class="white-button">Admin Dashboard</button></a>
-            <?php } ?>
+        <label>Email</label>
+        <input type="email" name="email" required>
 
-            <a href="./logout.php"><button class="green-button">Logout</button></a>
-        
-        <?php } ?>
-    </div>
-</nav>
+        <label>Phone Number</label>
+        <input type="text" name="phone" required>
 
-<div class="webpage">
-    <div class="intro">
-        <h2>Grow Your Tech Sustainably - Buy, Sell, and Renew at Gadget Garden!</h2>
-        <div class="image1">
-            <img src="../public/assets/ggLaptopSignIn.png" class="images" alt="Laptop Promo"/>
-        </div>
-    </div>
+        <label>Password</label>
+        <input type="password" name="password" required>
 
-    <div class="signup">
-        <h3>Create Account</h3>
-        <form method="POST" action="./signup.php" id="myForm">
-            <div class="creating">
-                <label>Username</label>
-                <input required type="text" name="username" placeholder="Username">
+        <label>Confirm Password</label>
+        <input type="password" name="confirm_password" required>
 
-                <label for="email">E-mail</label>
-                <input required type="email" name="email" placeholder="Email">
+        <label>Memorable Phrase</label>
+        <input type="text" name="memorable_phrase" required>
 
-                <label for="phone">Phone Number</label>
-                <input required type="text" name="phone" placeholder="Phone">
-
-                <label for="password">Password</label>
-                <input required type="password" name="password" placeholder="Password">
-
-  <label for="cpassword">Confirm Password</label>
-
-  <input required ="text" id="cpassword" name="confirm_password" placeholder="Confirm Password">
-
-  <label for="mphrase">Please enter a memorable phrase to recover your account if you forget your password</label>
-
-<input required ="text" id="mphrase" name="memorable_phrase" placeholder="Memorable Phrase">
-
-                <button type="submit">Create Account</button>
-
-                <h6>Already have an account? <a href="./login.php">Log in</a></h6>
+        <!-- Display PHP Validation Errors -->
+        <?php if (!empty($errors)): ?>
+            <div class="error-box">
+                <ul>
+                    <?php foreach ($errors as $error): ?>
+                        <li style="color: red;"><?php echo $error; ?></li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
-        </form>
-    </div>
+        <?php endif; ?>
+
+        <button type="submit">Create Account</button>
+
+        <p>Already have an account? <a href="./login.php">Log in</a></p>
+    </form>
 </div>
 
-<?php require_once '../partials/footer.php' ?>
 </body>
 </html>
+ 

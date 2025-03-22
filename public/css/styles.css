@@ -68,7 +68,7 @@ hr{
     grid-row: span 2;
     background: url("../assets/hero.jpg");
     background-size: cover; /* Scales the image to cover the entire div */
-    background-position: left; /* Centers the image */
+    background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents tiling if the image is smaller than the div */
     border-radius: 3rem;
     background-color: #275E4A;

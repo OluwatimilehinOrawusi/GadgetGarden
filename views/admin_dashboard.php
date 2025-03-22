@@ -69,13 +69,13 @@ $customerMonths = [];
 $newCustomers = [];
 
 foreach ($salesData as $data) {
-    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10));
+    $formattedDate = date('F', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
     $months[] = $formattedDate;
     $revenues[] = $data['total_revenue'];
 }
 
 foreach ($orderCountsData as $data) {
-    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10));
+    $formattedDate = date('F', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
     $orderCounts[] = $data['order_count'];
 }
 
@@ -137,7 +137,7 @@ $newCustomersData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $customerMonths = [];
 $newCustomers = [];
 foreach ($newCustomersData as $data) {
-    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10));
+    $formattedDate = date('F', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
     $customerMonths[] = $formattedDate;
     $newCustomers[] = $data['new_customers'];
 }

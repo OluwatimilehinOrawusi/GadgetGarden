@@ -83,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
         <p class="error"><?= $error_message; ?></p>
     <?php endif; ?>
 
+    <!-- Select order drop down -->
     <form action="" method="POST" class="return-form">
         <div class="form-group">
             <label for="order_id">Select an Order to Return:</label>

@@ -71,14 +71,15 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <p>Analytics</p>
         </a>
         
-        <a href="./admin_return.php"  class="return-cards clickable-div">
-            <img src="../public/assets/Home.png">
-            <p>Return request</p>
-        </a>
 
         <a href="./alerts.php" class="dashboard-cards clickable-div">
             <img src="../public/assets/VolumeUp.png">
             <p>Alerts</p>
+        </a>
+
+        <a href="./admin_return.php"  class="return-cards clickable-div">
+            <img src="../public/assets/Home.png">
+            <p>Return request</p>
         </a>
 
         <a href="./admin_contact.php" class="dashboard-cards clickable-div">

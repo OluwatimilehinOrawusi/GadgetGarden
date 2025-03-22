@@ -53,6 +53,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Returns - Admin</title>
+ 
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
     <link rel="stylesheet" href="../public/css/admin_return.css">
@@ -119,7 +120,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <option value="Approved" <?php echo ($order['return_status'] == 'Approved') ? 'selected' : ''; ?>>Approve</option>
                         <option value="Rejected" <?php echo ($order['return_status'] == 'Rejected') ? 'selected' : ''; ?>>Reject</option>
                     </select>
-                    <button type="submit" name="update_return_status">Update</button>
+                    <button type="submit" class = "submitbutton" name="update_return_status">Update</button>
                 </form>
             </td>
         </tr>

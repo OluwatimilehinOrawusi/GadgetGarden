@@ -18,7 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     $memorable_phrase = $_POST['memorable_phrase'];
-
+    
+    if (!preg_match('/^[0-9]{11}$/', $phone)) {
+        $errors[] = "Phone number must be exactly 11 digits and contain numbers only.";
+    }
+     
     if ($password !== $confirm_password) {
         $errors[] = "The passwords do not match, please try again.";
     }

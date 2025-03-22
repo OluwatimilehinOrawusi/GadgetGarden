@@ -2,6 +2,21 @@
 session_start();
 require_once ("../database/database.php");
 
+$role = null;
+$email = null;
+
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role, email FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $role = $user['role'];
+        $email = $user['email'];
+        $_SESSION['email'] = $email;
+    }
+}
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php?error=Please+log+in");
     exit();
@@ -9,24 +24,8 @@ if (!isset($_SESSION['username'])) {
 
 $user_id = $_SESSION['user_id'] ?? null;
 $username = $_SESSION['username'] ?? 'Unknown User';
-$email = $_SESSION['email'] ?? null;
-
-// Fix missing email after login
-if (!$email && $user_id) {
-    $stmt = $pdo->prepare("SELECT email FROM users WHERE user_id = :user_id");
-    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-        $email = $user["email"];
-        $_SESSION["email"] = $email;
-    }
-}
-
-$email = $email ?? 'Email not available';
-
-// Fetch User Orders 
+$email = $email ?? ($_SESSION['email'] ?? 'Email not available');
+ 
 $orderQuery = $pdo->prepare("
     SELECT o.order_id, o.order_date, o.total_price, o.order_status, 
            op.product_id, op.quantity, p.name AS product_name, 
@@ -41,6 +40,7 @@ $orderQuery->bindValue(":user_id", $user_id, PDO::PARAM_INT);
 $orderQuery->execute();
 $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

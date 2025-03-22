@@ -26,19 +26,19 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </head>
     <body>
      
-    <!-- Nav Bar -->
-    <nav>
+<!-- Admin Navbar -->
+<nav>
     <div class="nav-left">
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
     </div>
     <div class="nav-right">
-        <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
         <a href="manage_users.php"><button class="white-button">Users</button></a>
         <a href="manage_orders.php"><button class="white-button">Orders</button></a>
-        <a href="profile.php"><button class="white-button">Profile</button></a>
-        <a href="./logout.php"><button class="green-button">Logout</button></a>
+        <a href="admin.php"><button class="white-button">Inventory</button></a>
+        <a href="logout.php"><button class="green-button">Logout</button></a>
     </div>
 </nav>
+
 
 
     <div id="main-container">

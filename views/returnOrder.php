@@ -75,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
 </nav>
 
 <main class="container">
+    <!-- main header -->
     <h1>Return an Order</h1>
 
     <?php if (!empty($success_message)): ?>

@@ -10,6 +10,13 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once '../database/db_connection.php';
 
+$user = null;
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 $email = $_SESSION['email'] ?? '';
 $full_name = $_SESSION['username'] ?? '';
 $total_price = isset($_POST['total']) ? floatval($_POST['total']) : 0.00;

@@ -68,11 +68,11 @@ if (!empty($category)) {
         <?php foreach($products as $i => $product){ ?>
             
                 <div class="card">
-                
+                <a href="<?php echo "./product.php?id=" .$product['product_id']?>" class="clickable-div">
                     <div id="product-image-container">
                     <img class="product-images" src="<?php echo $product['image']?>">
                     </div>
-                    <a href="<?php echo "./product.php?id=" .$product['product_id']?>">
+                    
                     <p><?php echo $product["name"] ?></p>
                     <p>£<?php echo $product["price"] ?></p>
                     </a>

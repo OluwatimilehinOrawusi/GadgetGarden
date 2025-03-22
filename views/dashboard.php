@@ -77,8 +77,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <p>Alerts</p>
         </a>
 
-        <a href="./admin_return.php"  class="return-cards clickable-div">
-            <img src="../public/assets/Home.png">
+        <a href="./admin_return.php"  class="dashboard-cards clickable-div">
+            <img src="../public/assets/returnRequest.png">
             <p>Return request</p>
         </a>
 

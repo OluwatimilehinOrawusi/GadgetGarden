@@ -59,6 +59,7 @@ input, select, textarea {
     transform: scale(1.2);
     background-color: #275E4A;
     color: white;
+    cursor: pointer;
 }
 
 #pricecontainer {

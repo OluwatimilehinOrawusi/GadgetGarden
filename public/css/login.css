@@ -60,6 +60,7 @@ body {
     transform: scale(1.05);
     background-color: white;
     color: #004d30;
+    cursor: pointer;
 }
 
 

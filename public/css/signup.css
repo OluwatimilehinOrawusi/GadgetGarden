@@ -111,12 +111,14 @@ align-items: center;
 justify-content: center; 
 width: 100%; 
 margin-top: 20px;
+cursor: pointer;
   }
   
   .signup button:hover {
     background-color: #fff;
     transition: 0.3s ease-in-out;
     color:#275E4A;
+    cursor: pointer;
   }
   
   .signup h6 {

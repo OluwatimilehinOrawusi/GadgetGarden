@@ -47,7 +47,23 @@ $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../public/css/replies.css">
 </head>
 <body>
-<nav>
+
+<?php if ($user && ($user['role'] === 'admin' || $user['role'] === 'manager')){ ?>
+    <!-- Admin Navbar -->
+    <nav>
+    <div class="nav-left">
+        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+    </div>
+    <div class="nav-right">
+        <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
+        <a href="manage_users.php"><button class="white-button">Users</button></a>
+        <a href="manage_orders.php"><button class="white-button">Orders</button></a>
+        <a href="admin.php"><button class="white-button">Inventory</button></a>
+        <a href="logout.php"><button class="green-button">Logout</button></a>
+    </div>
+</nav>
+<?php } else {?>
+    <nav>
     <div class="nav-left">
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
     </div>
@@ -67,9 +83,13 @@ $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <a href="./admin.php"><button class="white-button">Admin Dashboard</button></a>
             
             <a href="./logout.php"><button class="green-button">Logout</button></a>
-        <?php } ?>
+        <?php }  ?>
     </div>
 </nav>
+
+<?php } ?>
+
+
             
 
     <div class="container">

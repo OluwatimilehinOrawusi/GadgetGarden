@@ -122,3 +122,32 @@ button {
 
 }
 
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+#about-us {
+    background-color: var(--box-bg);
+    color: var(--text-color);
+}
+
+button {
+    padding: 8px 16px;
+    border-radius: 1.5rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--button-bg);
+    cursor: pointer;
+}
+
+.green-button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.white-button {
+    background-color: var(--alt-button-bg);
+    color: var(--alt-button-text);
+}

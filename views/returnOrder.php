@@ -48,10 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Return Order - Gadget Garden</title>
     <?php require_once "../partials/header.php"; ?>
-    <link rel="stylesheet" href="../public/css/returnOrder.css">
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="../public/css/returnOrder.css">
     <link rel="stylesheet" href="../public/css/chatbot.css">
+
 </head>
 <body>
 

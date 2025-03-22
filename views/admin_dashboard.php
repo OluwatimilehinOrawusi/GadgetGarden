@@ -50,30 +50,46 @@ foreach ($bestSellingProducts as $row) {
 
 // Monthly revenue query
 $salesDataQuery = "
-    SELECT MONTH(order_date) AS month, SUM(total_price) AS total_revenue
+    SELECT YEAR(order_date) AS year, MONTH(order_date) AS month, SUM(total_price) AS total_revenue
     FROM orders
-    GROUP BY MONTH(order_date)
-    ORDER BY MONTH(order_date)
+    GROUP BY YEAR(order_date), MONTH(order_date)
+    ORDER BY YEAR(order_date), MONTH(order_date)
 ";
+
 $stmt = $pdo->prepare($salesDataQuery);
 $stmt->execute();
 $salesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$orderCountsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$newCustomersData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $months = [];
 $revenues = [];
+$orderCounts = [];
+$customerMonths = [];
+$newCustomers = [];
+
 foreach ($salesData as $data) {
-    $months[] = date('F', mktime(0, 0, 0, $data['month'], 10)); // Convert month number to name
+    $formattedDate = date('F', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
+    $months[] = $formattedDate;
     $revenues[] = $data['total_revenue'];
 }
+
+foreach ($orderCountsData as $data) {
+    $formattedDate = date('F', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
+    $orderCounts[] = $data['order_count'];
+}
+
+
 
 
 // Monthly order count query
 $orderCountQuery = "
-    SELECT MONTH(order_date) AS month, COUNT(order_id) AS order_count
+    SELECT YEAR(order_date) AS year, MONTH(order_date) AS month, COUNT(order_id) AS order_count
     FROM orders
-    GROUP BY MONTH(order_date)
-    ORDER BY MONTH(order_date)
+    GROUP BY YEAR(order_date), MONTH(order_date)
+    ORDER BY YEAR(order_date), MONTH(order_date)
 ";
+
 $stmt = $pdo->prepare($orderCountQuery);
 $stmt->execute();
 $orderCountsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -93,6 +109,7 @@ $bestSellingProductsQuery = "
     ORDER BY total_sales DESC
     LIMIT 5
 ";
+
 $stmt = $pdo->prepare($bestSellingProductsQuery);
 $stmt->execute();
 $bestSellingProductsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -107,11 +124,12 @@ foreach ($bestSellingProductsData as $data) {
 
 // Monthly new customers query
 $newCustomersQuery = "
-    SELECT MONTH(created_at) AS month, COUNT(user_id) AS new_customers
+    SELECT YEAR(created_at) AS year, MONTH(created_at) AS month, COUNT(user_id) AS new_customers
     FROM users
-    GROUP BY MONTH(created_at)
-    ORDER BY MONTH(created_at)
+    GROUP BY YEAR(created_at), MONTH(created_at)
+    ORDER BY YEAR(created_at), MONTH(created_at)
 ";
+
 $stmt = $pdo->prepare($newCustomersQuery);
 $stmt->execute();
 $newCustomersData = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -119,7 +137,8 @@ $newCustomersData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $customerMonths = [];
 $newCustomers = [];
 foreach ($newCustomersData as $data) {
-    $customerMonths[] = date('F', mktime(0, 0, 0, $data['month'], 10)); // Convert month number to name
+    $formattedDate = date('F', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
+    $customerMonths[] = $formattedDate;
     $newCustomers[] = $data['new_customers'];
 }
 

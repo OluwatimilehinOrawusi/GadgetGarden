@@ -23,21 +23,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "The passwords do not match, please try again.";
     }
 
-    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+    if (strlen($password) < 8) {
+        $errors[] = "Password must be at least 8 characters long.";
+    }
+    if (!preg_match('/[A-Z]/', $password)) {
+        $errors[] = "Password must contain at least one uppercase letter.";
+    }
+    if (!preg_match('/[a-z]/', $password)) {
+        $errors[] = "Password must contain at least one lowercase letter.";
+    }
+    if (!preg_match('/[0-9]/', $password)) {
+        $errors[] = "Password must contain at least one number.";
+    }
+    if (!preg_match('/[\W]/', $password)) { 
+        $errors[] = "Password must contain at least one special character (e.g., !@#$%^&*).";
+    }
 
-    try {
-        $sql = "INSERT INTO users(username, email, phone, password_hash,memorable_phrase) VALUES(?,?,?,?,?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt -> execute([$username, $email,$phone, $password_hash,$memorable_phrase]);
+    if (empty($errors)) {
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-        header("Location: ./profile.php");
-        exit;
-    } catch (PDOException $e) {
-        echo "An error occurred, please try again later: " . $e->getMessage();
-        exit;
+        try {
+            $sql = "INSERT INTO users(username, email, phone, password_hash, memorable_phrase) VALUES(?,?,?,?,?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$username, $email, $phone, $password_hash, $memorable_phrase]);
+
+            header("Location: ./profile.php");
+            exit;
+        } catch (PDOException $e) {
+            echo "An error occurred, please try again later: " . $e->getMessage();
+            exit;
+        }
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,6 +108,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="signup">
         <h3>Create Account</h3>
+
+<?php if (!empty($errors)): ?>
+    <div class="error-box" style="color:red; margin-bottom:15px;">
+        <ul>
+            <?php foreach ($errors as $error): ?>
+                <li><?php echo htmlspecialchars($error); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
         <form method="POST" action="./signup.php" id="myForm">
             <div class="creating">
                 <label>Username</label>

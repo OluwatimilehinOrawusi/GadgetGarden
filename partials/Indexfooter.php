@@ -6,21 +6,14 @@
         </div>
         <div class="footer-links">
             <div class="footer-column">
-                <h4>Popular</h4>
+                <h4>Menu</h4>
+                <a class="footer-link" href="./views/products.php">All Categories</a>
                 <a class="footer-link" href="./views/products.php?category=phones">Phones</a>
                 <a class="footer-link" href="./views/products.php?category=tablets">Tablets</a>
                 <a  class="footer-link"href="./views/products.php?category=laptops">Laptops</a>
-                <a  class="footer-link"href="./views/products.php?category=audio">Audio</a>
-                <a class="footer-link" href="./views/products.php?category=accessories">Accessories</a>
+   
             </div>
-            <div class="footer-column">
-                <h4>Menu</h4>
-                <a class="footer-link" href="./views/products.php">All Categories</a>
-                <a class="footer-link"href="#">Gift Cards</a>
-                <a class="footer-link"href="#">Special Events</a>
-                <a  class="footer-link"href="#">Testimonials</a>
-                <a class="footer-link"href="#">Blog</a>
-            </div>
+   
             <div class="footer-column">
                 <h4>Other</h4>
                 <a class="footer-link"href="./views/replies.php">FAQ</a>

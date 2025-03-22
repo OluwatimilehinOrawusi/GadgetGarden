@@ -65,6 +65,11 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <p>Inventory Management</p>
         </a>
 
+        <a href="./admin_return.php"  class="return-cards clickable-div">
+            <img src="../public/assets/Home.png">
+            <p>Return request</p>
+        </a>
+
         <a href="./admin_dashboard.php" id="analytic-card" class="dashboard-cards clickable-div">
             <img src="../public/assets\Diagram.png">
             <p>Analytics</p>

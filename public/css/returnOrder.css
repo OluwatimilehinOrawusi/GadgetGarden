@@ -1,98 +1,106 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
+/* Main Container */
 .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 40px auto;
-    background: white;
-    padding: 80px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+/* Header */
+.container h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1d1d1f;
     text-align: center;
-    font-size: 24px;
+}
+
+/* Success and Error Messages */
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
     margin-bottom: 20px;
 }
 
-/* Form Styling */
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
 .return-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
+.form-group label {
+    font-weight: 500;
+    color: #333;
 }
 
-select, textarea {
+input[type="text"],
+select,
+textarea {
+    width: 90%; /* Ensure full width inside the container */
     padding: 10px;
-    font-size: 16px;
-    border: 2px solid #1E5631;
-    border-radius: 5px;
-    background: white;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #275E4A;
+    background-color: #fff;
+    outline: none;
 }
 
 textarea {
-    resize: vertical;
+    resize: none;
 }
 
 /* Submit Button */
 button[type="submit"] {
-    background: #145A32;
-    color: white;
-    border: none;
-    padding: 10px 15px;
+    width: 100%; /* Stretch button to full width */
+    padding: 12px;
     font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #275E4A;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    border-radius: 5px;
-    transition: 0.3s;
+    transition: background-color 0.2s ease-in-out;
 }
 
 button[type="submit"]:hover {
-    background: #117A3D;
-    transform: scale(1.05);
-}
-
-/* Success & Error Messages */
-.success, .error {
-    text-align: center;
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.success {
-    background: #d4edda;
-    color: #155724;
-}
-
-.error {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        padding: 40px;
-    }
-    
-    .search-bar input {
-        width: 80%;
-    }
+    background-color: #1d4c39;
 }

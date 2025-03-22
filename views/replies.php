@@ -65,6 +65,7 @@ $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </nav>
 <?php } else {?>
+    <!-- User Navbar -->
     <nav>
     <div class="nav-left">
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>

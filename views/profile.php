@@ -148,6 +148,14 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
 
+            <div class="info-card">
+                <div class="info-header">
+                    <h3>Query Responses (Customer Forum Page)</h3>
+                </div>
+                <div class="info-content">
+                    <a href="./replies.php" class="return-link">Customer Forum Page</a>
+                </div>
+            </div>
         </section>
 
         <!-- My Orders Section -->

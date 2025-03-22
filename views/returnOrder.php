@@ -34,8 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
         $stmt = $pdo->prepare("UPDATE orders SET return_status = 'Pending' WHERE order_id = :order_id");
         $stmt->execute([':order_id' => $order_id]);
 
+        //To run if return order was successful
         $success_message = "Your return request has been submitted.";
     } else {
+    
         $error_message = "Please select an order and provide a reason.";
     }
 }

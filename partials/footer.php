@@ -11,6 +11,7 @@
                 <a class="footer-link" href="./products.php?category=phones">Phones</a>
                 <a class="footer-link" href="./products.php?category=tablets">Tablets</a>
                 <a  class="footer-link"href="./products.php?category=laptops">Laptops</a>
+                <a  class="footer-link"href="./products.php?category=gaming">Gaming</a>
 
             </div>
 

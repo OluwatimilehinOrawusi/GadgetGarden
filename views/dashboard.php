@@ -78,6 +78,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <p>Inventory Management</p>
         </a>
 
+
+
         <!-- Analytics card -->
         <a href="./admin_dashboard.php" id="analytic-card" class="dashboard-cards clickable-div">
             <img src="../public/assets\Diagram.png">
@@ -90,6 +92,12 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <img src="../public/assets/VolumeUp.png">
             <p>Alerts</p>
         </a>
+
+        <a href="./admin_return.php"  class="dashboard-cards clickable-div">
+            <img src="../public/assets/returnRequest.png">
+            <p>Return request</p>
+        </a>
+
 
         <!-- Customer Queries card -->
         <a href="./admin_contact.php" class="dashboard-cards clickable-div">

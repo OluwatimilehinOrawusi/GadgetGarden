@@ -1,25 +1,28 @@
 <?php
 session_start();
-
-// Require the database connection
 $pdo = require_once "../database/database.php";
 
-$user = null;
-if (isset($_SESSION['user_id'])) {
-    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
-    $stmt->execute(['user_id' => $_SESSION['user_id']]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+$user_id = $_SESSION['user_id'] ?? null;
+
+//If user is not logged in redirect to log in page
+if (!$user_id) {
+    header("Location: login.php");
+    exit();
 }
 
-// Handle return form submission
+// Fetch user's previous orders for dropdown
+$stmt = $pdo->prepare("SELECT order_id FROM orders WHERE user_id = :user_id");
+$stmt->execute([':user_id' => $user_id]);
+$orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Handle return request
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
-    $order_id = htmlspecialchars(trim($_POST['order_id']));
+    $order_id = $_POST['order_id'] ?? '';
     $reason = htmlspecialchars(trim($_POST['reason']));
     $details = htmlspecialchars(trim($_POST['details']));
-    $user_id = $_SESSION['user_id'] ?? null;
 
-    // Validate form inputs
-    if ($user_id && $order_id && $reason) {
+    if ($order_id && $reason) {
+        // Insert return request
         $stmt = $pdo->prepare("INSERT INTO returns (user_id, order_id, reason, details) VALUES (:user_id, :order_id, :reason, :details)");
         $stmt->execute([
             ':user_id' => $user_id,
@@ -27,24 +30,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
             ':reason' => $reason,
             ':details' => $details
         ]);
+
+        // Update return status in orders table
+        $stmt = $pdo->prepare("UPDATE orders SET return_status = 'Pending' WHERE order_id = :order_id");
+        $stmt->execute([':order_id' => $order_id]);
+
+        //To run if return order was successful
         $success_message = "Your return request has been submitted.";
     } else {
-        $error_message = "Please fill in all required fields.";
+        //To run if return order was unsuccessful
+        $error_message = "Please select an order and provide a reason.";
     }
 }
 ?>
 
+
+<!-- HTML -->
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Return Order - Gadget Garden</title>
-        <?php require_once "../partials/header.php"; ?>
-        <link rel="stylesheet" href="../public/css/returnOrder.css">
-        <link rel="stylesheet" href="../public/css/navbar.css">
-        <link rel="stylesheet" href="../public/css/styles.css">
-        <link rel="stylesheet" href="../public/css/chatbot.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Order - Gadget Garden</title>
+    
+    <!-- Header link -->
+    <?php require_once "../partials/header.php"; ?>
+    
+    <!-- Styles sheet links -->
+    <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="../public/css/returnOrder.css">
+    <link rel="stylesheet" href="../public/css/chatbot.css">
 
 
     </head>
@@ -79,36 +95,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
 </nav>
                 
 
-        <main class="container">
-            <h1>Return an Order</h1>
-            <?php if (!empty($success_message)): ?>
-                <p class="success"><?= $success_message; ?></p>
-            <?php elseif (!empty($error_message)): ?>
-                <p class="error"><?= $error_message; ?></p>
-            <?php endif; ?>
+<main class="container">
+    <!-- main header -->
+    <h1>Return an Order</h1>
 
-            <form action="" method="POST" class="return-form">
-                <div class="form-group">
-                    <label for="order_id">Order ID:</label>
-                    <input type="text" id="order_id" name="order_id" required>
-                </div>
-                <div class="form-group">
-                    <label for="reason">Reason for Return:</label>
-                    <select id="reason" name="reason" required>
-                        <option value="">Select a reason</option>
-                        <option value="Damaged item">Damaged item</option>
-                        <option value="Wrong item sent">Wrong item sent</option>
-                        <option value="Not satisfied">Not satisfied</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="details">Additional Details:</label>
-                    <textarea id="details" name="details" rows="5"></textarea>
-                </div>
-                <button type="submit" name="submit_return">Submit Return</button>
-            </form>
-        </main>
+    <?php if (!empty($success_message)): ?>
+        <p class="success"><?= $success_message; ?></p>
+    <?php elseif (!empty($error_message)): ?>
+        <p class="error"><?= $error_message; ?></p>
+    <?php endif; ?>
+
+    <!-- Select order drop down -->
+    <form action="" method="POST" class="return-form">
+        <div class="form-group">
+            <label for="order_id">Select an Order to Return:</label>
+            <select id="order_id" name="order_id" required>
+                <option value="">Select an order</option>
+                <?php foreach ($orders as $order): ?>
+                    <option value="<?= htmlspecialchars($order['order_id']); ?>">
+                        Order #<?= htmlspecialchars($order['order_id']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+
+        <!-- Return reasons drop down -->
+        <div class="form-group">
+            <label for="reason">Reason for Return:</label>
+            <select id="reason" name="reason" required>
+                <option value="">Select a reason</option>
+                <option value="Damaged item">Damaged item</option>
+                <option value="Wrong item sent">Wrong item sent</option>
+                <option value="Not satisfied">Not satisfied</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="details">Additional Details:</label>
+            <textarea id="details" name="details" rows="5"></textarea>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" name="submit_return">Submit Return</button>
+    </form>
+</main>
+
 
 <!-- Chat Icon -->
 <div class="chat-icon" onclick="toggleChat()">💬</div>
@@ -134,7 +167,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
 
     <input type="text" id="user-input" class="chat-input" placeholder="Type here..." onkeypress="handleKeyPress(event)">
 </div>
-
 
 <script>
     function toggleChat() {
@@ -223,7 +255,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
     }
 </script>
 
-    <!-----Links the footer partial to the page----->
-        <?php require_once "../partials/footer.php"; ?>
-    </body>
+<?php require_once "../partials/footer.php"; ?>
+</body>
 </html>

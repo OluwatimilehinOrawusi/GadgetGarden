@@ -59,12 +59,30 @@ $salesDataQuery = "
 $stmt = $pdo->prepare($salesDataQuery);
 $stmt->execute();
 $salesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$orderCountsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$newCustomersData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $months = [];
 $revenues = [];
+$orderCounts = [];
+$customerMonths = [];
+$newCustomers = [];
+
 foreach ($salesData as $data) {
-    $months[] = date('F', mktime(0, 0, 0, $data['month'], 10)); // Convert month number to name
+    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
+    $months[] = $formattedDate;
     $revenues[] = $data['total_revenue'];
+}
+
+foreach ($orderCountsData as $data) {
+    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
+    $orderCounts[] = $data['order_count'];
+}
+
+foreach ($newCustomersData as $data) {
+    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
+    $customerMonths[] = $formattedDate;
+    $newCustomers[] = $data['new_customers'];
 }
 
 

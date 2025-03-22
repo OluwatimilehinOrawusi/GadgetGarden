@@ -4,6 +4,7 @@ $pdo = require_once "../database/database.php";
 
 $user_id = $_SESSION['user_id'] ?? null;
 
+//If user is not logged in redirect to log in page
 if (!$user_id) {
     header("Location: login.php");
     exit();

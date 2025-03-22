@@ -2,6 +2,13 @@
 session_start();
 $pdo = require_once "../database/database.php";
 
+$user = null;
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;

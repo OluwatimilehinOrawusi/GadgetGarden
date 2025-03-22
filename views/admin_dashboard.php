@@ -50,11 +50,12 @@ foreach ($bestSellingProducts as $row) {
 
 // Monthly revenue query
 $salesDataQuery = "
-    SELECT MONTH(order_date) AS month, SUM(total_price) AS total_revenue
+    SELECT YEAR(order_date) AS year, MONTH(order_date) AS month, SUM(total_price) AS total_revenue
     FROM orders
-    GROUP BY MONTH(order_date)
-    ORDER BY MONTH(order_date)
+    GROUP BY YEAR(order_date), MONTH(order_date)
+    ORDER BY YEAR(order_date), MONTH(order_date)
 ";
+
 $stmt = $pdo->prepare($salesDataQuery);
 $stmt->execute();
 $salesData = $stmt->fetchAll(PDO::FETCH_ASSOC);

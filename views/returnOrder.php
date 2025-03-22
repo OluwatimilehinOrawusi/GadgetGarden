@@ -122,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
             <textarea id="details" name="details" rows="5"></textarea>
         </div>
 
+        <!-- Submit button -->
         <button type="submit" name="submit_return">Submit Return</button>
     </form>
 </main>

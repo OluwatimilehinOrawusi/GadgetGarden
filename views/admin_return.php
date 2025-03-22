@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_return_status'
 }
 
 // Fetch only orders with return requests
-$stmt = $pdo->prepare("SELECT order_id, user_id, total_price, order_date, order_status, return_status FROM orders WHERE return_status != 'No Return' ORDER BY order_date DESC");
+$stmt = $pdo->prepare("SELECT o.order_id, o.user_id, o.total_price, o.order_date, o.order_status, o.return_status, r.reason, r.details FROM orders o INNER JOIN returns r ON o.order_id = r.order_id WHERE o.return_status != 'No Return' ORDER BY o.order_date DESC");
 $stmt->execute();
 $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -95,6 +95,8 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <th>Order Date</th>
                 <th>Order Status</th>
                 <th>Return Status</th>
+                <th>Reason</th>
+                <th>Details</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -108,6 +110,8 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <td><?php echo htmlspecialchars($order['order_date']); ?></td>
             <td><?php echo htmlspecialchars($order['order_status']); ?></td>
             <td><?php echo htmlspecialchars($order['return_status']); ?></td>
+            <td><?php echo htmlspecialchars($order['reason']); ?></td>
+            <td><?php echo htmlspecialchars($order['details']); ?></td>
             <td>
                 <form action="admin_return.php" method="POST">
                     <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">

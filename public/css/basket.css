@@ -1,42 +1,68 @@
-.card{
+.card {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 70%;
+    width: 60%;
     border: 1px solid #275E4A;
     border-radius: 1rem;
-    padding-right:  2rem;
-    padding-left:  2rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: #F9F9F9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
 
-#card-container{
+#card-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 4rem;
+    gap: 1rem;
 }
-#basket-img{
+
+#basket-img {
     height: 4rem;
     border-radius: 0.8rem;
+    object-fit: cover;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-#quantity{
-   width: 2rem;
+#quantity {
+    width: 2.5rem;
+    padding: 0.3rem;
+    border: 1px solid #275E4A;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #FFF;
+}
+
+#checkout-button {
+    padding: 0.75rem 1rem;
+    width: 7rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #275E4A;
+    border: none;
+    border-radius: 2rem;
+    margin-top: 3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+#checkout-button:hover {
+    background-color: #1E4B38;
+    transform: scale(1.05);
 }
 
 
-   
-#checkout-button{
-        padding-top: 1rem;
-        padding-bottom: 1.5rem;
-        width: 5rem;
-        height: 1rem;
-        border-radius: 2rem;
-        margin-top: 3rem;
-    }
-    
+
+

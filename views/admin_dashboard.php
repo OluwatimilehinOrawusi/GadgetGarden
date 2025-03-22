@@ -70,11 +70,12 @@ foreach ($salesData as $data) {
 
 // Monthly order count query
 $orderCountQuery = "
-    SELECT MONTH(order_date) AS month, COUNT(order_id) AS order_count
+    SELECT YEAR(order_date) AS year, MONTH(order_date) AS month, COUNT(order_id) AS order_count
     FROM orders
-    GROUP BY MONTH(order_date)
-    ORDER BY MONTH(order_date)
+    GROUP BY YEAR(order_date), MONTH(order_date)
+    ORDER BY YEAR(order_date), MONTH(order_date)
 ";
+
 $stmt = $pdo->prepare($orderCountQuery);
 $stmt->execute();
 $orderCountsData = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <label for="cpassword">Confirm Password</label>
 
-  <input required ="text" id="cpassword" name="confirm_password" placeholder="Confirm Password">
+  <input required type="password" id="cpassword" name="confirm_password" placeholder="Confirm Password">
 
   <label for="mphrase">Please enter a memorable phrase to recover your account if you forget your password</label>
 

@@ -64,12 +64,13 @@ body {
 input[type="text"],
 select,
 textarea {
-    width: 90%; /* Ensure full width inside the container */
+    width: 100%; 
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f8f8f8;
+    box-sizing: border-box; 
     transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
@@ -87,18 +88,21 @@ textarea {
 
 /* Submit Button */
 button[type="submit"] {
-    width: 100%; /* Stretch button to full width */
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #275E4A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 2rem; /* Fix incorrect comma */
     border: none;
-    border-radius: 8px;
+    border-radius: 25px;
+    font-size: 1rem;
+    background: linear-gradient(90deg, #0d5c47, #1abc9c);
+    color: white;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: background 0.3s, transform 0.2s;
+    margin-left: 245px;
 }
 
 button[type="submit"]:hover {
-    background-color: #1d4c39;
+    background: linear-gradient(90deg, #1abc9c, #275E4A);
+    transform: scale(1.05);
 }

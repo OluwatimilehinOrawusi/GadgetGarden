@@ -18,7 +18,7 @@ session_start();
             <a href="./profile.php"><button class="white-button">Profile</button></a>
             
            
-            <a href="./admin.php"><button class="white-button">Admin</button></a>
+            <a href="./admin.php"><button class="white-button">Admin Dashboard</button></a>
             
             <a href="./logout.php"><button class="green-button">Logout</button></a>
         <?php } ?>

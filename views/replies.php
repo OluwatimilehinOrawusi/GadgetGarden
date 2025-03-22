@@ -47,48 +47,23 @@ $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../public/css/replies.css">
 </head>
 <body>
-
-<?php if ($user && ($user['role'] === 'admin' || $user['role'] === 'manager')){ ?>
-    <!-- Admin Navbar -->
     <nav>
-    <div class="nav-left">
-        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
-    </div>
-    <div class="nav-right">
-        <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
-        <?php if($user&&$user['role']==='admin'){?>
-        <a href="manage_users.php"><button class="white-button">Users</button></a>
-        <?php } ?>
-        <a href="manage_orders.php"><button class="white-button">Orders</button></a>
-        <a href="admin.php"><button class="white-button">Inventory</button></a>
-        <a href="logout.php"><button class="green-button">Logout</button></a>
-    </div>
-</nav>
-<?php } else {?>
-    <nav>
-    <div class="nav-left">
-        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
-    </div>
-    <div class="nav-right">
-        <a href="../views/contact.php"><button class="green-button">Contact Us</button></a>
-        <a href="../views/aboutpage.php"><button class="white-button">About Us</button></a>
-        <?php if (!isset($_SESSION['user_id'])) { ?>
-            <a href="./login.php"><button class="green-button">Login</button></a>
-            <a href="./signup.php"><button class="white-button">Sign Up</button></a>
-        <?php } ?>
-        <a href="../views/products.php"><button class="green-button">Products</button></a>
-        <?php if (isset($_SESSION['user_id'])) { ?>
-            <a href="./basket.php"><button class="white-button">Basket</button></a>
-            <a href="./profile.php"><button class="white-button">Profile</button></a>       
-            <a href="./logout.php"><button class="green-button">Logout</button></a>
-        <?php }  ?>
-    </div>
-</nav>
-
-<?php } ?>
-
-
-            
+        <div class="nav-left">
+            <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+        </div>
+        <div class="nav-right">
+            <a href="../views/aboutpage.php"><button class="white-button">About Us</button></a>
+            <?php if (!isset($_SESSION['user_id'])): ?>
+                <a href="./login.php"><button class="green-button">Login</button></a>
+                <a href="./signup.php"><button class="white-button">Sign Up</button></a>
+            <?php else: ?>
+                <a href="./basket.php"><button class="white-button">Basket</button></a>
+                <a href="./contact.php"><button class="white-button">Contact us</button></a>
+                <a href="./profile.php"><button class="white-button">Profile</button></a>
+                <a href="./logout.php"><button class="green-button">Logout</button></a>
+            <?php endif; ?>
+        </div>
+    </nav>
 
     <div class="container">
         <h1>Your Questions and Replies</h1>

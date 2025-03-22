@@ -122,55 +122,46 @@ button {
 
 }
 
-/* Default Light Mode */
-:root {
-    --bg-color: #f4f4f9;
-    --text-color: #333;
-    --box-bg: #fff;
-    --button-bg: #1e5631;
-    --button-text: #fff;
-    --alt-button-bg: #fff;
-    --alt-button-text: #275E4A;
+/* Dark Mode Styling */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
 }
 
-/* Dark Mode */
-.dark-mode {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --box-bg: #1e1e1e;
-    --button-bg: #275E4A;
-    --button-text: #fff;
-    --alt-button-bg: #333;
-    --alt-button-text: #e0e0e0;
+body.dark-mode .container {
+    background-color: #1f1f1f;
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
+body.dark-mode #header {
+    color: #ffffff;
 }
 
-#about-us {
-    background-color: var(--box-bg);
-    color: var(--text-color);
-}
-
-button {
-    padding: 8px 16px;
-    border-radius: 1.5rem;
-    font-size: 0.9rem;
-    border: 1px solid var(--button-bg);
+/* Dark Mode Toggle Button */
+#dark-mode-toggle {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    background-color: #275E4A;
+    color: white;
+    transition: background-color 0.3s;
 }
 
-.green-button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
+#dark-mode-toggle:hover {
+    background-color: #1c4c38;
 }
 
-.white-button {
-    background-color: var(--alt-button-bg);
-    color: var(--alt-button-text);
+body.dark-mode #dark-mode-toggle {
+    background-color: white;
+    color: black;
 }
 
+body.dark-mode #dark-mode-toggle:hover {
+    background-color: #e0e0e0;
+}

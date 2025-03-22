@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_return_status'
     // Ensure valid status
     if (in_array($new_status, ['Approved', 'Rejected'])) {
         $stmt = $pdo->prepare("UPDATE orders SET return_status = :new_status WHERE order_id = :order_id");
+        $stmt = $pdo->prepare("UPDATE returns SET status = :new_status WHERE order_id = :order_id");
         $stmt->execute([':new_status' => $new_status, ':order_id' => $order_id]);
 
         $_SESSION['success_message'] = "Return status updated successfully.";

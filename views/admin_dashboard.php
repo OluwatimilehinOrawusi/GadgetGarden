@@ -69,18 +69,18 @@ $customerMonths = [];
 $newCustomers = [];
 
 foreach ($salesData as $data) {
-    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
+    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10));
     $months[] = $formattedDate;
     $revenues[] = $data['total_revenue'];
 }
 
 foreach ($orderCountsData as $data) {
-    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
+    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10));
     $orderCounts[] = $data['order_count'];
 }
 
 foreach ($newCustomersData as $data) {
-    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
+    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10));
     $customerMonths[] = $formattedDate;
     $newCustomers[] = $data['new_customers'];
 }

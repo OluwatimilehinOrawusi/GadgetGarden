@@ -51,7 +51,7 @@ try {
 body {
     font-family: Arial, sans-serif;
     background-color: white;
-    color: #333;
+   
 }
 
 .container {

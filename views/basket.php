@@ -5,12 +5,20 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../index.php");
     exit();
 }
 
 $pdo = require_once "../database/database.php";
+
+$user = null;
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && isset($_POST['quantity'])) {

@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
         //To run if return order was successful
         $success_message = "Your return request has been submitted.";
     } else {
-    
+        //To run if return order was unsuccessful
         $error_message = "Please select an order and provide a reason.";
     }
 }

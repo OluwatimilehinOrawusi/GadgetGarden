@@ -79,11 +79,7 @@ foreach ($orderCountsData as $data) {
     $orderCounts[] = $data['order_count'];
 }
 
-foreach ($newCustomersData as $data) {
-    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10));
-    $customerMonths[] = $formattedDate;
-    $newCustomers[] = $data['new_customers'];
-}
+
 
 
 // Monthly order count query
@@ -113,6 +109,7 @@ $bestSellingProductsQuery = "
     ORDER BY total_sales DESC
     LIMIT 5
 ";
+
 $stmt = $pdo->prepare($bestSellingProductsQuery);
 $stmt->execute();
 $bestSellingProductsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -140,7 +137,8 @@ $newCustomersData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $customerMonths = [];
 $newCustomers = [];
 foreach ($newCustomersData as $data) {
-    $customerMonths[] = date('F', mktime(0, 0, 0, $data['month'], 10)); // Convert month number to name
+    $formattedDate = date('F Y', mktime(0, 0, 0, $data['month'], 10));
+    $customerMonths[] = $formattedDate;
     $newCustomers[] = $data['new_customers'];
 }
 

@@ -22,32 +22,22 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         <link rel="stylesheet" href="../public/css/legal.css">
     </head>
     <body>
-        <nav>
-        <div class="nav-left">
-            <p id="logo-text">GADGET GARDEN</p>
-        </div>
-        <div class="nav-right">
-            <a href="#categories"><button class="green-button">Categories</button></a>
-            <a href="./views/aboutpage.php"><button class="white-button">About Us</button></a>
+<!-- Admin Navbar -->
+<nav>
+    <div class="nav-left">
+        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+    </div>
+    <div class="nav-right">
+        <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
+        <?php if($user&&$user['role']==='admin'){?>
+        <a href="manage_users.php"><button class="white-button">Users</button></a>
+        <?php } ?>
+        <a href="manage_orders.php"><button class="white-button">Orders</button></a>
+        <a href="admin.php"><button class="white-button">Inventory</button></a>
+        <a href="logout.php"><button class="green-button">Logout</button></a>
+    </div>
+</nav>
 
-            <?php if (!isset($_SESSION['user_id'])) { ?>
-                <a href="./login.php"><button class="green-button">Login</button></a>
-                <a href="./signup.php"><button class="white-button">Sign Up</button></a>
-            <?php } ?>
-
-            <?php if (isset($_SESSION['user_id'])) { ?>
-                <a href="./basket.php"><button class="green-button">Basket</button></a>
-                <a href="./contact.php"><button class="green-button">Contact Us</button></a>
-                <a href="./profile.php"><button class="white-button">Profile</button></a>
-
-                <?php if ($user && $user['admin']) { ?>
-                    <a href="./dashboard.php"><button class="white-button">Admin Dashboard</button></a>
-                <?php } ?>
-
-                <a href="./views/logout.php"><button class="green-button">Logout</button></a>
-            <?php } ?>
-        </div>
-    </nav>
 
              
     <div class="main-container">

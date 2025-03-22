@@ -10,6 +10,13 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once '../database/db_connection.php';
 
+$user = null;
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 $email = $_SESSION['email'] ?? '';
 $full_name = $_SESSION['username'] ?? '';
 $total_price = isset($_POST['total']) ? floatval($_POST['total']) : 0.00;
@@ -31,14 +38,29 @@ $user_id = $_SESSION['user_id'];
 
 <nav>
     <div class="nav-left">
-        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p>
     </div>
     <div class="nav-right">
-        <a href="../views/aboutpage.php"><button class="white-button">About Us</button></a>
-        <a href="./basket.php"><button class="white-button">Basket</button></a>
-        <a href="./contact.php"><button class="white-button">Contact Us</button></a>
-        <a href="./profile.php"><button class="white-button">Profile</button></a>
-        <a href="./logout.php"><button class="green-button">Logout</button></a>
+        <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
+
+        <?php if (!isset($_SESSION['user_id'])) { ?>
+            <a href="./login.php"><button class="green-button">Login</button></a>
+            <a href="./signup.php"><button class="white-button">Sign Up</button></a>
+        <?php } ?>
+
+        <?php if (isset($_SESSION['user_id'])) { ?>
+            <a href="./basket.php"><button class="green-button">Basket</button></a>
+            <a href="./contact.php"><button class="green-button">Contact Us</button></a>
+            <a href="./profile.php"><button class="white-button">Profile</button></a>
+            <a href="./products.php"><button class="green-button">Products</button></a>
+
+            <?php if ($user && ($user['role'] === 'admin' || $user['role'] === 'manager')){ ?>
+                <a href="./dashboard.php"><button class="white-button">Admin Dashboard</button></a>
+            <?php } ?>
+
+            <a href="./logout.php"><button class="green-button">Logout</button></a>
+        
+        <?php } ?>
     </div>
 </nav>
 

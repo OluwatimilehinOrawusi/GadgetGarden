@@ -2,6 +2,12 @@
 session_start();
 require_once "../database/database.php";
 
+$user = null;
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
 try {
  
@@ -35,20 +41,17 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Alerts</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../public/css/navbar.css">
+    <?php require_once "../partials/header.php" ?>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Basic reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+       
 
 /* Body and container styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: white;
+   
 }
 
 .container {
@@ -102,6 +105,22 @@ h1 {
         </style>
 </head>
 <body>
+
+<!-- Admin Navbar -->
+<nav>
+    <div class="nav-left">
+        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+    </div>
+    <div class="nav-right">
+        <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
+        <?php if($user&&$user['role']==='admin'){?>
+        <a href="manage_users.php"><button class="white-button">Users</button></a>
+        <?php } ?>
+        <a href="manage_orders.php"><button class="white-button">Orders</button></a>
+        <a href="admin.php"><button class="white-button">Inventory</button></a>
+        <a href="logout.php"><button class="green-button">Logout</button></a>
+    </div>
+</nav>
 
     <div class="container">
         <h1>Inventory Alerts</h1>

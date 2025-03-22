@@ -72,19 +72,22 @@ foreach ($reviews as $review) {
 </head>
 <body>
 
+<!-- Admin Navbar -->
 <nav>
     <div class="nav-left">
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
     </div>
     <div class="nav-right">
         <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
+        <?php if($user&&$user['role']==='admin'){?>
         <a href="manage_users.php"><button class="white-button">Users</button></a>
+        <?php } ?>
         <a href="manage_orders.php"><button class="white-button">Orders</button></a>
-        <a href="admin.php"><button class="white-button">Products</button></a>
-        <a href="admin_reviews.php"><button class="white-button">Reviews</button></a>
+        <a href="admin.php"><button class="white-button">Inventory</button></a>
         <a href="logout.php"><button class="green-button">Logout</button></a>
     </div>
 </nav>
+
 
 <div class="container">
     <h1>Manage Reviews</h1>

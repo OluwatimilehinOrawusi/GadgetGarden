@@ -2,6 +2,21 @@
 session_start();
 require_once ("../database/database.php");
 
+$role = null;
+$email = null;
+
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role, email FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $role = $user['role'];
+        $email = $user['email'];
+        $_SESSION['email'] = $email;
+    }
+}
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php?error=Please+log+in");
     exit();
@@ -9,24 +24,8 @@ if (!isset($_SESSION['username'])) {
 
 $user_id = $_SESSION['user_id'] ?? null;
 $username = $_SESSION['username'] ?? 'Unknown User';
-$email = $_SESSION['email'] ?? null;
-
-// Fix missing email after login
-if (!$email && $user_id) {
-    $stmt = $pdo->prepare("SELECT email FROM users WHERE user_id = :user_id");
-    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-        $email = $user["email"];
-        $_SESSION["email"] = $email;
-    }
-}
-
-$email = $email ?? 'Email not available';
-
-// Fetch User Orders 
+$email = $email ?? ($_SESSION['email'] ?? 'Email not available');
+ 
 $orderQuery = $pdo->prepare("
     SELECT o.order_id, o.order_date, o.total_price, o.order_status, 
            op.product_id, op.quantity, p.name AS product_name, 
@@ -42,6 +41,7 @@ $orderQuery->execute();
 $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,21 +55,29 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
 <body>
 <nav>
     <div class="nav-left">
-        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
+        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p>
     </div>
     <div class="nav-right">
-        <a href="../views/aboutpage.php"><button class="white-button">About Us</button></a>
+        <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
+
         <?php if (!isset($_SESSION['user_id'])) { ?>
             <a href="./login.php"><button class="green-button">Login</button></a>
             <a href="./signup.php"><button class="white-button">Sign Up</button></a>
-        <?php } else { ?>
-            <a href="./basket.php"><button class="white-button">Basket</button></a>
-            <a href="./contact.php"><button class="white-button">Contact us</button></a>
-            <a href="./profile.php"><button class="white-button">Profile</button></a>
-            <a href="./logout.php"><button class="green-button">Logout</button></a>
         <?php } ?>
-    </div>
+
+        <?php if (isset($_SESSION['user_id'])) { ?>
+            <a href="./basket.php"><button class="green-button">Basket</button></a>
+            <a href="./contact.php"><button class="green-button">Contact Us</button></a>
+            <a href="./profile.php"><button class="white-button">Profile</button></a>
+            <a href="./products.php"><button class="green-button">Products</button></a>
+
+            <?php if ($user && ($user['role'] === 'admin' || $user['role'] === 'manager')){ ?>
+                <a href="./dashboard.php"><button class="white-button">Admin Dashboard</button></a>
+            <?php } ?>
+
+            <a href="./logout.php"><button class="green-button">Logout</button></a>
         
+        <?php } ?>
     </div>
 </nav>
 
@@ -140,6 +148,14 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
 
+            <div class="info-card">
+                <div class="info-header">
+                    <h3>Query Responses (Customer Forum Page)</h3>
+                </div>
+                <div class="info-content">
+                    <a href="./replies.php" class="return-link">Customer Forum Page</a>
+                </div>
+            </div>
         </section>
 
         <!-- My Orders Section -->

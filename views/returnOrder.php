@@ -4,6 +4,13 @@ session_start();
 // Require the database connection
 $pdo = require_once "../database/database.php";
 
+$user = null;
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 // Handle return form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
     $order_id = htmlspecialchars(trim($_POST['order_id']));
@@ -44,25 +51,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
     <body>
 
     <nav>
-            <div class="nav-left">
-                <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
-            </div>
-            <div class="nav-right">
-                <a href="../views/aboutpage.php"><button class="white-button">About Us</button></a>
-                <?php if (!isset($_SESSION['user_id'])){?>
-                <?php echo '<a href="./login.php"><button class="green-button">Login</button></a>' ?>
-                 <?php echo '<a href="./signup.php"><button class="white-button">Sign Up</button></a> '?>
-                <?php }?>
-                <?php if (isset($_SESSION['user_id'])){?>
-                <?php echo '<a href="./basket.php"><button class="white-button">Basket</button></a>' ?>
-                <?php echo '<a href="./contact.php"><button class="white-button">Contact us</button></a>' ?>
-                <?php echo '<a href = "./profile.php"><button class ="white-button">Profile</button></a>' ?>
-                <?php echo '<a href="./logout.php"><button class="green-button">Logout</button></a>' ?>
+    <div class="nav-left">
+        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p>
+    </div>
+    <div class="nav-right">
+        <a href="./aboutpage.php"><button class="white-button">About Us</button></a>
 
-                <?php }?>
+        <?php if (!isset($_SESSION['user_id'])) { ?>
+            <a href="./login.php"><button class="green-button">Login</button></a>
+            <a href="./signup.php"><button class="white-button">Sign Up</button></a>
+        <?php } ?>
 
-            </div>
-</nav>       
+        <?php if (isset($_SESSION['user_id'])) { ?>
+            <a href="./basket.php"><button class="green-button">Basket</button></a>
+            <a href="./contact.php"><button class="green-button">Contact Us</button></a>
+            <a href="./profile.php"><button class="white-button">Profile</button></a>
+            <a href="./products.php"><button class="green-button">Products</button></a>
+
+            <?php if ($user && ($user['role'] === 'admin' || $user['role'] === 'manager')){ ?>
+                <a href="./dashboard.php"><button class="white-button">Admin Dashboard</button></a>
+            <?php } ?>
+
+            <a href="./logout.php"><button class="green-button">Logout</button></a>
+        
+        <?php } ?>
+    </div>
+</nav>
+                
 
         <main class="container">
             <h1>Return an Order</h1>

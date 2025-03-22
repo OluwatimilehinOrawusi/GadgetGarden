@@ -1,12 +1,23 @@
 <?php
 $pdo = require_once "../database/database.php";
 
+$user = null;
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
 if (isset($_GET['product_id'])) {
     $product_id = $_GET['product_id'];
     $stmt = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
     $stmt->execute([$product_id]);
+    
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $product_id = $_POST['product_id'];
@@ -58,18 +69,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
+<!-- Admin Navbar -->
 <nav>
     <div class="nav-left">
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
     </div>
     <div class="nav-right">
-        <a href="dashboard.php"><button class="white-button">Dashboard</button></a>
-        <a href="manage_users.php"><button class="white-button">Users</button></a>
-        <a href="admin.php"><button class="white-button">Products</button></a>
+        <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
+        <?php if($user&&$user['role']==='admin'){?>
+            <a href="manage_users.php"><button class="white-button">Users</button></a>
+        <?php } ?>
         <a href="manage_orders.php"><button class="white-button">Orders</button></a>
+        <a href="admin.php"><button class="white-button">Inventory</button></a>
         <a href="logout.php"><button class="green-button">Logout</button></a>
     </div>
 </nav>
+
 
 <h2>Update Product</h2>
 <form method="POST" action="update.php" enctype="multipart/form-data">

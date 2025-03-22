@@ -2,6 +2,12 @@
 session_start();
 require_once "../database/database.php";
 
+$user = null;
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
 try {
  
@@ -107,7 +113,9 @@ h1 {
     </div>
     <div class="nav-right">
         <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
+        <?php if($user&&$user['role']==='admin'){?>
         <a href="manage_users.php"><button class="white-button">Users</button></a>
+        <?php } ?>
         <a href="manage_orders.php"><button class="white-button">Orders</button></a>
         <a href="admin.php"><button class="white-button">Inventory</button></a>
         <a href="logout.php"><button class="green-button">Logout</button></a>

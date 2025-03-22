@@ -29,7 +29,9 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
     <div class="nav-right">
         <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
+        <?php if($user&&$user['role']==='admin'){?>
         <a href="manage_users.php"><button class="white-button">Users</button></a>
+        <?php } ?>
         <a href="manage_orders.php"><button class="white-button">Orders</button></a>
         <a href="admin.php"><button class="white-button">Inventory</button></a>
         <a href="logout.php"><button class="green-button">Logout</button></a>

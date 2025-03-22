@@ -32,7 +32,9 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p></a>
     </div>
     <div class="nav-right">
+        <?php if($user&&$user['role']==='admin'){?>
         <a href="manage_users.php"><button class="white-button">Users</button></a>
+        <?php } ?>
         <a href="manage_orders.php"><button class="white-button">Orders</button></a>
         <a href="admin.php"><button class="white-button">Inventory</button></a>
         <a href="logout.php"><button class="green-button">Logout</button></a>

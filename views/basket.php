@@ -80,7 +80,7 @@ $serialized_array = serialize($products);
 
 <nav>
     <div class="nav-left">
-        <p id="logo-text">GADGET GARDEN</p>
+        <a href="../index.php"><p id="logo-text">GADGET GARDEN</p>
     </div>
     <div class="nav-right">
         <a href="./aboutpage.php"><button class="white-button">About Us</button></a>

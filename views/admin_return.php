@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['handled_returns'])) {
+    $_SESSION['handled_returns'] =[];
+}
+
 // Require database connection
 $pdo = require_once "../database/database.php";
 
@@ -22,10 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_return_status'
 
     // Ensure valid status
     if (in_array($new_status, ['Approved', 'Rejected'])) {
-        $stmt = $pdo->prepare("UPDATE orders SET return_status = :new_status WHERE order_id = :order_id");
-        $stmt = $pdo->prepare("UPDATE returns SET status = :new_status WHERE order_id = :order_id");
-        $stmt->execute([':new_status' => $new_status, ':order_id' => $order_id]);
+        $stmt1 = $pdo->prepare("UPDATE orders SET return_status = :new_status WHERE order_id = :order_id");
+        $stmt1->execute([':new_status' => $new_status, ':order_id' => $order_id]);
 
+        $stmt2 = $pdo->prepare("UPDATE returns SET status = :new_status WHERE order_id = :order_id");
+        $stmt2->execute([':new_status' => $new_status, ':order_id' => $order_id]);
+
+        $_SESSION['handled_returns'][] = $order_id;
         $_SESSION['success_message'] = "Return status updated successfully.";
     } else {
         $_SESSION['error_message'] = "Invalid return status.";
@@ -92,26 +99,28 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($orders as $order): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($order['order_id']); ?></td>
-                    <td><?php echo htmlspecialchars($order['user_id']); ?></td>
-                    <td>£<?php echo number_format($order['total_price'], 2); ?></td>
-                    <td><?php echo htmlspecialchars($order['order_date']); ?></td>
-                    <td><?php echo htmlspecialchars($order['order_status']); ?></td>
-                    <td><?php echo htmlspecialchars($order['return_status']); ?></td>
-                    <td>
-                        <form action="admin_return.php" method="POST">
-                            <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-                            <select name="return_status">
-                                <option value="Approved" <?php echo ($order['return_status'] == 'Approved') ? 'selected' : ''; ?>>Approve</option>
-                                <option value="Rejected" <?php echo ($order['return_status'] == 'Rejected') ? 'selected' : ''; ?>>Reject</option>
-                            </select>
-                            <button type="submit" name="update_return_status">Update</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
+    <?php foreach ($orders as $order): ?>
+        <?php if (!in_array($order['order_id'], $_SESSION['handled_returns'])): ?>
+        <tr>
+            <td><?php echo htmlspecialchars($order['order_id']); ?></td>
+            <td><?php echo htmlspecialchars($order['user_id']); ?></td>
+            <td>£<?php echo number_format($order['total_price'], 2); ?></td>
+            <td><?php echo htmlspecialchars($order['order_date']); ?></td>
+            <td><?php echo htmlspecialchars($order['order_status']); ?></td>
+            <td><?php echo htmlspecialchars($order['return_status']); ?></td>
+            <td>
+                <form action="admin_return.php" method="POST">
+                    <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                    <select name="return_status">
+                        <option value="Approved" <?php echo ($order['return_status'] == 'Approved') ? 'selected' : ''; ?>>Approve</option>
+                        <option value="Rejected" <?php echo ($order['return_status'] == 'Rejected') ? 'selected' : ''; ?>>Reject</option>
+                    </select>
+                    <button type="submit" name="update_return_status">Update</button>
+                </form>
+            </td>
+        </tr>
+        <?php endif; ?>
+    <?php endforeach; ?>
             <?php if (empty($orders)): ?>
                 <tr>
                     <td colspan="7" style="text-align: center;">No return requests found.</td>

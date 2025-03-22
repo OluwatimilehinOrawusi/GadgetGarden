@@ -96,6 +96,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_return'])) {
             </select>
         </div>
 
+
+        <!-- Return reasons drop down -->
         <div class="form-group">
             <label for="reason">Reason for Return:</label>
             <select id="reason" name="reason" required>

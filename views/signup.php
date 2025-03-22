@@ -88,6 +88,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <input required ="text" id="cpassword" name="confirm_password" placeholder="Confirm Password">
 
+  <label for="mphrase">Please enter a memorable phrase to recover your account if you forget your password</label>
+
+<input required ="text" id="mphrase" name="memorable_phrase" placeholder="Memorable Phrase">
+
                 <button type="submit">Create Account</button>
 
                 <h6>Already have an account? <a href="./login.php">Log in</a></h6>

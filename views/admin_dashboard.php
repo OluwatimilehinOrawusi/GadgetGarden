@@ -109,11 +109,12 @@ foreach ($bestSellingProductsData as $data) {
 
 // Monthly new customers query
 $newCustomersQuery = "
-    SELECT MONTH(created_at) AS month, COUNT(user_id) AS new_customers
+    SELECT YEAR(created_at) AS year, MONTH(created_at) AS month, COUNT(user_id) AS new_customers
     FROM users
-    GROUP BY MONTH(created_at)
-    ORDER BY MONTH(created_at)
+    GROUP BY YEAR(created_at), MONTH(created_at)
+    ORDER BY YEAR(created_at), MONTH(created_at)
 ";
+
 $stmt = $pdo->prepare($newCustomersQuery);
 $stmt->execute();
 $newCustomersData = $stmt->fetchAll(PDO::FETCH_ASSOC);

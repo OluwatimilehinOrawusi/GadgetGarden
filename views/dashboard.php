@@ -35,7 +35,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         <a href="./dashboard.php"><button class="white-button">Dashboard</button></a>
         <a href="manage_users.php"><button class="white-button">Users</button></a>
         <a href="manage_orders.php"><button class="white-button">Orders</button></a>
-        <a href="admin.php"><button class="white-button">Products</button></a>
+        <a href="profile.php"><button class="white-button">Profile</button></a>
         <a href="./logout.php"><button class="green-button">Logout</button></a>
     </div>
 </nav>

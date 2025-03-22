@@ -2,6 +2,13 @@
 session_start();
 $pdo = require_once "../database/database.php";
 
+$user = null;
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 $user_id = $_SESSION['user_id'] ?? null;
 
 //If user is not logged in redirect to log in page

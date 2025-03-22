@@ -15,7 +15,7 @@
             </div>
             <div class="footer-column">
                 <h4>Menu</h4>
-                <a class="footer-link" href="./products.php">All Categories</a>
+                <a class="footer-link" href="./views/products.php">All Categories</a>
                 <a class="footer-link"href="#">Gift Cards</a>
                 <a class="footer-link"href="#">Special Events</a>
                 <a  class="footer-link"href="#">Testimonials</a>

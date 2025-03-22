@@ -1,106 +1,111 @@
 /* General Styles */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #f8f9fa;
     color: #333;
 }
 
-/* Main Container */
-.container {
-    max-width: 600px;
+/* Orders Container */
+#orders-container {
+    max-width: 90%;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Header */
-.container h1 {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #1d1d1f;
-    text-align: center;
-}
-
-/* Success and Error Messages */
-.success {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 10px;
-    border: 1px solid #c3e6cb;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border: 1px solid #f5c6cb;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-/* Form Styles */
-.return-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.form-group label {
-    font-weight: 500;
-    color: #333;
-}
-
-input[type="text"],
-select,
-textarea {
-    width: 90%; /* Ensure full width inside the container */
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f8f8f8;
-    transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
-input[type="text"]:focus,
-select:focus,
-textarea:focus {
-    border-color: #275E4A;
-    background-color: #fff;
-    outline: none;
-}
-
-textarea {
-    resize: none;
-}
-
-/* Submit Button */
-button[type="submit"] {
-    width: 100%; /* Stretch button to full width */
-    padding: 12px;
-    font-size: 16px;
+h1.subtitle {
+    font-size: 24px;
     font-weight: bold;
-    color: #fff;
-    background-color: #275E4A;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    text-align: center;
+    color: #275E4A;
+    margin-bottom: 20px;
 }
 
-button[type="submit"]:hover {
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #275E4A;
+    color: #fff;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-weight: bold;
+}
+
+/* Alternate row styling */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Status Colors */
+.pending {
+    color: #FFA500; /* Orange */
+    font-weight: bold;
+}
+
+.approved {
+    color: #28a745; /* Green */
+    font-weight: bold;
+}
+
+.rejected {
+    color: #dc3545; /* Red */
+    font-weight: bold;
+}
+
+.no-return {
+    color: #6c757d; /* Grey */
+}
+
+/* Select Dropdown */
+select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+/* Update Button */
+button {
+    background-color: #275E4A;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
     background-color: #1d4c39;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    th, td {
+        padding: 10px;
+    }
 }

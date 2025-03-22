@@ -28,14 +28,15 @@ $email = $email ?? 'Email not available';
 
 // Fetch User Orders 
 $orderQuery = $pdo->prepare("
-    SELECT o.order_id, o.order_date, o.total_price, o.order_status, 
-           op.product_id, op.quantity, p.name AS product_name, 
-           p.price AS product_price, p.image 
-    FROM orders o 
-    LEFT JOIN order_products op ON o.order_id = op.order_id 
-    LEFT JOIN products p ON op.product_id = p.product_id 
-    WHERE o.user_id = :user_id
-    ORDER BY o.order_id DESC
+SELECT o.order_id, o.order_date, o.total_price, o.order_status, o.return_status,
+       op.product_id, op.quantity, p.name AS product_name, 
+       p.price AS product_price, p.image 
+FROM orders o 
+LEFT JOIN order_products op ON o.order_id = op.order_id 
+LEFT JOIN products p ON op.product_id = p.product_id 
+WHERE o.user_id = :user_id
+ORDER BY o.order_id DESC
+
 ");
 $orderQuery->bindValue(":user_id", $user_id, PDO::PARAM_INT);
 $orderQuery->execute();
@@ -160,7 +161,6 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                                 echo "</div>";
                             }
 
-                            // Order status logic
                             $status = ucfirst($order["order_status"] ?? 'Paid');
                             $statusClass = strtolower(str_replace(" ", "-", $status));
                             ?>
@@ -169,32 +169,39 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
                                 <p><b>Order Date:</b> <?php echo htmlspecialchars($order["order_date"]); ?></p>
                                 <p><b>Order Total:</b> £<?php echo htmlspecialchars($order["total_price"]); ?></p>
                                 <p><b>Payment Method:</b> Card</p>
+                                
                                 <p class="order-status <?php echo htmlspecialchars($statusClass); ?>">
                                     <?php echo htmlspecialchars($status); ?>
                                 </p>
-                            <?php
-                        }
-
-                        if (!empty($order['product_name'])) { 
-                            $productImage = !empty($order['image']) ? "../uploads/".htmlspecialchars($order['image']) : "../public/assets/placeholder.png";
+                            
+                                <?php if (!empty($order["return_status"]) && $order["return_status"] !== "No Return") : ?>
+                                    <p><b>Return Status:</b> <?php echo htmlspecialchars($order["return_status"]); ?></p>
+                                <?php endif; ?>
+                            
+                                <?php
+                            }
+                            
+                            if (!empty($order['product_name'])) { 
+                                $productImage = !empty($order['image']) ? "../uploads/".htmlspecialchars($order['image']) : "../public/assets/placeholder.png";
                             ?>
-                            <div class="order-details">
-                                <img src="<?php echo $productImage; ?>" alt="Product Image" class="order-image" 
-                                    onerror="this.src='../public/assets/placeholder.png'">
-                                <div class="info-content">
-                                    <p><b>Product:</b> <?php echo htmlspecialchars($order["product_name"]); ?></p>
-                                    <p><b>Price:</b> £<?php echo htmlspecialchars($order["product_price"]); ?></p>
-                                    <p><b>Quantity:</b> <?php echo htmlspecialchars($order["quantity"]); ?></p>
+                                <div class="order-details">
+                                    <img src="<?php echo $productImage; ?>" alt="Product Image" class="order-image" 
+                                        onerror="this.src='../public/assets/placeholder.png'">
+                                    <div class="info-content">
+                                        <p><b>Product:</b> <?php echo htmlspecialchars($order["product_name"]); ?></p>
+                                        <p><b>Price:</b> £<?php echo htmlspecialchars($order["product_price"]); ?></p>
+                                        <p><b>Quantity:</b> <?php echo htmlspecialchars($order["quantity"]); ?></p>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php } ?>
-
-                        <?php 
-                        $previousOrderId = $order["order_id"];
-                    }
-                    echo "</div>";
-                    ?>
-                <?php endif; ?>
+                            <?php } ?>
+                            
+                            <?php 
+                            $previousOrderId = $order["order_id"];
+                            }
+                            echo "</div>";
+                            ?>
+                            <?php endif; ?>
+                            
 
 <!-- Chat Icon -->
 <div class="chat-icon" onclick="toggleChat()">💬</div>

@@ -22,6 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!preg_match('/^[0-9]{11}$/', $phone)) {
         $errors[] = "Phone number must be exactly 11 digits and contain numbers only.";
     }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Please enter a valid email address containing the '@' symbol.";
+    }
      
     if ($password !== $confirm_password) {
         $errors[] = "The passwords do not match, please try again.";

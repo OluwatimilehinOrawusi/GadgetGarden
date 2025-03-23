@@ -27,6 +27,8 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
+
+<!-- HTML -->
 <!DOCTYPE html>
 <html lang="en">
 <head>

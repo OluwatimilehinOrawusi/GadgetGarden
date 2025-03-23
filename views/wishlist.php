@@ -1,6 +1,10 @@
 <?php
+//Session start
 session_start();
+
+//Connect to Database
 $pdo = require_once "../database/database.php";
+
 
 $user = null;
 if (isset($_SESSION['user_id'])) {
@@ -9,6 +13,7 @@ if (isset($_SESSION['user_id'])) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+//Redirects user if not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;

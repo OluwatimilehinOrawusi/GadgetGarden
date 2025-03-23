@@ -70,7 +70,7 @@ $user_id = $_SESSION['user_id'];
         <p><strong>TOTAL: £<?php echo number_format($total_price, 2); ?></strong></p>
 
         <form action="./order.php" method="POST" onsubmit="return validateExpiryDate()">
-            <input type="hidden" name="total" value="<?php echo number_format($total_price, 2); ?>">
+            <input type="hidden" name="total" value="<?php echo $total_price; ?>">
             <div class="form-group">
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($full_name); ?>" required>

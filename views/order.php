@@ -10,7 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $payment_method = $_POST['payment_method'];
     $card_number = $_POST['card_number'];
-    $total = $_POST['total'];
+    $total = floatval(str_replace(',', '', $_POST['total']));
+
 
     try {
         $statement = $pdo->prepare('INSERT INTO orders (user_id, total_price) VALUES (:user_id, :total)');

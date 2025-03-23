@@ -16,10 +16,11 @@
    
             <div class="footer-column">
                 <h4>Other</h4>
+                <a class="footer-link" href="./views/legal.php">Terms and Conditions</a>
                 <a class="footer-link"href="./views/replies.php">FAQ</a>
                 <a class="footer-link"href="./views/aboutpage.php">About Us</a>
                 <a  class="footer-link"href="./views/contact.php">Contact Us</a>
-                <a class="footer-link" href="./views/legal.php">Terms and Conditions</a>
+                <a class="footer-link"href="./views/returnOrder.php">Return an Order</a>
             </div>
         </div>
     </footer>

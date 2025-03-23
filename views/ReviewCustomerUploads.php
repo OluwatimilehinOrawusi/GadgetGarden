@@ -1,6 +1,7 @@
 <?php
 //Session start
 session_start();
+//Connects to Database
 require_once "../database/database.php";
 
 // Ensure user is logged in

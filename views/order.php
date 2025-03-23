@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 session_start();
 
 //connects to the database
-$pdo = require_once "../database/db_connection.php";
+$pdo = require_once "../database/database.php";
 
 //Form info saved to variables
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

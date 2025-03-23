@@ -1,5 +1,6 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
+    //Starts the session
     session_start();
 }
 
@@ -26,6 +27,10 @@ $total_price = isset($_POST['total']) ? floatval($_POST['total']) : 0.00;
 $user_id = $_SESSION['user_id'];
 ?>
 
+
+
+
+<!-- HTML -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,18 +88,26 @@ $user_id = $_SESSION['user_id'];
 
         <form action="./order.php" method="POST" onsubmit="return validateExpiryDate()">
             <input type="hidden" name="total" value="<?php echo $total_price; ?>">
+
+            <!-- Full name -->
             <div class="form-group">
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($full_name); ?>" required>
             </div>
+
+            <!-- Email Address -->
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
             </div>
+
+            <!-- Shipping address -->
             <div class="form-group">
                 <label for="address">Shipping Address:</label>
                 <textarea id="address" name="address" rows="4" required></textarea>
             </div>
+
+            <!-- Payment Method -->
             <div class="form-group">
                 <label for="payment">Payment Method:</label>
                 <select id="payment" name="payment_method" required>
@@ -103,18 +116,26 @@ $user_id = $_SESSION['user_id'];
                     <option value="bank_transfer">Bank Transfer</option>
                 </select>
             </div>
+
+            <!-- Cardholder Name -->
             <div class="form-group">
                 <label for="cardholder">Cardholder Name:</label>
                 <input type="text" id="cardholder" name="cardholder" placeholder="Name on Card" required>
             </div>
+
+            <!-- Card Number -->
             <div class="form-group">
                 <label for="card_number">Card Number:</label>
                 <input type="text" id="card_number" name="card_number" placeholder="Enter 16-digit card number" maxlength="16" pattern="\d{16}" required oninput="this.value = this.value.replace(/\D/g, '')">
             </div>
+
+            <!-- Expiry Date -->
             <div class="form-group">
                 <label for="expiry_date">Expiry Date:</label>
                 <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required oninput="formatExpiryDate(this)">
             </div>
+
+            <!-- Security code -->
             <div class="form-group">
                 <label for="cvv">CVV:</label>
                 <input type="text" id="cvv" name="cvv" placeholder="Enter 3-digit CVV" maxlength="3" pattern="\d{3}" required oninput="this.value = this.value.replace(/\D/g, '')">
@@ -124,6 +145,7 @@ $user_id = $_SESSION['user_id'];
     </div>
 </div>
 
+<!-- JavaScript -->
 <script>
 function formatExpiryDate(input) {
     let value = input.value.replace(/\D/g, '');
@@ -133,6 +155,7 @@ function formatExpiryDate(input) {
     input.value = value;
 }
 
+//Makes sure the card isn't expired
 function validateExpiryDate() {
     let expiry = document.getElementById("expiry_date").value;
     let parts = expiry.split("/");

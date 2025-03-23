@@ -14,7 +14,7 @@ $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
 $stmt->execute([':user_id' => $user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$user || $user['role'] !== 'admin') {
+if (!$user || !in_array($user['role'], ['admin', 'manager'])) {
     header("Location: ../index.php");
     exit();
 }

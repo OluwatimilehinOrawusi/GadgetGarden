@@ -1,4 +1,10 @@
 <?php
+// debugging help
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 //Session start
 session_start();
 
@@ -72,7 +78,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         <?php if ($items) : ?>
             <?php foreach ($items as $item): ?>
-                <div clas = "wishlistcrd">
+                <div class = "wishlistcrd">
                     <img class="wishlist-image" src="<?php echo htmlspecialchars($item['image']); ?>" alt = "Image">
                     <h3><?php echo htmlspecialchars($item['name']); ?></h3>
                     <p>£<?php echo htmlspecialchars($item['price']); ?></p>

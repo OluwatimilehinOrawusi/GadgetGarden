@@ -27,7 +27,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$stmt = $pdo->prepare("SELECT P.product_id, p.name, p.price, p.image FROM wishlist w JOIN products p ON w.product_id = p.product_id WHERE w.user_id = :user_id");
+$stmt = $pdo->prepare("SELECT p.product_id, p.name, p.price, p.image FROM wishlist w JOIN products p ON w.product_id = p.product_id WHERE w.user_id = :user_id");
 $stmt->execute(['user_id' => $user_id]);
 $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

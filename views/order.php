@@ -1,8 +1,11 @@
 <?php  
+//Starts session
 session_start();
 
+//connects to the database
 $pdo = require_once "../database/db_connection.php";
 
+//Form info saved to variables
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
     $name = $_POST['name'];
@@ -14,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     try {
+        //Inserting the user's ID and the price into the order table
         $statement = $pdo->prepare('INSERT INTO orders (user_id, total_price) VALUES (:user_id, :total)');
         $statement->bindValue(":user_id", $user_id);
         $statement->bindValue(":total", $total);

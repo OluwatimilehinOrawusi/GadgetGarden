@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 //Connects to database
-require_once '../database/db_connection.php';
+$pdo = require_once "../database/database.php";
 
 $user = null;
 if (isset($_SESSION['user_id'])) {

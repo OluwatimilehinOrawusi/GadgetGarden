@@ -2,6 +2,29 @@
 // Connect to Database
 $pdo = require_once "../database/database.php";
 
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    die("You must be logged in to add items to your basket.");
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_basket'])) {
+    $user_id = $_SESSION['user_id'];
+    $product_id = intval($_POST['product_id']);
+    $quantity = intval($_POST['quantity']) ?: 1;
+
+    $stmt = $pdo->prepare("INSERT INTO basket (user_id, product_id, quantity)
+                           VALUES (:user_id, :product_id, :quantity)
+                           ON DUPLICATE KEY UPDATE quantity = quantity + :quantity");
+    $stmt->execute([
+        ':user_id' => $user_id,
+        ':product_id' => $product_id,
+        ':quantity' => $quantity
+    ]);
+
+    header("Location: basket.php");
+    exit();
+}
+
 // Validate and sanitize the product ID from the URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("Invalid product ID.");
@@ -46,10 +69,6 @@ function displayStars($rating) {
 }
 ?>
 
-
-
-
-
 <!-----HTML------->
 <!DOCTYPE html>
 <html lang="en">
@@ -72,26 +91,23 @@ function displayStars($rating) {
             <p class="product-condition">Condition: <?php echo htmlspecialchars($product["state"]); ?></p>
             <p class="product-price">£<?php echo htmlspecialchars($product["price"]); ?></p>
             
-            <!-----Product normal stock----->
-            <?php if ($stockQuantity > 3) : ?>
-                <a href="add-products.php?product_id=<?php echo $product["product_id"]; ?>">
-                    <button class="green-button">Add to Basket</button>
+            <!-- Add to Basket Form -->
+            <?php if ($stockQuantity > 0) : ?>
+                <form method="POST">
+                    <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['product_id']) ?>">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" value="1" min="1" required>
+                    <button type="submit" name="add_to_basket" class="green-button">Add to Basket</button>
+                </form>
+                <a href="bookmark.php?product_id=<?php echo $product["product_id"] ?>">
+                    <button class="green-button">Bookmark Item</button>
                 </a>
-                <a href="bookmark.php?product_id=<?php echo $product["product_id"] ?>"><button class="green-button">Bookmark Item</button></a>
-
-            <!-----Product Low stock----->    
-            <?php elseif ($stockQuantity > 0) : ?>
-                <p class="low-stock-warning">Only <?php echo $stockQuantity; ?> left in stock!</p>
-                <a href="add-products.php?product_id=<?php echo $product["product_id"]; ?>">
-                    <button class="green-button">Add to Basket</button>
-                </a>
-                <a href="bookmark.php?product_id=<?php echo $product["product_id"] ?>"><button class="green-button">Bookmark Item</button></a>
-
-            <!-----Product out of stock----->
             <?php else: ?>
                 <p class="out-of-stock-warning"> Out of Stock</p>
                 <button class="out-of-stock-button" disabled>Out of Stock</button>
-                <a href="bookmark.php?product_id=<?php echo $product["product_id"] ?>"><button class="green-button">Bookmark Item</button></a>
+                <a href="bookmark.php?product_id=<?php echo $product["product_id"] ?>">
+                    <button class="green-button">Bookmark Item</button>
+                </a>
             <?php endif; ?>
             
             <a href="./reviewPage.php?id=<?php echo $id; ?>"><u>Write a review</u></a>
@@ -122,119 +138,6 @@ function displayStars($rating) {
         <?php endif; ?>
     </div>
 
-    <!-- Chat Icon -->
-<div class="chat-icon" onclick="toggleChat()">💬</div>
-
-<!-- Chat Container -->
-<div class="chat-container" id="chat-container">
-    <div class="chat-header">
-        <span>Chatbot</span>
-        <button onclick="minimizeChat()">➖</button>
-        <button onclick="closeChat()">❌</button>
-        <button onclick="terminateChat()">⛔</button>
-    </div>
-    <div class="chat-box" id="chat-box"></div>
-    
-    <div class="chat-options">
-        <p class="bot-message message"><strong>Bot:</strong> Select an option:</p>
-        <button onclick="sendMessage('delivery times')">Delivery Times</button>
-        <button onclick="sendMessage('returns')">Returns</button>
-        <button onclick="sendMessage('refunds')">Refunds</button>
-        <button onclick="sendMessage('rate us')">Rate Us</button>
-        <button onclick="sendMessage('contact us')">Contact Us</button>
-    </div>
-
-    <input type="text" id="user-input" class="chat-input" placeholder="Type here..." onkeypress="handleKeyPress(event)">
-</div>
-
-    
-<!-- Chat Icon -->
-<script>
-    function toggleChat() {
-        let chatContainer = document.getElementById("chat-container");
-        if (!chatContainer.classList.contains("open")) {
-            chatContainer.style.display = "block";
-            setTimeout(() => chatContainer.classList.add("open"), 10);
-        } else {
-            chatContainer.classList.remove("open");
-            setTimeout(() => chatContainer.style.display = "none", 300);
-        }
-    }
-
-    function minimizeChat() {
-        let chatContainer = document.getElementById("chat-container");
-        chatContainer.classList.remove("open");
-        setTimeout(() => { chatContainer.style.display = "none"; }, 300);
-    }
-
-    function closeChat() {
-        let chatContainer = document.getElementById("chat-container");
-        chatContainer.classList.remove("open");
-        setTimeout(() => { chatContainer.style.display = "none"; }, 300);
-    }
-
-    function terminateChat() {
-        let chatContainer = document.getElementById("chat-container");
-        chatContainer.classList.remove("open");
-        setTimeout(() => { chatContainer.style.display = "none"; }, 300);
-        alert("Chat terminated. Refresh to start a new chat.");
-    }
-
-    function sendMessage(userInput) {
-        let chatBox = document.getElementById("chat-box");
-        
-        let userMessage = document.createElement("div");
-        userMessage.className = "message user-message";
-        userMessage.innerHTML = "<strong>You:</strong> " + userInput;
-        chatBox.appendChild(userMessage);
-        
-        let responses = {
-            "delivery times": "Our standard delivery time is 3-5 business days.",
-            "returns": "You can return any product within 30 days of purchase.",
-            "refunds": "Refunds are processed within 5-7 business days after we receive the returned item.",
-            "rate us": "How would you rate us? <div class='rating-stars'><span onclick='rate(1)'>★</span><span onclick='rate(2)'>★</span><span onclick='rate(3)'>★</span><span onclick='rate(4)'>★</span><span onclick='rate(5)'>★</span></div>",
-            "contact us": "Need help? <a href='./contact.php' style='text-decoration: underline; font-weight: bold; color: blue;'>Contact Us</a>."
-        };
-
-        let response = responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. Try selecting an option.";
-
-        let botMessage = document.createElement("div");
-        botMessage.className = "message bot-message";
-        botMessage.innerHTML = "<strong>Bot:</strong> <span class='typing-indicator'><span></span><span></span><span></span></span>";
-        chatBox.appendChild(botMessage);
-
-        setTimeout(() => {
-            botMessage.innerHTML = "<strong>Bot:</strong> " + response;
-        }, 1500);
-
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function rate(stars) {
-        let starElements = document.querySelectorAll('.rating-stars span');
-        starElements.forEach((star, index) => {
-            if (index < stars) {
-                star.classList.add("active");
-            } else {
-                star.classList.remove("active");
-            }
-        });
-
-        setTimeout(() => {
-            alert("Thank you for rating us " + stars + " stars!");
-        }, 300);
-    }
-
-    function handleKeyPress(event) {
-        if (event.key === "Enter") {
-            let userInput = document.getElementById("user-input").value.trim();
-            if (userInput !== "") {
-                document.getElementById("user-input").value = "";
-                sendMessage(userInput);
-            }
-        }
-    }
-</script>
     <?php require_once "../partials/footer.php"; ?>
 </body>
 </html>

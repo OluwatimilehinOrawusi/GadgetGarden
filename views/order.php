@@ -62,7 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
 
     } catch (PDOException $e) {
-        echo "<script>alert('Your order wasn't successful. Please try again.');</script>";
+        echo "Error: " . $e->getMessage(); // shows exact error
+        exit; // stop further output
     }
+    
+    
 }
 ?>

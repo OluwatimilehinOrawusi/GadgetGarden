@@ -4,7 +4,9 @@
             <h3>GADGET GARDEN</h3>
             <p>Your go-to store for everything tech.</p>
         </div>
+        
         <div class="footer-links">
+            <!-- First column -->
             <div class="footer-column">
                 <h4>Menu</h4>
                 <a class="footer-link" href="./products.php">All Categories</a>
@@ -15,6 +17,7 @@
 
             </div>
 
+            <!-- Second column -->
             <div class="footer-column">
                 <h4>Other</h4>
                 <a class="footer-link" href="./legal.php">Terms and Conditions</a>

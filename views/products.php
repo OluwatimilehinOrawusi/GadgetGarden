@@ -1,7 +1,7 @@
 <?php 
 
 
-
+//Connects to the database
 $pdo = require_once "../database/database.php" ;
 
 $keyword = $_GET['search'] ?? null;
@@ -43,6 +43,7 @@ if (!empty($category)) {
 
 ?>
 
+<!-- HTML -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,7 +52,10 @@ if (!empty($category)) {
     <link rel="stylesheet" href="../public/css/chatbot.css">
     </head>
     <body>
+        
+    <!-- NAV BAR -->
     <?php require_once "../partials/navbar.php" ?>
+
     <section id="header">
         <div id="search-bar-container">
         <h1 id="heading">Explore our products</h1>

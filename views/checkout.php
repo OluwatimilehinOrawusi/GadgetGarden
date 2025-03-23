@@ -19,6 +19,7 @@ if (isset($_SESSION['user_id'])) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+//Gets the users information from the session and stores
 $email = $_SESSION['email'] ?? '';
 $full_name = $_SESSION['username'] ?? '';
 $total_price = isset($_POST['total']) ? floatval($_POST['total']) : 0.00;
@@ -31,13 +32,19 @@ $user_id = $_SESSION['user_id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Gadget Garden</title>
+
+    <!-- link to header -->
     <?php require_once "../partials/header.php"; ?>
+
+    <!-- Links to style sheets -->
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/styles.css">
     <link rel="stylesheet" href="../public/css/checkout.css">
 </head>
 <body>
 
+
+<!-- Nav bar -->
 <nav>
     <div class="nav-left">
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p>
@@ -66,9 +73,12 @@ $user_id = $_SESSION['user_id'];
     </div>
 </nav>
 
+
 <div id="checkout-container">
     <div id="checkout-flex">
         <h1>Checkout</h1>
+
+        <!-- Displays Total price of the products -->
         <p><strong>TOTAL: £<?php echo number_format($total_price, 2); ?></strong></p>
 
         <form action="./order.php" method="POST" onsubmit="return validateExpiryDate()">

@@ -102,9 +102,9 @@ foreach ($orderCountsData as $data) {
 
 // Best-selling products query
 $bestSellingProductsQuery = "
-    SELECT p.name, SUM(oi.quantity) AS total_sales
-    FROM orders oi
-    JOIN products p ON oi.product_id = p.product_id
+    SELECT p.name, SUM(op.quantity) AS total_sales
+    FROM order_products op
+    JOIN products p ON op.product_id = p.product_id
     GROUP BY p.name
     ORDER BY total_sales DESC
     LIMIT 5

@@ -133,6 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 
 <body>
 
+<!-- Nav Bar -->
 <nav>
     <div class="nav-left">
         <a href="../index.php"><p id="logo-text">GADGET GARDEN</p>
@@ -250,6 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 </div>
         </div>
     
+        <!-- Footer -->
        <?php require_once '../partials/footer.php'; ?>
 </body>
 </html>

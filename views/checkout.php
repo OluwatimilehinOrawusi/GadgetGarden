@@ -3,11 +3,13 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+//Redirects user to log in page if not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php?error=Please+log+in+to+checkout");
     exit();
 }
 
+//Connects to database
 require_once '../database/db_connection.php';
 
 $user = null;

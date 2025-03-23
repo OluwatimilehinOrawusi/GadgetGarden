@@ -62,6 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
 }
 ?>
 
+
+<!-- HTML -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     <link rel="stylesheet" href="../public/css/reviewPage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
+
     <!-- Navigation Bar -->
     <nav>
     <div class="nav-left">

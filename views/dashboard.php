@@ -95,7 +95,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         <a href="./admin_return.php"  class="dashboard-cards clickable-div">
             <img src="../public/assets/returnRequest.png">
-            <p>Return request</p>
+            <p>Return Request</p>
         </a>
 
 

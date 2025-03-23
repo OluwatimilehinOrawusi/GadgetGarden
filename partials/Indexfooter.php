@@ -5,6 +5,8 @@
             <p>Your go-to store for everything tech.</p>
         </div>
         <div class="footer-links">
+
+            <!-- First column -->
             <div class="footer-column">
                 <h4>Menu</h4>
                 <a class="footer-link" href="./views/products.php">All Categories</a>
@@ -14,6 +16,7 @@
                 <a class="footer-link"href="./views/products.php?category=gaming">Gaming</a>
             </div>
    
+            <!-- Second column -->
             <div class="footer-column">
                 <h4>Other</h4>
                 <a class="footer-link" href="./views/legal.php">Terms and Conditions</a>

@@ -21,6 +21,7 @@
                 <a class="footer-link"href="./replies.php">FAQ</a>
                 <a class="footer-link"href="./aboutpage.php">About Us</a>
                 <a class="footer-link"href="./contact.php">Contact Us</a>
+                <a class="footer-link"href="./returnOrder.php">Return an Order</a>
                 
             </div>
         </div>

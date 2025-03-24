@@ -1,10 +1,5 @@
 <?php
 ob_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-echo "START<br>";
 
 session_start();
 require_once "../database/database.php";
@@ -17,8 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 if (!$pdo) {
     echo "Database connection failed.";
     exit();
-} else {
-    echo "DB connected.<br>";
 }
 
 // Check if the user is an admin or manager

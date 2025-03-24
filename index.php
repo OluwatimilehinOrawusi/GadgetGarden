@@ -1,7 +1,7 @@
 <?php
 // Session start
 session_start();
-
+// connects to database
 $pdo = require_once "./database/database.php";
 
 $user_id = $_SESSION['user_id'] ?? null;

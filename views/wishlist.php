@@ -11,7 +11,7 @@ session_start();
 //Connect to Database
 $pdo = require_once "../database/database.php";
 
-
+// check if user is logged in 
 $user = null;
 if (isset($_SESSION['user_id'])) {
     $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");

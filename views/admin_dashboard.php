@@ -10,12 +10,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-if (!$pdo) {
-    echo "Database connection failed.";
-    exit();
-} else {
-    echo "DB connected.<br>";
-}
 
 // Check if the user is an admin or manager
 $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = ?");

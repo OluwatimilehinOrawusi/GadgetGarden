@@ -1,5 +1,8 @@
 <?php
+//Session start
 session_start();
+
+
 require_once "../database/database.php";
 
 // Ensure user is logged in

@@ -1,15 +1,24 @@
 <?php
+ob_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+echo "START<br>";
+
 session_start();
 require_once "../database/database.php";
 
-// Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php?error=Please+log+in");
     exit();
+}
+
+if (!$pdo) {
+    echo "Database connection failed.";
+    exit();
+} else {
+    echo "DB connected.<br>";
 }
 
 // Check if the user is an admin or manager
@@ -25,10 +34,8 @@ $totalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $totalOrders = $pdo->query("SELECT COUNT(*) FROM orders")->fetchColumn();
 $totalRevenue = $pdo->query("SELECT SUM(total_price) FROM orders")->fetchColumn();
 
-// Calculate Average Order Value
 $averageOrderValue = ($totalOrders > 0) ? ($totalRevenue / $totalOrders) : 0;
 
-// Monthly revenue query
 $salesDataQuery = "
     SELECT YEAR(order_date) AS year, MONTH(order_date) AS month, SUM(total_price) AS total_revenue
     FROM orders
@@ -48,7 +55,6 @@ foreach ($salesData as $data) {
     $revenues[] = $data['total_revenue'];
 }
 
-// Monthly order count query
 $orderCountQuery = "
     SELECT YEAR(order_date) AS year, MONTH(order_date) AS month, COUNT(order_id) AS order_count
     FROM orders
@@ -65,7 +71,6 @@ foreach ($orderCountsData as $data) {
     $orderCounts[] = $data['order_count'];
 }
 
-// Best-selling products query (corrected)
 $bestSellingProductsQuery = "
     SELECT p.name, SUM(op.quantity) AS total_sales
     FROM order_products op
@@ -86,7 +91,6 @@ foreach ($bestSellingProductsData as $data) {
     $productSales[] = $data['total_sales'];
 }
 
-// Monthly new customers query
 $newCustomersQuery = "
     SELECT YEAR(created_at) AS year, MONTH(created_at) AS month, COUNT(user_id) AS new_customers
     FROM users

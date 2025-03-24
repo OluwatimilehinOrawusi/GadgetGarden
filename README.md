@@ -11,19 +11,45 @@ Gadget Garden is a private e-commerce platform dedicated to selling tech accesso
 
 ## Features
 
-- **User Registration & Login**: Secure user authentication with password hashing and salting.
-- **Product Browsing & Filtering**: Browse, search, and filter tech accessories by categories and attributes.
-- **Shopping Cart & Checkout**: Manage items in the shopping cart, process orders, and complete checkout.
-- **Order History**: Users can track their previous orders and view order details.
-- **Admin Dashboard**: Admins can add, edit, and delete products, manage customer data, and process orders.
-- **Real-time Inventory Management**: Automatic stock updates based on incoming and outgoing orders.
-- **User Product Upload** *(Optional)*: Users can upload their own tech products for sale on the platform.
+- **Role-Based Access Control**: Supports three roles: `admin`, `manager`, and `user`. Role-specific content is displayed dynamically across all pages.
+
+- **User Registration & Login**: Secure user authentication with password hashing.
+- **Product Browsing & Filtering**: Search and filter products by category, price, and condition.
+- **Shopping Cart System**: Add/remove products, view basket, and complete checkout. Basket clears upon successful order.
+- **Checkout Form with Validation**: Ensures credit card numbers are 16 digits, and the expiration date is valid. Also auto-fills name and email.
+- **Order Management**: Tracks status (`Paid → Dispatched → Delivered`). Admins and managers can update order statuses.
+- **Order History**: Users can track their order details and return status.
+- **Product Review System**: Users can leave reviews and ratings; average ratings are displayed using stars. Admin can view reviews.
+- **Customer Contact & Reply**: Users can submit contact queries. Admins can reply, users can view responses. Admins see all replies; users only see their own.
+
+- **Return Requests**: Users can initiate return requests and view return status.
+- **Upload Tech for Sale**: Users can upload products for approval. Admins can approve or reject uploads.
+- **Admin & Manager Dashboard**: Includes analytics with charts for:
+  - Monthly revenue
+  - Orders trend
+  - New customer growth
+  - Best-selling products
+
+- **Inventory Management**:
+  - Add/edit/update products
+  - View low stock warnings
+  - Admin/Manager access only
+
+- **Manage Users Page**:
+  - View all users
+  - Update roles (admin/manager/user)
+
+- **Hosting Compatibility Fixes**:
+  - Debugged SQL issues from local → hosted environment due to stricter SQL modes
+  - Ensured compatibility with hosted phpMyAdmin
+
+- **Responsive Navbars**: Role-aware navigation bar components render appropriate options for admins, managers, and regular users.
 
 ## Technologies Used
 
 - **Frontend**: 
   - HTML, CSS
-  - JavaScript (React, GSAP for animations)
+  - JavaScript 
   
 - **Backend**: 
   - PHP
@@ -32,22 +58,38 @@ Gadget Garden is a private e-commerce platform dedicated to selling tech accesso
   - Apache (XAMPP for local development)
 
 - **Version Control**: 
-  - Git (private repository hosted on GitHub/GitLab)
+  - Git (private repository hosted on GitHub)
 
 ## Usage
 
 ### For Admins:
-- Admins can manage all products, view customer details, and track orders from the Admin Dashboard.
-- The inventory system alerts admins about low stock and allows them to update product quantities in real-time.
+- Access full analytics via dashboard
+- Approve uploaded products
+- Update order statuses
+- Manage inventory and user roles
+- View and reply to contact messages
+
+### For Managers:
+- Access full analytics via dashboard
+- Approve uploaded products
+- Update order statuses
+- Edit inventory 
+- View and reply to contact messages
 
 ### For Users:
-- Users can browse products, filter by category, add items to their cart, and complete a checkout process.
-- Registered users can view their order history and manage their personal details.
+- Browse and purchase tech products
+- Upload products for admin review
+- Submit support/contact queries
+- Leave product reviews
+- Track order status and initiate returns
+- Manage profile, including name, email, and account ID
 
 ## Security Considerations
 
 - **Password Hashing**: User passwords are hashed and salted using a secure algorithm (e.g., bcrypt) before storage.
 - **User Input Validation**: All forms (signup, login, product creation, etc.) have thorough validation to prevent malicious input.
 - **Error Handling**: The system provides meaningful error messages in case of validation failures or other issues during use.
+- **SQL Injection Protection**: All database queries use prepared statements.
+- **Access Control**: Users cannot access admin features without proper role authorization.
 
 

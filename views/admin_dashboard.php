@@ -5,10 +5,16 @@ session_start();
 //Connects to database
 require_once "../database/database.php";
 
-// Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php?error=Please+log+in");
     exit();
+}
+
+if (!$pdo) {
+    echo "Database connection failed.";
+    exit();
+} else {
+    echo "DB connected.<br>";
 }
 
 // Check if the user is an admin or manager
@@ -24,34 +30,8 @@ $totalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $totalOrders = $pdo->query("SELECT COUNT(*) FROM orders")->fetchColumn();
 $totalRevenue = $pdo->query("SELECT SUM(total_price) FROM orders")->fetchColumn();
 
-    // Calculate Average Order Value
-    $averageOrderValue = ($totalOrders > 0) ? ($totalRevenue / $totalOrders) : 0;
+$averageOrderValue = ($totalOrders > 0) ? ($totalRevenue / $totalOrders) : 0;
 
-
-
-// Fetch Best-Selling Products with Product Names
-$productsQuery = "
-    SELECT p.name, COUNT(o.product_id) AS sold 
-    FROM orders o
-    JOIN products p ON o.product_id = p.product_id 
-    GROUP BY o.product_id 
-    ORDER BY sold DESC 
-    LIMIT 5
-";
-
-$stmt = $pdo->prepare($productsQuery);
-$stmt->execute();
-$bestSellingProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Extract product names and sales into separate arrays
-$productNames = [];
-$productSales = [];
-foreach ($bestSellingProducts as $row) {
-    $productNames[] = $row['name'];
-    $productSales[] = $row['sold'];
-}
-
-// Monthly revenue query
 $salesDataQuery = "
     SELECT YEAR(order_date) AS year, MONTH(order_date) AS month, SUM(total_price) AS total_revenue
     FROM orders
@@ -62,30 +42,15 @@ $salesDataQuery = "
 $stmt = $pdo->prepare($salesDataQuery);
 $stmt->execute();
 $salesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$orderCountsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$newCustomersData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $months = [];
 $revenues = [];
-$orderCounts = [];
-$customerMonths = [];
-$newCustomers = [];
-
 foreach ($salesData as $data) {
     $formattedDate = date('F', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
     $months[] = $formattedDate;
     $revenues[] = $data['total_revenue'];
 }
 
-foreach ($orderCountsData as $data) {
-    $formattedDate = date('F', mktime(0, 0, 0, $data['month'], 10)) . ' (' . $data['year'] . ')';
-    $orderCounts[] = $data['order_count'];
-}
-
-
-
-
-// Monthly order count query
 $orderCountQuery = "
     SELECT YEAR(order_date) AS year, MONTH(order_date) AS month, COUNT(order_id) AS order_count
     FROM orders
@@ -102,8 +67,6 @@ foreach ($orderCountsData as $data) {
     $orderCounts[] = $data['order_count'];
 }
 
-
-// Best-selling products query
 $bestSellingProductsQuery = "
     SELECT p.name, SUM(op.quantity) AS total_sales
     FROM order_products op
@@ -124,8 +87,6 @@ foreach ($bestSellingProductsData as $data) {
     $productSales[] = $data['total_sales'];
 }
 
-
-// Monthly new customers query
 $newCustomersQuery = "
     SELECT YEAR(created_at) AS year, MONTH(created_at) AS month, COUNT(user_id) AS new_customers
     FROM users

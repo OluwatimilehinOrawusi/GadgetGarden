@@ -20,6 +20,7 @@ if (isset($_GET['product_id'])) {
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+//form data stored in variables
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $product_id = $_POST['product_id'];
     $new_name = $_POST['name'];

@@ -260,7 +260,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 
-    
+
 <?php require_once "./partials/Indexfooter.php"; ?>
 
 </body>

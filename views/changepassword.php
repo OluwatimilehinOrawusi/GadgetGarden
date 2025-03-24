@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header> 
         
         <div class="input-group">
-             <form action="changePassword.php" method="POST" onsubmit="return validateForm()">
+             <form action="changepassword.php" method="POST" onsubmit="return validateForm()">
             <div class="input-group"> 
             <label for="new-password">New Password</label>
             <div class="password-wrapper">

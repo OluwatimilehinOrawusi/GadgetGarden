@@ -144,10 +144,10 @@ foreach ($newCustomersData as $data) {
     $customerMonths[] = $formattedDate;
     $newCustomers[] = $data['new_customers'];
 }
-
 ?>
 
 
+<!-- HTML -->
 <!DOCTYPE html>
 <html lang="en">
 <head>

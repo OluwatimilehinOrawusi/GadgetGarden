@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_FILES['image']['name'])) {
         $original_name = basename($_FILES['image']['name']);
         $image = time() . '_' . preg_replace("/[^a-zA-Z0-9._-]/", "_", $original_name); // Clean file name
-        $target_dir = "../uploads/";
+        $target_dir = "../uploads/ProductImageChange/";
         $target = $target_dir . $image;
 
         // Ensure upload directory exists

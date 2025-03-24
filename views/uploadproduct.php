@@ -166,7 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitbutton'])) {
 <div id="upload-container">
     <h1 id = "titlestatement">Upload your own product here</h1>
 
-    <form action="uploadProduct.php" method="POST" enctype="multipart/form-data" id = "uploadform">
+    <form action="uploadproduct.php" method="POST" enctype="multipart/form-data" id = "uploadform">
         
         <!-------Product name------>
         <label for="product_name">Product Name</label>

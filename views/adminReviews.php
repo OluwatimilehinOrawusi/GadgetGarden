@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_review'])) {
     $deleteStmt->bindParam(':review_id', $review_id, PDO::PARAM_INT);
     $deleteStmt->execute();
     
-    header("Location: admin_Reviews.php");
+    header("Location: adminReviews.php");
     exit();
 }
 

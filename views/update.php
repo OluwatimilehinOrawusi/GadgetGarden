@@ -1,5 +1,8 @@
 <?php
+//Start Sessions
 session_start();
+
+//Connects to database
 $pdo = require_once "../database/database.php";
 
 $user = null;

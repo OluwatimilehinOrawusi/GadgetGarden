@@ -27,7 +27,7 @@ $totalRevenue = $pdo->query("SELECT SUM(total_price) FROM orders")->fetchColumn(
     // Calculate Average Order Value
     $averageOrderValue = ($totalOrders > 0) ? ($totalRevenue / $totalOrders) : 0;
 
-// Fetch Best-Selling Products
+
 
 // Fetch Best-Selling Products with Product Names
 $productsQuery = "

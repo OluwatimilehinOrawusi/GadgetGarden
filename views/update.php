@@ -5,6 +5,7 @@ session_start();
 //Connects to database
 $pdo = require_once "../database/database.php";
 
+
 $user = null;
 if (isset($_SESSION['user_id'])) {
     $stmt = $pdo->prepare("SELECT role FROM users WHERE user_id = :user_id");
@@ -65,6 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 ?>
+
+
+
+<!-- HTML -->
 <!DOCTYPE html>
 <html>
 <head>
